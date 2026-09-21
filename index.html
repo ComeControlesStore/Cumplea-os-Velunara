@@ -1,0 +1,1266 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Maléfica | Cuenta Regresiva</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:'Playfair Display',serif;
+    color:white;
+
+    background:
+        radial-gradient(circle at 50% 35%,rgba(100,35,140,.35),transparent 35%),
+        radial-gradient(circle at 20% 80%,rgba(40,130,65,.15),transparent 30%),
+        linear-gradient(135deg,#050207,#100817 45%,#030304);
+}
+
+/* =========================
+   FONDO
+========================= */
+
+.magic{
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle,
+        rgba(126,44,180,.18),
+        rgba(50,160,76,.07),
+        transparent 70%
+    );
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    animation:pulse 5s infinite alternate;
+}
+
+@keyframes pulse{
+    from{
+        transform:translate(-50%,-50%) scale(.9);
+        opacity:.6;
+    }
+
+    to{
+        transform:translate(-50%,-50%) scale(1.1);
+        opacity:1;
+    }
+}
+
+/* =========================
+   ESPINAS
+========================= */
+
+.thorns{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.55;
+}
+
+.thorn{
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-left:2px solid #315d3a;
+    border-radius:80% 0 0 0;
+}
+
+.t1{
+    left:-60px;
+    top:10%;
+    transform:rotate(45deg);
+}
+
+.t2{
+    right:-70px;
+    top:20%;
+    transform:rotate(135deg);
+}
+
+.t3{
+    left:-80px;
+    bottom:5%;
+    transform:rotate(-20deg);
+}
+
+.t4{
+    right:-70px;
+    bottom:8%;
+    transform:rotate(200deg);
+}
+
+/* =========================
+   PARTÍCULAS
+========================= */
+
+.particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+}
+
+.particle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+
+    background:#9dff9f;
+    box-shadow:0 0 12px #65ff7a;
+
+    animation:float 7s linear infinite;
+    opacity:.7;
+}
+
+.particle:nth-child(1){
+    left:12%;
+    top:80%;
+}
+
+.particle:nth-child(2){
+    left:25%;
+    top:65%;
+    animation-delay:2s;
+}
+
+.particle:nth-child(3){
+    left:40%;
+    top:90%;
+    animation-delay:1s;
+}
+
+.particle:nth-child(4){
+    left:60%;
+    top:75%;
+    animation-delay:3s;
+}
+
+.particle:nth-child(5){
+    left:75%;
+    top:85%;
+    animation-delay:1.5s;
+}
+
+.particle:nth-child(6){
+    left:88%;
+    top:60%;
+    animation-delay:4s;
+}
+
+.particle:nth-child(7){
+    left:50%;
+    top:55%;
+    animation-delay:2.5s;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0) scale(.5);
+        opacity:0;
+    }
+
+    30%{
+        opacity:.8;
+    }
+
+    100%{
+        transform:translateY(-350px) scale(1.4);
+        opacity:0;
+    }
+}
+
+/* =========================
+   CONTADOR
+========================= */
+
+.container{
+    position:relative;
+    z-index:5;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:25px;
+}
+
+.card{
+    width:min(850px,95vw);
+
+    padding:55px 35px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,8,16,.96),
+            rgba(29,12,38,.92)
+        );
+
+    border:1px solid rgba(160,90,210,.55);
+
+    border-radius:8px;
+
+    box-shadow:
+        0 0 35px rgba(100,30,150,.3),
+        inset 0 0 50px rgba(0,0,0,.7);
+
+    backdrop-filter:blur(10px);
+}
+
+.small{
+    font-family:'Cinzel',serif;
+
+    letter-spacing:5px;
+
+    color:#9bd69d;
+
+    font-size:13px;
+
+    margin-bottom:18px;
+
+    text-transform:uppercase;
+}
+
+h1{
+    font-family:'Cinzel',serif;
+
+    font-size:clamp(42px,8vw,82px);
+
+    font-weight:500;
+
+    letter-spacing:7px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #b884e8,
+            #fff,
+            #9bd69d
+        );
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+    text-shadow:
+        0 0 30px rgba(155,100,220,.25);
+}
+
+.subtitle{
+    margin-top:12px;
+
+    font-size:18px;
+
+    color:#d6c9df;
+
+    letter-spacing:2px;
+}
+
+.timer{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-top:45px;
+}
+
+.box{
+    padding:22px 10px;
+
+    background:rgba(0,0,0,.45);
+
+    border:1px solid rgba(154,91,188,.45);
+
+    box-shadow:
+        inset 0 0 20px rgba(100,30,140,.12),
+        0 0 15px rgba(80,30,120,.1);
+}
+
+.number{
+    font-family:'Cinzel',serif;
+
+    font-size:clamp(30px,6vw,58px);
+
+    color:#fff;
+
+    text-shadow:
+        0 0 18px rgba(170,100,255,.55);
+}
+
+.label{
+    margin-top:6px;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    color:#91c997;
+
+    text-transform:uppercase;
+}
+
+.date{
+    margin-top:35px;
+
+    font-family:'Cinzel',serif;
+
+    color:#b88bd4;
+
+    letter-spacing:3px;
+
+    font-size:14px;
+}
+
+.rune{
+    margin-top:25px;
+
+    font-size:22px;
+
+    color:#78b87d;
+
+    text-shadow:
+        0 0 15px #52a95d;
+}
+
+/* =========================
+   CELEBRACIÓN
+========================= */
+
+#celebracion{
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #35104d 0%,
+            #12051c 40%,
+            #020102 100%
+        );
+
+    overflow:hidden;
+}
+
+#celebracion h2{
+    position:relative;
+
+    z-index:5;
+
+    font-family:'Cinzel',serif;
+
+    font-size:clamp(35px,7vw,80px);
+
+    color:white;
+
+    text-shadow:
+        0 0 10px #b75cff,
+        0 0 30px #8a26d1,
+        0 0 70px #4b147a;
+
+    animation:celebracionTexto 1.5s infinite alternate;
+}
+
+#celebracion p{
+    position:relative;
+
+    z-index:5;
+
+    margin-top:15px;
+
+    font-size:20px;
+
+    color:#a8e5a7;
+}
+
+@keyframes celebracionTexto{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.04);
+    }
+}
+
+/* =========================
+   CHISPAS
+========================= */
+
+.spark{
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#baffb8;
+
+    box-shadow:
+        0 0 8px #72ff83,
+        0 0 20px #72ff83;
+
+    animation:spark 2s linear infinite;
+}
+
+@keyframes spark{
+
+    0%{
+        transform:
+            translate(0,0)
+            scale(.2);
+
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(
+                calc(var(--x) - 50vw),
+                calc(var(--y) - 50vh)
+            )
+            scale(1);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   SERVIDOR
+========================= */
+
+#servidor{
+    position:fixed;
+
+    inset:0;
+
+    z-index:10000;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#000;
+
+    color:#39ff63;
+
+    font-family:
+        "Courier New",
+        monospace;
+}
+
+.terminal{
+    width:min(760px,90%);
+
+    padding:30px;
+
+    border:1px solid #39ff63;
+
+    background:#020602;
+
+    box-shadow:
+        0 0 30px rgba(57,255,99,.15);
+}
+
+.terminal p{
+    margin:12px 0;
+}
+
+.terminal .danger{
+    color:#ff3333;
+}
+
+.terminal h3{
+    margin-top:35px;
+
+    text-align:center;
+
+    font-size:clamp(30px,6vw,60px);
+
+    color:#ff3333;
+
+    animation:glitch .13s infinite;
+}
+
+@keyframes glitch{
+
+    0%{
+        transform:translate(0);
+    }
+
+    25%{
+        transform:translate(4px,-2px);
+    }
+
+    50%{
+        transform:translate(-4px,2px);
+    }
+
+    75%{
+        transform:translate(2px,1px);
+    }
+
+    100%{
+        transform:translate(0);
+    }
+}
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media(max-width:600px){
+
+    .card{
+        padding:40px 18px;
+    }
+
+    .timer{
+        gap:7px;
+    }
+
+    .box{
+        padding:18px 5px;
+    }
+
+    .number{
+        font-size:30px;
+    }
+
+    .label{
+        font-size:8px;
+        letter-spacing:1px;
+    }
+
+    h1{
+        letter-spacing:4px;
+    }
+
+    .terminal{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="magic"></div>
+
+<div class="thorns">
+    <div class="thorn t1"></div>
+    <div class="thorn t2"></div>
+    <div class="thorn t3"></div>
+    <div class="thorn t4"></div>
+</div>
+
+<div class="particles">
+
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+</div>
+
+
+<!-- =========================
+     CONTADOR
+========================= -->
+
+<div class="container" id="contador">
+
+    <div class="card">
+
+        <div class="small">
+            El hechizo comienza...
+        </div>
+
+        <h1>Maléfica</h1>
+
+        <div class="subtitle" id="subtitle">
+            La magia está cada vez más cerca
+        </div>
+
+        <div class="timer">
+
+            <div class="box">
+                <div class="number" id="days">00</div>
+                <div class="label">Días</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="hours">00</div>
+                <div class="label">Horas</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="minutes">00</div>
+                <div class="label">Minutos</div>
+            </div>
+
+            <div class="box">
+                <div class="number" id="seconds">00</div>
+                <div class="label">Segundos</div>
+            </div>
+
+        </div>
+
+        <div class="date">
+            27 DE SEPTIEMBRE DE 2026 · 12:00 AM
+        </div>
+
+        <div class="rune">
+            ✦ ❧ ✦
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CELEBRACIÓN
+========================= -->
+
+<div id="celebracion">
+
+    <h2>
+        ¡HA LLEGADO EL DÍA!
+    </h2>
+
+    <p>
+        La magia ha comenzado...
+    </p>
+
+</div>
+
+
+<!-- =========================
+     SERVIDOR COLAPSADO
+========================= -->
+
+<div id="servidor">
+
+    <div class="terminal">
+
+        <p>
+            &gt; MALÉFICA_OS iniciando...
+        </p>
+
+        <p>
+            &gt; FECHA: 27/09/2026 · 00:00:00
+        </p>
+
+        <p>
+            &gt; ✦ MAGIA LIBERADA
+        </p>
+
+        <p>
+            &gt; REPRODUCIENDO LAS MAÑANITAS...
+        </p>
+
+        <p>
+            &gt; CANCIÓN FINALIZADA.
+        </p>
+
+        <p class="danger">
+            &gt; ERROR: SOBRECARGA MÁGICA
+        </p>
+
+        <p class="danger">
+            &gt; SERVIDOR CORROMPIDO
+        </p>
+
+        <p class="danger">
+            &gt; TODOS LOS SERVICIOS DETENIDOS
+        </p>
+
+        <h3>
+            CONNECTION LOST
+        </h3>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MÚSICA
+========================= -->
+
+<audio id="mananitas" preload="auto">
+    <source src="mananitas.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+
+/* ==================================================
+   CONFIGURACIÓN
+================================================== */
+
+/*
+   IMPORTANTE:
+
+   El navegador toma el año, mes, día y hora
+   usando la HORA LOCAL de la computadora.
+
+   Mes:
+   0 = enero
+   1 = febrero
+   2 = marzo
+   3 = abril
+   4 = mayo
+   5 = junio
+   6 = julio
+   7 = agosto
+   8 = septiembre
+*/
+
+const target = new Date(
+    2026,
+    8,
+    27,
+    0,
+    0,
+    0
+);
+
+
+/*
+   FALSE = contador normal.
+
+   TRUE = prueba inmediatamente
+   la celebración.
+*/
+
+const MODO_PRUEBA = false;
+
+
+/*
+   Estado guardado.
+*/
+
+const ESTADO =
+    "malefica_servidor_colapsado";
+
+
+/* ==================================================
+   ELEMENTOS
+================================================== */
+
+const contador =
+    document.getElementById("contador");
+
+const celebracion =
+    document.getElementById("celebracion");
+
+const servidor =
+    document.getElementById("servidor");
+
+const musica =
+    document.getElementById("mananitas");
+
+const days =
+    document.getElementById("days");
+
+const hours =
+    document.getElementById("hours");
+
+const minutes =
+    document.getElementById("minutes");
+
+const seconds =
+    document.getElementById("seconds");
+
+const subtitle =
+    document.getElementById("subtitle");
+
+
+/* ==================================================
+   VARIABLE PARA NO REPETIR LA CELEBRACIÓN
+================================================== */
+
+let celebracionIniciada = false;
+
+
+/* ==================================================
+   SERVIDOR COLAPSADO
+================================================== */
+
+function servidorColapsado(){
+
+    contador.style.display = "none";
+
+    celebracion.style.display = "none";
+
+    servidor.style.display = "flex";
+
+}
+
+
+/* ==================================================
+   CHISPAS
+================================================== */
+
+function crearChispas(){
+
+    /*
+       Evita crear 120 chispas varias veces.
+    */
+
+    if(
+        celebracion.querySelector(".spark")
+    ){
+        return;
+    }
+
+
+    for(let i = 0; i < 120; i++){
+
+        const spark =
+            document.createElement("div");
+
+        spark.className = "spark";
+
+
+        const x =
+            Math.random() *
+            window.innerWidth;
+
+        const y =
+            Math.random() *
+            window.innerHeight;
+
+
+        spark.style.left = "50vw";
+
+        spark.style.top = "50vh";
+
+
+        spark.style.setProperty(
+            "--x",
+            x + "px"
+        );
+
+        spark.style.setProperty(
+            "--y",
+            y + "px"
+        );
+
+
+        spark.style.animationDelay =
+            Math.random() * 1.5 + "s";
+
+
+        spark.style.animationDuration =
+            1 +
+            Math.random() * 2 +
+            "s";
+
+
+        celebracion.appendChild(
+            spark
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   CELEBRACIÓN
+================================================== */
+
+function iniciarCelebracion(){
+
+    if(celebracionIniciada){
+
+        return;
+
+    }
+
+
+    celebracionIniciada = true;
+
+
+    /*
+       Si ya ocurrió anteriormente,
+       mostrar directamente el servidor.
+    */
+
+    if(
+        localStorage.getItem(ESTADO)
+        === "true"
+    ){
+
+        servidorColapsado();
+
+        return;
+
+    }
+
+
+    contador.style.display = "none";
+
+    celebracion.style.display = "flex";
+
+
+    crearChispas();
+
+
+    /*
+       Intentar reproducir Las Mañanitas.
+    */
+
+    musica.currentTime = 0;
+
+
+    musica.play().catch(() => {
+
+        /*
+           Los navegadores pueden bloquear
+           audio automático.
+        */
+
+        const aviso =
+            document.createElement("div");
+
+
+        aviso.style.position =
+            "absolute";
+
+        aviso.style.bottom =
+            "30px";
+
+        aviso.style.zIndex =
+            "30";
+
+        aviso.style.color =
+            "white";
+
+        aviso.style.fontSize =
+            "14px";
+
+        aviso.textContent =
+            "Haz clic para iniciar Las Mañanitas";
+
+
+        celebracion.appendChild(
+            aviso
+        );
+
+
+        celebracion.addEventListener(
+            "click",
+            function(){
+
+                musica.play();
+
+                aviso.remove();
+
+            },
+            {
+                once:true
+            }
+        );
+
+    });
+
+
+    /*
+       Cuando termine la canción,
+       activar el estado permanente.
+    */
+
+    musica.onended = function(){
+
+        localStorage.setItem(
+            ESTADO,
+            "true"
+        );
+
+
+        celebracion.style.display =
+            "none";
+
+
+        servidor.style.display =
+            "flex";
+
+    };
+
+}
+
+
+/* ==================================================
+   CONTADOR
+================================================== */
+
+function updateTimer(){
+
+    /*
+       Si ya está colapsado,
+       no volver al contador.
+    */
+
+    if(
+        localStorage.getItem(ESTADO)
+        === "true"
+    ){
+
+        servidorColapsado();
+
+        return;
+
+    }
+
+
+    /*
+       Modo prueba.
+    */
+
+    if(MODO_PRUEBA){
+
+        iniciarCelebracion();
+
+        return;
+
+    }
+
+
+    /*
+       Hora actual del navegador.
+    */
+
+    const now =
+        new Date();
+
+
+    /*
+       Diferencia real.
+    */
+
+    const difference =
+        target.getTime()
+        -
+        now.getTime();
+
+
+    /*
+       DEBUG:
+       Si algo raro ocurre, puedes abrir F12.
+    */
+
+    console.log(
+        "Hora actual:",
+        now.toString()
+    );
+
+    console.log(
+        "Fecha objetivo:",
+        target.toString()
+    );
+
+    console.log(
+        "Milisegundos restantes:",
+        difference
+    );
+
+
+    /*
+       Si llegó la fecha.
+    */
+
+    if(difference <= 0){
+
+        days.textContent =
+            "00";
+
+        hours.textContent =
+            "00";
+
+        minutes.textContent =
+            "00";
+
+        seconds.textContent =
+            "00";
+
+
+        subtitle.textContent =
+            "El hechizo ha comenzado...";
+
+
+        iniciarCelebracion();
+
+        return;
+
+    }
+
+
+    /*
+       DÍAS
+    */
+
+    const d =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    /*
+       HORAS
+    */
+
+    const h =
+        Math.floor(
+            (
+                difference /
+                (1000 * 60 * 60)
+            ) % 24
+        );
+
+
+    /*
+       MINUTOS
+    */
+
+    const m =
+        Math.floor(
+            (
+                difference /
+                (1000 * 60)
+            ) % 60
+        );
+
+
+    /*
+       SEGUNDOS
+    */
+
+    const s =
+        Math.floor(
+            (
+                difference /
+                1000
+            ) % 60
+        );
+
+
+    /*
+       MOSTRAR
+    */
+
+    days.textContent =
+        String(d).padStart(2,"0");
+
+    hours.textContent =
+        String(h).padStart(2,"0");
+
+    minutes.textContent =
+        String(m).padStart(2,"0");
+
+    seconds.textContent =
+        String(s).padStart(2,"0");
+
+}
+
+
+/* ==================================================
+   TECLA R = REINICIAR
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key.toLowerCase()
+            === "r"
+        ){
+
+            localStorage.removeItem(
+                ESTADO
+            );
+
+            location.reload();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   ARRANCAR
+================================================== */
+
+updateTimer();
+
+
+setInterval(
+    updateTimer,
+    1000
+);
+
+</script>
+
+</body>
+</html>
