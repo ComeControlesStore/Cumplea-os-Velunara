@@ -1,14 +1,21 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Maléfica | Cuenta Regresiva</title>
+<title>Velunara | Maléfica</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
+
+
+/* ==================================================
+   GENERAL
+================================================== */
 
 *{
     margin:0;
@@ -16,171 +23,288 @@
     box-sizing:border-box;
 }
 
-html,body{
-    width:100%;
-    height:100%;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
+
     min-height:100vh;
-    overflow:hidden;
+
+    overflow-x:hidden;
+
     font-family:'Playfair Display',serif;
+
     color:white;
 
     background:
-        radial-gradient(circle at 50% 35%,rgba(100,35,140,.35),transparent 35%),
-        radial-gradient(circle at 20% 80%,rgba(40,130,65,.15),transparent 30%),
-        linear-gradient(135deg,#050207,#100817 45%,#030304);
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(92,32,126,.35),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(35,120,52,.16),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #020202,
+            #0b0610 45%,
+            #020202
+        );
 }
 
-/* =========================
-   FONDO
-========================= */
 
-.magic{
+/* ==================================================
+   FONDO MÁGICO
+================================================== */
+
+.magic-glow{
+
     position:fixed;
-    width:500px;
-    height:500px;
-    border-radius:50%;
 
-    background:radial-gradient(
-        circle,
-        rgba(126,44,180,.18),
-        rgba(50,160,76,.07),
-        transparent 70%
-    );
+    width:700px;
+    height:700px;
 
-    top:50%;
     left:50%;
+    top:45%;
 
     transform:translate(-50%,-50%);
 
-    animation:pulse 5s infinite alternate;
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(116,39,157,.20),
+            rgba(47,133,62,.07),
+            transparent 68%
+        );
+
+    pointer-events:none;
+
+    animation:
+        magicPulse 6s ease-in-out infinite alternate;
+
 }
 
-@keyframes pulse{
+@keyframes magicPulse{
+
     from{
-        transform:translate(-50%,-50%) scale(.9);
-        opacity:.6;
+        transform:
+            translate(-50%,-50%)
+            scale(.85);
     }
 
     to{
-        transform:translate(-50%,-50%) scale(1.1);
-        opacity:1;
+        transform:
+            translate(-50%,-50%)
+            scale(1.12);
     }
+
 }
 
-/* =========================
-   ESPINAS
-========================= */
+
+/* ==================================================
+   ESPINAS DECORATIVAS
+================================================== */
 
 .thorns{
+
     position:fixed;
+
     inset:0;
+
     pointer-events:none;
+
+    z-index:2;
+
     opacity:.55;
+
 }
 
-.thorn{
+.branch{
+
     position:absolute;
-    width:150px;
-    height:150px;
-    border-left:2px solid #315d3a;
-    border-radius:80% 0 0 0;
+
+    width:230px;
+    height:230px;
+
+    border-left:
+        2px solid
+        rgba(72,137,75,.8);
+
+    border-radius:
+        100% 0 0 0;
+
 }
 
-.t1{
-    left:-60px;
-    top:10%;
-    transform:rotate(45deg);
+.branch::before,
+.branch::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:75px;
+    height:25px;
+
+    border-top:
+        2px solid
+        rgba(72,137,75,.75);
+
+    border-radius:50%;
+
 }
 
-.t2{
-    right:-70px;
-    top:20%;
-    transform:rotate(135deg);
+.branch::before{
+
+    top:60px;
+    left:15px;
+
+    transform:rotate(-25deg);
+
 }
 
-.t3{
-    left:-80px;
-    bottom:5%;
-    transform:rotate(-20deg);
+.branch::after{
+
+    top:115px;
+    left:80px;
+
+    transform:rotate(35deg);
+
 }
 
-.t4{
-    right:-70px;
-    bottom:8%;
-    transform:rotate(200deg);
+
+.branch1{
+
+    left:-100px;
+    top:4%;
+
+    transform:rotate(25deg);
+
 }
 
-/* =========================
+.branch2{
+
+    right:-110px;
+    top:8%;
+
+    transform:rotate(155deg);
+
+}
+
+.branch3{
+
+    left:-110px;
+    bottom:-30px;
+
+    transform:rotate(-25deg);
+
+}
+
+.branch4{
+
+    right:-110px;
+    bottom:-20px;
+
+    transform:rotate(205deg);
+
+}
+
+
+/* ==================================================
    PARTÍCULAS
-========================= */
+================================================== */
 
 .particles{
+
     position:fixed;
+
     inset:0;
+
     pointer-events:none;
+
+    z-index:1;
+
 }
 
 .particle{
+
     position:absolute;
+
     width:4px;
     height:4px;
+
     border-radius:50%;
 
     background:#9dff9f;
-    box-shadow:0 0 12px #65ff7a;
 
-    animation:float 7s linear infinite;
+    box-shadow:
+        0 0 10px #64ff72,
+        0 0 20px #64ff72;
+
+    animation:
+        floating 7s linear infinite;
+
     opacity:.7;
+
 }
 
 .particle:nth-child(1){
-    left:12%;
-    top:80%;
+    left:8%;
+    top:85%;
 }
 
 .particle:nth-child(2){
-    left:25%;
-    top:65%;
-    animation-delay:2s;
-}
-
-.particle:nth-child(3){
-    left:40%;
-    top:90%;
+    left:20%;
+    top:70%;
     animation-delay:1s;
 }
 
+.particle:nth-child(3){
+    left:35%;
+    top:90%;
+    animation-delay:2s;
+}
+
 .particle:nth-child(4){
-    left:60%;
-    top:75%;
+    left:55%;
+    top:80%;
     animation-delay:3s;
 }
 
 .particle:nth-child(5){
-    left:75%;
-    top:85%;
+    left:70%;
+    top:90%;
     animation-delay:1.5s;
 }
 
 .particle:nth-child(6){
     left:88%;
-    top:60%;
+    top:75%;
     animation-delay:4s;
 }
 
 .particle:nth-child(7){
-    left:50%;
+    left:48%;
     top:55%;
     animation-delay:2.5s;
 }
 
-@keyframes float{
+@keyframes floating{
 
     0%{
-        transform:translateY(0) scale(.5);
+        transform:
+            translateY(0)
+            scale(.4);
+
         opacity:0;
     }
 
@@ -189,176 +313,432 @@ body{
     }
 
     100%{
-        transform:translateY(-350px) scale(1.4);
+
+        transform:
+            translateY(-400px)
+            scale(1.3);
+
         opacity:0;
+
     }
+
 }
 
-/* =========================
-   CONTADOR
-========================= */
 
-.container{
+/* ==================================================
+   CONTENEDOR
+================================================== */
+
+.main{
+
     position:relative;
+
     z-index:5;
 
     min-height:100vh;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
-    padding:25px;
+    padding:
+        55px
+        20px;
+
 }
 
-.card{
-    width:min(850px,95vw);
 
-    padding:55px 35px;
+/* ==================================================
+   TARJETA
+================================================== */
+
+.card{
+
+    width:min(
+        900px,
+        94vw
+    );
+
+    padding:
+        55px
+        35px
+        45px;
 
     text-align:center;
 
     background:
+
         linear-gradient(
             145deg,
-            rgba(12,8,16,.96),
-            rgba(29,12,38,.92)
+            rgba(9,7,11,.96),
+            rgba(26,11,34,.95)
         );
 
-    border:1px solid rgba(160,90,210,.55);
+    border:
 
-    border-radius:8px;
+        1px solid
+        rgba(169,105,207,.5);
 
     box-shadow:
-        0 0 35px rgba(100,30,150,.3),
-        inset 0 0 50px rgba(0,0,0,.7);
 
-    backdrop-filter:blur(10px);
+        0 0 50px
+        rgba(91,34,125,.25),
+
+        inset 0 0 60px
+        rgba(0,0,0,.8);
+
+    backdrop-filter:blur(12px);
+
 }
 
-.small{
+
+/* ==================================================
+   TEXTO SUPERIOR
+================================================== */
+
+.pre-title{
+
     font-family:'Cinzel',serif;
 
-    letter-spacing:5px;
+    font-size:12px;
 
-    color:#9bd69d;
+    letter-spacing:7px;
+
+    color:#9dd79f;
+
+    margin-bottom:15px;
+
+}
+
+
+/* ==================================================
+   VELUNARA
+================================================== */
+
+.velunara{
+
+    font-family:'Cinzel',serif;
+
+    font-size:
+        clamp(
+            40px,
+            8vw,
+            75px
+        );
+
+    letter-spacing:8px;
+
+    font-weight:500;
+
+    color:#fff;
+
+    text-shadow:
+
+        0 0 10px
+        rgba(196,131,255,.8),
+
+        0 0 35px
+        rgba(115,42,160,.7);
+
+    margin-bottom:25px;
+
+}
+
+
+/* ==================================================
+   FOTO
+================================================== */
+
+.photo-frame{
+
+    position:relative;
+
+    width:min(
+        390px,
+        85vw
+    );
+
+    margin:
+        0 auto
+        35px;
+
+    padding:10px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #3e6e3d,
+            #17101c 25%,
+            #8d5ab1 50%,
+            #17101c 75%,
+            #3e6e3d
+        );
+
+    box-shadow:
+
+        0 0 20px
+        rgba(120,57,160,.4),
+
+        0 0 50px
+        rgba(46,130,62,.15);
+
+}
+
+
+/* espinas alrededor de la foto */
+
+.photo-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-9px;
+
+    border:
+        1px solid
+        rgba(106,174,102,.6);
+
+    pointer-events:none;
+
+}
+
+.photo-frame::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:-24px;
+    right:-20px;
+
+    color:#9dff9f;
+
+    font-size:25px;
+
+    text-shadow:
+        0 0 15px #5cff68;
+
+}
+
+
+.photo{
+
+    display:block;
+
+    width:100%;
+
+    aspect-ratio:3/4;
+
+    object-fit:cover;
+
+    background:#090609;
+
+    border:
+        3px solid
+        #090609;
+
+}
+
+
+/* ==================================================
+   TEXTO BAJO FOTO
+================================================== */
+
+.invitation-text{
+
+    font-family:'Cinzel',serif;
+
+    font-size:13px;
+
+    letter-spacing:4px;
+
+    color:#bba8c8;
+
+    text-transform:uppercase;
+
+    margin-bottom:10px;
+
+}
+
+.magic-title{
+
+    font-family:'Cinzel',serif;
+
+    font-size:
+        clamp(
+            25px,
+            5vw,
+            38px
+        );
+
+    color:#d3a5ef;
+
+    text-shadow:
+        0 0 18px
+        rgba(160,80,220,.4);
+
+}
+
+
+/* ==================================================
+   SEPARADOR
+================================================== */
+
+.separator{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:
+        30px
+        auto;
+
+    color:#72b977;
+
+}
+
+.separator span{
+
+    display:block;
+
+    width:55px;
+
+    height:1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #72b977
+        );
+
+}
+
+.separator span:last-child{
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #72b977,
+            transparent
+        );
+
+}
+
+
+/* ==================================================
+   CONTADOR
+================================================== */
+
+.count-title{
+
+    font-family:'Cinzel',serif;
+
+    color:#a8d8a7;
+
+    letter-spacing:4px;
 
     font-size:13px;
 
     margin-bottom:18px;
 
-    text-transform:uppercase;
-}
-
-h1{
-    font-family:'Cinzel',serif;
-
-    font-size:clamp(42px,8vw,82px);
-
-    font-weight:500;
-
-    letter-spacing:7px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #b884e8,
-            #fff,
-            #9bd69d
-        );
-
-    -webkit-background-clip:text;
-
-    color:transparent;
-
-    text-shadow:
-        0 0 30px rgba(155,100,220,.25);
-}
-
-.subtitle{
-    margin-top:12px;
-
-    font-size:18px;
-
-    color:#d6c9df;
-
-    letter-spacing:2px;
 }
 
 .timer{
+
     display:grid;
 
     grid-template-columns:
         repeat(4,1fr);
 
-    gap:15px;
+    gap:10px;
 
-    margin-top:45px;
 }
 
 .box{
-    padding:22px 10px;
 
-    background:rgba(0,0,0,.45);
+    padding:
+        18px
+        8px;
 
-    border:1px solid rgba(154,91,188,.45);
+    background:
 
-    box-shadow:
-        inset 0 0 20px rgba(100,30,140,.12),
-        0 0 15px rgba(80,30,120,.1);
+        rgba(0,0,0,.45);
+
+    border:
+        1px solid
+        rgba(143,91,171,.4);
+
 }
 
 .number{
+
     font-family:'Cinzel',serif;
 
-    font-size:clamp(30px,6vw,58px);
+    font-size:
+        clamp(
+            30px,
+            6vw,
+            50px
+        );
 
     color:#fff;
 
     text-shadow:
-        0 0 18px rgba(170,100,255,.55);
+        0 0 15px
+        rgba(176,111,235,.55);
+
 }
 
 .label{
-    margin-top:6px;
 
-    font-size:11px;
+    margin-top:5px;
 
-    letter-spacing:3px;
+    font-size:9px;
 
-    color:#91c997;
+    letter-spacing:2px;
 
-    text-transform:uppercase;
+    color:#8cc790;
+
 }
 
+
+/* ==================================================
+   FECHA
+================================================== */
+
 .date{
-    margin-top:35px;
+
+    margin-top:25px;
 
     font-family:'Cinzel',serif;
 
-    color:#b88bd4;
+    font-size:12px;
 
     letter-spacing:3px;
 
-    font-size:14px;
+    color:#ad88c2;
+
 }
 
-.rune{
-    margin-top:25px;
 
-    font-size:22px;
-
-    color:#78b87d;
-
-    text-shadow:
-        0 0 15px #52a95d;
-}
-
-/* =========================
+/* ==================================================
    CELEBRACIÓN
-========================= */
+================================================== */
 
 #celebracion{
+
     position:fixed;
 
     inset:0;
@@ -376,63 +756,71 @@ h1{
     text-align:center;
 
     background:
+
         radial-gradient(
             circle,
-            #35104d 0%,
-            #12051c 40%,
-            #020102 100%
+            #42145d,
+            #13061b 45%,
+            #010101
         );
 
     overflow:hidden;
+
 }
 
 #celebracion h2{
-    position:relative;
-
-    z-index:5;
 
     font-family:'Cinzel',serif;
 
-    font-size:clamp(35px,7vw,80px);
+    font-size:
+        clamp(
+            35px,
+            8vw,
+            80px
+        );
 
     color:white;
 
     text-shadow:
-        0 0 10px #b75cff,
-        0 0 30px #8a26d1,
-        0 0 70px #4b147a;
 
-    animation:celebracionTexto 1.5s infinite alternate;
+        0 0 10px #d26cff,
+        0 0 35px #8b24ce,
+        0 0 70px #4c0872;
+
+    animation:
+        celebrationPulse 1.5s infinite alternate;
+
 }
 
 #celebracion p{
-    position:relative;
-
-    z-index:5;
 
     margin-top:15px;
 
     font-size:20px;
 
-    color:#a8e5a7;
+    color:#a9e6aa;
+
 }
 
-@keyframes celebracionTexto{
+@keyframes celebrationPulse{
 
     from{
         transform:scale(1);
     }
 
     to{
-        transform:scale(1.04);
+        transform:scale(1.05);
     }
+
 }
 
-/* =========================
+
+/* ==================================================
    CHISPAS
-========================= */
+================================================== */
 
 .spark{
+
     position:absolute;
 
     width:7px;
@@ -440,23 +828,28 @@ h1{
 
     border-radius:50%;
 
-    background:#baffb8;
+    background:#c4ffc3;
 
     box-shadow:
+
         0 0 8px #72ff83,
         0 0 20px #72ff83;
 
-    animation:spark 2s linear infinite;
+    animation:
+        sparkAnimation 2s linear infinite;
+
 }
 
-@keyframes spark{
+@keyframes sparkAnimation{
 
     0%{
+
         transform:
             translate(0,0)
             scale(.2);
 
         opacity:0;
+
     }
 
     10%{
@@ -464,22 +857,29 @@ h1{
     }
 
     100%{
+
         transform:
+
             translate(
                 calc(var(--x) - 50vw),
                 calc(var(--y) - 50vh)
             )
+
             scale(1);
 
         opacity:0;
+
     }
+
 }
 
-/* =========================
-   SERVIDOR
-========================= */
+
+/* ==================================================
+   SERVIDOR COLAPSADO
+================================================== */
 
 #servidor{
+
     position:fixed;
 
     inset:0;
@@ -499,39 +899,56 @@ h1{
     font-family:
         "Courier New",
         monospace;
+
 }
 
 .terminal{
-    width:min(760px,90%);
+
+    width:min(
+        760px,
+        90%
+    );
 
     padding:30px;
 
-    border:1px solid #39ff63;
+    border:
+        1px solid
+        #39ff63;
 
     background:#020602;
 
     box-shadow:
-        0 0 30px rgba(57,255,99,.15);
+        0 0 30px
+        rgba(57,255,99,.15);
+
 }
 
 .terminal p{
     margin:12px 0;
 }
 
-.terminal .danger{
+.danger{
     color:#ff3333;
 }
 
 .terminal h3{
+
     margin-top:35px;
 
     text-align:center;
 
-    font-size:clamp(30px,6vw,60px);
+    font-size:
+        clamp(
+            30px,
+            7vw,
+            60px
+        );
 
     color:#ff3333;
 
-    animation:glitch .13s infinite;
+    animation:
+        glitch .13s infinite;
+
 }
 
 @keyframes glitch{
@@ -555,56 +972,114 @@ h1{
     100%{
         transform:translate(0);
     }
+
 }
 
-/* =========================
+
+/* ==================================================
    MÓVIL
-========================= */
+================================================== */
 
 @media(max-width:600px){
 
+    .main{
+
+        padding:
+            35px
+            12px;
+
+    }
+
     .card{
-        padding:40px 18px;
+
+        padding:
+            40px
+            18px
+            35px;
+
+    }
+
+    .velunara{
+
+        letter-spacing:5px;
+
+    }
+
+    .photo-frame{
+
+        width:
+            min(
+                330px,
+                88vw
+            );
+
     }
 
     .timer{
-        gap:7px;
+
+        gap:5px;
+
     }
 
     .box{
-        padding:18px 5px;
+
+        padding:
+            15px
+            3px;
+
     }
 
     .number{
-        font-size:30px;
+
+        font-size:28px;
+
     }
 
     .label{
-        font-size:8px;
+
+        font-size:7px;
+
         letter-spacing:1px;
+
     }
 
-    h1{
-        letter-spacing:4px;
+    .date{
+
+        font-size:9px;
+
+        letter-spacing:2px;
+
     }
 
-    .terminal{
-        padding:20px;
-    }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<div class="magic"></div>
+
+<!-- ==================================================
+     FONDO
+================================================== -->
+
+<div class="magic-glow"></div>
+
 
 <div class="thorns">
-    <div class="thorn t1"></div>
-    <div class="thorn t2"></div>
-    <div class="thorn t3"></div>
-    <div class="thorn t4"></div>
+
+    <div class="branch branch1"></div>
+
+    <div class="branch branch2"></div>
+
+    <div class="branch branch3"></div>
+
+    <div class="branch branch4"></div>
+
 </div>
+
 
 <div class="particles">
 
@@ -619,64 +1094,151 @@ h1{
 </div>
 
 
-<!-- =========================
-     CONTADOR
-========================= -->
+<!-- ==================================================
+     INVITACIÓN
+================================================== -->
 
-<div class="container" id="contador">
+<main class="main" id="contador">
 
-    <div class="card">
+    <section class="card">
 
-        <div class="small">
-            El hechizo comienza...
+
+        <div class="pre-title">
+            UNA NOCHE ENCANTADA
         </div>
 
-        <h1>Maléfica</h1>
 
-        <div class="subtitle" id="subtitle">
-            La magia está cada vez más cerca
+        <div class="velunara">
+            VELUNARA
         </div>
+
+
+        <!-- FOTO DE LA NIÑA -->
+
+        <div class="photo-frame">
+
+            <img
+                src="foto1.jpg"
+                class="photo"
+                alt="Velunara"
+            >
+
+        </div>
+
+
+        <div class="invitation-text">
+            Estás invitado a celebrar
+        </div>
+
+
+        <div class="magic-title">
+            Una noche de magia
+        </div>
+
+
+        <div class="separator">
+
+            <span></span>
+
+            ✦
+
+            <span></span>
+
+        </div>
+
+
+        <!-- CONTADOR -->
+
+        <div class="count-title">
+            FALTA PARA EL GRAN DÍA
+        </div>
+
 
         <div class="timer">
 
-            <div class="box">
-                <div class="number" id="days">00</div>
-                <div class="label">Días</div>
-            </div>
 
             <div class="box">
-                <div class="number" id="hours">00</div>
-                <div class="label">Horas</div>
+
+                <div
+                    class="number"
+                    id="days"
+                >
+                    00
+                </div>
+
+                <div class="label">
+                    Días
+                </div>
+
             </div>
 
-            <div class="box">
-                <div class="number" id="minutes">00</div>
-                <div class="label">Minutos</div>
-            </div>
 
             <div class="box">
-                <div class="number" id="seconds">00</div>
-                <div class="label">Segundos</div>
+
+                <div
+                    class="number"
+                    id="hours"
+                >
+                    00
+                </div>
+
+                <div class="label">
+                    Horas
+                </div>
+
             </div>
+
+
+            <div class="box">
+
+                <div
+                    class="number"
+                    id="minutes"
+                >
+                    00
+                </div>
+
+                <div class="label">
+                    Minutos
+                </div>
+
+            </div>
+
+
+            <div class="box">
+
+                <div
+                    class="number"
+                    id="seconds"
+                >
+                    00
+                </div>
+
+                <div class="label">
+                    Segundos
+                </div>
+
+            </div>
+
 
         </div>
+
 
         <div class="date">
+
             27 DE SEPTIEMBRE DE 2026 · 12:00 AM
+
         </div>
 
-        <div class="rune">
-            ✦ ❧ ✦
-        </div>
 
-    </div>
+    </section>
 
-</div>
+</main>
 
 
-<!-- =========================
+<!-- ==================================================
      CELEBRACIÓN
-========================= -->
+================================================== -->
 
 <div id="celebracion">
 
@@ -685,22 +1247,22 @@ h1{
     </h2>
 
     <p>
-        La magia ha comenzado...
+        La magia de Velunara ha comenzado...
     </p>
 
 </div>
 
 
-<!-- =========================
-     SERVIDOR COLAPSADO
-========================= -->
+<!-- ==================================================
+     SERVIDOR
+================================================== -->
 
 <div id="servidor">
 
     <div class="terminal">
 
         <p>
-            &gt; MALÉFICA_OS iniciando...
+            &gt; VELUNARA_OS iniciando...
         </p>
 
         <p>
@@ -740,37 +1302,37 @@ h1{
 </div>
 
 
-<!-- =========================
+<!-- ==================================================
      MÚSICA
-========================= -->
+================================================== -->
 
-<audio id="mananitas" preload="auto">
-    <source src="mananitas.mp3" type="audio/mpeg">
+<audio
+    id="mananitas"
+    preload="auto"
+>
+
+    <source
+        src="mananitas.mp3"
+        type="audio/mpeg"
+    >
+
 </audio>
 
 
 <script>
 
+
 /* ==================================================
-   CONFIGURACIÓN
+   FECHA DEL EVENTO
 ================================================== */
 
 /*
-   IMPORTANTE:
 
-   El navegador toma el año, mes, día y hora
-   usando la HORA LOCAL de la computadora.
+   27 DE SEPTIEMBRE DE 2026
+   12:00 AM
 
-   Mes:
-   0 = enero
-   1 = febrero
-   2 = marzo
-   3 = abril
-   4 = mayo
-   5 = junio
-   6 = julio
-   7 = agosto
-   8 = septiembre
+   Se utiliza la hora LOCAL del navegador.
+
 */
 
 const target = new Date(
@@ -783,22 +1345,19 @@ const target = new Date(
 );
 
 
-/*
-   FALSE = contador normal.
-
-   TRUE = prueba inmediatamente
-   la celebración.
-*/
+/* ==================================================
+   MODO PRUEBA
+================================================== */
 
 const MODO_PRUEBA = false;
 
 
-/*
-   Estado guardado.
-*/
+/* ==================================================
+   ESTADO
+================================================== */
 
 const ESTADO =
-    "malefica_servidor_colapsado";
+    "velunara_malefica_final";
 
 
 /* ==================================================
@@ -806,51 +1365,64 @@ const ESTADO =
 ================================================== */
 
 const contador =
-    document.getElementById("contador");
+    document.getElementById(
+        "contador"
+    );
 
 const celebracion =
-    document.getElementById("celebracion");
+    document.getElementById(
+        "celebracion"
+    );
 
 const servidor =
-    document.getElementById("servidor");
+    document.getElementById(
+        "servidor"
+    );
 
 const musica =
-    document.getElementById("mananitas");
+    document.getElementById(
+        "mananitas"
+    );
 
 const days =
-    document.getElementById("days");
+    document.getElementById(
+        "days"
+    );
 
 const hours =
-    document.getElementById("hours");
+    document.getElementById(
+        "hours"
+    );
 
 const minutes =
-    document.getElementById("minutes");
+    document.getElementById(
+        "minutes"
+    );
 
 const seconds =
-    document.getElementById("seconds");
+    document.getElementById(
+        "seconds"
+    );
 
-const subtitle =
-    document.getElementById("subtitle");
 
-
-/* ==================================================
-   VARIABLE PARA NO REPETIR LA CELEBRACIÓN
-================================================== */
-
-let celebracionIniciada = false;
+let celebracionIniciada =
+    false;
 
 
 /* ==================================================
-   SERVIDOR COLAPSADO
+   SERVIDOR
 ================================================== */
 
 function servidorColapsado(){
 
-    contador.style.display = "none";
+    contador.style.display =
+        "none";
 
-    celebracion.style.display = "none";
+    celebracion.style.display =
+        "none";
 
-    servidor.style.display = "flex";
+    servidor.style.display =
+        "flex";
 
 }
 
@@ -861,23 +1433,19 @@ function servidorColapsado(){
 
 function crearChispas(){
 
-    /*
-       Evita crear 120 chispas varias veces.
-    */
-
-    if(
-        celebracion.querySelector(".spark")
+    for(
+        let i = 0;
+        i < 130;
+        i++
     ){
-        return;
-    }
-
-
-    for(let i = 0; i < 120; i++){
 
         const spark =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        spark.className = "spark";
+        spark.className =
+            "spark";
 
 
         const x =
@@ -889,9 +1457,11 @@ function crearChispas(){
             window.innerHeight;
 
 
-        spark.style.left = "50vw";
+        spark.style.left =
+            "50vw";
 
-        spark.style.top = "50vh";
+        spark.style.top =
+            "50vh";
 
 
         spark.style.setProperty(
@@ -906,12 +1476,8 @@ function crearChispas(){
 
 
         spark.style.animationDelay =
-            Math.random() * 1.5 + "s";
-
-
-        spark.style.animationDuration =
-            1 +
-            Math.random() * 2 +
+            Math.random() *
+            1.5 +
             "s";
 
 
@@ -930,23 +1496,23 @@ function crearChispas(){
 
 function iniciarCelebracion(){
 
-    if(celebracionIniciada){
+    if(
+        celebracionIniciada
+    ){
 
         return;
 
     }
 
 
-    celebracionIniciada = true;
+    celebracionIniciada =
+        true;
 
-
-    /*
-       Si ya ocurrió anteriormente,
-       mostrar directamente el servidor.
-    */
 
     if(
-        localStorage.getItem(ESTADO)
+        localStorage.getItem(
+            ESTADO
+        )
         === "true"
     ){
 
@@ -957,94 +1523,89 @@ function iniciarCelebracion(){
     }
 
 
-    contador.style.display = "none";
+    contador.style.display =
+        "none";
 
-    celebracion.style.display = "flex";
+
+    celebracion.style.display =
+        "flex";
 
 
     crearChispas();
 
 
-    /*
-       Intentar reproducir Las Mañanitas.
-    */
-
     musica.currentTime = 0;
 
 
-    musica.play().catch(() => {
+    musica.play().catch(
+        function(){
 
-        /*
-           Los navegadores pueden bloquear
-           audio automático.
-        */
-
-        const aviso =
-            document.createElement("div");
+            const aviso =
+                document.createElement(
+                    "div"
+                );
 
 
-        aviso.style.position =
-            "absolute";
-
-        aviso.style.bottom =
-            "30px";
-
-        aviso.style.zIndex =
-            "30";
-
-        aviso.style.color =
-            "white";
-
-        aviso.style.fontSize =
-            "14px";
-
-        aviso.textContent =
-            "Haz clic para iniciar Las Mañanitas";
+            aviso.textContent =
+                "Haz clic para iniciar Las Mañanitas";
 
 
-        celebracion.appendChild(
-            aviso
-        );
+            aviso.style.position =
+                "absolute";
+
+            aviso.style.bottom =
+                "30px";
+
+            aviso.style.zIndex =
+                "20";
+
+            aviso.style.color =
+                "white";
+
+            aviso.style.fontSize =
+                "14px";
 
 
-        celebracion.addEventListener(
-            "click",
-            function(){
-
-                musica.play();
-
-                aviso.remove();
-
-            },
-            {
-                once:true
-            }
-        );
-
-    });
+            celebracion.appendChild(
+                aviso
+            );
 
 
-    /*
-       Cuando termine la canción,
-       activar el estado permanente.
-    */
+            celebracion.addEventListener(
+                "click",
+                function(){
 
-    musica.onended = function(){
+                    musica.play();
 
-        localStorage.setItem(
-            ESTADO,
-            "true"
-        );
+                    aviso.remove();
+
+                },
+                {
+                    once:true
+                }
+            );
+
+        }
+    );
 
 
-        celebracion.style.display =
-            "none";
+    musica.onended =
+        function(){
+
+            localStorage.setItem(
+                ESTADO,
+                "true"
+            );
 
 
-        servidor.style.display =
-            "flex";
+            celebracion.style.display =
+                "none";
 
-    };
+
+            servidor.style.display =
+                "flex";
+
+        };
 
 }
 
@@ -1053,15 +1614,12 @@ function iniciarCelebracion(){
    CONTADOR
 ================================================== */
 
-function updateTimer(){
-
-    /*
-       Si ya está colapsado,
-       no volver al contador.
-    */
+function actualizar(){
 
     if(
-        localStorage.getItem(ESTADO)
+        localStorage.getItem(
+            ESTADO
+        )
         === "true"
     ){
 
@@ -1072,11 +1630,9 @@ function updateTimer(){
     }
 
 
-    /*
-       Modo prueba.
-    */
-
-    if(MODO_PRUEBA){
+    if(
+        MODO_PRUEBA
+    ){
 
         iniciarCelebracion();
 
@@ -1085,50 +1641,19 @@ function updateTimer(){
     }
 
 
-    /*
-       Hora actual del navegador.
-    */
-
-    const now =
+    const ahora =
         new Date();
 
 
-    /*
-       Diferencia real.
-    */
-
-    const difference =
+    const diferencia =
         target.getTime()
         -
-        now.getTime();
+        ahora.getTime();
 
 
-    /*
-       DEBUG:
-       Si algo raro ocurre, puedes abrir F12.
-    */
-
-    console.log(
-        "Hora actual:",
-        now.toString()
-    );
-
-    console.log(
-        "Fecha objetivo:",
-        target.toString()
-    );
-
-    console.log(
-        "Milisegundos restantes:",
-        difference
-    );
-
-
-    /*
-       Si llegó la fecha.
-    */
-
-    if(difference <= 0){
+    if(
+        diferencia <= 0
+    ){
 
         days.textContent =
             "00";
@@ -1143,10 +1668,6 @@ function updateTimer(){
             "00";
 
 
-        subtitle.textContent =
-            "El hechizo ha comenzado...";
-
-
         iniciarCelebracion();
 
         return;
@@ -1154,85 +1675,84 @@ function updateTimer(){
     }
 
 
-    /*
-       DÍAS
-    */
-
     const d =
         Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
+            diferencia /
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
         );
 
-
-    /*
-       HORAS
-    */
 
     const h =
         Math.floor(
             (
-                difference /
-                (1000 * 60 * 60)
+                diferencia /
+                (
+                    1000 *
+                    60 *
+                    60
+                )
             ) % 24
         );
 
 
-    /*
-       MINUTOS
-    */
-
     const m =
         Math.floor(
             (
-                difference /
-                (1000 * 60)
+                diferencia /
+                (
+                    1000 *
+                    60
+                )
             ) % 60
         );
 
 
-    /*
-       SEGUNDOS
-    */
-
     const s =
         Math.floor(
             (
-                difference /
+                diferencia /
                 1000
             ) % 60
         );
 
 
-    /*
-       MOSTRAR
-    */
-
     days.textContent =
-        String(d).padStart(2,"0");
+        String(d)
+        .padStart(2,"0");
+
 
     hours.textContent =
-        String(h).padStart(2,"0");
+        String(h)
+        .padStart(2,"0");
+
 
     minutes.textContent =
-        String(m).padStart(2,"0");
+        String(m)
+        .padStart(2,"0");
+
 
     seconds.textContent =
-        String(s).padStart(2,"0");
+        String(s)
+        .padStart(2,"0");
 
 }
 
 
 /* ==================================================
-   TECLA R = REINICIAR
+   TECLA R
 ================================================== */
 
 document.addEventListener(
     "keydown",
-    function(event){
+    function(e){
 
         if(
-            event.key.toLowerCase()
+            e.key.toLowerCase()
             === "r"
         ){
 
@@ -1249,14 +1769,13 @@ document.addEventListener(
 
 
 /* ==================================================
-   ARRANCAR
+   INICIO
 ================================================== */
 
-updateTimer();
-
+actualizar();
 
 setInterval(
-    updateTimer,
+    actualizar,
     1000
 );
 
@@ -1264,3 +1783,4 @@ setInterval(
 
 </body>
 </html>
+```
