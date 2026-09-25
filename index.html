@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +13,9 @@
 <style>
 
 /* =========================================================
-   GENERAL
+   GENERALLa flecha arriba
+Música 
+Video de inicio
 ========================================================= */
 
 *{
@@ -28,7 +31,7 @@ html{
 body{
     background:#08030c;
     color:white;
-    font-family:Georgia, "Times New Roman", serif;
+    font-family:Georgia,"Times New Roman",serif;
     overflow-x:hidden;
 }
 
@@ -47,8 +50,10 @@ button{
 
 body::before{
     content:"";
+
     position:fixed;
     inset:0;
+
     z-index:-3;
 
     background:
@@ -68,18 +73,25 @@ body::before{
 .stars{
     position:fixed;
     inset:0;
+
     z-index:-2;
+
     pointer-events:none;
     overflow:hidden;
 }
 
 .star{
     position:absolute;
+
     width:2px;
     height:2px;
+
     background:#fff;
+
     border-radius:50%;
+
     opacity:.7;
+
     animation:twinkle 3s infinite alternate;
 }
 
@@ -99,6 +111,138 @@ body::before{
 
 
 /* =========================================================
+   TUTORIAL FIJO
+========================================================= */
+
+.fixed-tutorial{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    width:100%;
+
+    z-index:9999;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding:
+        max(10px,env(safe-area-inset-top))
+        15px
+        10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8,3,12,.98),
+            rgba(8,3,12,.90),
+            rgba(8,3,12,0)
+        );
+
+    pointer-events:none;
+
+    text-align:center;
+}
+
+.fixed-tutorial-title{
+
+    color:#d9b5ff;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 8px rgba(190,100,255,.8);
+
+    margin-bottom:5px;
+}
+
+.fixed-tutorial-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.tutorial-instruction{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.9),
+        0 0 10px rgba(190,100,255,.7);
+}
+
+.tutorial-icon{
+
+    font-size:20px;
+
+    filter:
+        drop-shadow(
+            0 0 6px rgba(190,100,255,.8)
+        );
+}
+
+.tutorial-arrow{
+
+    margin-top:0;
+
+    color:#d8a7ff;
+
+    font-size:35px;
+
+    line-height:.8;
+
+    text-shadow:
+        0 0 8px rgba(190,100,255,1),
+        0 0 20px rgba(150,50,220,.8);
+
+    animation:
+        fixedTutorialArrow
+        1.2s
+        infinite
+        ease-in-out;
+}
+
+@keyframes fixedTutorialArrow{
+
+    0%,100%{
+        transform:translateY(0);
+        opacity:.75;
+    }
+
+    50%{
+        transform:translateY(7px);
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================================
    CONTENIDO
 ========================================================= */
 
@@ -112,12 +256,15 @@ body::before{
 ========================================================= */
 
 .hero{
+
     min-height:100vh;
 
-    padding:50px 20px 80px;
+    padding:130px 20px 80px;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
     align-items:center;
 
@@ -127,6 +274,7 @@ body::before{
 }
 
 .hero::after{
+
     content:"";
 
     position:absolute;
@@ -151,16 +299,24 @@ body::before{
 }
 
 .small-title{
+
     color:#c9a5ff;
+
     letter-spacing:6px;
+
     text-transform:uppercase;
+
     font-size:13px;
+
     margin-bottom:15px;
 }
 
 .main-title{
+
     font-size:clamp(42px,8vw,82px);
+
     font-weight:normal;
+
     letter-spacing:5px;
 
     text-shadow:
@@ -169,9 +325,13 @@ body::before{
 }
 
 .subtitle{
+
     margin-top:10px;
+
     color:#ddd;
+
     font-size:18px;
+
     letter-spacing:2px;
 }
 
@@ -181,11 +341,13 @@ body::before{
 ========================================================= */
 
 .hero-content{
+
     width:min(1050px,100%);
 
     margin-top:45px;
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -193,16 +355,20 @@ body::before{
 }
 
 .photo1-container{
+
     width:280px;
+
     flex-shrink:0;
 
     position:relative;
 }
 
 .photo1-container::before{
+
     content:"";
 
     position:absolute;
+
     inset:-8px;
 
     border:1px solid rgba(204,145,255,.7);
@@ -215,9 +381,11 @@ body::before{
 }
 
 .photo1-container::after{
+
     content:"";
 
     position:absolute;
+
     inset:-18px;
 
     border:1px solid rgba(150,80,220,.25);
@@ -226,10 +394,13 @@ body::before{
 }
 
 .photo1-container img{
+
     width:100%;
+
     display:block;
 
     position:relative;
+
     z-index:2;
 
     border:4px solid #160b20;
@@ -239,24 +410,34 @@ body::before{
 }
 
 .countdown-area{
+
     flex:1;
+
     max-width:620px;
 }
 
 .countdown-title{
+
     color:#cda5ff;
+
     font-size:18px;
+
     letter-spacing:3px;
+
     margin-bottom:25px;
 }
 
 .countdown{
+
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
+
     gap:14px;
 }
 
 .time-box{
+
     padding:20px 10px;
 
     background:rgba(25,10,35,.65);
@@ -269,6 +450,7 @@ body::before{
 }
 
 .time-number{
+
     display:block;
 
     font-size:clamp(30px,5vw,48px);
@@ -280,6 +462,7 @@ body::before{
 }
 
 .time-label{
+
     display:block;
 
     margin-top:5px;
@@ -295,84 +478,19 @@ body::before{
 
 
 /* =========================================================
-   TUTORIAL DE DESPLAZAMIENTO
-========================================================= */
-
-.scroll-tutorial{
-    margin-top:60px;
-
-    text-align:center;
-
-    color:#fff;
-
-    cursor:pointer;
-
-    user-select:none;
-
-    transition:
-        opacity .5s ease,
-        transform .5s ease;
-}
-
-.scroll-tutorial.hidden-tutorial{
-    opacity:0;
-    pointer-events:none;
-    transform:translateY(-10px);
-}
-
-.scroll-tutorial-text{
-    font-size:17px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    text-shadow:
-        0 0 8px rgba(190,120,255,.8),
-        0 2px 8px rgba(0,0,0,.8);
-}
-
-.scroll-tutorial-arrow{
-    margin-top:8px;
-
-    font-size:50px;
-
-    line-height:1;
-
-    color:#d7a6ff;
-
-    text-shadow:
-        0 0 10px rgba(190,100,255,.9),
-        0 0 30px rgba(150,50,220,.7);
-
-    animation:
-        tutorialArrow 1.2s infinite ease-in-out;
-}
-
-@keyframes tutorialArrow{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(13px);
-    }
-
-}
-
-
-/* =========================================================
    TRANSICIÓN + FOTO 2
 ========================================================= */
 
 .invitation-reveal{
+
     min-height:100vh;
 
     padding:120px 20px 100px;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
     justify-content:center;
 
@@ -380,6 +498,7 @@ body::before{
 }
 
 .magic-transition{
+
     text-align:center;
 
     margin-bottom:55px;
@@ -394,11 +513,14 @@ body::before{
 }
 
 .invitation-reveal.visible .magic-transition{
+
     opacity:1;
+
     transform:translateY(0);
 }
 
 .magic-symbol{
+
     font-size:38px;
 
     color:#c48cff;
@@ -409,6 +531,7 @@ body::before{
 }
 
 .magic-text{
+
     margin-top:12px;
 
     color:#cdb9d8;
@@ -423,11 +546,14 @@ body::before{
 @keyframes magicPulse{
 
     0%,100%{
+
         text-shadow:0 0 5px #9d4edd;
+
         opacity:.5;
     }
 
     50%{
+
         text-shadow:
             0 0 10px #c77dff,
             0 0 30px #9d4edd,
@@ -456,6 +582,7 @@ body::before{
 ========================================================= */
 
 .invitation-image-wrapper{
+
     width:min(750px,95vw);
 
     position:relative;
@@ -476,7 +603,9 @@ body::before{
         filter 1.5s ease;
 }
 
-.invitation-reveal.visible .invitation-image-wrapper{
+.invitation-reveal.visible
+.invitation-image-wrapper{
+
     opacity:1;
 
     transform:
@@ -489,6 +618,7 @@ body::before{
 }
 
 .invitation-image-wrapper::before{
+
     content:"";
 
     position:absolute;
@@ -513,16 +643,20 @@ body::before{
 
 .invitation-reveal.visible
 .invitation-image-wrapper::before{
+
     opacity:1;
 }
 
 .invitation-image-wrapper img{
+
     width:100%;
+
     height:auto;
 
     display:block;
 
     position:relative;
+
     z-index:2;
 
     border:5px solid #17091f;
@@ -538,6 +672,7 @@ body::before{
 ========================================================= */
 
 .confirm-help{
+
     margin-top:25px;
 
     color:#d7c5df;
@@ -558,6 +693,7 @@ body::before{
 ========================================================= */
 
 .confirm-button{
+
     margin-top:12px;
 
     padding:17px 36px;
@@ -591,6 +727,7 @@ body::before{
 }
 
 .confirm-button:hover{
+
     transform:translateY(-3px);
 
     box-shadow:
@@ -606,6 +743,7 @@ body::before{
 }
 
 .confirm-button:active{
+
     transform:translateY(0);
 }
 
@@ -615,7 +753,9 @@ body::before{
 ========================================================= */
 
 .modal{
+
     position:fixed;
+
     inset:0;
 
     background:rgba(3,0,7,.88);
@@ -629,10 +769,11 @@ body::before{
 
     padding:20px;
 
-    z-index:1000;
+    z-index:10000;
 }
 
 .modal-box{
+
     width:min(500px,100%);
 
     background:
@@ -653,6 +794,7 @@ body::before{
 }
 
 .modal-title{
+
     text-align:center;
 
     font-size:28px;
@@ -663,6 +805,7 @@ body::before{
 }
 
 .modal-subtitle{
+
     text-align:center;
 
     color:#ad9ab8;
@@ -673,6 +816,7 @@ body::before{
 }
 
 .close-modal{
+
     position:absolute;
 
     top:12px;
@@ -690,10 +834,12 @@ body::before{
 }
 
 .form-group{
+
     margin-bottom:20px;
 }
 
 .form-group label{
+
     display:block;
 
     color:#d7c2df;
@@ -705,6 +851,7 @@ body::before{
 
 .form-group input,
 .form-group select{
+
     width:100%;
 
     padding:13px;
@@ -722,6 +869,7 @@ body::before{
 
 .form-group input:focus,
 .form-group select:focus{
+
     border-color:#b66aff;
 
     box-shadow:
@@ -729,11 +877,14 @@ body::before{
 }
 
 .radio-container{
+
     display:flex;
+
     gap:20px;
 }
 
 .radio-option{
+
     display:flex;
 
     align-items:center;
@@ -746,10 +897,12 @@ body::before{
 }
 
 .radio-option input{
+
     width:auto;
 }
 
 .submit-button{
+
     width:100%;
 
     padding:15px;
@@ -768,10 +921,12 @@ body::before{
 }
 
 .submit-button:hover{
+
     background:#75309a;
 }
 
 .form-message{
+
     margin-top:15px;
 
     text-align:center;
@@ -785,11 +940,12 @@ body::before{
 ========================================================= */
 
 .celebration{
+
     position:fixed;
 
     inset:0;
 
-    z-index:2000;
+    z-index:20000;
 
     background:
         radial-gradient(
@@ -809,6 +965,7 @@ body::before{
 }
 
 .celebration-content{
+
     position:relative;
 
     z-index:10;
@@ -817,6 +974,7 @@ body::before{
 }
 
 .celebration-title{
+
     font-size:clamp(38px,8vw,75px);
 
     font-weight:normal;
@@ -827,6 +985,7 @@ body::before{
 }
 
 .celebration-subtitle{
+
     margin-top:15px;
 
     color:#e4d4ea;
@@ -835,6 +994,7 @@ body::before{
 }
 
 .play-music{
+
     margin-top:30px;
 
     padding:14px 25px;
@@ -853,18 +1013,23 @@ body::before{
 @keyframes celebrateIn{
 
     from{
+
         opacity:0;
+
         transform:scale(.7);
     }
 
     to{
+
         opacity:1;
+
         transform:scale(1);
     }
 
 }
 
 .spark{
+
     position:absolute;
 
     width:5px;
@@ -884,6 +1049,7 @@ body::before{
 @keyframes sparkFly{
 
     from{
+
         transform:
             translate(0,0)
             scale(1);
@@ -892,6 +1058,7 @@ body::before{
     }
 
     to{
+
         transform:
             translate(var(--x),var(--y))
             scale(0);
@@ -907,11 +1074,12 @@ body::before{
 ========================================================= */
 
 .party-mode{
+
     position:fixed;
 
     inset:0;
 
-    z-index:1500;
+    z-index:15000;
 
     background:
         radial-gradient(
@@ -930,10 +1098,12 @@ body::before{
 }
 
 .party-content{
+
     padding:30px;
 }
 
 .party-icon{
+
     font-size:65px;
 
     animation:
@@ -941,6 +1111,7 @@ body::before{
 }
 
 .party-title{
+
     margin-top:20px;
 
     font-size:clamp(40px,8vw,80px);
@@ -953,6 +1124,7 @@ body::before{
 }
 
 .party-text{
+
     margin-top:15px;
 
     color:#d8c4df;
@@ -963,12 +1135,14 @@ body::before{
 @keyframes partyFloat{
 
     0%,100%{
+
         transform:
             translateY(0)
             rotate(-3deg);
     }
 
     50%{
+
         transform:
             translateY(-15px)
             rotate(3deg);
@@ -982,11 +1156,12 @@ body::before{
 ========================================================= */
 
 .final-screen{
+
     position:fixed;
 
     inset:0;
 
-    z-index:3000;
+    z-index:30000;
 
     background:
         radial-gradient(
@@ -1006,10 +1181,12 @@ body::before{
 }
 
 .final-content{
+
     animation:finalAppear 2s ease;
 }
 
 .final-title{
+
     font-size:clamp(38px,8vw,80px);
 
     font-weight:normal;
@@ -1022,6 +1199,7 @@ body::before{
 }
 
 .final-text{
+
     margin-top:25px;
 
     color:#d9c8df;
@@ -1034,12 +1212,16 @@ body::before{
 @keyframes finalAppear{
 
     from{
+
         opacity:0;
+
         transform:scale(.8);
     }
 
     to{
+
         opacity:1;
+
         transform:scale(1);
     }
 
@@ -1052,67 +1234,105 @@ body::before{
 
 @media(max-width:750px){
 
+    .fixed-tutorial{
+
+        padding:
+            max(8px,env(safe-area-inset-top))
+            10px
+            8px;
+    }
+
+    .fixed-tutorial-title{
+
+        font-size:9px;
+
+        letter-spacing:2px;
+
+        margin-bottom:4px;
+    }
+
+    .tutorial-instruction{
+
+        font-size:12px;
+
+        letter-spacing:.8px;
+    }
+
+    .tutorial-icon{
+
+        font-size:17px;
+    }
+
+    .tutorial-arrow{
+
+        font-size:30px;
+    }
+
     .hero{
-        padding-top:35px;
+
+        padding-top:140px;
     }
 
     .hero-content{
+
         flex-direction:column;
+
         gap:45px;
     }
 
     .photo1-container{
+
         width:min(270px,75vw);
     }
 
     .countdown-area{
+
         width:100%;
     }
 
     .countdown{
+
         gap:7px;
     }
 
     .time-box{
+
         padding:14px 5px;
     }
 
     .time-label{
+
         font-size:9px;
+
         letter-spacing:1px;
     }
 
-    .scroll-tutorial{
-        margin-top:50px;
-    }
-
-    .scroll-tutorial-text{
-        font-size:16px;
-    }
-
-    .scroll-tutorial-arrow{
-        font-size:48px;
-    }
-
     .invitation-reveal{
+
         padding-top:90px;
     }
 
     .invitation-image-wrapper{
+
         width:94vw;
     }
 
     .confirm-help{
+
         font-size:15px;
+
         line-height:1.5;
+
         padding:0 15px;
     }
 
     .confirm-button{
+
         padding:17px 25px;
     }
 
     .modal-box{
+
         padding:25px 20px;
     }
 
@@ -1126,6 +1346,7 @@ body::before{
 @media(min-width:751px){
 
     .invitation-image-wrapper{
+
         width:min(600px,85vw);
     }
 
@@ -1138,28 +1359,52 @@ body::before{
 
 @media(max-width:420px){
 
+    .fixed-tutorial-title{
+
+        font-size:8px;
+
+        letter-spacing:1.5px;
+    }
+
+    .tutorial-instruction{
+
+        font-size:11px;
+    }
+
+    .tutorial-arrow{
+
+        font-size:27px;
+    }
+
     .main-title{
+
         letter-spacing:2px;
     }
 
     .subtitle{
+
         font-size:15px;
     }
 
     .countdown-title{
+
         font-size:14px;
     }
 
     .time-number{
+
         font-size:27px;
     }
 
     .magic-text{
+
         font-size:11px;
+
         letter-spacing:2px;
     }
 
     .confirm-button{
+
         width:90%;
 
         font-size:12px;
@@ -1170,9 +1415,43 @@ body::before{
 }
 
 </style>
+
 </head>
 
 <body>
+
+
+<!-- =========================================================
+     TUTORIAL FIJO
+========================================================= -->
+
+<div class="fixed-tutorial">
+
+    <div class="fixed-tutorial-title">
+        ✦ CÓMO VER LA INVITACIÓN ✦
+    </div>
+
+    <div class="fixed-tutorial-content">
+
+        <div class="tutorial-instruction">
+
+            <span class="tutorial-icon">
+                ☝
+            </span>
+
+            <span>
+                DESLIZA HACIA ABAJO
+            </span>
+
+        </div>
+
+        <div class="tutorial-arrow">
+            ↓
+        </div>
+
+    </div>
+
+</div>
 
 
 <!-- =========================================================
@@ -1305,24 +1584,6 @@ body::before{
 
                 </div>
 
-            </div>
-
-        </div>
-
-
-        <!-- TUTORIAL -->
-
-        <div
-            class="scroll-tutorial"
-            id="scrollTutorial"
-        >
-
-            <div class="scroll-tutorial-text">
-                DESLIZA HACIA ABAJO PARA CONTINUAR
-            </div>
-
-            <div class="scroll-tutorial-arrow">
-                ↓
             </div>
 
         </div>
@@ -1617,6 +1878,7 @@ body::before{
         <div class="final-text">
 
             Gracias por haber formado parte
+
             <br>
 
             de este día tan especial.
@@ -1632,7 +1894,9 @@ body::before{
 </div>
 
 
-<!-- AUDIO -->
+<!-- =========================================================
+     AUDIO
+========================================================= -->
 
 <audio
     id="birthdayMusic"
@@ -1762,16 +2026,6 @@ const music =
 const playMusic =
     document.getElementById(
         "playMusic"
-    );
-
-const scrollTutorial =
-    document.getElementById(
-        "scrollTutorial"
-    );
-
-const countdownSection =
-    document.getElementById(
-        "countdownSection"
     );
 
 
@@ -1904,259 +2158,6 @@ updateCountdown();
 setInterval(
     updateCountdown,
     1000
-);
-
-
-/* =========================================================
-   TUTORIAL AUTOMÁTICO
-========================================================= */
-
-let tutorialUserInteracted =
-    false;
-
-let automaticScrolling =
-    false;
-
-let firstAutoScrollTimer =
-    null;
-
-let secondAutoScrollTimer =
-    null;
-
-
-/* Ocultar tutorial */
-
-function hideScrollTutorial(){
-
-    scrollTutorial.classList.add(
-        "hidden-tutorial"
-    );
-
-}
-
-
-/* Cancelar desplazamientos automáticos */
-
-function cancelAutomaticTutorial(){
-
-    if(automaticScrolling){
-        return;
-    }
-
-    tutorialUserInteracted =
-        true;
-
-    clearTimeout(
-        firstAutoScrollTimer
-    );
-
-    clearTimeout(
-        secondAutoScrollTimer
-    );
-
-    hideScrollTutorial();
-
-}
-
-
-/* Detectar interacción manual */
-
-window.addEventListener(
-    "scroll",
-    function(){
-
-        if(
-            window.scrollY > 10 &&
-            !automaticScrolling
-        ){
-
-            cancelAutomaticTutorial();
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-/* También cancelar si la persona toca/clica */
-
-window.addEventListener(
-    "wheel",
-    cancelAutomaticTutorial,
-    {
-        passive:true
-    }
-);
-
-window.addEventListener(
-    "touchstart",
-    cancelAutomaticTutorial,
-    {
-        passive:true
-    }
-);
-
-
-/* Click en el tutorial */
-
-scrollTutorial.addEventListener(
-    "click",
-    function(){
-
-        tutorialUserInteracted =
-            true;
-
-        clearTimeout(
-            firstAutoScrollTimer
-        );
-
-        clearTimeout(
-            secondAutoScrollTimer
-        );
-
-        hideScrollTutorial();
-
-        automaticScrolling =
-            true;
-
-        countdownSection.scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-
-        setTimeout(
-            function(){
-
-                automaticScrolling =
-                    false;
-
-            },
-            1800
-        );
-
-    }
-);
-
-
-/* Iniciar tutorial */
-
-function startAutomaticTutorial(){
-
-    firstAutoScrollTimer =
-        setTimeout(
-            function(){
-
-                if(
-                    tutorialUserInteracted
-                ){
-                    return;
-                }
-
-
-                const now =
-                    new Date();
-
-
-                if(
-                    now >= partyStart
-                ){
-                    return;
-                }
-
-
-                hideScrollTutorial();
-
-                automaticScrolling =
-                    true;
-
-
-                countdownSection.scrollIntoView({
-                    behavior:"smooth",
-                    block:"center"
-                });
-
-
-                setTimeout(
-                    function(){
-
-                        automaticScrolling =
-                            false;
-
-                    },
-                    1800
-                );
-
-
-                /*
-                   Después de llegar al contador
-                   comienza el segundo minuto.
-                */
-
-                secondAutoScrollTimer =
-                    setTimeout(
-                        function(){
-
-                            if(
-                                tutorialUserInteracted
-                            ){
-                                return;
-                            }
-
-
-                            const currentTime =
-                                new Date();
-
-
-                            if(
-                                currentTime >= partyStart
-                            ){
-                                return;
-                            }
-
-
-                            automaticScrolling =
-                                true;
-
-
-                            invitationReveal.scrollIntoView({
-                                behavior:"smooth",
-                                block:"start"
-                            });
-
-
-                            setTimeout(
-                                function(){
-
-                                    automaticScrolling =
-                                        false;
-
-                                    hideScrollTutorial();
-
-                                },
-                                1800
-                            );
-
-                        },
-                        60000
-                    );
-
-            },
-            60000
-        );
-
-}
-
-
-window.addEventListener(
-    "load",
-    function(){
-
-        startAutomaticTutorial();
-
-    }
 );
 
 
@@ -2517,14 +2518,6 @@ function updatePageState(){
         now >= finalDate
     ){
 
-        clearTimeout(
-            firstAutoScrollTimer
-        );
-
-        clearTimeout(
-            secondAutoScrollTimer
-        );
-
         publicContent.classList.add(
             "hidden"
         );
@@ -2553,14 +2546,6 @@ function updatePageState(){
         now >= partyStart &&
         now < partyEnd
     ){
-
-        clearTimeout(
-            firstAutoScrollTimer
-        );
-
-        clearTimeout(
-            secondAutoScrollTimer
-        );
 
         publicContent.classList.add(
             "hidden"
