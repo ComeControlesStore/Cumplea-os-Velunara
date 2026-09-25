@@ -22,8 +22,14 @@ body{
     min-height:100vh;
     background:#09030f;
     color:white;
-    font-family:Georgia,serif;
+    font-family:Georgia,"Times New Roman",serif;
     overflow-x:hidden;
+}
+
+button,
+input,
+select{
+    font-family:Arial,sans-serif;
 }
 
 .hidden{
@@ -102,7 +108,7 @@ body{
 }
 
 .introStartTitle{
-    font-family:"Trebuchet MS",Arial,sans-serif;
+    font-family:Arial,sans-serif;
     font-size:clamp(30px,8vw,58px);
     font-weight:bold;
     letter-spacing:6px;
@@ -163,6 +169,7 @@ body{
 }
 
 .fixed-tutorial-title{
+    font-family:Arial,sans-serif;
     font-size:11px;
     letter-spacing:3px;
     opacity:.7;
@@ -266,7 +273,7 @@ body{
 
 .velunara-title{
     margin:0;
-    font-family:"Trebuchet MS",Arial,sans-serif;
+    font-family:Arial,sans-serif;
     font-size:clamp(42px,11vw,78px);
     font-weight:700;
     letter-spacing:8px;
@@ -400,6 +407,7 @@ body{
 .modal-box h2{
     margin-top:0;
     text-align:center;
+    font-family:Arial,sans-serif;
 }
 
 .form-label{
@@ -510,6 +518,7 @@ body{
 }
 
 .celebration h2{
+    font-family:Arial,sans-serif;
     font-size:clamp(30px,8vw,60px);
 }
 
@@ -539,6 +548,7 @@ body{
 }
 
 .party-mode h2{
+    font-family:Arial,sans-serif;
     font-size:clamp(30px,8vw,60px);
 }
 
@@ -562,6 +572,7 @@ body{
 }
 
 .final-screen h2{
+    font-family:Arial,sans-serif;
     font-size:clamp(30px,8vw,60px);
 }
 
@@ -705,10 +716,6 @@ body{
 
 <body>
 
-<!-- =====================================================
-     VIDEO 1
-===================================================== -->
-
 <div id="introVideoScreen">
 
     <video
@@ -739,11 +746,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     TUTORIAL
-===================================================== -->
-
 <div
     class="fixed-tutorial"
     id="fixedTutorial"
@@ -763,16 +765,10 @@ body{
 
 </div>
 
-
 <div
     class="stars"
     id="stars"
 ></div>
-
-
-<!-- =====================================================
-     CONTENIDO
-===================================================== -->
 
 <div id="publicContent">
 
@@ -842,7 +838,6 @@ body{
 
     </section>
 
-
     <section
         class="invitation-reveal"
         id="invitationReveal"
@@ -875,11 +870,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     FORMULARIO
-===================================================== -->
-
 <div
     class="modal hidden"
     id="formModal"
@@ -909,7 +899,6 @@ body{
                 placeholder="Tu nombre"
             >
 
-
             <label class="form-label">
                 Personas que asistirán
             </label>
@@ -937,7 +926,6 @@ body{
 
                 </div>
 
-
                 <div>
 
                     <label
@@ -961,7 +949,6 @@ body{
 
             </div>
 
-
             <label
                 class="form-label"
                 for="phone"
@@ -976,7 +963,6 @@ body{
                 placeholder="Opcional"
                 autocomplete="tel"
             >
-
 
             <label
                 class="form-label"
@@ -1005,7 +991,6 @@ body{
 
             </select>
 
-
             <div class="modal-buttons">
 
                 <button
@@ -1030,11 +1015,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     CELEBRACIÓN
-===================================================== -->
-
 <div
     class="celebration hidden"
     id="celebration"
@@ -1053,11 +1033,6 @@ body{
     </div>
 
 </div>
-
-
-<!-- =====================================================
-     PARTY MODE
-===================================================== -->
 
 <div
     class="party-mode hidden"
@@ -1078,11 +1053,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     FINAL
-===================================================== -->
-
 <div
     class="final-screen hidden"
     id="finalScreen"
@@ -1098,11 +1068,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     VIDEO 2
-===================================================== -->
-
 <div
     id="finalVideoScreen"
     class="hidden"
@@ -1117,13 +1082,11 @@ body{
 
 </div>
 
-
 <audio
     id="birthdayMusic"
     src="mananitas.mp3"
     preload="auto"
 ></audio>
-
 
 <script>
 
@@ -1166,79 +1129,49 @@ const finalDate =
 ===================================================== */
 
 const introVideoScreen =
-    document.getElementById(
-        "introVideoScreen"
-    );
+    document.getElementById("introVideoScreen");
 
 const introVideo =
-    document.getElementById(
-        "introVideo"
-    );
+    document.getElementById("introVideo");
 
 const introStart =
-    document.getElementById(
-        "introStart"
-    );
+    document.getElementById("introStart");
 
 const startInvitation =
-    document.getElementById(
-        "startInvitation"
-    );
+    document.getElementById("startInvitation");
 
 const fixedTutorial =
-    document.getElementById(
-        "fixedTutorial"
-    );
+    document.getElementById("fixedTutorial");
 
 const invitationReveal =
-    document.getElementById(
-        "invitationReveal"
-    );
+    document.getElementById("invitationReveal");
 
 const formModal =
-    document.getElementById(
-        "formModal"
-    );
+    document.getElementById("formModal");
 
 const openForm =
-    document.getElementById(
-        "openForm"
-    );
+    document.getElementById("openForm");
 
 const closeModal =
-    document.getElementById(
-        "closeModal"
-    );
+    document.getElementById("closeModal");
 
 const rsvpForm =
-    document.getElementById(
-        "rsvpForm"
-    );
+    document.getElementById("rsvpForm");
 
 const celebration =
-    document.getElementById(
-        "celebration"
-    );
+    document.getElementById("celebration");
 
 const partyMode =
-    document.getElementById(
-        "partyMode"
-    );
+    document.getElementById("partyMode");
 
 const finalScreen =
-    document.getElementById(
-        "finalScreen"
-    );
+    document.getElementById("finalScreen");
 
 const finalVideoScreen =
-    document.getElementById(
-        "finalVideoScreen"
-    );
+    document.getElementById("finalVideoScreen");
 
 const finalVideo =
-    document.getElementById(
-        "finalVideo"
-    );
+    document.getElementById("finalVideo");
 
 
 /* =====================================================
@@ -1293,7 +1226,6 @@ function showVideo1Error(){
     }
 
 }
-
 
 startInvitation.addEventListener(
     "click",
@@ -1359,9 +1291,6 @@ startInvitation.addEventListener(
 
     }
 );
-
-
-/* VIDEO 1 TERMINA -> FADE */
 
 introVideo.addEventListener(
     "ended",
@@ -1651,7 +1580,6 @@ async function playVideo2(){
 
 }
 
-
 finalVideo.addEventListener(
     "ended",
     () => {
@@ -1720,13 +1648,20 @@ rsvpForm.addEventListener(
                 "attendance"
             ).value;
 
+        const personas =
+            adults + children;
+
 
         if(
             !guestName ||
             adults < 0 ||
             children < 0 ||
+            personas <= 0 ||
             !attendance
         ){
+            alert(
+                "Indica al menos una persona que asistirá."
+            );
             return;
         }
 
@@ -1744,16 +1679,6 @@ rsvpForm.addEventListener(
 
         try{
 
-            /*
-              Estos nombres deben coincidir
-              con las columnas de Supabase:
-              nombre
-              adultos
-              ninos
-              telefono
-              asistencia
-            */
-
             const {
                 error
             } =
@@ -1762,6 +1687,7 @@ rsvpForm.addEventListener(
                 .insert([
                     {
                         nombre:guestName,
+                        personas:personas,
                         adultos:adults,
                         ninos:children,
                         telefono:phone,
@@ -1771,19 +1697,20 @@ rsvpForm.addEventListener(
 
 
             if(error){
+
+                console.error(
+                    "Error de Supabase:",
+                    error
+                );
+
                 throw error;
+
             }
 
 
             formModal.classList.add(
                 "hidden"
             );
-
-
-            /*
-              Primero muestra la celebración
-              y después reproduce Video 2.
-            */
 
             celebration.classList.remove(
                 "hidden"
@@ -1806,7 +1733,6 @@ rsvpForm.addEventListener(
 
             rsvpForm.reset();
 
-
             document.getElementById(
                 "adults"
             ).value = 1;
@@ -1818,10 +1744,15 @@ rsvpForm.addEventListener(
 
         }catch(error){
 
-            console.error(error);
+            console.error(
+                "Supabase:",
+                error
+            );
 
             alert(
-                "No se pudo guardar la confirmación. Revisa las columnas de Supabase."
+                "No se pudo guardar la confirmación.\n\n" +
+                "Supabase dice:\n" +
+                error.message
             );
 
         }finally{
@@ -1908,5 +1839,3 @@ document.addEventListener(
 </body>
 </html>
 ```
-
-**Importante:** en Supabase, la tabla `confirmaciones` ahora debe tener las columnas `nombre`, `adultos`, `ninos`, `telefono` y `asistencia`. Si tus columnas ya tienen otros nombres, hay que poner exactamente esos nombres en el `.insert()`, porque Supabase, criatura burocrática digital, no adivina qué quisiste decir.
