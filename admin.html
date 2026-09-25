@@ -1,1497 +1,1791 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="robots"
+    content="noindex,nofollow,noarchive"
+>
 
 <title>Administración | Velunara</title>
 
-<meta name="robots" content="noindex,nofollow,noarchive">
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    defer
+></script>
 
 <style>
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
 *{
     box-sizing:border-box;
 }
 
-html,body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-}
-
 body{
-    background:#08030c;
-    color:#f5eefe;
-    font-family:Georgia,"Times New Roman",serif;
-    overflow-x:hidden;
-}
-
-body::before,
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-1;
-}
-
-body::before{
-    background:
-        radial-gradient(circle at 15% 20%,rgba(151,76,255,.15),transparent 25%),
-        radial-gradient(circle at 85% 70%,rgba(100,40,180,.12),transparent 25%);
-}
-
-body::after{
-    opacity:.55;
-    background-image:
-        radial-gradient(circle,#fff 1px,transparent 1px),
-        radial-gradient(circle,#c89cff 1px,transparent 1px);
-    background-size:95px 95px,145px 145px;
-    background-position:10px 20px,50px 70px;
-}
-
-/* =========================
-   LOGIN
-========================= */
-
-#loginScreen{
+    margin:0;
     min-height:100vh;
-    min-height:100dvh;
+    background:
+        radial-gradient(
+            circle at top,
+            #30154b 0%,
+            #160b24 45%,
+            #09050d 100%
+        );
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.hidden{
+    display:none !important;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-screen{
+    min-height:100vh;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     padding:20px;
 }
 
-.loginBox{
+.login-box{
     width:100%;
-    max-width:360px;
-    padding:28px 24px;
-    text-align:center;
-    border:1px solid rgba(190,125,255,.45);
-    border-radius:16px;
-    background:rgba(15,6,24,.94);
+    max-width:420px;
+    padding:35px;
+    border-radius:20px;
+    background:rgba(20,10,30,.94);
+    border:1px solid rgba(220,170,255,.25);
     box-shadow:
-        0 0 30px rgba(143,65,255,.18),
-        inset 0 0 20px rgba(150,70,255,.04);
+        0 20px 60px rgba(0,0,0,.55);
 }
 
-.loginSymbol{
-    font-size:30px;
-    margin-bottom:8px;
+.login-box h1{
+    margin:0 0 8px;
+    text-align:center;
+    font-family:Georgia,serif;
+    color:#e8c8ff;
 }
 
-.loginBox h1{
-    margin:0 0 6px;
-    font-size:24px;
-    color:#dfbdff;
+.login-box p{
+    margin:0 0 25px;
+    text-align:center;
+    color:#c9b9d4;
 }
 
-.loginBox p{
-    margin:0 0 18px;
-    color:#bfa9cb;
-    font-size:13px;
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.input-group{
+    margin-bottom:15px;
 }
 
-.loginBox input{
+.input-group label{
+    display:block;
+    margin-bottom:7px;
+    color:#ddd;
+    font-size:14px;
+}
+
+.input-group input{
     width:100%;
-    padding:11px 12px;
-    margin-bottom:8px;
-    border:1px solid #70419b;
-    border-radius:8px;
+    padding:13px;
+    border-radius:10px;
+    border:1px solid #604675;
+    background:#110817;
+    color:#fff;
     outline:none;
-    background:#0b0610;
-    color:white;
-    font-family:inherit;
-    font-size:14px;
 }
 
-.loginBox input:focus{
-    border-color:#b77aff;
-    box-shadow:0 0 8px rgba(183,122,255,.2);
+.input-group input:focus{
+    border-color:#c99aff;
 }
 
-.loginBox button{
+
+/* =========================================================
+   CONTRASEÑA + OJITO
+========================================================= */
+
+.password-wrapper{
+    position:relative;
     width:100%;
-    margin-top:4px;
-    padding:11px;
-    border:1px solid #8d58bd;
+}
+
+.password-wrapper input{
+    padding-right:55px;
+}
+
+.password-toggle{
+    position:absolute;
+    top:50%;
+    right:7px;
+    transform:translateY(-50%);
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+
+    border:0;
     border-radius:8px;
-    background:linear-gradient(135deg,#3b155c,#6b2c91);
+
+    background:transparent;
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    user-select:none;
+}
+
+.password-toggle:hover{
+    background:rgba(255,255,255,.08);
+}
+
+.password-toggle:focus{
+    outline:2px solid #c99aff;
+    outline-offset:1px;
+}
+
+
+/* =========================================================
+   BOTÓN LOGIN
+========================================================= */
+
+.login-button{
+    width:100%;
+    padding:14px;
+
+    border:0;
+    border-radius:10px;
+
+    background:#8e4fc4;
     color:white;
-    font-family:inherit;
-    font-size:14px;
+
+    font-weight:bold;
+
     cursor:pointer;
 }
 
-.loginBox button:hover{
-    background:linear-gradient(135deg,#512071,#7c35a5);
+.login-button:hover{
+    background:#a968dd;
 }
 
-.loginBox button:disabled{
+.login-button:disabled{
     opacity:.6;
     cursor:not-allowed;
 }
 
-#errorLogin{
-    min-height:18px;
-    margin-top:10px;
-    color:#ff9d9d;
-    font-size:12px;
+.login-message{
+    min-height:22px;
+    margin-top:14px;
+
+    text-align:center;
+
+    color:#ff9b9b;
 }
 
-/* =========================
+
+/* =========================================================
    ADMIN
-========================= */
+========================================================= */
 
-#adminApp{
-    display:none;
-    width:100%;
-    max-width:1180px;
-    margin:auto;
-    padding:18px 14px 30px;
+.admin-screen{
+    min-height:100vh;
+    padding:20px;
 }
 
-.adminHeader{
+.admin-container{
+    width:100%;
+    max-width:1250px;
+    margin:auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-header{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:15px;
-    margin-bottom:18px;
-    padding:12px 15px;
-    border:1px solid rgba(180,115,240,.28);
-    border-radius:12px;
-    background:rgba(18,7,29,.82);
+
+    margin-bottom:25px;
+    padding:20px;
+
+    border-radius:18px;
+
+    background:rgba(20,10,30,.9);
+    border:1px solid rgba(220,170,255,.18);
 }
 
-.adminTitle{
-    display:flex;
-    align-items:center;
-    gap:9px;
-}
-
-.adminTitle .symbol{
-    font-size:24px;
-}
-
-.adminTitle h1{
+.admin-header h1{
     margin:0;
-    font-size:23px;
-    font-weight:normal;
-    color:#e1c4ff;
+
+    font-family:Georgia,serif;
+
+    color:#e8c8ff;
 }
 
-.adminTitle small{
-    display:block;
-    margin-top:2px;
-    color:#a996b2;
-    font-size:11px;
+.admin-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-.logoutBtn{
-    border:1px solid #633b7d;
-    background:#12091b;
-    color:#d6bde2;
-    padding:7px 11px;
-    border-radius:7px;
-    font-family:inherit;
-    font-size:12px;
+.admin-actions button{
+    border:1px solid #75558a;
+    border-radius:9px;
+
+    padding:10px 15px;
+
+    background:#1b1024;
+    color:#fff;
+
     cursor:pointer;
 }
 
-.logoutBtn:hover{
-    background:#261036;
-    color:white;
+.admin-actions button:hover{
+    background:#2d183c;
 }
 
-/* =========================
+.admin-actions button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+
+/* =========================================================
    ESTADÍSTICAS
-========================= */
+========================================================= */
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin-bottom:14px;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:15px;
+
+    margin-bottom:25px;
 }
 
-.statCard{
-    min-width:0;
-    padding:12px 13px;
-    border:1px solid rgba(179,110,240,.27);
-    border-radius:10px;
-    background:rgba(17,7,27,.88);
+.stat-card{
+    padding:22px;
+
+    border-radius:16px;
+
+    background:rgba(20,10,30,.9);
+
+    border:1px solid
+        rgba(220,170,255,.18);
 }
 
-.statTop{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    color:#bca7c7;
-    font-size:11px;
-}
+.stat-card h2{
+    margin:0 0 8px;
 
-.statIcon{
-    font-size:17px;
-}
-
-.statNumber{
-    margin-top:5px;
-    font-size:24px;
-    color:#e5c8ff;
-    line-height:1;
-}
-
-/* =========================
-   PANEL
-========================= */
-
-.panel{
-    overflow:hidden;
-    border:1px solid rgba(179,110,240,.28);
-    border-radius:11px;
-    background:rgba(13,5,22,.91);
-}
-
-.panelHeader{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:11px 13px;
-    border-bottom:1px solid rgba(179,110,240,.2);
-}
-
-.panelHeader h2{
-    margin:0;
     font-size:15px;
+
+    color:#cbb8d7;
+
     font-weight:normal;
-    color:#dfc1f5;
 }
 
-.refreshBtn{
-    border:1px solid #65427b;
-    background:#110819;
-    color:#d8c2e4;
-    border-radius:6px;
-    padding:6px 9px;
-    font-family:inherit;
-    font-size:11px;
-    cursor:pointer;
+.stat-number{
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:#efd9ff;
 }
 
-.refreshBtn:hover{
-    background:#251030;
-}
 
-/* =========================
-   FILTROS
-========================= */
-
-.filters{
-    display:grid;
-    grid-template-columns:1.6fr 1fr 1fr;
-    gap:8px;
-    padding:10px 12px;
-    border-bottom:1px solid rgba(179,110,240,.16);
-}
-
-.filters input,
-.filters select{
-    width:100%;
-    padding:8px 9px;
-    border:1px solid #493255;
-    border-radius:6px;
-    outline:none;
-    background:#09050d;
-    color:#eee3f3;
-    font-family:inherit;
-    font-size:11px;
-}
-
-.filters input:focus,
-.filters select:focus{
-    border-color:#9561b8;
-}
-
-/* =========================
+/* =========================================================
    TABLA
-========================= */
+========================================================= */
 
-.tableWrap{
-    width:100%;
+.table-container{
     overflow-x:auto;
+
+    border-radius:16px;
+
+    background:rgba(20,10,30,.9);
+
+    border:1px solid
+        rgba(220,170,255,.18);
 }
 
 table{
     width:100%;
-    min-width:700px;
+    min-width:850px;
+
     border-collapse:collapse;
 }
 
-th{
-    padding:8px 9px;
-    background:#12081b;
-    color:#a991b6;
-    border-bottom:1px solid rgba(179,110,240,.2);
+thead{
+    background:#251334;
+}
+
+th,
+td{
+    padding:14px 12px;
+
     text-align:left;
-    font-size:10px;
-    font-weight:normal;
-    text-transform:uppercase;
-    letter-spacing:.3px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+}
+
+th{
+    color:#e7cfff;
+
+    font-size:14px;
 }
 
 td{
-    padding:8px 9px;
-    border-bottom:1px solid rgba(179,110,240,.10);
-    color:#ded0e4;
-    font-size:11px;
-    vertical-align:middle;
+    color:#eee;
+
+    font-size:14px;
 }
 
 tbody tr:hover{
-    background:rgba(128,65,170,.07);
+    background:
+        rgba(255,255,255,.035);
 }
 
-.empty,
-.loading{
-    padding:25px 15px;
-    text-align:center;
-    color:#9d8ba5;
-    font-size:12px;
+.attending{
+    color:#9dffb2;
+
+    font-weight:bold;
 }
 
-/* =========================
-   BADGES
-========================= */
+.not-attending{
+    color:#ff9b9b;
 
-.badge{
-    display:inline-block;
-    padding:3px 6px;
-    border-radius:20px;
-    font-size:9px;
-    white-space:nowrap;
+    font-weight:bold;
 }
 
-.badgeYes{
-    background:rgba(78,180,117,.12);
-    border:1px solid rgba(100,210,135,.28);
-    color:#9fe6b3;
-}
+.delete-button{
+    border:0;
 
-.badgeNo{
-    background:rgba(220,80,80,.10);
-    border:1px solid rgba(220,100,100,.25);
-    color:#f1a2a2;
-}
-
-.badgeNeutral{
-    background:rgba(170,130,190,.10);
-    border:1px solid rgba(170,130,190,.2);
-    color:#c8b6cf;
-}
-
-/* =========================
-   MENSAJES
-========================= */
-
-.message{
-    display:none;
-    margin:10px 12px;
-    padding:9px 11px;
     border-radius:7px;
-    font-size:11px;
+
+    padding:8px 11px;
+
+    background:#8e3030;
+
+    color:#fff;
+
+    cursor:pointer;
 }
 
-.message.error{
-    display:block;
-    color:#ffb1b1;
-    background:rgba(120,30,30,.15);
-    border:1px solid rgba(210,80,80,.25);
+.delete-button:hover{
+    background:#a83b3b;
 }
 
-.adminFooter{
-    padding-top:12px;
+.delete-button:disabled{
+    opacity:.5;
+
+    cursor:not-allowed;
+}
+
+
+/* =========================================================
+   MENSAJE VACÍO
+========================================================= */
+
+.empty-message{
+    padding:35px;
+
     text-align:center;
-    color:#75657d;
-    font-size:10px;
+
+    color:#b9a9c4;
 }
 
-/* =========================
+
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
-@media(max-width:850px){
+@media(max-width:750px){
 
-    #adminApp{
-        padding:12px 10px 25px;
-    }
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .filters{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .filters input{
-        grid-column:1 / -1;
-    }
-}
-
-@media(max-width:500px){
-
-    .adminHeader{
-        padding:10px 11px;
-    }
-
-    .adminTitle h1{
-        font-size:19px;
-    }
-
-    .adminTitle .symbol{
-        font-size:21px;
-    }
-
-    .adminTitle small{
-        font-size:9px;
-    }
-
-    .logoutBtn{
-        padding:6px 8px;
-        font-size:10px;
-    }
-
-    .stats{
-        gap:7px;
-    }
-
-    .statCard{
+    .admin-screen{
         padding:10px;
     }
 
-    .statNumber{
-        font-size:21px;
+    .admin-header{
+        flex-direction:column;
+
+        align-items:stretch;
     }
 
-    .filters{
+    .admin-header h1{
+        text-align:center;
+    }
+
+    .admin-actions{
+        justify-content:center;
+    }
+
+    .admin-actions button{
+        flex:1;
+    }
+
+    .stats{
         grid-template-columns:1fr;
     }
 
-    .filters input{
-        grid-column:auto;
+    .login-box{
+        padding:25px 20px;
     }
 
-    .panelHeader{
-        padding:9px 10px;
-    }
-
-    .panelHeader h2{
-        font-size:13px;
-    }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================
+
+<!-- =====================================================
      LOGIN
-========================= -->
+===================================================== -->
 
-<section id="loginScreen">
+<section
+    id="loginScreen"
+    class="login-screen"
+>
 
-    <div class="loginBox">
+    <div class="login-box">
 
-        <div class="loginSymbol">✦</div>
+        <h1>
+            Administración
+        </h1>
 
-        <h1>Administración</h1>
+        <p>
+            Acceso privado de Velunara
+        </p>
 
-        <p>Panel privado de Velunara</p>
 
-        <input
-            type="email"
-            id="adminEmail"
-            placeholder="Correo electrónico"
-            autocomplete="username"
-        >
+        <form id="loginForm">
 
-        <input
-            type="password"
-            id="adminPassword"
-            placeholder="Contraseña"
-            autocomplete="current-password"
-        >
 
-        <button
-            id="loginButton"
-            onclick="login()"
-        >
-            Iniciar sesión
-        </button>
+            <!-- CORREO -->
 
-        <div id="errorLogin"></div>
+            <div class="input-group">
+
+                <label for="email">
+                    Correo
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CONTRASEÑA -->
+
+            <div class="input-group">
+
+                <label for="password">
+                    Contraseña
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="password-toggle"
+                        aria-label="Mostrar contraseña"
+                        title="Mostrar contraseña"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
+                INICIAR SESIÓN
+            </button>
+
+
+            <div
+                class="login-message"
+                id="loginMessage"
+            ></div>
+
+
+        </form>
 
     </div>
 
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      ADMIN
-========================= -->
+===================================================== -->
 
-<main id="adminApp">
+<section
+    id="adminScreen"
+    class="admin-screen hidden"
+>
 
-    <header class="adminHeader">
+    <div class="admin-container">
 
-        <div class="adminTitle">
 
-            <div class="symbol">✦</div>
+        <!-- HEADER -->
 
-            <div>
-                <h1>Velunara</h1>
-                <small>Panel de administración</small>
+        <header class="admin-header">
+
+            <h1>
+                💜 Confirmaciones
+            </h1>
+
+
+            <div class="admin-actions">
+
+                <button
+                    type="button"
+                    id="refreshButton"
+                >
+                    ↻ Actualizar
+                </button>
+
+
+                <button
+                    type="button"
+                    id="logoutButton"
+                >
+                    Cerrar sesión
+                </button>
+
             </div>
 
-        </div>
-
-        <button
-            class="logoutBtn"
-            onclick="logout()"
-        >
-            Cerrar sesión
-        </button>
-
-    </header>
+        </header>
 
 
-    <!-- ESTADÍSTICAS -->
+        <!-- ESTADÍSTICAS -->
 
-    <section class="stats">
+        <section class="stats">
 
-        <div class="statCard">
 
-            <div class="statTop">
-                <span class="statIcon">💌</span>
-                <span>Confirmaciones</span>
+            <div class="stat-card">
+
+                <h2>
+                    Confirmaciones
+                </h2>
+
+                <div
+                    class="stat-number"
+                    id="totalConfirmaciones"
+                >
+                    0
+                </div>
+
             </div>
 
-            <div
-                class="statNumber"
-                id="statConfirmaciones"
-            >
-                0
+
+            <div class="stat-card">
+
+                <h2>
+                    Personas que asistirán
+                </h2>
+
+                <div
+                    class="stat-number"
+                    id="totalAsistiran"
+                >
+                    0
+                </div>
+
             </div>
 
-        </div>
 
+            <div class="stat-card">
 
-        <div class="statCard">
+                <h2>
+                    Personas que no asistirán
+                </h2>
 
-            <div class="statTop">
-                <span class="statIcon">✨</span>
-                <span>Asistirán</span>
+                <div
+                    class="stat-number"
+                    id="totalNoAsistiran"
+                >
+                    0
+                </div>
+
             </div>
 
-            <div
-                class="statNumber"
-                id="statAsistiran"
-            >
-                0
-            </div>
 
-        </div>
+        </section>
 
 
-        <div class="statCard">
+        <!-- TABLA -->
 
-            <div class="statTop">
-                <span class="statIcon">👤</span>
-                <span>Adultos</span>
-            </div>
-
-            <div
-                class="statNumber"
-                id="statAdultos"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="statCard">
-
-            <div class="statTop">
-                <span class="statIcon">🧒</span>
-                <span>Niños</span>
-            </div>
-
-            <div
-                class="statNumber"
-                id="statNinos"
-            >
-                0
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- TABLA -->
-
-    <section class="panel">
-
-        <div class="panelHeader">
-
-            <h2>
-                Confirmaciones de invitados
-            </h2>
-
-            <button
-                class="refreshBtn"
-                onclick="loadConfirmations()"
-            >
-                ↻ Actualizar
-            </button>
-
-        </div>
-
-
-        <div class="filters">
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Buscar por nombre..."
-                oninput="applyFilters()"
-            >
-
-            <select
-                id="attendanceFilter"
-                onchange="applyFilters()"
-            >
-
-                <option value="todos">
-                    Todas las respuestas
-                </option>
-
-                <option value="si">
-                    Asistirán
-                </option>
-
-                <option value="no">
-                    No asistirán
-                </option>
-
-            </select>
-
-
-            <select
-                id="categoryFilter"
-                onchange="applyFilters()"
-            >
-
-                <option value="todos">
-                    Todas las categorías
-                </option>
-
-                <option value="adultos">
-                    Con adultos
-                </option>
-
-                <option value="ninos">
-                    Con niños
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div id="message"></div>
-
-
-        <div class="tableWrap">
+        <section class="table-container">
 
             <table>
 
                 <thead>
 
                     <tr>
-                        <th>Nombre</th>
-                        <th>Asistencia</th>
-                        <th>Adultos</th>
-                        <th>Niños</th>
-                        <th>Total</th>
-                        <th>Teléfono</th>
+
+                        <th>
+                            Nombre
+                        </th>
+
+                        <th>
+                            Personas
+                        </th>
+
+                        <th>
+                            Asistencia
+                        </th>
+
+                        <th>
+                            Teléfono
+                        </th>
+
+                        <th>
+                            Fecha
+                        </th>
+
+                        <th>
+                            Acción
+                        </th>
+
                     </tr>
 
                 </thead>
 
-                <tbody id="tableBody">
 
-                    <tr>
-
-                        <td
-                            colspan="6"
-                            class="loading"
-                        >
-                            Cargando confirmaciones...
-                        </td>
-
-                    </tr>
-
-                </tbody>
+                <tbody
+                    id="guestsTableBody"
+                ></tbody>
 
             </table>
 
-        </div>
 
-    </section>
+            <div
+                id="emptyMessage"
+                class="empty-message hidden"
+            >
+                No hay confirmaciones registradas.
+            </div>
+
+        </section>
 
 
-    <div class="adminFooter">
-        Velunara · Panel privado
     </div>
 
-</main>
+</section>
 
-
-<!-- =========================
-     SUPABASE
-========================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
-
-const SUPABASE_URL =
-    "https://ibdjtobuadgzozbggxxu.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
-
-
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-let confirmations = [];
-
-
-/* =========================
-   ELEMENTOS
-========================= */
-
-const loginScreen =
-    document.getElementById(
-        "loginScreen"
-    );
-
-const adminApp =
-    document.getElementById(
-        "adminApp"
-    );
-
-const adminEmail =
-    document.getElementById(
-        "adminEmail"
-    );
-
-const adminPassword =
-    document.getElementById(
-        "adminPassword"
-    );
-
-const loginButton =
-    document.getElementById(
-        "loginButton"
-    );
-
-const errorLogin =
-    document.getElementById(
-        "errorLogin"
-    );
-
-const tableBody =
-    document.getElementById(
-        "tableBody"
-    );
-
-const message =
-    document.getElementById(
-        "message"
-    );
-
-
-/* =========================
-   LOGIN CON SUPABASE AUTH
-========================= */
-
-async function login(){
-
-    const email =
-        adminEmail.value
-            .trim()
-            .toLowerCase();
-
-    const password =
-        adminPassword.value;
-
-
-    errorLogin.textContent = "";
-
-
-    if(!email){
-
-        errorLogin.textContent =
-            "Escribe el correo.";
-
-        adminEmail.focus();
-
-        return;
-    }
-
-
-    if(!password){
-
-        errorLogin.textContent =
-            "Escribe la contraseña.";
-
-        adminPassword.focus();
-
-        return;
-    }
-
-
-    loginButton.disabled = true;
-
-    loginButton.textContent =
-        "Comprobando...";
-
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth
-                .signInWithPassword({
-                    email:email,
-                    password:password
-                });
-
-
-        if(error){
-
-            console.error(error);
-
-
-            errorLogin.textContent =
-                "El correo o la contraseña no son correctos.";
-
-            adminPassword.value = "";
-
-            return;
-        }
-
-
-        if(!data.session){
-
-            errorLogin.textContent =
-                "No se pudo iniciar la sesión.";
-
-            return;
-        }
-
-
-        showAdmin();
-
-
-    }catch(error){
-
-        console.error(error);
-
-
-        errorLogin.textContent =
-            "No se pudo iniciar sesión. Revisa tu conexión a Internet.";
-
-    }finally{
-
-        loginButton.disabled = false;
-
-        loginButton.textContent =
-            "Iniciar sesión";
-
-    }
-
-}
-
-
-/* =========================
-   MOSTRAR ADMIN
-========================= */
-
-function showAdmin(){
-
-    loginScreen.style.display =
-        "none";
-
-    adminApp.style.display =
-        "block";
-
-    loadConfirmations();
-
-}
-
-
-/* =========================
-   CERRAR SESIÓN
-========================= */
-
-async function logout(){
-
-    await supabaseClient.auth.signOut();
-
-
-    adminApp.style.display =
-        "none";
-
-    loginScreen.style.display =
-        "flex";
-
-
-    adminEmail.value = "";
-
-    adminPassword.value = "";
-
-    errorLogin.textContent = "";
-
-}
-
-
-/* =========================
-   COMPROBAR SESIÓN REAL
-========================= */
-
-async function checkSession(){
-
-    try{
-
-        const {
-            data
-        } =
-            await supabaseClient.auth
-                .getSession();
-
-
-        if(
-            data &&
-            data.session
-        ){
-
-            showAdmin();
-
-        }
-
-    }catch(error){
-
-        console.error(error);
-
-    }
-
-}
-
-
-checkSession();
-
-
-/* =========================
-   CARGAR CONFIRMACIONES
-========================= */
-
-async function loadConfirmations(){
-
-    tableBody.innerHTML = `
-        <tr>
-            <td
-                colspan="6"
-                class="loading"
-            >
-                Cargando confirmaciones...
-            </td>
-        </tr>
-    `;
-
-
-    hideMessage();
-
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("confirmaciones")
-                .select("*");
-
-
-        if(error){
-
-            console.error(error);
-
-
-            tableBody.innerHTML = `
-                <tr>
-                    <td
-                        colspan="6"
-                        class="empty"
-                    >
-                        No se pudieron cargar las confirmaciones.
-                    </td>
-                </tr>
-            `;
-
-
-            showMessage(
-                "No se pudieron cargar las confirmaciones. Revisa los permisos de la tabla.",
-                "error"
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        /* =================================================
+           CONFIGURACIÓN SUPABASE
+        ================================================= */
+
+        const SUPABASE_URL =
+            "https://ibdjtobuadgzozbggxxu.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
+
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY,
+                {
+                    auth:{
+                        persistSession:true,
+                        autoRefreshToken:true,
+                        detectSessionInUrl:true
+                    }
+                }
             );
 
 
-            return;
+        /* =================================================
+           ELEMENTOS
+        ================================================= */
+
+        const loginScreen =
+            document.getElementById(
+                "loginScreen"
+            );
+
+        const adminScreen =
+            document.getElementById(
+                "adminScreen"
+            );
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+        const loginMessage =
+            document.getElementById(
+                "loginMessage"
+            );
+
+        const refreshButton =
+            document.getElementById(
+                "refreshButton"
+            );
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
+        const guestsTableBody =
+            document.getElementById(
+                "guestsTableBody"
+            );
+
+        const emptyMessage =
+            document.getElementById(
+                "emptyMessage"
+            );
+
+        const totalConfirmaciones =
+            document.getElementById(
+                "totalConfirmaciones"
+            );
+
+        const totalAsistiran =
+            document.getElementById(
+                "totalAsistiran"
+            );
+
+        const totalNoAsistiran =
+            document.getElementById(
+                "totalNoAsistiran"
+            );
+
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+        const togglePassword =
+            document.getElementById(
+                "togglePassword"
+            );
+
+
+        /* =================================================
+           ESTADO
+        ================================================= */
+
+        let loadingGuests = false;
+
+        let currentGuests = [];
+
+        let sessionActive = false;
+
+
+        /* =================================================
+           MOSTRAR / OCULTAR CONTRASEÑA
+        ================================================= */
+
+        togglePassword.addEventListener(
+            "click",
+            () => {
+
+                const showing =
+                    passwordInput.type === "text";
+
+
+                if(showing){
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁️";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Mostrar contraseña"
+                    );
+
+                    togglePassword.setAttribute(
+                        "title",
+                        "Mostrar contraseña"
+                    );
+
+                }
+                else{
+
+                    passwordInput.type =
+                        "text";
+
+                    togglePassword.textContent =
+                        "🙈";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Ocultar contraseña"
+                    );
+
+                    togglePassword.setAttribute(
+                        "title",
+                        "Ocultar contraseña"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           MOSTRAR LOGIN
+        ================================================= */
+
+        function showLogin(){
+
+            sessionActive =
+                false;
+
+            currentGuests =
+                [];
+
+
+            loginScreen.classList.remove(
+                "hidden"
+            );
+
+            adminScreen.classList.add(
+                "hidden"
+            );
+
+
+            guestsTableBody.innerHTML =
+                "";
+
+            emptyMessage.classList.add(
+                "hidden"
+            );
+
+
+            updateStats(
+                []
+            );
+
         }
 
 
-        confirmations =
-            Array.isArray(data)
-                ? data
-                : [];
+        /* =================================================
+           MOSTRAR ADMIN
+        ================================================= */
+
+        function showAdmin(){
+
+            sessionActive =
+                true;
+
+            loginScreen.classList.add(
+                "hidden"
+            );
+
+            adminScreen.classList.remove(
+                "hidden"
+            );
+
+        }
 
 
-        updateStats();
+        /* =================================================
+           LOGIN
+        ================================================= */
 
-        applyFilters();
+        loginForm.addEventListener(
+            "submit",
+            async event => {
 
-
-    }catch(error){
-
-        console.error(error);
-
-
-        tableBody.innerHTML = `
-            <tr>
-                <td
-                    colspan="6"
-                    class="empty"
-                >
-                    Ocurrió un problema al cargar los datos.
-                </td>
-            </tr>
-        `;
+                event.preventDefault();
 
 
-        showMessage(
-            "Ocurrió un problema al cargar los datos. Intenta actualizar la página.",
-            "error"
+                loginMessage.textContent =
+                    "";
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const password =
+                    passwordInput.value;
+
+
+                if(
+                    !email ||
+                    !password
+                ){
+
+                    loginMessage.textContent =
+                        "Completa todos los campos.";
+
+                    return;
+
+                }
+
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.textContent =
+                    "INICIANDO...";
+
+
+                try{
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient
+                            .auth
+                            .signInWithPassword({
+                                email,
+                                password
+                            });
+
+
+                    if(
+                        error ||
+                        !data.session
+                    ){
+
+                        console.error(
+                            "ERROR DE LOGIN:",
+                            error
+                        );
+
+                        loginMessage.textContent =
+                            "Correo o contraseña incorrectos.";
+
+                        return;
+
+                    }
+
+
+                    loginForm.reset();
+
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁️";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Mostrar contraseña"
+                    );
+
+                    togglePassword.setAttribute(
+                        "title",
+                        "Mostrar contraseña"
+                    );
+
+
+                    showAdmin();
+
+                    await loadGuests();
+
+
+                }
+                catch(error){
+
+                    console.error(
+                        "ERROR:",
+                        error
+                    );
+
+                    loginMessage.textContent =
+                        "No se pudo iniciar sesión.";
+
+                }
+                finally{
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "INICIAR SESIÓN";
+
+                }
+
+            }
         );
 
-    }
 
-}
+        /* =================================================
+           CARGAR CONFIRMACIONES
+        ================================================= */
 
-
-/* =========================
-   ESTADÍSTICAS
-========================= */
-
-function updateStats(){
-
-    const total =
-        confirmations.length;
-
-
-    const attending =
-        confirmations.filter(
-            row =>
-                String(
-                    row.asistencia || ""
-                ).toLowerCase() === "si"
-        );
-
-
-    let adults = 0;
-
-    let children = 0;
-
-
-    attending.forEach(row => {
-
-        adults +=
-            Number(row.adultos) || 0;
-
-        children +=
-            Number(row.ninos) || 0;
-
-    });
-
-
-    document.getElementById(
-        "statConfirmaciones"
-    ).textContent =
-        total;
-
-
-    document.getElementById(
-        "statAsistiran"
-    ).textContent =
-        adults + children;
-
-
-    document.getElementById(
-        "statAdultos"
-    ).textContent =
-        adults;
-
-
-    document.getElementById(
-        "statNinos"
-    ).textContent =
-        children;
-
-}
-
-
-/* =========================
-   FILTROS
-========================= */
-
-function applyFilters(){
-
-    const search =
-        document.getElementById(
-            "searchInput"
-        ).value
-        .trim()
-        .toLowerCase();
-
-
-    const attendance =
-        document.getElementById(
-            "attendanceFilter"
-        ).value;
-
-
-    const category =
-        document.getElementById(
-            "categoryFilter"
-        ).value;
-
-
-    const filtered =
-        confirmations.filter(row => {
-
-            const name =
-                String(
-                    row.nombre || ""
-                ).toLowerCase();
-
-
-            const rowAttendance =
-                String(
-                    row.asistencia || ""
-                ).toLowerCase();
-
-
-            const adults =
-                Number(row.adultos) || 0;
-
-
-            const children =
-                Number(row.ninos) || 0;
-
+        async function loadGuests(){
 
             if(
-                search &&
-                !name.includes(search)
+                loadingGuests ||
+                !sessionActive
             ){
 
-                return false;
+                return;
 
             }
 
 
-            if(
-                attendance !== "todos" &&
-                rowAttendance !== attendance
-            ){
+            loadingGuests =
+                true;
 
-                return false;
+            refreshButton.disabled =
+                true;
 
-            }
-
-
-            if(
-                category === "adultos" &&
-                adults <= 0
-            ){
-
-                return false;
-
-            }
+            refreshButton.textContent =
+                "↻ Cargando...";
 
 
-            if(
-                category === "ninos" &&
-                children <= 0
-            ){
+            try{
 
-                return false;
-
-            }
-
-
-            return true;
-
-        });
-
-
-    renderTable(filtered);
-
-}
-
-
-/* =========================
-   TABLA
-========================= */
-
-function renderTable(rows){
-
-    if(!rows.length){
-
-        tableBody.innerHTML = `
-            <tr>
-                <td
-                    colspan="6"
-                    class="empty"
-                >
-                    No hay confirmaciones que coincidan.
-                </td>
-            </tr>
-        `;
-
-        return;
-    }
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("confirmaciones")
+                        .select(
+                            "id,nombre,personas,asistencia,telefono,fecha"
+                        )
+                        .order(
+                            "fecha",
+                            {
+                                ascending:false
+                            }
+                        );
 
 
-    tableBody.innerHTML =
-        rows.map(row => {
+                if(error){
 
-            const nombre =
-                escapeHTML(
-                    row.nombre ||
-                    "Sin nombre"
+                    console.error(
+                        "ERROR CARGANDO CONFIRMACIONES:",
+                        error
+                    );
+
+
+                    currentGuests =
+                        [];
+
+
+                    guestsTableBody.innerHTML =
+                        "";
+
+
+                    emptyMessage.classList.remove(
+                        "hidden"
+                    );
+
+
+                    emptyMessage.textContent =
+                        "No se pudieron cargar las confirmaciones.";
+
+
+                    updateStats(
+                        []
+                    );
+
+
+                    return;
+
+                }
+
+
+                currentGuests =
+                    Array.isArray(data)
+                        ? data
+                        : [];
+
+
+                renderGuests(
+                    currentGuests
                 );
 
 
-            const asistencia =
-                String(
-                    row.asistencia || ""
-                ).toLowerCase();
-
-
-            let badge =
-                `<span class="badge badgeNeutral">Sin respuesta</span>`;
-
-
-            if(
-                asistencia === "si"
-            ){
-
-                badge =
-                    `<span class="badge badgeYes">Asistirá</span>`;
-
-            }
-
-
-            if(
-                asistencia === "no"
-            ){
-
-                badge =
-                    `<span class="badge badgeNo">No asistirá</span>`;
-
-            }
-
-
-            const adultos =
-                Number(row.adultos) || 0;
-
-
-            const ninos =
-                Number(row.ninos) || 0;
-
-
-            let personas =
-                Number(row.personas);
-
-
-            if(
-                !Number.isFinite(personas)
-            ){
-
-                personas =
-                    adultos + ninos;
-
-            }
-
-
-            const telefono =
-                escapeHTML(
-                    row.telefono ||
-                    "No indicado"
+                updateStats(
+                    currentGuests
                 );
 
 
-            return `
-                <tr>
+            }
+            catch(error){
 
-                    <td>
-                        ${nombre}
-                    </td>
-
-                    <td>
-                        ${badge}
-                    </td>
-
-                    <td>
-                        ${adultos}
-                    </td>
-
-                    <td>
-                        ${ninos}
-                    </td>
-
-                    <td>
-                        ${personas}
-                    </td>
-
-                    <td>
-                        ${telefono}
-                    </td>
-
-                </tr>
-            `;
-
-        }).join("");
-
-}
+                console.error(
+                    "ERROR:",
+                    error
+                );
 
 
-/* =========================
-   SEGURIDAD HTML
-========================= */
+                currentGuests =
+                    [];
 
-function escapeHTML(value){
 
-    return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
+                guestsTableBody.innerHTML =
+                    "";
+
+
+                emptyMessage.classList.remove(
+                    "hidden"
+                );
+
+
+                emptyMessage.textContent =
+                    "No se pudieron cargar las confirmaciones.";
+
+
+                updateStats(
+                    []
+                );
+
+            }
+            finally{
+
+                loadingGuests =
+                    false;
+
+                refreshButton.disabled =
+                    false;
+
+                refreshButton.textContent =
+                    "↻ Actualizar";
+
+            }
+
+        }
+
+
+        /* =================================================
+           ESTADÍSTICAS
+        ================================================= */
+
+        function updateStats(
+            guests
+        ){
+
+            let asistiran =
+                0;
+
+            let noAsistiran =
+                0;
+
+
+            for(
+                const guest of guests
+            ){
+
+                const personas =
+                    Number(
+                        guest.personas
+                    ) || 0;
+
+
+                if(
+                    guest.asistencia === true
+                ){
+
+                    asistiran +=
+                        personas;
+
+                }
+                else{
+
+                    noAsistiran +=
+                        personas;
+
+                }
+
+            }
+
+
+            totalConfirmaciones.textContent =
+                guests.length;
+
+
+            totalAsistiran.textContent =
+                asistiran;
+
+
+            totalNoAsistiran.textContent =
+                noAsistiran;
+
+        }
+
+
+        /* =================================================
+           FORMATEAR FECHA
+        ================================================= */
+
+        function formatDate(
+            value
+        ){
+
+            if(!value){
+
+                return "Sin fecha";
+
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            if(
+                Number.isNaN(
+                    date.getTime()
+                )
+            ){
+
+                return "Fecha inválida";
+
+            }
+
+
+            return date.toLocaleString(
+                "es-MX",
+                {
+                    dateStyle:"medium",
+                    timeStyle:"short"
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           RENDERIZAR TABLA
+           Se usa textContent para evitar XSS.
+        ================================================= */
+
+        function renderGuests(
+            guests
+        ){
+
+            guestsTableBody.innerHTML =
+                "";
+
+
+            if(!guests.length){
+
+                emptyMessage.classList.remove(
+                    "hidden"
+                );
+
+                emptyMessage.textContent =
+                    "No hay confirmaciones registradas.";
+
+                return;
+
+            }
+
+
+            emptyMessage.classList.add(
+                "hidden"
+            );
+
+
+            for(
+                const guest of guests
+            ){
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                /* NOMBRE */
+
+                const nameCell =
+                    document.createElement(
+                        "td"
+                    );
+
+                nameCell.textContent =
+                    guest.nombre || "";
+
+                row.appendChild(
+                    nameCell
+                );
+
+
+                /* PERSONAS */
+
+                const peopleCell =
+                    document.createElement(
+                        "td"
+                    );
+
+                peopleCell.textContent =
+                    String(
+                        Number(
+                            guest.personas
+                        ) || 0
+                    );
+
+                row.appendChild(
+                    peopleCell
+                );
+
+
+                /* ASISTENCIA */
+
+                const attendanceCell =
+                    document.createElement(
+                        "td"
+                    );
+
+
+                if(
+                    guest.asistencia === true
+                ){
+
+                    attendanceCell.textContent =
+                        "Sí, asistirá";
+
+                    attendanceCell.className =
+                        "attending";
+
+                }
+                else{
+
+                    attendanceCell.textContent =
+                        "No asistirá";
+
+                    attendanceCell.className =
+                        "not-attending";
+
+                }
+
+
+                row.appendChild(
+                    attendanceCell
+                );
+
+
+                /* TELÉFONO */
+
+                const phoneCell =
+                    document.createElement(
+                        "td"
+                    );
+
+                phoneCell.textContent =
+                    guest.telefono ||
+                    "No indicado";
+
+                row.appendChild(
+                    phoneCell
+                );
+
+
+                /* FECHA */
+
+                const dateCell =
+                    document.createElement(
+                        "td"
+                    );
+
+                dateCell.textContent =
+                    formatDate(
+                        guest.fecha
+                    );
+
+                row.appendChild(
+                    dateCell
+                );
+
+
+                /* ACCIÓN */
+
+                const actionCell =
+                    document.createElement(
+                        "td"
+                    );
+
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+                deleteButton.type =
+                    "button";
+
+                deleteButton.className =
+                    "delete-button";
+
+                deleteButton.textContent =
+                    "Eliminar";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    () => {
+
+                        deleteGuest(
+                            guest.id,
+                            deleteButton
+                        );
+
+                    }
+                );
+
+
+                actionCell.appendChild(
+                    deleteButton
+                );
+
+
+                row.appendChild(
+                    actionCell
+                );
+
+
+                guestsTableBody.appendChild(
+                    row
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           ELIMINAR CONFIRMACIÓN
+        ================================================= */
+
+        async function deleteGuest(
+            id,
+            button
+        ){
+
+            if(
+                !sessionActive ||
+                !id
+            ){
+
+                return;
+
+            }
+
+
+            const confirmed =
+                window.confirm(
+                    "¿Seguro que quieres eliminar esta confirmación?"
+                );
+
+
+            if(!confirmed){
+
+                return;
+
+            }
+
+
+            button.disabled =
+                true;
+
+            button.textContent =
+                "Eliminando...";
+
+
+            try{
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("confirmaciones")
+                        .delete()
+                        .eq(
+                            "id",
+                            id
+                        );
+
+
+                if(error){
+
+                    console.error(
+                        "ERROR ELIMINANDO:",
+                        error
+                    );
+
+
+                    window.alert(
+                        "No se pudo eliminar la confirmación."
+                    );
+
+
+                    button.disabled =
+                        false;
+
+                    button.textContent =
+                        "Eliminar";
+
+
+                    return;
+
+                }
+
+
+                await loadGuests();
+
+
+            }
+            catch(error){
+
+                console.error(
+                    "ERROR:",
+                    error
+                );
+
+
+                window.alert(
+                    "Ocurrió un error al eliminar."
+                );
+
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Eliminar";
+
+            }
+
+        }
+
+
+        /* =================================================
+           ACTUALIZAR
+        ================================================= */
+
+        refreshButton.addEventListener(
+            "click",
+            () => {
+
+                loadGuests();
+
+            }
         );
 
-}
+
+        /* =================================================
+           CERRAR SESIÓN
+        ================================================= */
+
+        logoutButton.addEventListener(
+            "click",
+            async () => {
+
+                logoutButton.disabled =
+                    true;
 
 
-/* =========================
-   MENSAJES
-========================= */
+                try{
 
-function showMessage(
-    text,
-    type
-){
-
-    message.className =
-        "message " + type;
-
-    message.textContent =
-        text;
-
-}
+                    const {
+                        error
+                    } =
+                        await supabaseClient
+                            .auth
+                            .signOut();
 
 
-function hideMessage(){
+                    if(error){
 
-    message.className = "";
+                        console.error(
+                            "ERROR CERRANDO SESIÓN:",
+                            error
+                        );
 
-    message.textContent = "";
+                    }
 
-}
+                }
+                finally{
+
+                    showLogin();
+
+                    logoutButton.disabled =
+                        false;
+
+                }
+
+            }
+        );
 
 
-/* =========================
-   ENTER PARA LOGIN
-========================= */
+        /* =================================================
+           CAMBIOS DE AUTENTICACIÓN
+        ================================================= */
 
-adminEmail.addEventListener(
-    "keydown",
-    function(event){
+        supabaseClient
+            .auth
+            .onAuthStateChange(
+                (
+                    event,
+                    session
+                ) => {
 
-        if(
-            event.key === "Enter"
-        ){
+                    if(session){
 
-            login();
+                        showAdmin();
+
+                    }
+                    else{
+
+                        showLogin();
+
+                    }
+
+                }
+            );
+
+
+        /* =================================================
+           COMPROBAR SESIÓN EXISTENTE
+        ================================================= */
+
+        async function init(){
+
+            try{
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .getSession();
+
+
+                if(error){
+
+                    console.error(
+                        "ERROR OBTENIENDO SESIÓN:",
+                        error
+                    );
+
+                    showLogin();
+
+                    return;
+
+                }
+
+
+                if(data.session){
+
+                    showAdmin();
+
+                    await loadGuests();
+
+                }
+                else{
+
+                    showLogin();
+
+                }
+
+            }
+            catch(error){
+
+                console.error(
+                    "ERROR:",
+                    error
+                );
+
+                showLogin();
+
+            }
 
         }
 
-    }
-);
 
+        /* =================================================
+           INICIAR
+        ================================================= */
 
-adminPassword.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key === "Enter"
-        ){
-
-            login();
-
-        }
+        init();
 
     }
 );
@@ -1500,4 +1794,3 @@ adminPassword.addEventListener(
 
 </body>
 </html>
-
