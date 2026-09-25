@@ -1907,3 +1907,6 @@ document.addEventListener(
 
 </body>
 </html>
+```
+
+**Importante:** en Supabase, la tabla `confirmaciones` ahora debe tener las columnas `nombre`, `adultos`, `ninos`, `telefono` y `asistencia`. Si tus columnas ya tienen otros nombres, hay que poner exactamente esos nombres en el `.insert()`, porque Supabase, criatura burocrática digital, no adivina qué quisiste decir.
