@@ -12,10 +12,7 @@
 
 <title>Velunara | Invitación</title>
 
-<meta
-    name="robots"
-    content="noindex,nofollow,noarchive"
->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,59 +22,76 @@
     rel="stylesheet"
 >
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 
+/* =========================================================
+   GENERAL
+========================================================= */
+
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
-html,
-body{
-    margin:0;
-    padding:0;
-    width:100%;
-    min-height:100%;
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#09030f;
+    background:#08030c;
     color:white;
-    font-family:Georgia,serif;
+    font-family:Georgia,"Times New Roman",serif;
     overflow-x:hidden;
+}
+
+button{
+    font-family:inherit;
 }
 
 .hidden{
     display:none !important;
 }
 
-/* =========================
-   VIDEO DE INTRODUCCIÓN
-========================= */
 
-#introVideoScreen{
+/* =========================================================
+   VIDEO DE INICIO
+========================================================= */
+
+.intro-video-screen{
+
     position:fixed;
     inset:0;
+
     width:100vw;
     height:100dvh;
+
     background:#000;
-    z-index:20000;
+
+    z-index:50000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
 
     opacity:1;
     visibility:visible;
 
     transition:
-        opacity 1.25s ease,
-        visibility 1.25s ease;
+        opacity 1.3s ease,
+        visibility 1.3s ease;
 }
 
-#introVideoScreen.fade-out{
+.intro-video-screen.fade-out{
+
     opacity:0;
     visibility:hidden;
 }
 
-#introVideo{
+.intro-video{
+
     position:absolute;
     inset:0;
 
@@ -86,278 +100,53 @@ body{
 
     object-fit:cover;
 
-    opacity:0;
-    visibility:hidden;
+    background:#000;
 
-    transform:scale(1.04);
+    opacity:0;
 
     transition:
-        opacity 1s ease,
-        transform 1.4s ease,
-        visibility 1s ease;
+        opacity 1s ease;
 }
 
-#introVideo.visible{
+.intro-video.visible{
     opacity:1;
-    visibility:visible;
-    transform:scale(1);
 }
 
-#introStart{
+.intro-start{
+
     position:absolute;
+
+    z-index:2;
+
     left:50%;
     top:50%;
 
     transform:translate(-50%,-50%);
 
-    width:min(90%,460px);
+    width:min(90%,450px);
 
-    padding:30px 24px;
-
-    text-align:center;
-
-    background:rgba(10,3,18,.72);
-
-    border:1px solid rgba(255,255,255,.25);
-
-    border-radius:20px;
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-        0 0 40px rgba(0,0,0,.65),
-        inset 0 0 30px rgba(255,255,255,.04);
-}
-
-#introStartTitle{
-    margin:0 0 20px;
-
-    font-family:"Trebuchet MS",Arial,sans-serif;
-
-    font-size:clamp(26px,7vw,42px);
-
-    letter-spacing:4px;
-}
-
-#introStart button{
-    border:none;
-
-    padding:14px 28px;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.95);
-
-    color:#180b20;
-
-    font-family:Arial,sans-serif;
-
-    font-size:16px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-#introStart button:hover{
-    transform:scale(1.05);
-
-    box-shadow:
-        0 0 25px rgba(255,255,255,.35);
-}
-
-/* =========================
-   TUTORIAL FIJO
-========================= */
-
-.fixed-tutorial{
-    position:fixed;
-
-    top:14px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:min(92%,430px);
-
-    padding:13px 18px;
-
-    text-align:center;
-
-    z-index:9999;
-
-    border-radius:16px;
-
-    background:rgba(15,5,25,.88);
-
-    border:1px solid rgba(255,255,255,.22);
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.45);
-
-    backdrop-filter:blur(10px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease,
-        visibility .8s ease;
-}
-
-.fixed-tutorial.hide{
-    opacity:0;
-    visibility:hidden;
-
-    transform:
-        translateX(-50%)
-        translateY(-20px);
-}
-
-.fixed-tutorial-title{
-    font-family:Arial,sans-serif;
-
-    font-size:13px;
-
-    letter-spacing:2px;
-
-    margin-bottom:5px;
-}
-
-.fixed-tutorial-text{
-    font-family:Arial,sans-serif;
-
-    font-size:14px;
-}
-
-.fixed-tutorial-arrow{
-    margin-top:3px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:22px;
-
-    animation:
-        tutorialArrow 1.1s ease-in-out infinite;
-}
-
-@keyframes tutorialArrow{
-
-    0%,
-    100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(6px);
-    }
-
-}
-
-/* =========================
-   ESTRELLAS
-========================= */
-
-.star{
-    position:fixed;
-
-    width:2px;
-    height:2px;
-
-    border-radius:50%;
-
-    background:white;
-
-    opacity:.7;
-
-    pointer-events:none;
-
-    z-index:0;
-
-    animation:
-        twinkle 3s ease-in-out infinite;
-}
-
-@keyframes twinkle{
-
-    0%,
-    100%{
-        opacity:.25;
-    }
-
-    50%{
-        opacity:.9;
-    }
-
-}
-
-/* =========================
-   CONTENIDO
-========================= */
-
-main{
-    position:relative;
-
-    z-index:1;
-
-    width:100%;
-}
-
-section{
-    position:relative;
-
-    width:100%;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    min-height:100dvh;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:40px 20px;
+    padding:30px 25px;
 
     text-align:center;
 
     background:
         linear-gradient(
-            to bottom,
-            rgba(9,3,15,.05),
-            rgba(9,3,15,.85)
-        ),
-        url("foto1.jpg") center/cover no-repeat;
+            145deg,
+            rgba(20,7,28,.86),
+            rgba(5,1,9,.86)
+        );
+
+    border:1px solid rgba(194,124,255,.5);
+
+    box-shadow:
+        0 0 35px rgba(140,50,200,.35);
+
+    backdrop-filter:blur(8px);
 }
 
-.hero-content{
-    width:min(900px,100%);
+.intro-start-title{
 
-    padding:30px 20px;
-
-    background:rgba(10,3,18,.30);
-
-    border-radius:28px;
-
-    backdrop-filter:blur(3px);
-}
-
-.hero-small{
-    margin:0 0 14px;
-
-    font-size:clamp(15px,4vw,20px);
-
-    letter-spacing:4px;
-}
-
-.velunara-title{
-
-    margin:0;
+    margin-bottom:22px;
 
     font-family:
         "Cinzel Decorative",
@@ -365,433 +154,1216 @@ section{
         serif;
 
     font-size:
-        clamp(42px,11vw,78px);
+        clamp(28px,8vw,48px);
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+    text-shadow:
+        0 0 15px rgba(190,100,255,.8),
+        0 0 35px rgba(120,30,200,.5);
+}
+
+.intro-start-button{
+
+    padding:15px 30px;
+
+    border:1px solid #c17cff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(80,20,110,.95),
+            rgba(30,5,45,.95)
+        );
+
+    color:white;
+
+    cursor:pointer;
+
+    letter-spacing:2px;
+
+    font-size:14px;
+
+    box-shadow:
+        0 0 15px rgba(180,80,255,.25);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.intro-start-button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 20px rgba(200,100,255,.6),
+        0 0 45px rgba(130,40,200,.3);
+}
+
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    z-index:-3;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(100,20,130,.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(40,0,70,.3),
+            transparent 40%
+        ),
+        #08030c;
+}
+
+.stars{
+
+    position:fixed;
+    inset:0;
+
+    z-index:-2;
+
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.star{
+
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    opacity:.7;
+
+    animation:
+        twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.2;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+
+}
+
+
+/* =========================================================
+   TUTORIAL FIJO
+========================================================= */
+
+.fixed-tutorial{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    width:100%;
+
+    z-index:9999;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    padding:
+        max(10px,env(safe-area-inset-top))
+        15px
+        10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8,3,12,.98),
+            rgba(8,3,12,.90),
+            rgba(8,3,12,0)
+        );
+
+    pointer-events:none;
+
+    text-align:center;
+
+    opacity:1;
+
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.fixed-tutorial.hide{
+
+    opacity:0;
+
+    transform:
+        translateY(-25px);
+}
+
+.fixed-tutorial-title{
+
+    color:#d9b5ff;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 8px rgba(190,100,255,.8);
+
+    margin-bottom:5px;
+}
+
+.fixed-tutorial-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.tutorial-instruction{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.9),
+        0 0 10px rgba(190,100,255,.7);
+}
+
+.tutorial-icon{
+
+    font-size:20px;
+
+    filter:
+        drop-shadow(
+            0 0 6px rgba(190,100,255,.8)
+        );
+}
+
+.tutorial-arrow{
+
+    margin-top:0;
+
+    color:#d8a7ff;
+
+    font-size:35px;
+
+    line-height:.8;
+
+    text-shadow:
+        0 0 8px rgba(190,100,255,1),
+        0 0 20px rgba(150,50,220,.8);
+
+    animation:
+        fixedTutorialArrow
+        1.2s
+        infinite
+        ease-in-out;
+}
+
+@keyframes fixedTutorialArrow{
+
+    0%,100%{
+        transform:translateY(0);
+        opacity:.75;
+    }
+
+    50%{
+        transform:translateY(7px);
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+#publicContent{
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    min-height:100vh;
+
+    padding:130px 20px 80px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:10%;
+    right:10%;
+    bottom:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #9d5cff,
+            #d8b4ff,
+            #9d5cff,
+            transparent
+        );
+
+    opacity:.7;
+}
+
+.small-title{
+
+    color:#c9a5ff;
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    font-size:13px;
+
+    margin-bottom:15px;
+}
+
+
+/* SOLO VELUNARA USA LA FUENTE DECORATIVA */
+
+.main-title{
+
+    font-family:
+        "Cinzel Decorative",
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(42px,8vw,82px);
 
     font-weight:900;
 
     letter-spacing:5px;
 
-    line-height:1;
-
-    text-transform:uppercase;
-
     text-shadow:
-        0 0 10px rgba(255,255,255,.18),
-        0 0 25px rgba(177,105,230,.25);
+        0 0 15px rgba(170,80,255,.7),
+        0 0 40px rgba(120,30,200,.5);
 }
 
-.hero-subtitle{
-    margin:20px 0 0;
+.subtitle{
 
-    font-size:clamp(17px,4vw,23px);
+    margin-top:10px;
+
+    color:#ddd;
+
+    font-size:18px;
 
     letter-spacing:2px;
 }
 
-/* =========================
-   CONTADOR
-========================= */
 
-.countdown{
-    margin-top:30px;
+/* =========================================================
+   FOTO 1 + CONTADOR
+========================================================= */
 
-    display:grid;
+.hero-content{
 
-    grid-template-columns:
-        repeat(4,1fr);
+    width:min(1050px,100%);
 
-    gap:10px;
+    margin-top:45px;
 
-    width:min(520px,100%);
+    display:flex;
 
-    margin-left:auto;
-    margin-right:auto;
+    justify-content:center;
+    align-items:center;
+
+    gap:55px;
 }
 
-.count-box{
-    padding:14px 6px;
+.photo1-container{
 
-    border-radius:14px;
+    width:280px;
 
-    background:rgba(0,0,0,.4);
+    flex-shrink:0;
 
-    border:1px solid rgba(255,255,255,.15);
+    position:relative;
 }
 
-.count-number{
-    font-family:Arial,sans-serif;
+.photo1-container::before{
 
-    font-size:clamp(24px,7vw,40px);
+    content:"";
 
-    font-weight:bold;
+    position:absolute;
+
+    inset:-8px;
+
+    border:1px solid rgba(204,145,255,.7);
+
+    box-shadow:
+        0 0 20px rgba(160,70,255,.5),
+        inset 0 0 20px rgba(160,70,255,.15);
+
+    transform:rotate(-2deg);
 }
 
-.count-label{
-    margin-top:4px;
+.photo1-container::after{
 
-    font-family:Arial,sans-serif;
+    content:"";
 
-    font-size:11px;
+    position:absolute;
 
-    letter-spacing:1px;
+    inset:-18px;
 
-    opacity:.75;
+    border:1px solid rgba(150,80,220,.25);
+
+    transform:rotate(2deg);
 }
 
-/* =========================
-   INVITACIÓN
-========================= */
+.photo1-container img{
 
-.invitation-reveal{
-
-    padding:
-        80px 20px
-        100px;
-
-    text-align:center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(91,39,125,.18),
-            transparent 60%
-        );
-}
-
-.invitation-image{
+    width:100%;
 
     display:block;
 
-    width:min(900px,100%);
+    position:relative;
 
-    max-height:75dvh;
+    z-index:2;
 
-    object-fit:contain;
-
-    margin:0 auto 35px;
-
-    border-radius:18px;
+    border:4px solid #160b20;
 
     box-shadow:
-        0 20px 60px rgba(0,0,0,.5);
-
-    cursor:zoom-in;
+        0 0 30px rgba(160,50,255,.4);
 }
 
-.invitation-reveal h2{
+.countdown-area{
 
-    margin:0 0 15px;
+    flex:1;
 
-    font-size:clamp(24px,6vw,40px);
+    max-width:620px;
+}
+
+.countdown-title{
+
+    color:#cda5ff;
+
+    font-size:18px;
+
+    letter-spacing:3px;
+
+    margin-bottom:25px;
+}
+
+.countdown{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:14px;
+}
+
+.time-box{
+
+    padding:20px 10px;
+
+    background:rgba(25,10,35,.65);
+
+    border:1px solid rgba(192,125,255,.4);
+
+    box-shadow:
+        inset 0 0 25px rgba(100,30,150,.12),
+        0 0 15px rgba(100,30,150,.1);
+}
+
+.time-number{
+
+    display:block;
+
+    font-size:
+        clamp(30px,5vw,48px);
+
+    color:#fff;
+
+    text-shadow:
+        0 0 12px rgba(190,120,255,.7);
+}
+
+.time-label{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:11px;
+
+    color:#bdaacb;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   TRANSICIÓN + FOTO 2
+========================================================= */
+
+.invitation-reveal{
+
+    min-height:100vh;
+
+    padding:120px 20px 100px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+}
+
+.magic-transition{
+
+    text-align:center;
+
+    margin-bottom:55px;
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+        opacity 1.3s ease,
+        transform 1.3s ease;
+}
+
+.invitation-reveal.visible .magic-transition{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+.magic-symbol{
+
+    font-size:38px;
+
+    color:#c48cff;
+
+    animation:
+        magicPulse 2.5s infinite ease-in-out,
+        rotateMagic 10s linear infinite;
+}
+
+.magic-text{
+
+    margin-top:12px;
+
+    color:#cdb9d8;
+
+    font-size:14px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+}
+
+@keyframes magicPulse{
+
+    0%,100%{
+
+        text-shadow:0 0 5px #9d4edd;
+
+        opacity:.5;
+    }
+
+    50%{
+
+        text-shadow:
+            0 0 10px #c77dff,
+            0 0 30px #9d4edd,
+            0 0 60px #6a0dad;
+
+        opacity:1;
+    }
 
 }
 
-.invitation-reveal p{
+@keyframes rotateMagic{
 
-    width:min(700px,100%);
+    from{
+        transform:rotate(0);
+    }
 
-    margin:0 auto 25px;
-
-    font-size:clamp(16px,4vw,20px);
-
-    line-height:1.6;
-
-}
-
-/* =========================
-   BOTONES
-========================= */
-
-button,
-input,
-select{
-
-    font-family:Arial,sans-serif;
+    to{
+        transform:rotate(360deg);
+    }
 
 }
 
-.confirm-button{
 
-    border:none;
+/* =========================================================
+   FOTO 2
+========================================================= */
 
-    padding:15px 28px;
+.invitation-image-wrapper{
 
-    border-radius:999px;
+    width:min(750px,95vw);
 
-    background:white;
+    position:relative;
 
-    color:#180b20;
+    opacity:0;
+
+    transform:
+        translateY(80px)
+        scale(.88);
+
+    filter:
+        brightness(.35)
+        blur(4px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s cubic-bezier(.2,.8,.2,1),
+        filter 1.5s ease;
+}
+
+.invitation-reveal.visible
+.invitation-image-wrapper{
+
+    opacity:1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    filter:
+        brightness(1)
+        blur(0);
+}
+
+.invitation-image-wrapper::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(174,90,255,.5),
+            transparent 65%
+        );
+
+    filter:blur(25px);
+
+    opacity:0;
+
+    transition:opacity 2s ease;
+
+    pointer-events:none;
+}
+
+.invitation-reveal.visible
+.invitation-image-wrapper::before{
+
+    opacity:1;
+}
+
+.invitation-image-wrapper img{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    position:relative;
+
+    z-index:2;
+
+    border:5px solid #17091f;
+
+    box-shadow:
+        0 0 20px rgba(172,84,255,.5),
+        0 0 70px rgba(120,40,180,.25);
+}
+
+
+/* =========================================================
+   TEXTO DEL BOTÓN
+========================================================= */
+
+.confirm-help{
+
+    margin-top:25px;
+
+    color:#d7c5df;
 
     font-size:16px;
 
+    letter-spacing:1px;
+
+    text-align:center;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.8);
+}
+
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.confirm-button{
+
+    margin-top:12px;
+
+    padding:17px 36px;
+
+    border:1px solid #c17cff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(80,20,110,.9),
+            rgba(30,5,45,.95)
+        );
+
+    color:white;
+
+    font-size:15px;
+
     font-weight:bold;
+
+    letter-spacing:2px;
 
     cursor:pointer;
 
+    box-shadow:
+        0 0 15px rgba(180,80,255,.25);
+
     transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
 .confirm-button:hover{
 
-    transform:scale(1.04);
+    transform:translateY(-3px);
 
     box-shadow:
-        0 0 25px rgba(255,255,255,.3);
+        0 0 20px rgba(200,100,255,.6),
+        0 0 45px rgba(130,40,200,.3);
 
+    background:
+        linear-gradient(
+            135deg,
+            rgba(110,35,145,.95),
+            rgba(45,8,60,.95)
+        );
 }
 
-/* =========================
-   MODAL
-========================= */
+.confirm-button:active{
 
-#rsvpModal{
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
 
     position:fixed;
 
     inset:0;
 
-    z-index:50000;
+    background:rgba(3,0,7,.88);
+
+    backdrop-filter:blur(8px);
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+    align-items:center;
 
     padding:20px;
 
-    background:
-        rgba(0,0,0,.78);
-
-    backdrop-filter:blur(8px);
+    z-index:10000;
 }
 
 .modal-box{
 
-    width:min(520px,100%);
+    width:min(500px,100%);
 
     max-height:90dvh;
 
-    overflow:auto;
-
-    padding:28px 22px;
-
-    border-radius:22px;
+    overflow-y:auto;
 
     background:
         linear-gradient(
             145deg,
-            #16091f,
-            #09030f
+            #18091f,
+            #09040e
         );
 
-    border:1px solid rgba(255,255,255,.18);
+    border:1px solid rgba(190,120,255,.55);
+
+    padding:35px;
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,.7);
+        0 0 35px rgba(130,40,190,.3);
+
+    position:relative;
 }
 
-.modal-box h2{
-
-    margin-top:0;
-
-    margin-bottom:22px;
+.modal-title{
 
     text-align:center;
 
     font-size:28px;
 
+    font-weight:normal;
+
+    margin-bottom:8px;
+}
+
+.modal-subtitle{
+
+    text-align:center;
+
+    color:#ad9ab8;
+
+    font-size:13px;
+
+    margin-bottom:30px;
+}
+
+.close-modal{
+
+    position:absolute;
+
+    top:12px;
+    right:15px;
+
+    background:none;
+
+    border:0;
+
+    color:#c5a7d2;
+
+    font-size:25px;
+
+    cursor:pointer;
 }
 
 .form-group{
 
-    margin-bottom:17px;
+    margin-bottom:20px;
 }
 
 .form-group label{
 
     display:block;
 
+    color:#d7c2df;
+
+    font-size:13px;
+
     margin-bottom:7px;
-
-    font-family:Arial,sans-serif;
-
-    font-size:14px;
-
 }
 
-.form-group input,
-.form-group select{
+.form-group input{
 
     width:100%;
 
-    padding:13px 14px;
+    padding:13px;
 
-    border-radius:12px;
+    background:#0b0610;
 
-    border:1px solid rgba(255,255,255,.18);
-
-    background:#12071a;
+    border:1px solid #4b2a5a;
 
     color:white;
 
     outline:none;
 
-    font-size:16px;
+    font-family:inherit;
 }
 
-.form-group input:focus,
-.form-group select:focus{
+.form-group input:focus{
 
-    border-color:
-        rgba(255,255,255,.5);
+    border-color:#b66aff;
 
+    box-shadow:
+        0 0 10px rgba(180,90,255,.2);
 }
 
-.modal-actions{
+.radio-container{
 
     display:flex;
 
-    gap:10px;
-
-    margin-top:22px;
+    gap:20px;
 }
 
-.modal-actions button{
+.radio-option{
 
-    flex:1;
+    display:flex;
 
-    border:none;
+    align-items:center;
 
-    padding:13px;
+    gap:7px;
 
-    border-radius:12px;
+    color:#ddd;
 
     cursor:pointer;
-
-    font-weight:bold;
 }
 
-.cancel-button{
+.radio-option input{
 
-    background:#2a172f;
-
-    color:white;
+    width:auto;
 }
 
 .submit-button{
 
-    background:white;
+    width:100%;
 
-    color:#170a1d;
+    padding:15px;
+
+    background:#5c247a;
+
+    border:1px solid #bd78ff;
+
+    color:white;
+
+    cursor:pointer;
+
+    letter-spacing:2px;
+
+    transition:.25s;
 }
 
-/* =========================
-   CELEBRACIÓN
-========================= */
+.submit-button:hover{
 
-#celebration{
+    background:#75309a;
+}
+
+.submit-button:disabled{
+
+    opacity:.6;
+
+    cursor:wait;
+}
+
+.form-message{
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   CELEBRACIÓN
+========================================================= */
+
+.celebration{
 
     position:fixed;
 
     inset:0;
 
-    z-index:55000;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
+    z-index:20000;
 
     background:
         radial-gradient(
             circle,
-            rgba(113,47,155,.45),
-            rgba(0,0,0,.95)
+            rgba(80,15,110,.75),
+            rgba(4,1,8,.97) 65%
         );
 
-    opacity:1;
+    display:flex;
 
-    transition:opacity .8s ease;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    overflow:hidden;
 }
 
 .celebration-content{
 
-    padding:30px;
+    position:relative;
 
+    z-index:10;
+
+    animation:celebrateIn 1.5s ease;
 }
 
-.celebration-content h2{
+.celebration-title{
 
-    margin:0;
+    font-family:
+        "Cinzel Decorative",
+        Georgia,
+        serif;
 
-    font-size:clamp(32px,9vw,65px);
+    font-size:
+        clamp(38px,8vw,75px);
 
+    font-weight:900;
+
+    text-shadow:
+        0 0 20px #c77dff,
+        0 0 50px #8b2fc9;
 }
 
-.celebration-content p{
+.celebration-subtitle{
 
-    font-family:Arial,sans-serif;
+    margin-top:15px;
+
+    color:#e4d4ea;
 
     font-size:18px;
+}
+
+.play-music{
+
+    margin-top:30px;
+
+    padding:14px 25px;
+
+    background:transparent;
+
+    color:white;
+
+    border:1px solid #c17cff;
+
+    cursor:pointer;
+
+    letter-spacing:1px;
+}
+
+@keyframes celebrateIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.7);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
 
 }
 
-/* =========================
-   MODO FIESTA
-========================= */
+.spark{
 
-#partyMode{
+    position:absolute;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#dba3ff;
+
+    box-shadow:
+        0 0 8px #dba3ff,
+        0 0 20px #9b4dca;
+
+    animation:sparkFly linear forwards;
+}
+
+@keyframes sparkFly{
+
+    from{
+
+        transform:
+            translate(0,0)
+            scale(1);
+
+        opacity:1;
+    }
+
+    to{
+
+        transform:
+            translate(var(--x),var(--y))
+            scale(0);
+
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
+   MODO FIESTA
+========================================================= */
+
+.party-mode{
 
     position:fixed;
 
     inset:0;
 
-    z-index:45000;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    text-align:center;
+    z-index:15000;
 
     background:
         radial-gradient(
-            circle,
-            rgba(107,37,137,.5),
-            rgba(4,1,7,.96)
+            circle at center,
+            #351052,
+            #100317 65%,
+            #050108
         );
 
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
 }
 
-.party-content h2{
+.party-content{
 
-    font-size:clamp(34px,10vw,70px);
-
-    margin:0 0 15px;
-
+    padding:30px;
 }
 
-.party-content p{
+.party-icon{
 
-    font-family:Arial,sans-serif;
+    font-size:65px;
+
+    animation:
+        partyFloat 2s infinite ease-in-out;
+}
+
+.party-title{
+
+    margin-top:20px;
+
+    font-size:
+        clamp(40px,8vw,80px);
+
+    font-weight:normal;
+
+    text-shadow:
+        0 0 20px #c77dff,
+        0 0 60px #8b2fc9;
+}
+
+.party-text{
+
+    margin-top:15px;
+
+    color:#d8c4df;
 
     font-size:18px;
+}
+
+@keyframes partyFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-15px)
+            rotate(3deg);
+    }
 
 }
 
-/* =========================
-   VIDEO FINAL
-========================= */
 
-#finalVideoScreen{
+/* =========================================================
+   VIDEO 2 FINAL
+   MISMO ESTILO VERTICAL QUE VIDEO 1
+========================================================= */
+
+.final-video-screen{
 
     position:fixed;
 
@@ -800,86 +1372,329 @@ select{
     width:100vw;
     height:100dvh;
 
-    z-index:60000;
+    z-index:30000;
 
     background:#000;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
 
     opacity:1;
 
     visibility:visible;
 
     transition:
-        opacity 1.2s ease,
-        visibility 1.2s ease;
+        opacity 1.3s ease,
+        visibility 1.3s ease;
 }
 
-#finalVideoScreen.fade-out{
+.final-video-screen.fade-out{
 
     opacity:0;
 
     visibility:hidden;
 }
 
-#finalVideo{
+.final-video{
+
+    position:absolute;
+
+    inset:0;
 
     width:100%;
     height:100%;
 
     object-fit:cover;
+
+    background:#000;
+
+    display:block;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
 
-@media(max-width:600px){
+/* =========================================================
+   PANTALLA FINAL
+========================================================= */
+
+.final-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:29000;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #351052,
+            #09020e 70%
+        );
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px;
+}
+
+.final-content{
+
+    animation:finalAppear 2s ease;
+}
+
+.final-title{
+
+    font-family:
+        "Cinzel Decorative",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(38px,8vw,80px);
+
+    font-weight:900;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 20px #d38aff,
+        0 0 50px #9c45d0;
+}
+
+.final-text{
+
+    margin-top:25px;
+
+    color:#d9c8df;
+
+    font-size:17px;
+
+    line-height:1.8;
+}
+
+@keyframes finalAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media(max-width:750px){
+
+    .fixed-tutorial{
+
+        padding:
+            max(8px,env(safe-area-inset-top))
+            10px
+            8px;
+    }
+
+    .fixed-tutorial-title{
+
+        font-size:9px;
+
+        letter-spacing:2px;
+
+        margin-bottom:4px;
+    }
+
+    .tutorial-instruction{
+
+        font-size:12px;
+
+        letter-spacing:.8px;
+    }
+
+    .tutorial-icon{
+
+        font-size:17px;
+    }
+
+    .tutorial-arrow{
+
+        font-size:30px;
+    }
 
     .hero{
 
-        padding:
-            30px 14px;
-
+        padding-top:140px;
     }
 
     .hero-content{
 
-        padding:
-            25px 12px;
+        flex-direction:column;
 
+        gap:45px;
+    }
+
+    .photo1-container{
+
+        width:min(270px,75vw);
+    }
+
+    .countdown-area{
+
+        width:100%;
     }
 
     .countdown{
 
-        gap:6px;
-
+        gap:7px;
     }
 
-    .count-box{
+    .time-box{
 
-        padding:
-            11px 3px;
+        padding:14px 5px;
+    }
 
+    .time-label{
+
+        font-size:9px;
+
+        letter-spacing:1px;
     }
 
     .invitation-reveal{
 
-        padding:
-            60px 14px
-            80px;
+        padding-top:90px;
+    }
 
+    .invitation-image-wrapper{
+
+        width:94vw;
+    }
+
+    .confirm-help{
+
+        font-size:15px;
+
+        line-height:1.5;
+
+        padding:0 15px;
+    }
+
+    .confirm-button{
+
+        padding:17px 25px;
     }
 
     .modal-box{
 
-        padding:
-            24px 17px;
-
+        padding:25px 20px;
     }
 
-    .modal-actions{
+    /*
+       Videos verticales en celular:
+       ocupan toda la pantalla.
+    */
 
-        flex-direction:column;
+    .intro-video,
+    .final-video{
 
+        width:100vw;
+        height:100dvh;
+
+        object-fit:cover;
+    }
+
+}
+
+
+/* =========================================================
+   PC
+========================================================= */
+
+@media(min-width:751px){
+
+    .invitation-image-wrapper{
+
+        width:min(600px,85vw);
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUEÑOS
+========================================================= */
+
+@media(max-width:420px){
+
+    .fixed-tutorial-title{
+
+        font-size:8px;
+
+        letter-spacing:1.5px;
+    }
+
+    .tutorial-instruction{
+
+        font-size:11px;
+    }
+
+    .tutorial-arrow{
+
+        font-size:27px;
+    }
+
+    .main-title{
+
+        letter-spacing:2px;
+    }
+
+    .subtitle{
+
+        font-size:15px;
+    }
+
+    .countdown-title{
+
+        font-size:14px;
+    }
+
+    .time-number{
+
+        font-size:27px;
+    }
+
+    .magic-text{
+
+        font-size:11px;
+
+        letter-spacing:2px;
+    }
+
+    .confirm-button{
+
+        width:90%;
+
+        font-size:12px;
+
+        padding:15px;
     }
 
 }
@@ -890,133 +1705,209 @@ select{
 
 <body>
 
-<!-- =========================
-     VIDEO DE INTRO
-========================= -->
 
-<div id="introVideoScreen">
+<!-- =========================================================
+     VIDEO DE INICIO
+========================================================= -->
+
+<div
+    class="intro-video-screen"
+    id="introVideoScreen"
+>
 
     <video
+        class="intro-video"
         id="introVideo"
         src="videoinicio1.mp4"
         playsinline
         preload="auto"
     ></video>
 
-    <div id="introStart">
+    <div
+        class="intro-start"
+        id="introStart"
+    >
 
-        <h1 id="introStartTitle">
-            ✨ VELUNARA ✨
-        </h1>
+        <div class="intro-start-title">
+            VELUNARA
+        </div>
 
-        <button id="startButton">
-            VER INVITACIÓN
+        <button
+            class="intro-start-button"
+            id="startButton"
+        >
+            ✦ VER INVITACIÓN ✦
         </button>
 
     </div>
 
 </div>
 
-<!-- =========================
-     TUTORIAL
-========================= -->
+
+<!-- =========================================================
+     TUTORIAL FIJO
+========================================================= -->
 
 <div
-    id="fixedTutorial"
     class="fixed-tutorial"
+    id="fixedTutorial"
 >
 
     <div class="fixed-tutorial-title">
         ✦ CÓMO VER LA INVITACIÓN ✦
     </div>
 
-    <div class="fixed-tutorial-text">
-        ☝ DESLIZA HACIA ABAJO
-    </div>
+    <div class="fixed-tutorial-content">
 
-    <div class="fixed-tutorial-arrow">
-        ↓
+        <div class="tutorial-instruction">
+
+            <span class="tutorial-icon">
+                ☝
+            </span>
+
+            <span>
+                DESLIZA HACIA ABAJO
+            </span>
+
+        </div>
+
+        <div class="tutorial-arrow">
+            ↓
+        </div>
+
     </div>
 
 </div>
 
-<!-- =========================
-     CONTENIDO
-========================= -->
 
-<main>
+<!-- =========================================================
+     ESTRELLAS
+========================================================= -->
+
+<div
+    class="stars"
+    id="stars"
+></div>
+
+
+<!-- =========================================================
+     CONTENIDO PÚBLICO
+========================================================= -->
+
+<div id="publicContent">
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
     <section class="hero">
 
+        <div class="small-title">
+            Una celebración especial
+        </div>
+
+        <h1 class="main-title">
+            VELUNARA
+        </h1>
+
+        <div class="subtitle">
+            ✦ Una noche mágica está por comenzar ✦
+        </div>
+
+
         <div class="hero-content">
 
-            <p class="hero-small">
-                ✦ INVITACIÓN ✦
-            </p>
 
-            <h1 class="velunara-title">
-                VELUNARA
-            </h1>
+            <!-- FOTO 1 -->
 
-            <p class="hero-subtitle">
-                Una celebración muy especial
-            </p>
+            <div class="photo1-container">
+
+                <img
+                    src="foto1.jpg"
+                    alt="Velunara"
+                >
+
+            </div>
+
+
+            <!-- CONTADOR -->
 
             <div
-                id="countdown"
-                class="countdown"
+                class="countdown-area"
+                id="countdownSection"
             >
 
-                <div class="count-box">
-                    <div
-                        id="days"
-                        class="count-number"
-                    >
-                        0
-                    </div>
-
-                    <div class="count-label">
-                        DÍAS
-                    </div>
+                <div class="countdown-title">
+                    FALTAN PARA LA CELEBRACIÓN
                 </div>
 
-                <div class="count-box">
-                    <div
-                        id="hours"
-                        class="count-number"
-                    >
-                        0
+
+                <div class="countdown">
+
+                    <div class="time-box">
+
+                        <span
+                            class="time-number"
+                            id="days"
+                        >
+                            00
+                        </span>
+
+                        <span class="time-label">
+                            Días
+                        </span>
+
                     </div>
 
-                    <div class="count-label">
-                        HORAS
-                    </div>
-                </div>
 
-                <div class="count-box">
-                    <div
-                        id="minutes"
-                        class="count-number"
-                    >
-                        0
-                    </div>
+                    <div class="time-box">
 
-                    <div class="count-label">
-                        MINUTOS
-                    </div>
-                </div>
+                        <span
+                            class="time-number"
+                            id="hours"
+                        >
+                            00
+                        </span>
 
-                <div class="count-box">
-                    <div
-                        id="seconds"
-                        class="count-number"
-                    >
-                        0
+                        <span class="time-label">
+                            Horas
+                        </span>
+
                     </div>
 
-                    <div class="count-label">
-                        SEGUNDOS
+
+                    <div class="time-box">
+
+                        <span
+                            class="time-number"
+                            id="minutes"
+                        >
+                            00
+                        </span>
+
+                        <span class="time-label">
+                            Minutos
+                        </span>
+
                     </div>
+
+
+                    <div class="time-box">
+
+                        <span
+                            class="time-number"
+                            id="seconds"
+                        >
+                            00
+                        </span>
+
+                        <span class="time-label">
+                            Segundos
+                        </span>
+
+                    </div>
+
                 </div>
 
             </div>
@@ -1025,160 +1916,188 @@ select{
 
     </section>
 
+
+    <!-- =====================================================
+         TRANSICIÓN + FOTO 2
+    ====================================================== -->
+
     <section
-        id="invitationReveal"
         class="invitation-reveal"
+        id="invitationReveal"
     >
 
-        <img
-            src="foto2.jpg"
-            alt="Invitación Velunara"
-            class="invitation-image"
-        >
 
-        <h2>
-            ¡Te esperamos!
-        </h2>
+        <div class="magic-transition">
 
-        <p>
-            Será un momento muy especial y nos encantará
-            compartirlo contigo.
-        </p>
+            <div class="magic-symbol">
+                ✦
+            </div>
+
+            <div class="magic-text">
+                La magia comienza aquí
+            </div>
+
+        </div>
+
+
+        <!-- INVITACIÓN -->
+
+        <div class="invitation-image-wrapper">
+
+            <img
+                src="foto2.jpg"
+                alt="Invitación de Velunara"
+            >
+
+        </div>
+
+
+        <!-- AYUDA -->
+
+        <div class="confirm-help">
+            Pica aquí para confirmar tu asistencia
+        </div>
+
+
+        <!-- CONFIRMAR -->
 
         <button
-            id="confirmButton"
             class="confirm-button"
+            id="openForm"
         >
-            CONFIRMAR ASISTENCIA
+            💜 CONFIRMAR ASISTENCIA
         </button>
+
 
     </section>
 
-</main>
+</div>
 
-<!-- =========================
-     MODAL RSVP
-========================= -->
+
+<!-- =========================================================
+     MODAL
+========================================================= -->
 
 <div
-    id="rsvpModal"
-    class="hidden"
+    class="modal hidden"
+    id="formModal"
 >
 
     <div class="modal-box">
 
-        <h2>
+
+        <button
+            class="close-modal"
+            id="closeForm"
+            aria-label="Cerrar"
+        >
+            ×
+        </button>
+
+
+        <h2 class="modal-title">
             Confirmar asistencia
         </h2>
 
-        <form id="rsvpForm">
+
+        <p class="modal-subtitle">
+            Completa los datos de tu asistencia
+        </p>
+
+
+        <form id="confirmationForm">
+
 
             <div class="form-group">
 
-                <label for="guestName">
+                <label for="nombre">
                     Nombre
                 </label>
 
                 <input
-                    id="guestName"
                     type="text"
+                    id="nombre"
                     required
-                    autocomplete="name"
+                    placeholder="Tu nombre"
                 >
 
             </div>
 
+
             <div class="form-group">
 
-                <label for="adults">
-                    Adultos
+                <label for="personas">
+                    Número de personas
                 </label>
 
                 <input
-                    id="adults"
                     type="number"
-                    min="0"
+                    id="personas"
+                    min="1"
+                    max="20"
                     value="1"
                     required
                 >
 
             </div>
 
-            <div class="form-group">
-
-                <label for="children">
-                    Niños
-                </label>
-
-                <input
-                    id="children"
-                    type="number"
-                    min="0"
-                    value="0"
-                    required
-                >
-
-            </div>
 
             <div class="form-group">
 
-                <label for="phone">
-                    Teléfono
-                </label>
-
-                <input
-                    id="phone"
-                    type="tel"
-                    autocomplete="tel"
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="attendance">
+                <label>
                     ¿Asistirás?
                 </label>
 
-                <select
-                    id="attendance"
-                    required
-                >
 
-                    <option
-                        value="si"
-                    >
-                        Sí, asistiré
-                    </option>
+                <div class="radio-container">
 
-                    <option
-                        value="no"
-                    >
-                        No podré asistir
-                    </option>
 
-                </select>
+                    <label class="radio-option">
 
-            </div>
+                        <input
+                            type="radio"
+                            name="asistencia"
+                            value="true"
+                            checked
+                        >
 
-            <div class="modal-actions">
+                        Sí
 
-                <button
-                    type="button"
-                    id="closeModal"
-                    class="cancel-button"
-                >
-                    CANCELAR
-                </button>
+                    </label>
 
-                <button
-                    type="submit"
-                    class="submit-button"
-                >
-                    GUARDAR
-                </button>
+
+                    <label class="radio-option">
+
+                        <input
+                            type="radio"
+                            name="asistencia"
+                            value="false"
+                        >
+
+                        No
+
+                    </label>
+
+
+                </div>
 
             </div>
+
+
+            <button
+                class="submit-button"
+                type="submit"
+                id="submitButton"
+            >
+                GUARDAR CONFIRMACIÓN
+            </button>
+
+
+            <div
+                class="form-message"
+                id="formMessage"
+            ></div>
+
 
         </form>
 
@@ -1186,62 +2105,78 @@ select{
 
 </div>
 
-<!-- =========================
+
+<!-- =========================================================
      CELEBRACIÓN
-========================= -->
+========================================================= -->
 
 <div
+    class="celebration hidden"
     id="celebration"
-    class="hidden"
 >
 
     <div class="celebration-content">
 
-        <h2>
-            ✨ ¡Gracias! ✨
-        </h2>
+        <div class="celebration-title">
+            ✨ VELUNARA ✨
+        </div>
 
-        <p>
-            Tu confirmación fue registrada.
-        </p>
+        <div class="celebration-subtitle">
+            ¡Ha llegado el gran día!
+        </div>
+
+        <button
+            class="play-music"
+            id="playMusic"
+        >
+            🎵 REPRODUCIR LAS MAÑANITAS
+        </button>
 
     </div>
 
 </div>
 
-<!-- =========================
+
+<!-- =========================================================
      MODO FIESTA
-========================= -->
+========================================================= -->
 
 <div
+    class="party-mode hidden"
     id="partyMode"
-    class="hidden"
 >
 
     <div class="party-content">
 
-        <h2>
-            🎉 ¡ES HORA DE CELEBRAR! 🎉
-        </h2>
+        <div class="party-icon">
+            🖤✨
+        </div>
 
-        <p>
-            La celebración ha comenzado.
-        </p>
+        <div class="party-title">
+            ¡ES HORA DE CELEBRAR!
+        </div>
+
+        <div class="party-text">
+            La fiesta de Velunara está comenzando.
+        </div>
 
     </div>
 
 </div>
 
-<!-- =========================
-     VIDEO FINAL
-========================= -->
+
+<!-- =========================================================
+     VIDEO 2
+     MISMO FORMATO VERTICAL QUE EL VIDEO 1
+========================================================= -->
 
 <div
+    class="final-video-screen hidden"
     id="finalVideoScreen"
-    class="hidden"
 >
 
     <video
+        class="final-video"
         id="finalVideo"
         src="video2.mp4"
         playsinline
@@ -1250,34 +2185,194 @@ select{
 
 </div>
 
+
+<!-- =========================================================
+     PANTALLA FINAL
+========================================================= -->
+
+<div
+    class="final-screen hidden"
+    id="finalScreen"
+>
+
+    <div class="final-content">
+
+        <div class="final-title">
+            ✨ ¡FELICIDADES, VELUNARA! ✨
+        </div>
+
+        <div class="final-text">
+
+            Gracias por haber formado parte
+
+            <br>
+
+            de este día tan especial.
+
+            <br><br>
+
+            💜 27 de septiembre de 2026 💜
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     AUDIO
+========================================================= -->
+
 <audio
-    id="birthdayAudio"
+    id="birthdayMusic"
     src="mananitas.mp3"
     preload="auto"
 ></audio>
 
+
 <script>
 
-/* =========================
+/* =========================================================
    SUPABASE
-========================= */
+========================================================= */
 
 const SUPABASE_URL =
     "https://ibdjtobuadgzozbggxxu.supabase.co";
 
-const SUPABASE_ANON_KEY =
+const SUPABASE_KEY =
     "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
 
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_ANON_KEY
+        SUPABASE_KEY
     );
 
 
-/* =========================
-   VIDEO DE INTRO
-========================= */
+/* =========================================================
+   FECHAS
+========================================================= */
+
+const countdownDate =
+    new Date(
+        2026,
+        8,
+        27,
+        0,
+        0,
+        0
+    );
+
+const partyStart =
+    new Date(
+        2026,
+        8,
+        27,
+        16,
+        0,
+        0
+    );
+
+const partyEnd =
+    new Date(
+        2026,
+        8,
+        27,
+        20,
+        0,
+        0
+    );
+
+const finalDate =
+    new Date(
+        2026,
+        8,
+        28,
+        0,
+        0,
+        0
+    );
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const publicContent =
+    document.getElementById(
+        "publicContent"
+    );
+
+const fixedTutorial =
+    document.getElementById(
+        "fixedTutorial"
+    );
+
+const invitationReveal =
+    document.getElementById(
+        "invitationReveal"
+    );
+
+const celebration =
+    document.getElementById(
+        "celebration"
+    );
+
+const partyMode =
+    document.getElementById(
+        "partyMode"
+    );
+
+const finalScreen =
+    document.getElementById(
+        "finalScreen"
+    );
+
+const formModal =
+    document.getElementById(
+        "formModal"
+    );
+
+const openForm =
+    document.getElementById(
+        "openForm"
+    );
+
+const closeForm =
+    document.getElementById(
+        "closeForm"
+    );
+
+const confirmationForm =
+    document.getElementById(
+        "confirmationForm"
+    );
+
+const formMessage =
+    document.getElementById(
+        "formMessage"
+    );
+
+const submitButton =
+    document.getElementById(
+        "submitButton"
+    );
+
+const music =
+    document.getElementById(
+        "birthdayMusic"
+    );
+
+const playMusic =
+    document.getElementById(
+        "playMusic"
+    );
+
+
+/* =========================================================
+   VIDEO 1
+========================================================= */
 
 const introVideoScreen =
     document.getElementById(
@@ -1319,6 +2414,10 @@ startButton.addEventListener(
 
         }catch(error){
 
+            console.log(
+                "Reproducción con audio bloqueada."
+            );
+
             try{
 
                 introVideo.muted = true;
@@ -1328,7 +2427,6 @@ startButton.addEventListener(
             }catch(secondError){
 
                 console.error(
-                    "Error reproduciendo video:",
                     secondError
                 );
 
@@ -1362,247 +2460,10 @@ introVideo.addEventListener(
 );
 
 
-/* =========================
-   TUTORIAL
-========================= */
-
-const fixedTutorial =
-    document.getElementById(
-        "fixedTutorial"
-    );
-
-const invitationReveal =
-    document.getElementById(
-        "invitationReveal"
-    );
-
-function checkTutorial(){
-
-    const rect =
-        invitationReveal.getBoundingClientRect();
-
-    const visible =
-        window.innerHeight -
-        rect.top;
-
-    if(
-        visible >=
-        window.innerHeight * .75
-    ){
-
-        fixedTutorial.classList.add(
-            "hide"
-        );
-
-        window.removeEventListener(
-            "scroll",
-            checkTutorial
-        );
-
-    }
-
-}
-
-window.addEventListener(
-    "scroll",
-    checkTutorial,
-    {passive:true}
-);
-
-
-/* =========================
-   ESTRELLAS
-========================= */
-
-for(
-    let i = 0;
-    i < 90;
-    i++
-){
-
-    const star =
-        document.createElement(
-            "div"
-        );
-
-    star.className = "star";
-
-    star.style.left =
-        Math.random() * 100 +
-        "%";
-
-    star.style.top =
-        Math.random() * 100 +
-        "%";
-
-    star.style.animationDelay =
-        Math.random() * 3 +
-        "s";
-
-    document.body.appendChild(
-        star
-    );
-
-}
-
-
-/* =========================
-   CUENTA REGRESIVA
-========================= */
-
-const targetDate =
-    new Date(
-        "2026-09-27T00:00:00"
-    ).getTime();
-
-function updateCountdown(){
-
-    const now =
-        Date.now();
-
-    const difference =
-        targetDate - now;
-
-    if(difference <= 0){
-
-        document.getElementById(
-            "days"
-        ).textContent = "0";
-
-        document.getElementById(
-            "hours"
-        ).textContent = "0";
-
-        document.getElementById(
-            "minutes"
-        ).textContent = "0";
-
-        document.getElementById(
-            "seconds"
-        ).textContent = "0";
-
-        return;
-
-    }
-
-    const days =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
-
-    const hours =
-        Math.floor(
-            (difference /
-            (1000 * 60 * 60)) % 24
-        );
-
-    const minutes =
-        Math.floor(
-            (difference /
-            (1000 * 60)) % 60
-        );
-
-    const seconds =
-        Math.floor(
-            (difference /
-            1000) % 60
-        );
-
-    document.getElementById(
-        "days"
-    ).textContent = days;
-
-    document.getElementById(
-        "hours"
-    ).textContent = hours;
-
-    document.getElementById(
-        "minutes"
-    ).textContent = minutes;
-
-    document.getElementById(
-        "seconds"
-    ).textContent = seconds;
-
-}
-
-updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
-
-
-/* =========================
-   MODAL
-========================= */
-
-const rsvpModal =
-    document.getElementById(
-        "rsvpModal"
-    );
-
-const confirmButton =
-    document.getElementById(
-        "confirmButton"
-    );
-
-const closeModal =
-    document.getElementById(
-        "closeModal"
-    );
-
-const rsvpForm =
-    document.getElementById(
-        "rsvpForm"
-    );
-
-confirmButton.addEventListener(
-    "click",
-    () => {
-
-        rsvpModal.classList.remove(
-            "hidden"
-        );
-
-    }
-);
-
-closeModal.addEventListener(
-    "click",
-    () => {
-
-        rsvpModal.classList.add(
-            "hidden"
-        );
-
-    }
-);
-
-rsvpModal.addEventListener(
-    "click",
-    event => {
-
-        if(
-            event.target ===
-            rsvpModal
-        ){
-
-            rsvpModal.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================
+/* =========================================================
    VIDEO 2
-========================= */
+   EXACTAMENTE COMO VIDEO 1
+========================================================= */
 
 const finalVideoScreen =
     document.getElementById(
@@ -1626,42 +2487,33 @@ function playVideo2(){
 
     finalVideo.currentTime = 0;
 
-    try{
+    finalVideo.muted = false;
 
-        finalVideo.muted = false;
+    const playPromise =
+        finalVideo.play();
 
-        const promise =
-            finalVideo.play();
+    if(
+        playPromise !== undefined
+    ){
 
-        if(
-            promise &&
-            promise.catch
-        ){
+        playPromise.catch(
+            () => {
 
-            promise.catch(
-                () => {
+                finalVideo.muted = true;
 
-                    finalVideo.muted = true;
+                finalVideo.play()
+                    .catch(
+                        error => {
 
-                    finalVideo.play()
-                        .catch(
-                            error => {
-                                console.error(
-                                    error
-                                );
-                            }
-                        );
+                            console.error(
+                                "No se pudo reproducir Video 2:",
+                                error
+                            );
 
-                }
-            );
+                        }
+                    );
 
-        }
-
-    }catch(error){
-
-        console.error(
-            "Error en Video 2:",
-            error
+            }
         );
 
     }
@@ -1695,87 +2547,384 @@ finalVideo.addEventListener(
 );
 
 
-/* =========================
-   GUARDAR CONFIRMACIÓN
-========================= */
+/* =========================================================
+   ESTRELLAS
+========================================================= */
 
-rsvpForm.addEventListener(
+const starsContainer =
+    document.getElementById(
+        "stars"
+    );
+
+for(
+    let i = 0;
+    i < 100;
+    i++
+){
+
+    const star =
+        document.createElement(
+            "div"
+        );
+
+    star.className =
+        "star";
+
+    star.style.left =
+        Math.random() * 100 +
+        "%";
+
+    star.style.top =
+        Math.random() * 100 +
+        "%";
+
+    star.style.animationDelay =
+        Math.random() * 3 +
+        "s";
+
+    star.style.animationDuration =
+        2 +
+        Math.random() * 4 +
+        "s";
+
+    starsContainer.appendChild(
+        star
+    );
+
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+function updateCountdown(){
+
+    const now =
+        new Date();
+
+    const difference =
+        countdownDate - now;
+
+    if(
+        difference <= 0
+    ){
+
+        document.getElementById(
+            "days"
+        ).textContent = "00";
+
+        document.getElementById(
+            "hours"
+        ).textContent = "00";
+
+        document.getElementById(
+            "minutes"
+        ).textContent = "00";
+
+        document.getElementById(
+            "seconds"
+        ).textContent = "00";
+
+        return;
+    }
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+    const hours =
+        Math.floor(
+            (
+                difference /
+                (1000 * 60 * 60)
+            ) % 24
+        );
+
+    const minutes =
+        Math.floor(
+            (
+                difference /
+                (1000 * 60)
+            ) % 60
+        );
+
+    const seconds =
+        Math.floor(
+            (
+                difference /
+                1000
+            ) % 60
+        );
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        String(days).padStart(
+            2,
+            "0"
+        );
+
+    document.getElementById(
+        "hours"
+    ).textContent =
+        String(hours).padStart(
+            2,
+            "0"
+        );
+
+    document.getElementById(
+        "minutes"
+    ).textContent =
+        String(minutes).padStart(
+            2,
+            "0"
+        );
+
+    document.getElementById(
+        "seconds"
+    ).textContent =
+        String(seconds).padStart(
+            2,
+            "0"
+        );
+
+}
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+/* =========================================================
+   TRANSICIÓN
+========================================================= */
+
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        invitationReveal
+                            .classList
+                            .add(
+                                "visible"
+                            );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.18
+        }
+    );
+
+revealObserver.observe(
+    invitationReveal
+);
+
+
+/* =========================================================
+   TUTORIAL
+   DESAPARECE CUANDO SE VE LA SEGUNDA PARTE
+========================================================= */
+
+let tutorialHidden =
+    false;
+
+function checkTutorial(){
+
+    if(
+        tutorialHidden
+    ){
+        return;
+    }
+
+    const rect =
+        invitationReveal
+            .getBoundingClientRect();
+
+    const visible =
+        window.innerHeight -
+        rect.top;
+
+    if(
+        visible >=
+        window.innerHeight * .75
+    ){
+
+        tutorialHidden =
+            true;
+
+        fixedTutorial.classList.add(
+            "hide"
+        );
+
+        window.removeEventListener(
+            "scroll",
+            checkTutorial
+        );
+
+    }
+
+}
+
+window.addEventListener(
+    "scroll",
+    checkTutorial,
+    {
+        passive:true
+    }
+);
+
+
+/* =========================================================
+   ABRIR FORMULARIO
+========================================================= */
+
+openForm.addEventListener(
+    "click",
+    () => {
+
+        formModal.classList.remove(
+            "hidden"
+        );
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+);
+
+
+/* =========================================================
+   CERRAR FORMULARIO
+========================================================= */
+
+closeForm.addEventListener(
+    "click",
+    closeModal
+);
+
+formModal.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            formModal
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+function closeModal(){
+
+    formModal.classList.add(
+        "hidden"
+    );
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+confirmationForm.addEventListener(
     "submit",
     async event => {
 
         event.preventDefault();
 
-        const guestName =
+        const nombre =
             document.getElementById(
-                "guestName"
+                "nombre"
             ).value.trim();
 
-        const adults =
-            Math.max(
-                0,
-                parseInt(
-                    document.getElementById(
-                        "adults"
-                    ).value
-                ) || 0
-            );
-
-        const children =
-            Math.max(
-                0,
-                parseInt(
-                    document.getElementById(
-                        "children"
-                    ).value
-                ) || 0
-            );
-
-        const attendance =
-            document.getElementById(
-                "attendance"
-            ).value;
-
         const personas =
-            adults + children;
-
-        const submitButton =
-            rsvpForm.querySelector(
-                ".submit-button"
+            Number(
+                document.getElementById(
+                    "personas"
+                ).value
             );
 
-        submitButton.disabled = true;
+        const asistencia =
+            document.querySelector(
+                'input[name="asistencia"]:checked'
+            ).value === "true";
+
+
+        if(
+            !nombre ||
+            !personas ||
+            personas < 1
+        ){
+
+            formMessage.textContent =
+                "Completa correctamente los datos.";
+
+            formMessage.style.color =
+                "#ff8f8f";
+
+            return;
+
+        }
+
+
+        submitButton.disabled =
+            true;
 
         submitButton.textContent =
             "GUARDANDO...";
 
+        formMessage.textContent =
+            "";
+
+
         try{
 
-            /*
-             * IMPORTANTE:
-             * Esta versión usa únicamente:
-             * nombre
-             * personas
-             * asistencia
-             *
-             * porque son las columnas existentes
-             * confirmadas en tu tabla.
-             */
-
-            const { error } =
+            const {
+                error
+            } =
                 await supabaseClient
-                    .from("confirmaciones")
+                    .from(
+                        "confirmaciones"
+                    )
                     .insert([
                         {
                             nombre:
-                                guestName,
+                                nombre,
 
                             personas:
                                 personas,
 
                             asistencia:
-                                attendance
+                                asistencia
                         }
                     ]);
+
 
             if(error){
 
@@ -1788,41 +2937,46 @@ rsvpForm.addEventListener(
 
             }
 
-            rsvpModal.classList.add(
-                "hidden"
-            );
 
-            const celebration =
-                document.getElementById(
-                    "celebration"
-                );
+            formMessage.textContent =
+                "✨ ¡Confirmación guardada correctamente!";
 
-            celebration.classList.remove(
-                "hidden"
-            );
+            formMessage.style.color =
+                "#bfffca";
+
 
             setTimeout(
                 () => {
 
-                    celebration.classList.add(
-                        "hidden"
+                    closeModal();
+
+                    confirmationForm.reset();
+
+                    document.getElementById(
+                        "personas"
+                    ).value = 1;
+
+                    formMessage.textContent =
+                        "";
+
+                    /*
+                       Después de confirmar:
+                       aparece Video 2 vertical.
+                    */
+
+                    setTimeout(
+                        () => {
+
+                            playVideo2();
+
+                        },
+                        250
                     );
 
-                    playVideo2();
-
                 },
-                1800
+                1400
             );
 
-            rsvpForm.reset();
-
-            document.getElementById(
-                "adults"
-            ).value = 1;
-
-            document.getElementById(
-                "children"
-            ).value = 0;
 
         }catch(error){
 
@@ -1831,22 +2985,26 @@ rsvpForm.addEventListener(
                 error
             );
 
-            alert(
-                "No se pudo guardar.\n\n" +
+
+            formMessage.textContent =
                 (
                     error &&
                     error.message
-                        ? error.message
-                        : "Error de conexión con Supabase."
                 )
-            );
+                    ? error.message
+                    : "No se pudo guardar. Revisa la conexión con Supabase.";
+
+            formMessage.style.color =
+                "#ff8f8f";
+
 
         }finally{
 
-            submitButton.disabled = false;
+            submitButton.disabled =
+                false;
 
             submitButton.textContent =
-                "GUARDAR";
+                "GUARDAR CONFIRMACIÓN";
 
         }
 
@@ -1854,82 +3012,283 @@ rsvpForm.addEventListener(
 );
 
 
-/* =========================
-   MODO FIESTA
-========================= */
+/* =========================================================
+   CHISPAS
+========================================================= */
 
-function checkPartyMode(){
+function createSparks(){
 
-    const now =
-        new Date();
-
-    const start =
-        new Date(
-            "2026-09-27T16:00:00"
-        );
-
-    const end =
-        new Date(
-            "2026-09-27T20:00:00"
-        );
-
-    const partyMode =
-        document.getElementById(
-            "partyMode"
-        );
-
-    if(
-        now >= start &&
-        now < end
+    for(
+        let i = 0;
+        i < 80;
+        i++
     ){
 
-        partyMode.classList.remove(
-            "hidden"
-        );
+        setTimeout(
+            () => {
 
-    }else{
+                const spark =
+                    document.createElement(
+                        "div"
+                    );
 
-        partyMode.classList.add(
-            "hidden"
+                spark.className =
+                    "spark";
+
+                spark.style.left =
+                    "50%";
+
+                spark.style.top =
+                    "50%";
+
+
+                const angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+                const distance =
+                    100 +
+                    Math.random() *
+                    500;
+
+
+                spark.style.setProperty(
+                    "--x",
+                    Math.cos(angle) *
+                    distance +
+                    "px"
+                );
+
+                spark.style.setProperty(
+                    "--y",
+                    Math.sin(angle) *
+                    distance +
+                    "px"
+                );
+
+
+                spark.style.animationDuration =
+                    (
+                        1.5 +
+                        Math.random() *
+                        2
+                    ) +
+                    "s";
+
+
+                celebration.appendChild(
+                    spark
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        spark.remove();
+
+                    },
+                    4000
+                );
+
+            },
+            i * 35
         );
 
     }
 
 }
 
-checkPartyMode();
 
-setInterval(
-    checkPartyMode,
-    30000
+/* =========================================================
+   CELEBRACIÓN
+========================================================= */
+
+function showMidnightCelebration(){
+
+    celebration.classList.remove(
+        "hidden"
+    );
+
+    createSparks();
+
+}
+
+
+/* =========================================================
+   MÚSICA
+========================================================= */
+
+playMusic.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await music.play();
+
+            playMusic.textContent =
+                "🎵 LAS MAÑANITAS ESTÁN SONANDO";
+
+        }catch(error){
+
+            playMusic.textContent =
+                "No se pudo reproducir el audio";
+
+        }
+
+    }
+);
+
+music.addEventListener(
+    "ended",
+    () => {
+
+        celebration.classList.add(
+            "hidden"
+        );
+
+    }
 );
 
 
-/* =========================
-   PANTALLA FINAL
-========================= */
+/* =========================================================
+   ESTADOS
+========================================================= */
 
-function checkFinalScreen(){
+let midnightShown =
+    false;
+
+function updatePageState(){
 
     const now =
         new Date();
 
-    const finalDate =
-        new Date(
-            "2026-09-28T00:00:00"
-        );
+
+    /* ---------------------------------------------
+       28 SEPTIEMBRE 00:00
+    --------------------------------------------- */
 
     if(
         now >= finalDate
     ){
 
-        playVideo2();
+        publicContent.classList.add(
+            "hidden"
+        );
 
+        celebration.classList.add(
+            "hidden"
+        );
+
+        partyMode.classList.add(
+            "hidden"
+        );
+
+        finalScreen.classList.remove(
+            "hidden"
+        );
+
+        return;
     }
+
+
+    /* ---------------------------------------------
+       27 SEPTIEMBRE 16:00 - 20:00
+    --------------------------------------------- */
+
+    if(
+        now >= partyStart &&
+        now < partyEnd
+    ){
+
+        publicContent.classList.add(
+            "hidden"
+        );
+
+        celebration.classList.add(
+            "hidden"
+        );
+
+        partyMode.classList.remove(
+            "hidden"
+        );
+
+        return;
+    }
+
+
+    /* ---------------------------------------------
+       27 SEPTIEMBRE 00:00 - 16:00
+    --------------------------------------------- */
+
+    if(
+        now >= countdownDate
+    ){
+
+        publicContent.classList.remove(
+            "hidden"
+        );
+
+        partyMode.classList.add(
+            "hidden"
+        );
+
+
+        const celebrationKey =
+            "velunara_midnight_2026";
+
+        const alreadyShown =
+            localStorage.getItem(
+                celebrationKey
+            );
+
+
+        if(
+            !alreadyShown &&
+            !midnightShown
+        ){
+
+            midnightShown =
+                true;
+
+            localStorage.setItem(
+                celebrationKey,
+                "true"
+            );
+
+            showMidnightCelebration();
+
+        }
+
+        return;
+    }
+
+
+    /* ---------------------------------------------
+       ANTES DEL 27
+    --------------------------------------------- */
+
+    publicContent.classList.remove(
+        "hidden"
+    );
+
+    partyMode.classList.add(
+        "hidden"
+    );
+
+    celebration.classList.add(
+        "hidden"
+    );
 
 }
 
-checkFinalScreen();
+updatePageState();
+
+setInterval(
+    updatePageState,
+    1000
+);
 
 </script>
 
