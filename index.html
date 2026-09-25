@@ -9,7 +9,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -85,11 +86,13 @@ body::before{
     display:flex;
     align-items:center;
     justify-content:center;
+
     opacity:1;
     visibility:visible;
+
     transition:
-        opacity 1.8s ease,
-        visibility 1.8s ease;
+        opacity 2.2s ease,
+        visibility 2.2s ease;
 }
 
 #introVideoScreen.fade-out{
@@ -102,11 +105,13 @@ body::before{
     width:100%;
     height:100%;
     object-fit:cover;
+
     opacity:0;
-    transform:scale(1.04);
+    transform:scale(1.045);
+
     transition:
-        opacity 2s ease,
-        transform 3s ease;
+        opacity 2.2s ease,
+        transform 3.5s ease;
 }
 
 #introVideo.visible{
@@ -119,11 +124,13 @@ body::before{
     z-index:2;
     text-align:center;
     padding:25px;
+
     opacity:1;
     transform:translateY(0);
+
     transition:
-        opacity 1s ease,
-        transform 1s ease;
+        opacity 1.2s ease,
+        transform 1.2s ease;
 }
 
 #introStart.hidden-start{
@@ -133,11 +140,12 @@ body::before{
 }
 
 .introStartTitle{
-    font-family:"Cinzel Decorative",Georgia,serif;
+    font-family:"UnifrakturCook","Cinzel Decorative",Georgia,serif;
     font-size:clamp(34px,7vw,70px);
-    font-weight:900;
-    letter-spacing:4px;
+    font-weight:700;
+    letter-spacing:2px;
     color:#f1ddff;
+
     text-shadow:
         0 0 12px rgba(210,160,255,.8),
         0 0 35px rgba(150,80,210,.6);
@@ -195,12 +203,18 @@ body::before{
         visibility 1s ease;
 }
 
+
+/* Primer fade al comenzar a bajar */
+
 .scroll-tutorial.fade-out{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
     transform:translate(-50%,-25px);
 }
+
+
+/* Eliminación definitiva al llegar a la invitación */
 
 .scroll-tutorial.permanently-hidden{
     display:none;
@@ -228,6 +242,7 @@ body::before{
     0%,100%{
         transform:translateY(0);
     }
+
     50%{
         transform:translateY(8px);
     }
@@ -255,10 +270,10 @@ main{
 .main-title{
     margin:0 0 35px;
 
-    font-family:"Cinzel Decorative",Georgia,serif;
+    font-family:"UnifrakturCook","Cinzel Decorative",Georgia,serif;
     font-size:clamp(42px,7vw,82px);
-    font-weight:900;
-    letter-spacing:4px;
+    font-weight:700;
+    letter-spacing:2px;
 
     color:#f1ddff;
 
@@ -271,10 +286,12 @@ main{
 }
 
 @keyframes titleAppear{
+
     from{
         opacity:0;
         transform:translateY(20px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
@@ -811,7 +828,7 @@ main{
     }
 
     .main-title{
-        letter-spacing:2px;
+        letter-spacing:1px;
     }
 
     .invitation-section{
@@ -900,8 +917,6 @@ main{
 
         <div class="hero-content">
 
-            <!-- FOTO IZQUIERDA -->
-
             <div class="photo1-container">
 
                 <img
@@ -910,8 +925,6 @@ main{
 
             </div>
 
-
-            <!-- TIMER DERECHA -->
 
             <div class="countdown-area">
 
@@ -927,6 +940,7 @@ main{
                             id="days">
                             00
                         </div>
+
                         <div class="time-label">
                             DÍAS
                         </div>
@@ -938,6 +952,7 @@ main{
                             id="hours">
                             00
                         </div>
+
                         <div class="time-label">
                             HORAS
                         </div>
@@ -949,6 +964,7 @@ main{
                             id="minutes">
                             00
                         </div>
+
                         <div class="time-label">
                             MINUTOS
                         </div>
@@ -960,6 +976,7 @@ main{
                             id="seconds">
                             00
                         </div>
+
                         <div class="time-label">
                             SEGUNDOS
                         </div>
@@ -972,9 +989,7 @@ main{
         </div>
 
 
-        <!-- =========================
-             INVITACIÓN COMPLETA
-        ========================= -->
+        <!-- INVITACIÓN -->
 
         <section
             class="invitation-section"
@@ -987,9 +1002,7 @@ main{
         </section>
 
 
-        <!-- =========================
-             CONFIRMAR
-        ========================= -->
+        <!-- CONFIRMAR -->
 
         <section class="confirm-section">
 
@@ -1118,9 +1131,7 @@ main{
             </div>
 
 
-            <div
-                id="formMessage">
-            </div>
+            <div id="formMessage"></div>
 
 
             <div class="form-actions">
@@ -1334,7 +1345,9 @@ const finalScreen =
 
 function finishIntro(){
 
-    introVideoScreen.classList.add("fade-out");
+    introVideoScreen.classList.add(
+        "fade-out"
+    );
 
 }
 
@@ -1345,6 +1358,10 @@ startInvitation.addEventListener(
         introStart.classList.add(
             "hidden-start"
         );
+
+        /*
+           El video entra suavemente.
+        */
 
         introVideo.classList.add(
             "visible"
@@ -1373,7 +1390,20 @@ startInvitation.addEventListener(
 
 introVideo.addEventListener(
     "ended",
-    finishIntro
+    () => {
+
+        /*
+           Esperamos un pequeño momento
+           para que el final del video no
+           se sienta cortado.
+        */
+
+        setTimeout(
+            finishIntro,
+            350
+        );
+
+    }
 );
 
 
@@ -1383,20 +1413,41 @@ introVideo.addEventListener(
 
 let tutorialRemoved = false;
 
+
+/*
+   El tutorial primero hace fade
+   después de bajar 70 píxeles.
+*/
+
 function updateTutorial(){
 
     if(tutorialRemoved){
         return;
     }
 
+
+    /*
+       PRIMER FADE
+    */
+
+    if(window.scrollY > 70){
+
+        scrollTutorial.classList.add(
+            "fade-out"
+        );
+
+    }
+
+
+    /*
+       ELIMINACIÓN DEFINITIVA
+       cuando la invitación llega
+       aproximadamente al 75% de la pantalla.
+    */
+
     const rect =
         invitationSection.getBoundingClientRect();
 
-    /*
-       Cuando la invitación empieza
-       a entrar en pantalla, el tutorial
-       se desvanece.
-    */
 
     if(rect.top <= window.innerHeight * 0.75){
 
@@ -1404,14 +1455,15 @@ function updateTutorial(){
             "fade-out"
         );
 
+        tutorialRemoved = true;
+
+
         setTimeout(
             () => {
 
                 scrollTutorial.classList.add(
                     "permanently-hidden"
                 );
-
-                tutorialRemoved = true;
 
             },
             1000
@@ -1438,14 +1490,18 @@ openForm.addEventListener(
     "click",
     () => {
 
-        formModal.classList.add("show");
+        formModal.classList.add(
+            "show"
+        );
 
     }
 );
 
 function closeModal(){
 
-    formModal.classList.remove("show");
+    formModal.classList.remove(
+        "show"
+    );
 
 }
 
@@ -1474,17 +1530,50 @@ formModal.addEventListener(
 
 async function mostrarVideoFinal(){
 
+    /*
+       Primero aseguramos que esté
+       completamente oculto.
+    */
+
     finalVideoScreen.classList.remove(
         "fade-out"
     );
 
-    finalVideoScreen.classList.add(
+    finalVideoScreen.classList.remove(
         "show"
     );
 
+
+    /*
+       Reiniciamos el video.
+    */
+
+    finalVideo.currentTime = 0;
+
+
+    /*
+       Dejamos que el fade-in
+       ocurra después de mostrar
+       el contenedor.
+    */
+
+    requestAnimationFrame(
+        () => {
+
+            finalVideoScreen.classList.add(
+                "show"
+            );
+
+        }
+    );
+
+
     try{
 
-        finalVideo.currentTime = 0;
+        /*
+           El usuario acaba de interactuar
+           con el botón de guardar.
+        */
 
         await finalVideo.play();
 
@@ -1503,9 +1592,14 @@ finalVideo.addEventListener(
     "ended",
     () => {
 
+        /*
+           Fade-out del Video 2.
+        */
+
         finalVideoScreen.classList.add(
             "fade-out"
         );
+
 
         setTimeout(
             () => {
@@ -1534,11 +1628,13 @@ confirmationForm.addEventListener(
 
         event.preventDefault();
 
+
         const nombre =
             document
                 .getElementById("nombre")
                 .value
                 .trim();
+
 
         const personas =
             Number(
@@ -1547,10 +1643,12 @@ confirmationForm.addEventListener(
                     .value
             );
 
+
         const asistenciaSeleccionada =
             document.querySelector(
                 'input[name="asistencia"]:checked'
             );
+
 
         const telefono =
             document
@@ -1744,8 +1842,9 @@ confirmationForm.addEventListener(
 
 
             /*
-               Esperamos un poco para que
-               el usuario vea que sí se guardó.
+               Dejamos visible el mensaje
+               un momento antes de pasar
+               al video final.
             */
 
             setTimeout(
@@ -1756,11 +1855,6 @@ confirmationForm.addEventListener(
                     confirmationForm.reset();
 
                     formMessage.textContent = "";
-
-                    /*
-                       Ahora entra Video 2
-                       con su propio fade.
-                    */
 
                     mostrarVideoFinal();
 
@@ -1834,6 +1928,7 @@ document
 
         }
     );
+
 
 music.addEventListener(
     "ended",
@@ -1987,7 +2082,9 @@ function updatePageState(){
 
         document.getElementById(
             "mainContent"
-        ).classList.add("hidden");
+        ).classList.add(
+            "hidden"
+        );
 
         celebration.classList.add(
             "hidden"
@@ -2017,7 +2114,9 @@ function updatePageState(){
 
         document.getElementById(
             "mainContent"
-        ).classList.add("hidden");
+        ).classList.add(
+            "hidden"
+        );
 
         celebration.classList.add(
             "hidden"
@@ -2040,7 +2139,9 @@ function updatePageState(){
 
         document.getElementById(
             "mainContent"
-        ).classList.remove("hidden");
+        ).classList.remove(
+            "hidden"
+        );
 
         celebration.classList.add(
             "hidden"
@@ -2066,7 +2167,9 @@ function updatePageState(){
 
         document.getElementById(
             "mainContent"
-        ).classList.add("hidden");
+        ).classList.add(
+            "hidden"
+        );
 
         partyMode.classList.add(
             "hidden"
@@ -2094,7 +2197,9 @@ function updatePageState(){
 
     document.getElementById(
         "mainContent"
-    ).classList.remove("hidden");
+    ).classList.remove(
+        "hidden"
+    );
 
     partyMode.classList.add(
         "hidden"
@@ -2113,6 +2218,3 @@ updatePageState();
 
 </body>
 </html>
-```
-
-Con esto quedan conectados los elementos principales: **Video 1 → invitación → tutorial que se desvanece y desaparece al llegar a `foto2.jpg` → confirmación → Video 2 final**, además del contador, celebración, modo fiesta y pantalla final.
