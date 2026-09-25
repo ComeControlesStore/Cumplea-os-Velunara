@@ -2,24 +2,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Velunara | Invitación</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
-/* =========================
+/* =========================================================
    GENERAL
-========================= */
+========================================================= */
 
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
@@ -28,26 +27,13 @@ html{
 }
 
 body{
-    margin:0;
-    min-height:100vh;
-
-    background:
-        radial-gradient(
-            circle at 50% 10%,
-            #35144f 0%,
-            #210d35 38%,
-            #100719 72%,
-            #07030c 100%
-        );
-
+    background:#08030c;
     color:white;
-    font-family:Georgia,serif;
+    font-family:Georgia,"Times New Roman",serif;
     overflow-x:hidden;
 }
 
-button,
-input,
-select{
+button{
     font-family:inherit;
 }
 
@@ -56,39 +42,14 @@ select{
 }
 
 
-/* =========================
-   ESTRELLAS
-========================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:.45;
-
-    background-image:
-        radial-gradient(circle,#ffffff 1px,transparent 1px),
-        radial-gradient(circle,#d9b7ff 1px,transparent 1px);
-
-    background-size:
-        95px 95px,
-        145px 145px;
-
-    background-position:
-        10px 20px,
-        60px 80px;
-
-    z-index:0;
-}
-
-
-/* =========================
-   VIDEO 1
-========================= */
+/* =========================================================
+   VIDEO DE INICIO
+========================================================= */
 
 #introVideoScreen{
+
     position:fixed;
+
     inset:0;
 
     width:100vw;
@@ -100,11 +61,12 @@ body::before{
 
     overflow:hidden;
 
-    z-index:9999;
+    z-index:50000;
 
-    background:#09030f;
+    background:#000;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -117,13 +79,18 @@ body::before{
 }
 
 #introVideoScreen.fade-out{
+
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
 }
 
 #introVideo{
+
     position:absolute;
+
     inset:0;
 
     display:block;
@@ -140,753 +107,42 @@ body::before{
     padding:0;
 
     object-fit:cover;
+
     object-position:center center;
 
     background:#000;
 
     opacity:0;
+
     visibility:hidden;
 
     transform:scale(1.04);
 
     transition:
-        opacity 2s ease,
+        opacity 1.2s ease,
         transform 3s ease;
 }
 
 #introVideo.visible{
-    opacity:1 !important;
-    visibility:visible !important;
+
+    opacity:1;
+
+    visibility:visible;
+
     transform:scale(1);
 }
 
 #introStart{
+
     position:absolute;
+
     inset:0;
 
     z-index:2;
 
     display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    padding:25px;
-
-    opacity:1;
-    transform:translateY(0);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
-}
-
-#introStart.hidden-start{
-    opacity:0;
-    transform:translateY(-15px);
-    pointer-events:none;
-}
-
-.introStartTitle{
-    font-family:
-        "Cinzel Decorative",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(
-            34px,
-            7vw,
-            70px
-        );
-
-    font-weight:900;
-    letter-spacing:4px;
-
-    color:#f1ddff;
-
-    text-shadow:
-        0 0 12px rgba(210,160,255,.8),
-        0 0 35px rgba(150,80,210,.6);
-}
-
-.introStartText{
-    margin-top:14px;
-
-    font-size:18px;
-
-    color:#e8d8f2;
-}
-
-#startInvitation{
-    margin-top:30px;
-
-    padding:15px 28px;
-
-    border:1px solid #cba5ec;
-    border-radius:30px;
-
-    background:rgba(80,35,110,.75);
-
-    color:white;
-
-    cursor:pointer;
-
-    font-size:15px;
-    letter-spacing:1px;
-
-    transition:.3s;
-}
-
-#startInvitation:hover{
-    transform:scale(1.05);
-
-    background:rgba(110,55,145,.85);
-}
-
-
-/* =========================
-   TUTORIAL
-========================= */
-
-.scroll-tutorial{
-    position:fixed;
-
-    top:18px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:500;
-
-    width:min(90%,500px);
-
-    padding:13px 20px;
-
-    text-align:center;
-
-    border-radius:20px;
-
-    background:rgba(25,8,39,.88);
-
-    border:
-        1px solid
-        rgba(211,172,240,.3);
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.35);
-
-    opacity:1;
-    visibility:visible;
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease,
-        visibility 1s ease;
-}
-
-.scroll-tutorial.fade-out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-
-    transform:
-        translate(-50%,-25px);
-}
-
-.scroll-tutorial.permanently-hidden{
-    display:none;
-}
-
-.tutorial-title{
-    font-size:14px;
-    letter-spacing:2px;
-
-    color:#ead8f5;
-}
-
-.tutorial-text{
-    margin-top:5px;
-    font-size:15px;
-}
-
-.tutorial-arrow{
-    margin-top:4px;
-
-    font-size:30px;
-
-    color:#dcbcf6;
-
-    animation:
-        arrowDown
-        1.2s
-        infinite
-        ease-in-out;
-}
-
-@keyframes arrowDown{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(8px);
-    }
-
-}
-
-
-/* =========================
-   CONTENIDO PRINCIPAL
-========================= */
-
-main{
-    position:relative;
-
-    z-index:2;
-
-    width:100%;
-
-    padding:
-        100px
-        20px
-        80px;
-}
-
-.hero{
-    width:100%;
-
-    max-width:1150px;
-
-    margin:auto;
-
-    text-align:center;
-}
-
-.main-title{
-    margin:
-        0
-        0
-        35px;
-
-    font-family:
-        "Cinzel Decorative",
-        Georgia,
-        serif;
-
-    font-size:
-        clamp(
-            42px,
-            7vw,
-            82px
-        );
-
-    font-weight:900;
-
-    letter-spacing:4px;
-
-    color:#f1ddff;
-
-    text-shadow:
-        0 0 8px rgba(210,160,255,.75),
-        0 0 22px rgba(150,80,210,.55),
-        0 4px 12px rgba(0,0,0,.8);
-
-    animation:
-        titleAppear
-        1.8s
-        ease
-        both;
-}
-
-@keyframes titleAppear{
-
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-
-/* =========================
-   FOTO + TIMER
-========================= */
-
-.hero-content{
-    width:100%;
-
-    max-width:1050px;
-
-    margin:0 auto;
-
-    display:flex;
-
-    flex-direction:row;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:55px;
-}
-
-.photo1-container{
-    width:min(360px,40vw);
-
-    flex-shrink:0;
-
-    padding:7px;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #d7b7f4,
-            #67447f,
-            #b18bd4
-        );
-
-    box-shadow:
-        0 0 25px rgba(168,113,217,.35),
-        0 20px 45px rgba(0,0,0,.5);
-}
-
-.photo1-container img{
-    display:block;
-
-    width:100%;
-
-    border-radius:16px;
-}
-
-.countdown-area{
-    width:360px;
-    max-width:100%;
-}
-
-.countdown-title{
-    font-size:19px;
-
-    color:#e9d8f5;
-
-    margin-bottom:18px;
-}
-
-.countdown{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:10px;
-}
-
-.time-box{
-    padding:
-        15px
-        8px;
-
-    border-radius:15px;
-
-    background:
-        rgba(51,20,70,.75);
-
-    border:
-        1px solid
-        rgba(208,166,238,.3);
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.3);
-}
-
-.time-number{
-    font-size:30px;
-    font-weight:bold;
-}
-
-.time-label{
-    margin-top:4px;
-
-    font-size:11px;
-
-    color:#cdb8da;
-}
-
-
-/* =========================
-   INVITACIÓN
-========================= */
-
-.invitation-section{
-    margin:
-        90px
-        auto
-        0;
-
-    width:100%;
-
-    max-width:700px;
-
-    text-align:center;
-}
-
-.invitation-section img{
-    display:block;
-
-    width:min(600px,94vw);
-
-    height:auto;
-
-    margin:auto;
-
-    border-radius:18px;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.6),
-        0 0 30px rgba(150,90,200,.2);
-}
-
-
-/* =========================
-   CONFIRMACIÓN
-========================= */
-
-.confirm-section{
-    margin:
-        70px
-        auto
-        0;
-
-    text-align:center;
-}
-
-.confirm-help{
-    margin-top:42px;
-
-    font-size:16px;
-
-    color:#e9d7f4;
-}
-
-.confirm-arrow{
-    font-size:34px;
-
-    color:#d7b5f4;
-
-    margin-bottom:7px;
-
-    animation:
-        arrowDown
-        1.2s
-        infinite
-        ease-in-out;
-}
-
-.confirm-button{
-    margin-top:18px;
-
-    padding:
-        15px
-        30px;
-
-    border:
-        1px solid
-        #d2afea;
-
-    border-radius:30px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #6c3789,
-            #3e1d58
-        );
-
-    color:white;
-
-    font-size:15px;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.35);
-
-    transition:.3s;
-}
-
-.confirm-button:hover{
-    transform:
-        translateY(-2px)
-        scale(1.03);
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-
-    z-index:7000;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-
-    background:
-        rgba(5,1,10,.78);
-
-    backdrop-filter:blur(7px);
-
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-
-    transition:
-        opacity .7s ease,
-        visibility .7s ease;
-}
-
-.modal.show{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-}
-
-.modal-content{
-    width:min(430px,94vw);
-
-    padding:28px;
-
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #281038,
-            #13081c
-        );
-
-    border:
-        1px solid
-        rgba(210,170,240,.35);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.65);
-
-    transform:
-        translateY(25px)
-        scale(.97);
-
-    transition:
-        transform .7s ease;
-}
-
-.modal.show .modal-content{
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-.modal-title{
-    text-align:center;
-
-    font-family:
-        "Cinzel Decorative",
-        Georgia,
-        serif;
-
-    color:#ead8f7;
-
-    margin-bottom:25px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-
-    margin-bottom:7px;
-
-    font-size:14px;
-
-    color:#d8c4e4;
-}
-
-.form-group input{
-    width:100%;
-
-    padding:12px;
-
-    border-radius:12px;
-
-    border:
-        1px solid
-        rgba(214,177,237,.3);
-
-    outline:none;
-
-    background:#100719;
-
-    color:white;
-}
-
-.radio-group{
-    display:flex;
 
     flex-direction:column;
-
-    gap:9px;
-}
-
-.radio-option{
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-}
-
-.radio-option input{
-    width:auto;
-}
-
-.form-actions{
-    display:flex;
-
-    gap:10px;
-
-    margin-top:22px;
-}
-
-.form-actions button{
-    flex:1;
-
-    padding:13px;
-
-    border-radius:15px;
-
-    border:
-        1px solid
-        rgba(214,177,237,.3);
-
-    cursor:pointer;
-}
-
-.cancel-button{
-    background:#211025;
-    color:#ddd;
-}
-
-.save-button{
-    background:#65347d;
-    color:white;
-}
-
-.save-button:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-}
-
-#formMessage{
-    min-height:20px;
-
-    margin-top:14px;
-
-    text-align:center;
-
-    font-size:14px;
-}
-
-
-/* =========================
-   VIDEO 2
-========================= */
-
-#finalVideoScreen{
-    position:fixed;
-    inset:0;
-
-    z-index:10000;
-
-    background:#08030c;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-
-    transition:
-        opacity 1.8s ease,
-        visibility 1.8s ease;
-}
-
-#finalVideoScreen.show{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-}
-
-#finalVideoScreen.fade-out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-#finalVideo{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    opacity:0;
-
-    transform:scale(1.03);
-
-    transition:
-        opacity 1.8s ease,
-        transform 2.5s ease;
-}
-
-#finalVideoScreen.show #finalVideo{
-    opacity:1;
-    transform:scale(1);
-}
-
-
-/* =========================
-   CELEBRACIÓN
-========================= */
-
-#celebration{
-    position:fixed;
-    inset:0;
-
-    z-index:9000;
-
-    display:flex;
 
     align-items:center;
     justify-content:center;
@@ -897,32 +153,3197 @@ main{
 
     background:
         radial-gradient(
-            circle,
-            #4b1c69,
-            #170820 70%,
-            #07030c
+            circle at center,
+            rgba(35,5,55,.35),
+            rgba(0,0,0,.75)
         );
 
-    opacity:1;
-    visibility:visible;
-
     transition:
-        opacity 1.5s ease,
-        visibility 1.5s ease;
+        opacity .8s ease,
+        visibility .8s ease;
 }
 
-#celebration.hidden{
+#introStart.hidden-start{
+
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
 }
 
+.introStartTitle{
+
+    font-size:clamp(35px,8vw,75px);
+
+    letter-spacing:5px;
+
+    font-weight:normal;
+
+    text-shadow:
+        0 0 20px #c77dff,
+        0 0 50px #8b2fc9;
+}
+
+.introStartText{
+
+    margin-top:15px;
+
+    color:#e3d6e9;
+
+    font-size:clamp(14px,3vw,20px);
+
+    letter-spacing:2px;
+}
+
+#startInvitation{
+
+    margin-top:30px;
+
+    padding:17px 30px;
+
+    border:1px solid #c17cff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(80,20,110,.95),
+            rgba(30,5,45,.98)
+        );
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 18px rgba(180,80,255,.35);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+#startInvitation:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 25px rgba(200,100,255,.7),
+        0 0 50px rgba(130,40,200,.35);
+}
+
+#startInvitation:active{
+
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-3;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(100,20,130,.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(40,0,70,.3),
+            transparent 40%
+        ),
+        #08030c;
+}
+
+.stars{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-2;
+
+    pointer-events:none;
+
+    overflow:hidden;
+}
+
+.star{
+
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    opacity:.7;
+
+    animation:
+        twinkle
+        3s
+        infinite
+        alternate;
+}
+
+@keyframes twinkle{
+
+    from{
+
+        opacity:.2;
+
+        transform:scale(.7);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1.5);
+    }
+
+}
+
+
+/* =========================================================
+   TUTORIAL FIJO
+========================================================= */
+
+.fixed-tutorial{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    width:100%;
+
+    z-index:9999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding:
+        max(10px,env(safe-area-inset-top))
+        15px
+        10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8,3,12,.98),
+            rgba(8,3,12,.90),
+            rgba(8,3,12,0)
+        );
+
+    pointer-events:none;
+
+    text-align:center;
+}
+
+.fixed-tutorial-title{
+
+    color:#d9b5ff;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 8px rgba(190,100,255,.8);
+
+    margin-bottom:5px;
+}
+
+.fixed-tutorial-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.tutorial-instruction{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.9),
+        0 0 10px rgba(190,100,255,.7);
+}
+
+.tutorial-icon{
+
+    font-size:20px;
+
+    filter:
+        drop-shadow(
+            0 0 6px rgba(190,100,255,.8)
+        );
+}
+
+.tutorial-arrow{
+
+    margin-top:0;
+
+    color:#d8a7ff;
+
+    font-size:35px;
+
+    line-height:.8;
+
+    text-shadow:
+        0 0 8px rgba(190,100,255,1),
+        0 0 20px rgba(150,50,220,.8);
+
+    animation:
+        fixedTutorialArrow
+        1.2s
+        infinite
+        ease-in-out;
+}
+
+@keyframes fixedTutorialArrow{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+        opacity:.75;
+    }
+
+    50%{
+
+        transform:translateY(7px);
+
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+#publicContent{
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    min-height:100vh;
+
+    padding:130px 20px 80px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:10%;
+    right:10%;
+    bottom:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #9d5cff,
+            #d8b4ff,
+            #9d5cff,
+            transparent
+        );
+
+    opacity:.7;
+}
+
+.small-title{
+
+    color:#c9a5ff;
+
+    letter-spacing:6px;
+
+    text-transform:uppercase;
+
+    font-size:13px;
+
+    margin-bottom:15px;
+}
+
+.main-title{
+
+    font-size:clamp(42px,8vw,82px);
+
+    font-weight:normal;
+
+    letter-spacing:5px;
+
+    text-shadow:
+        0 0 15px rgba(170,80,255,.7),
+        0 0 40px rgba(120,30,200,.5);
+}
+
+.subtitle{
+
+    margin-top:10px;
+
+    color:#ddd;
+
+    font-size:18px;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================================================
+   FOTO 1 + CONTADOR
+========================================================= */
+
+.hero-content{
+
+    width:min(1050px,100%);
+
+    margin-top:45px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:55px;
+}
+
+.photo1-container{
+
+    width:280px;
+
+    flex-shrink:0;
+
+    position:relative;
+}
+
+.photo1-container::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-8px;
+
+    border:1px solid rgba(204,145,255,.7);
+
+    box-shadow:
+        0 0 20px rgba(160,70,255,.5),
+        inset 0 0 20px rgba(160,70,255,.15);
+
+    transform:rotate(-2deg);
+}
+
+.photo1-container::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-18px;
+
+    border:1px solid rgba(150,80,220,.25);
+
+    transform:rotate(2deg);
+}
+
+.photo1-container img{
+
+    width:100%;
+
+    display:block;
+
+    position:relative;
+
+    z-index:2;
+
+    border:4px solid #160b20;
+
+    box-shadow:
+        0 0 30px rgba(160,50,255,.4);
+}
+
+.countdown-area{
+
+    flex:1;
+
+    max-width:620px;
+}
+
+.countdown-title{
+
+    color:#cda5ff;
+
+    font-size:18px;
+
+    letter-spacing:3px;
+
+    margin-bottom:25px;
+}
+
+.countdown{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:14px;
+}
+
+.time-box{
+
+    padding:20px 10px;
+
+    background:rgba(25,10,35,.65);
+
+    border:1px solid rgba(192,125,255,.4);
+
+    box-shadow:
+        inset 0 0 25px rgba(100,30,150,.12),
+        0 0 15px rgba(100,30,150,.1);
+}
+
+.time-number{
+
+    display:block;
+
+    font-size:clamp(30px,5vw,48px);
+
+    color:#fff;
+
+    text-shadow:
+        0 0 12px rgba(190,120,255,.7);
+}
+
+.time-label{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:11px;
+
+    color:#bdaacb;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+
+/* =========================================================
+   TRANSICIÓN + FOTO 2
+========================================================= */
+
+.invitation-reveal{
+
+    min-height:100vh;
+
+    padding:120px 20px 100px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+}
+
+.magic-transition{
+
+    text-align:center;
+
+    margin-bottom:55px;
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+        opacity 1.3s ease,
+        transform 1.3s ease;
+}
+
+.invitation-reveal.visible .magic-transition{
+
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+.magic-symbol{
+
+    font-size:38px;
+
+    color:#c48cff;
+
+    animation:
+        magicPulse
+        2.5s
+        infinite
+        ease-in-out,
+
+        rotateMagic
+        10s
+        linear
+        infinite;
+}
+
+.magic-text{
+
+    margin-top:12px;
+
+    color:#cdb9d8;
+
+    font-size:14px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+}
+
+@keyframes magicPulse{
+
+    0%,100%{
+
+        text-shadow:0 0 5px #9d4edd;
+
+        opacity:.5;
+    }
+
+    50%{
+
+        text-shadow:
+            0 0 10px #c77dff,
+            0 0 30px #9d4edd,
+            0 0 60px #6a0dad;
+
+        opacity:1;
+    }
+
+}
+
+@keyframes rotateMagic{
+
+    from{
+
+        transform:rotate(0);
+    }
+
+    to{
+
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   FOTO 2
+========================================================= */
+
+.invitation-image-wrapper{
+
+    width:min(750px,95vw);
+
+    position:relative;
+
+    opacity:0;
+
+    transform:
+        translateY(80px)
+        scale(.88);
+
+    filter:
+        brightness(.35)
+        blur(4px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s cubic-bezier(.2,.8,.2,1),
+        filter 1.5s ease;
+}
+
+.invitation-reveal.visible
+.invitation-image-wrapper{
+
+    opacity:1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    filter:
+        brightness(1)
+        blur(0);
+}
+
+.invitation-image-wrapper::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(174,90,255,.5),
+            transparent 65%
+        );
+
+    filter:blur(25px);
+
+    opacity:0;
+
+    transition:opacity 2s ease;
+
+    pointer-events:none;
+}
+
+.invitation-reveal.visible
+.invitation-image-wrapper::before{
+
+    opacity:1;
+}
+
+.invitation-image-wrapper img{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+    position:relative;
+
+    z-index:2;
+
+    border:5px solid #17091f;
+
+    box-shadow:
+        0 0 20px rgba(172,84,255,.5),
+        0 0 70px rgba(120,40,180,.25);
+}
+
+
+/* =========================================================
+   TEXTO DEL BOTÓN
+========================================================= */
+
+.confirm-help{
+
+    margin-top:25px;
+
+    color:#d7c5df;
+
+    font-size:16px;
+
+    letter-spacing:1px;
+
+    text-align:center;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.8);
+}
+
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.confirm-button{
+
+    margin-top:12px;
+
+    padding:17px 36px;
+
+    border:1px solid #c17cff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(80,20,110,.9),
+            rgba(30,5,45,.95)
+        );
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 15px rgba(180,80,255,.25);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.confirm-button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 20px rgba(200,100,255,.6),
+        0 0 45px rgba(130,40,200,.3);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(110,35,145,.95),
+            rgba(45,8,60,.95)
+        );
+}
+
+.confirm-button:active{
+
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(3,0,7,.88);
+
+    backdrop-filter:blur(8px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    z-index:10000;
+}
+
+.modal-box{
+
+    width:min(500px,100%);
+
+    background:
+        linear-gradient(
+            145deg,
+            #18091f,
+            #09040e
+        );
+
+    border:1px solid rgba(190,120,255,.55);
+
+    padding:35px;
+
+    box-shadow:
+        0 0 35px rgba(130,40,190,.3);
+
+    position:relative;
+}
+
+.modal-title{
+
+    text-align:center;
+
+    font-size:28px;
+
+    font-weight:normal;
+
+    margin-bottom:8px;
+}
+
+.modal-subtitle{
+
+    text-align:center;
+
+    color:#ad9ab8;
+
+    font-size:13px;
+
+    margin-bottom:30px;
+}
+
+.close-modal{
+
+    position:absolute;
+
+    top:12px;
+    right:15px;
+
+    background:none;
+
+    border:0;
+
+    color:#c5a7d2;
+
+    font-size:25px;
+
+    cursor:pointer;
+}
+
+.form-group{
+
+    margin-bottom:20px;
+}
+
+.form-group label{
+
+    display:block;
+
+    color:#d7c2df;
+
+    font-size:13px;
+
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    padding:13px;
+
+    background:#0b0610;
+
+    border:1px solid #4b2a5a;
+
+    color:white;
+
+    outline:none;
+
+    font-family:inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:#b66aff;
+
+    box-shadow:
+        0 0 10px rgba(180,90,255,.2);
+}
+
+.radio-container{
+
+    display:flex;
+
+    gap:20px;
+}
+
+.radio-option{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:#ddd;
+
+    cursor:pointer;
+}
+
+.radio-option input{
+
+    width:auto;
+}
+
+.submit-button{
+
+    width:100%;
+
+    padding:15px;
+
+    background:#5c247a;
+
+    border:1px solid #bd78ff;
+
+    color:white;
+
+    cursor:pointer;
+
+    letter-spacing:2px;
+
+    transition:.25s;
+}
+
+.submit-button:hover{
+
+    background:#75309a;
+}
+
+.form-message{
+
+    margin-top:15px;
+
+    text-align:center;
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   CELEBRACIÓN
+========================================================= */
+
+.celebration{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:20000;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(80,15,110,.75),
+            rgba(4,1,8,.97) 65%
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    overflow:hidden;
+}
+
 .celebration-content{
-    max-width:600px;
+
+    position:relative;
+
+    z-index:10;
+
+    animation:
+        celebrateIn
+        1.5s
+        ease;
 }
 
 .celebration-title{
-    font-family:
-        "Cinzel Decorative",
-        Georgia,
+
+    font-size:clamp(38px,8vw,75px);
+
+    font-weight:normal;
+
+    text-shadow:
+        0 0 20px #c77dff,
+        0 0 50px #8b2fc9;
+}
+
+.celebration-subtitle{
+
+    margin-top:15px;
+
+    color:#e4d4ea;
+
+    font-size:18px;
+}
+
+.play-music{
+
+    margin-top:30px;
+
+    padding:14px 25px;
+
+    background:transparent;
+
+    color:white;
+
+    border:1px solid #c17cff;
+
+    cursor:pointer;
+
+    letter-spacing:1px;
+}
+
+@keyframes celebrateIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.7);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+
+}
+
+.spark{
+
+    position:absolute;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#dba3ff;
+
+    box-shadow:
+        0 0 8px #dba3ff,
+        0 0 20px #9b4dca;
+
+    animation:
+        sparkFly
+        linear
+        forwards;
+}
+
+@keyframes sparkFly{
+
+    from{
+
+        transform:
+            translate(0,0)
+            scale(1);
+
+        opacity:1;
+    }
+
+    to{
+
+        transform:
+            translate(var(--x),var(--y))
+            scale(0);
+
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
+   MODO FIESTA
+========================================================= */
+
+.party-mode{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:15000;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #351052,
+            #100317 65%,
+            #050108
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+}
+
+.party-content{
+
+    padding:30px;
+}
+
+.party-icon{
+
+    font-size:65px;
+
+    animation:
+        partyFloat
+        2s
+        infinite
+        ease-in-out;
+}
+
+.party-title{
+
+    margin-top:20px;
+
+    font-size:clamp(40px,8vw,80px);
+
+    font-weight:normal;
+
+    text-shadow:
+        0 0 20px #c77dff,
+        0 0 60px #8b2fc9;
+}
+
+.party-text{
+
+    margin-top:15px;
+
+    color:#d8c4df;
+
+    font-size:18px;
+}
+
+@keyframes partyFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-15px)
+            rotate(3deg);
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLA FINAL
+========================================================= */
+
+.final-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:30000;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #351052,
+            #09020e 70%
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px;
+}
+
+.final-content{
+
+    animation:
+        finalAppear
+        2s
+        ease;
+}
+
+.final-title{
+
+    font-size:clamp(38px,8vw,80px);
+
+    font-weight:normal;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 20px #d38aff,
+        0 0 50px #9c45d0;
+}
+
+.final-text{
+
+    margin-top:25px;
+
+    color:#d9c8df;
+
+    font-size:17px;
+
+    line-height:1.8;
+}
+
+@keyframes finalAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media(max-width:750px){
+
+    .fixed-tutorial{
+
+        padding:
+            max(8px,env(safe-area-inset-top))
+            10px
+            8px;
+    }
+
+    .fixed-tutorial-title{
+
+        font-size:9px;
+
+        letter-spacing:2px;
+
+        margin-bottom:4px;
+    }
+
+    .tutorial-instruction{
+
+        font-size:12px;
+
+        letter-spacing:.8px;
+    }
+
+    .tutorial-icon{
+
+        font-size:17px;
+    }
+
+    .tutorial-arrow{
+
+        font-size:30px;
+    }
+
+    .hero{
+
+        padding-top:140px;
+    }
+
+    .hero-content{
+
+        flex-direction:column;
+
+        gap:45px;
+    }
+
+    .photo1-container{
+
+        width:min(270px,75vw);
+    }
+
+    .countdown-area{
+
+        width:100%;
+    }
+
+    .countdown{
+
+        gap:7px;
+    }
+
+    .time-box{
+
+        padding:14px 5px;
+    }
+
+    .time-label{
+
+        font-size:9px;
+
+        letter-spacing:1px;
+    }
+
+    .invitation-reveal{
+
+        padding-top:90px;
+    }
+
+    .invitation-image-wrapper{
+
+        width:94vw;
+    }
+
+    .confirm-help{
+
+        font-size:15px;
+
+        line-height:1.5;
+
+        padding:0 15px;
+    }
+
+    .confirm-button{
+
+        padding:17px 25px;
+    }
+
+    .modal-box{
+
+        padding:25px 20px;
+    }
+
+    #startInvitation{
+
+        width:min(90vw,330px);
+
+        padding:16px 20px;
+
+        font-size:13px;
+    }
+
+}
+
+
+/* =========================================================
+   PC
+========================================================= */
+
+@media(min-width:751px){
+
+    .invitation-image-wrapper{
+
+        width:min(600px,85vw);
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUEÑOS
+========================================================= */
+
+@media(max-width:420px){
+
+    .fixed-tutorial-title{
+
+        font-size:8px;
+
+        letter-spacing:1.5px;
+    }
+
+    .tutorial-instruction{
+
+        font-size:11px;
+    }
+
+    .tutorial-arrow{
+
+        font-size:27px;
+    }
+
+    .main-title{
+
+        letter-spacing:2px;
+    }
+
+    .subtitle{
+
+        font-size:15px;
+    }
+
+    .countdown-title{
+
+        font-size:14px;
+    }
+
+    .time-number{
+
+        font-size:27px;
+    }
+
+    .magic-text{
+
+        font-size:11px;
+
+        letter-spacing:2px;
+    }
+
+    .confirm-button{
+
+        width:90%;
+
+        font-size:12px;
+
+        padding:15px;
+    }
+
+    .introStartTitle{
+
+        font-size:32px;
+
+        letter-spacing:3px;
+    }
+
+    .introStartText{
+
+        font-size:13px;
+
+        letter-spacing:1px;
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLA APRETADA / HORIZONTAL EN CELULAR
+========================================================= */
+
+@media(max-width:750px) and (orientation:landscape){
+
+    #introVideo{
+
+        width:100vw;
+        height:100dvh;
+
+        object-fit:cover;
+    }
+
+    #introStart{
+
+        padding:10px;
+    }
+
+    .introStartTitle{
+
+        font-size:30px;
+    }
+
+    .introStartText{
+
+        margin-top:8px;
+
+        font-size:12px;
+    }
+
+    #startInvitation{
+
+        margin-top:15px;
+
+        padding:12px 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     VIDEO DE INICIO
+========================================================= -->
+
+<div id="introVideoScreen">
+
+    <video
+        id="introVideo"
+        src="videoinicio1.mp4"
+        playsinline
+        preload="auto"
+    ></video>
+
+
+    <div id="introStart">
+
+        <div class="introStartTitle">
+            ✨ VELUNARA ✨
+        </div>
+
+        <div class="introStartText">
+            Tu invitación está por comenzar
+        </div>
+
+        <button
+            id="startInvitation"
+            type="button"
+        >
+            ▶ INICIAR INVITACIÓN
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TUTORIAL FIJO
+========================================================= -->
+
+<div class="fixed-tutorial">
+
+    <div class="fixed-tutorial-title">
+        ✦ CÓMO VER LA INVITACIÓN ✦
+    </div>
+
+    <div class="fixed-tutorial-content">
+
+        <div class="tutorial-instruction">
+
+            <span class="tutorial-icon">
+                ☝
+            </span>
+
+            <span>
+                DESLIZA HACIA ABAJO
+            </span>
+
+        </div>
+
+        <div class="tutorial-arrow">
+            ↓
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ESTRELLAS
+========================================================= -->
+
+<div
+    class="stars"
+    id="stars"
+></div>
+
+
+<!-- =========================================================
+     CONTENIDO PÚBLICO
+========================================================= -->
+
+<div id="publicContent">
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+        <div class="small-title">
+            Una celebración especial
+        </div>
+
+        <h1 class="main-title">
+            VELUNARA
+        </h1>
+
+        <div class="subtitle">
+            ✦ Una noche mágica está por comenzar ✦
+        </div>
+
+
+        <div class="hero-content">
+
+
+            <!-- FOTO 1 -->
+
+            <div class="photo1-container">
+
+                <img
+                    src="foto1.jpg"
+                    alt="Velunara"
+                >
+
+            </div>
+
+
+            <!-- CONTADOR -->
+
+            <div
+                class="countdown-area"
+                id="countdownSection"
+            >
+
+                <div class="countdown-title">
+                    FALTAN PARA LA CELEBRACIÓN
+                </div>
+
+
+                <div class="countdown">
+
+                    <div class="time-box">
+
+                        <span
+                            class="time-number"
+                            id="days"
+                        >
+                            00
+                        </span>
+
+                        <span class="time-label">
+                            Días
+                        </span>
+
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <span
+                            class="time-number"
+                            id="hours"
+                        >
+                            00
+                        </span>
+
+                        <span class="time-label">
+                            Horas
+                        </span>
+
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <span
+                            class="time-number"
+                            id="minutes"
+                        >
+                            00
+                        </span>
+
+                        <span class="time-label">
+                            Minutos
+                        </span>
+
+                    </div>
+
+
+                    <div class="time-box">
+
+                        <span
+                            class="time-number"
+                            id="seconds"
+                        >
+                            00
+                        </span>
+
+                        <span class="time-label">
+                            Segundos
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TRANSICIÓN + FOTO 2
+    ====================================================== -->
+
+    <section
+        class="invitation-reveal"
+        id="invitationReveal"
+    >
+
+
+        <div class="magic-transition">
+
+            <div class="magic-symbol">
+                ✦
+            </div>
+
+            <div class="magic-text">
+                La magia comienza aquí
+            </div>
+
+        </div>
+
+
+        <!-- INVITACIÓN -->
+
+        <div class="invitation-image-wrapper">
+
+            <img
+                src="foto2.jpg"
+                alt="Invitación de Velunara"
+            >
+
+        </div>
+
+
+        <!-- AYUDA -->
+
+        <div class="confirm-help">
+            Pica aquí para confirmar tu asistencia
+        </div>
+
+
+        <!-- CONFIRMAR -->
+
+        <button
+            class="confirm-button"
+            id="openForm"
+        >
+            💜 CONFIRMAR ASISTENCIA
+        </button>
+
+
+    </section>
+
+</div>
+
+
+<!-- =========================================================
+     MODAL
+========================================================= -->
+
+<div
+    class="modal hidden"
+    id="formModal"
+>
+
+    <div class="modal-box">
+
+
+        <button
+            class="close-modal"
+            id="closeForm"
+            aria-label="Cerrar"
+        >
+            ×
+        </button>
+
+
+        <h2 class="modal-title">
+            Confirmar asistencia
+        </h2>
+
+
+        <p class="modal-subtitle">
+            Completa los datos de tu asistencia
+        </p>
+
+
+        <form id="confirmationForm">
+
+
+            <div class="form-group">
+
+                <label for="nombre">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    required
+                    placeholder="Tu nombre"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="personas">
+                    Número de personas
+                </label>
+
+                <input
+                    type="number"
+                    id="personas"
+                    min="1"
+                    max="20"
+                    value="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    ¿Asistirás?
+                </label>
+
+
+                <div class="radio-container">
+
+
+                    <label class="radio-option">
+
+                        <input
+                            type="radio"
+                            name="asistencia"
+                            value="true"
+                            checked
+                        >
+
+                        Sí
+
+                    </label>
+
+
+                    <label class="radio-option">
+
+                        <input
+                            type="radio"
+                            name="asistencia"
+                            value="false"
+                        >
+
+                        No
+
+                    </label>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="telefono">
+
+                    Teléfono
+
+                    <span style="color:#8e7a96;">
+                        (opcional)
+                    </span>
+
+                </label>
+
+
+                <input
+                    type="tel"
+                    id="telefono"
+                    placeholder="Número de teléfono"
+                >
+
+            </div>
+
+
+            <button
+                class="submit-button"
+                type="submit"
+            >
+                GUARDAR CONFIRMACIÓN
+            </button>
+
+
+            <div
+                class="form-message"
+                id="formMessage"
+            ></div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CELEBRACIÓN
+========================================================= -->
+
+<div
+    class="celebration hidden"
+    id="celebration"
+>
+
+    <div class="celebration-content">
+
+        <div class="celebration-title">
+            ✨ VELUNARA ✨
+        </div>
+
+        <div class="celebration-subtitle">
+            ¡Ha llegado el gran día!
+        </div>
+
+        <button
+            class="play-music"
+            id="playMusic"
+        >
+            🎵 REPRODUCIR LAS MAÑANITAS
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MODO FIESTA
+========================================================= -->
+
+<div
+    class="party-mode hidden"
+    id="partyMode"
+>
+
+    <div class="party-content">
+
+        <div class="party-icon">
+            🖤✨
+        </div>
+
+        <div class="party-title">
+            ¡ES HORA DE CELEBRAR!
+        </div>
+
+        <div class="party-text">
+            La fiesta de Velunara está comenzando.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PANTALLA FINAL
+========================================================= -->
+
+<div
+    class="final-screen hidden"
+    id="finalScreen"
+>
+
+    <div class="final-content">
+
+        <div class="final-title">
+            ✨ ¡FELICIDADES, VELUNARA! ✨
+        </div>
+
+        <div class="final-text">
+
+            Gracias por haber formado parte
+
+            <br>
+
+            de este día tan especial.
+
+            <br><br>
+
+            💜 27 de septiembre de 2026 💜
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     AUDIO
+========================================================= -->
+
+<audio
+    id="birthdayMusic"
+    src="mananitas.mp3"
+    preload="auto"
+></audio>
+
+
+<script>
+
+/* =========================================================
+   VIDEO DE INICIO
+========================================================= */
+
+const introVideoScreen =
+    document.getElementById(
+        "introVideoScreen"
+    );
+
+const introVideo =
+    document.getElementById(
+        "introVideo"
+    );
+
+const introStart =
+    document.getElementById(
+        "introStart"
+    );
+
+const startInvitation =
+    document.getElementById(
+        "startInvitation"
+    );
+
+let video1Started = false;
+
+let video1StuckTimer = null;
+
+
+/* ---------------------------------------------------------
+   INICIAR VIDEO
+--------------------------------------------------------- */
+
+startInvitation.addEventListener(
+    "click",
+    async () => {
+
+        if(video1Started){
+
+            return;
+
+        }
+
+        video1Started = true;
+
+
+        introStart.classList.add(
+            "hidden-start"
+        );
+
+
+        introVideoScreen.classList.remove(
+            "fade-out"
+        );
+
+
+        introVideoScreen.style.display =
+            "flex";
+
+        introVideoScreen.style.opacity =
+            "1";
+
+        introVideoScreen.style.visibility =
+            "visible";
+
+
+        introVideo.classList.add(
+            "visible"
+        );
+
+
+        try{
+
+            introVideo.pause();
+
+            introVideo.currentTime =
+                0;
+
+        }
+        catch(error){
+
+            console.log(
+                "No se pudo reiniciar Video 1.",
+                error
+            );
+
+        }
+
+
+        try{
+
+            await introVideo.play();
+
+            console.log(
+                "Video 1 reproduciéndose."
+            );
+
+
+            video1StuckTimer =
+                setInterval(
+                    () => {
+
+                        if(
+                            introVideo.paused ||
+                            introVideo.ended
+                        ){
+
+                            return;
+
+                        }
+
+                        console.log(
+                            "Video 1:",
+                            introVideo.currentTime
+                        );
+
+                    },
+                    5000
+                );
+
+        }
+        catch(error){
+
+            console.warn(
+                "No se pudo reproducir Video 1 con audio.",
+                error
+            );
+
+
+            try{
+
+                introVideo.muted =
+                    true;
+
+                introVideo.volume =
+                    0;
+
+                await introVideo.play();
+
+                console.log(
+                    "Video 1 reproduciéndose sin audio."
+                );
+
+            }
+            catch(error2){
+
+                video1Started =
+                    false;
+
+
+                introStart.classList.remove(
+                    "hidden-start"
+                );
+
+
+                const errorText =
+                    introStart.querySelector(
+                        ".introStartText"
+                    );
+
+
+                if(errorText){
+
+                    errorText.textContent =
+                        "No se pudo reproducir el video. Revisa videoinicio1.mp4.";
+
+                }
+
+                console.error(
+                    "Error Video 1:",
+                    error2
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   CUANDO TERMINA VIDEO 1
+--------------------------------------------------------- */
+
+introVideo.addEventListener(
+    "ended",
+    () => {
+
+        console.log(
+            "Video 1 terminó."
+        );
+
+
+        if(video1StuckTimer){
+
+            clearInterval(
+                video1StuckTimer
+            );
+
+            video1StuckTimer =
+                null;
+
+        }
+
+
+        /*
+           Primero comienza el desvanecido.
+           Así no se queda visible el último cuadro.
+        */
+
+        introVideoScreen.classList.add(
+            "fade-out"
+        );
+
+
+        /*
+           Esperamos a que termine la
+           transición y después eliminamos
+           completamente la pantalla.
+        */
+
+        setTimeout(
+            () => {
+
+                introVideo.pause();
+
+                introVideo.classList.remove(
+                    "visible"
+                );
+
+                introVideo.style.opacity =
+                    "0";
+
+                introVideo.style.visibility =
+                    "hidden";
+
+                introVideoScreen.style.display =
+                    "none";
+
+
+                /*
+                   Se reinicia después de ocultarlo,
+                   no mientras todavía está visible.
+                */
+
+                try{
+
+                    introVideo.currentTime =
+                        0;
+
+                }
+                catch(error){
+
+                    console.log(
+                        "No se pudo reiniciar Video 1.",
+                        error
+                    );
+
+                }
+
+            },
+            1900
+        );
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   ERRORES Y ESTADO DEL VIDEO
+--------------------------------------------------------- */
+
+introVideo.addEventListener(
+    "error",
+    () => {
+
+        console.error(
+            "Error al cargar videoinicio1.mp4:",
+            introVideo.error
+        );
+
+    }
+);
+
+introVideo.addEventListener(
+    "loadedmetadata",
+    () => {
+
+        console.log(
+            "Video 1 cargado:",
+            introVideo.videoWidth,
+            "x",
+            introVideo.videoHeight,
+            "Duración:",
+            introVideo.duration
+        );
+
+    }
+);
+
+introVideo.addEventListener(
+    "playing",
+    () => {
+
+        console.log(
+            "Video 1 está reproduciéndose."
+        );
+
+    }
+);
+
+introVideo.addEventListener(
+    "waiting",
+    () => {
+
+        console.log(
+            "Video 1 está esperando datos..."
+        );
+
+    }
+);
+
+introVideo.addEventListener(
+    "stalled",
+    () => {
+
+        console.warn(
+            "Video 1 dejó de recibir datos."
+        );
+
+    }
+);
+
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+    "https://ibdjtobuadgzozbggxxu.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================================================
+   FECHAS
+========================================================= */
+
+const countdownDate =
+    new Date(
+        2026,
+        8,
+        27,
+        0,
+        0,
+        0
+    );
+
+const partyStart =
+    new Date(
+        2026,
+        8,
+        27,
+        16,
+        0,
+        0
+    );
+
+const partyEnd =
+    new Date(
+        2026,
+        8,
+        27,
+        20,
+        0,
+        0
+    );
+
+const finalDate =
+    new Date(
+        2026,
+        8,
+        28,
+        0,
+        0,
+        0
+    );
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const publicContent =
+    document.getElementById(
+        "publicContent"
+    );
+
+const celebration =
+    document.getElementById(
+        "celebration"
+    );
+
+const partyMode =
+    document.getElementById(
+        "partyMode"
+    );
+
+const finalScreen =
+    document.getElementById(
+        "finalScreen"
+    );
+
+const formModal =
+    document.getElementById(
+        "formModal"
+    );
+
+const openForm =
+    document.getElementById(
+        "openForm"
+    );
+
+const closeForm =
+    document.getElementById(
+        "closeForm"
+    );
+
+const confirmationForm =
+    document.getElementById(
+        "confirmationForm"
+    );
+
+const formMessage =
+    document.getElementById(
+        "formMessage"
+    );
+
+const music =
+    document.getElementById(
+        "birthdayMusic"
+    );
+
+const playMusic =
+    document.getElementById(
+        "playMusic"
+    );
+
+
+/* =========================================================
+   ESTRELLAS
+========================================================= */
+
+const starsContainer =
+    document.getElementById(
+        "stars"
+    );
+
+for(let i = 0; i < 100; i++){
+
+    const star =
+        document.createElement(
+            "div"
+        );
+
+    star.className =
+        "star";
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+    star.style.animationDuration =
+        (
+            2 +
+            Math.random() * 4
+        ) + "s";
+
+    starsContainer.appendChild(
+        star
+    );
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+function updateCountdown(){
+
+    const now =
+        new Date();
+
+    const difference =
+        countdownDate - now;
+
+
+    if(difference <= 0){
+
+        document.getElementById(
+            "days"
+        ).textContent = "00";
+
+        document.getElementById(
+            "hours"
+        ).textContent = "00";
+
+        document.getElementById(
+            "minutes"
+        ).textContent = "00";
+
+        document.getElementById(
+            "seconds"
+        ).textContent = "00";
+
+        return;
+    }
+
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+    const hours =
+        Math.floor(
+            (
+                difference /
+                (1000 * 60 * 60)
+            ) % 24
+        );
+
+    const minutes =
+        Math.floor(
+            (
+                difference /
+                (1000 * 60)
+            ) % 60
+        );
+
+    const seconds =
+        Math.floor(
+            (
+                difference /
+                1000
+            ) % 60
+        );
+
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        String(days).padStart(
+            2,
+            "0"
+        );
+
+    document.getElementById(
+        "hours"
+    ).textContent =
+        String(hours).padStart(
+            2,
+            "0"
+        );
+
+    document.getElementById(
+        "minutes"
+    ).textContent =
+        String(minutes).padStart(
+            2,
+            "0"
+        );
+
+    document.getElementById(
+        "seconds"
+    ).textContent =
+        String(seconds).padStart(
+            2,
+            "0"
+        );
+
+}
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+/* =========================================================
+   TRANSICIÓN
+========================================================= */
+
+const invitationReveal =
+    document.getElementById(
+        "invitationReveal"
+    );
+
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        invitationReveal
+                            .classList
+                            .add(
+                                "visible"
+                            );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:0.18
+        }
+    );
+
+revealObserver.observe(
+    invitationReveal
+);
+
+
+/* =========================================================
+   ABRIR FORMULARIO
+========================================================= */
+
+openForm.addEventListener(
+    "click",
+    () => {
+
+        formModal.classList.remove(
+            "hidden"
+        );
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+);
+
+
+/* =========================================================
+   CERRAR FORMULARIO
+========================================================= */
+
+closeForm.addEventListener(
+    "click",
+    closeModal
+);
+
+formModal.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            formModal
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+function closeModal(){
+
+    formModal.classList.add(
+        "hidden"
+    );
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   SUPABASE FORM
+========================================================= */
+
+confirmationForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        const nombre =
+            document.getElementById(
+                "nombre"
+            ).value.trim();
+
+        const personas =
+            Number(
+                document.getElementById(
+                    "personas"
+                ).value
+            );
+
+        const asistencia =
+            document.querySelector(
+                'input[name="asistencia"]:checked'
+            ).value === "true";
+
+        const telefono =
+            document.getElementById(
+                "telefono"
+            ).value.trim();
+
+
+        formMessage.textContent =
+            "Guardando...";
+
+        formMessage.style.color =
+            "#d7b2ff";
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from(
+                    "confirmaciones"
+                )
+                .insert([
+                    {
+                        nombre,
+                        personas,
+                        asistencia,
+                        telefono:
+                            telefono ||
+                            null
+                    }
+                ]);
+
+
+        if(error){
+
+            console.error(error);
+
+            formMessage.textContent =
+                "No se pudo guardar la confirmación.";
+
+            formMessage.style.color =
+                "#ff8f8f";
+
+            return;
+        }
+
+
+        formMessage.textContent =
+            "✨ ¡Confirmación guardada correctamente!";
+
+        formMessage.style.color =
+            "#bfffca";
+
+
+        confirmationForm.reset();
+
+
+        setTimeout(
+            () => {
+
+                closeModal();
+
+                formMessage.textContent =
+                    "";
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+/* =========================================================
+   CHISPAS
+========================================================= */
+
+function createSparks(){
+
+    for(
+        let i = 0;
+        i < 80;
+        i++
+    ){
+
+        setTimeout(
+            () => {
+
+                const spark =
+                    document.createElement(
+                        "div"
+                    );
+
+                spark.className =
+                    "spark";
+
+
+                spark.style.left =
+                    "50%";
+
+                spark.style.top =
+                    "50%";
+
+
+                const angle =
+                    Math.random() *
+                    Math.PI *
+                    2;
+
+                const distance =
+                    100 +
+                    Math.random() *
+                    500;
+
+
+                spark.style.setProperty(
+                    "--x",
+                    Math.cos(angle) *
+                    distance +
+                    "px"
+                );
+
+                spark.style.setProperty(
+                    "--y",
+                    Math.sin(angle) *
+                    distance +
+                    "px"
+                );
+
+
+                spark.style.animationDuration =
+                    (
+                        1.5 +
+                        Math.random() *
+                        2
+                    ) + "s";
+
+
+                celebration.appendChild(
+                    spark
+                );
+
+
+                setTimeout(
+                    () => spark.remove(),
+                    4000
+                );
+
+            },
+            i * 35
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CELEBRACIÓN
+========================================================= */
+
+function showMidnightCelebration(){
+
+    celebration.classList.remove(
+        "hidden"
+    );
+
+    createSparks();
+
+}
+
+
+/* =========================================================
+   MÚSICA
+========================================================= */
+
+playMusic.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await music.play();
+
+            playMusic.textContent =
+                "🎵 LAS MAÑANITAS ESTÁN SONANDO";
+
+        }
+        catch(error){
+
+            playMusic.textContent =
+                "No se pudo reproducir el audio";
+
+        }
+
+    }
+);
+
+
+music.addEventListener(
+    "ended",
+    () => {
+
+        celebration.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   ESTADOS DE LA PÁGINA
+========================================================= */
+
+let midnightShown =
+    false;
+
+function updatePageState(){
+
+    const now =
+        new Date();
+
+
+    /* ---------------------------------------------
+       28 SEPTIEMBRE 00:00
+    --------------------------------------------- */
+
+    if(
+        now >= finalDate
+    ){
+
+        publicContent.classList.add(
+            "hidden"
+        );
+
+        celebration.classList.add(
+            "hidden"
+        );
+
+        partyMode.classList.add(
+            "hidden"
+        );
+
+        finalScreen.classList.remove(
+            "hidden"
+        );
+
+        return;
+    }
+
+
+    /* ---------------------------------------------
+       27 SEPTIEMBRE 16:00 - 20:00
+    --------------------------------------------- */
+
+    if(
+        now >= partyStart &&
+        now < partyEnd
+    ){
+
+        publicContent.classList.add(
+            "hidden"
+        );
+
+        celebration.classList.add(
+            "hidden"
+        );
+
+        partyMode.classList.remove(
+            "hidden"
+        );
+
+        return;
+    }
+
+
+    /* ---------------------------------------------
+       27 SEPTIEMBRE 00:00 - 16:00
+    --------------------------------------------- */
+
+    if(
+        now >= countdownDate
+    ){
+
+        publicContent.classList.remove(
+            "hidden"
+        );
+
+        partyMode.classList.add(
+            "hidden"
+        );
+
+
+        const celebrationKey =
+            "velunara_midnight_2026";
+
+        const alreadyShown =
+            localStorage.getItem(
+                celebrationKey
+            );
+
+
+        if(
+            !alreadyShown &&
+            !midnightShown
+        ){
+
+            midnightShown =
+                true;
+
+            localStorage.setItem(
+                celebrationKey,
+                "true"
+            );
+
+            showMidnightCelebration();
+
+        }
+
+        return;
+    }
+
+
+    /* ---------------------------------------------
+       ANTES DEL 27
+    --------------------------------------------- */
+
+    publicContent.classList.remove(
+        "hidden"
+    );
+
+    partyMode.classList.add(
+        "hidden"
+    );
+
+    celebration.classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+updatePageState();
+
+setInterval(
+    updatePageState,
+    1000
+);
+
+</script>
+
+</body>
+</html>
 ```
