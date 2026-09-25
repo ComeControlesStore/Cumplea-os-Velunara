@@ -1,1224 +1,778 @@
-```html
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Administración | Velunara</title>
 
-<meta
-    name="robots"
-    content="noindex,nofollow,noarchive"
->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="robots" content="noindex,nofollow,noarchive">
 
 <style>
-
 *{
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
 }
 
 body{
-    margin:0;
-    min-height:100vh;
     background:#08030c;
-    color:#fff;
+    color:#f5eefe;
     font-family:Georgia,"Times New Roman",serif;
     overflow-x:hidden;
 }
 
-.hidden{
-    display:none !important;
-}
-
-/* =====================================
-   ESTRELLAS
-===================================== */
-
-.stars{
+body::before,
+body::after{
+    content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:0;
-    overflow:hidden;
+    z-index:-1;
 }
 
-.star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:#fff;
-    border-radius:50%;
-    opacity:.7;
-    animation:twinkle 3s infinite ease-in-out;
+body::before{
+    background:
+        radial-gradient(circle at 15% 20%,rgba(151,76,255,.15),transparent 25%),
+        radial-gradient(circle at 85% 70%,rgba(100,40,180,.12),transparent 25%);
 }
 
-@keyframes twinkle{
-
-    0%,100%{
-        opacity:.2;
-        transform:scale(.8);
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(1.4);
-    }
-
+body::after{
+    opacity:.55;
+    background-image:
+        radial-gradient(circle,#fff 1px,transparent 1px),
+        radial-gradient(circle,#c89cff 1px,transparent 1px);
+    background-size:95px 95px,145px 145px;
+    background-position:10px 20px,50px 70px;
 }
 
-/* =====================================
+/* =========================
    LOGIN
-===================================== */
+========================= */
 
 #loginScreen{
-    position:fixed;
-    inset:0;
-    z-index:10000;
+    min-height:100vh;
+    min-height:100dvh;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     padding:20px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(95,30,125,.4),
-            #08030c 70%
-        );
 }
 
-.login-box{
-    position:relative;
-    z-index:1;
-
-    width:min(430px,100%);
-
-    padding:35px 28px;
-
-    border:1px solid rgba(205,155,255,.5);
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(39,10,52,.97),
-            rgba(14,3,20,.98)
-        );
-
-    box-shadow:
-        0 0 45px rgba(130,40,210,.4),
-        inset 0 0 30px rgba(255,255,255,.025);
-
+.loginBox{
+    width:100%;
+    max-width:360px;
+    padding:28px 24px;
     text-align:center;
+    border:1px solid rgba(190,125,255,.45);
+    border-radius:16px;
+    background:rgba(15,6,24,.94);
+    box-shadow:
+        0 0 30px rgba(143,65,255,.18),
+        inset 0 0 20px rgba(150,70,255,.04);
 }
 
-.login-symbol{
-    font-size:38px;
-    color:#d6aaff;
-
-    text-shadow:
-        0 0 15px #9d4edd,
-        0 0 30px #6d1e9f;
-
-    margin-bottom:12px;
-}
-
-.login-title{
-    font-family:"Trebuchet MS",Arial,sans-serif;
-
-    font-size:28px;
-
-    letter-spacing:2px;
-
-    color:#f4e7ff;
-
+.loginSymbol{
+    font-size:30px;
     margin-bottom:8px;
 }
 
-.login-subtitle{
-    color:#bfaac9;
-
-    font-size:14px;
-
-    line-height:1.6;
-
-    margin-bottom:25px;
+.loginBox h1{
+    margin:0 0 6px;
+    font-size:24px;
+    color:#dfbdff;
 }
 
-.login-input{
+.loginBox p{
+    margin:0 0 18px;
+    color:#bfa9cb;
+    font-size:13px;
+}
+
+.loginBox input{
     width:100%;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    border:1px solid rgba(190,130,230,.35);
-
-    background:rgba(10,2,15,.8);
-
-    color:#fff;
-
+    padding:11px 12px;
+    margin-bottom:8px;
+    border:1px solid #70419b;
+    border-radius:8px;
     outline:none;
+    background:#0b0610;
+    color:white;
+    font-family:inherit;
+    font-size:14px;
+}
 
-    font-family:Georgia,serif;
+.loginBox input:focus{
+    border-color:#b77aff;
+    box-shadow:0 0 8px rgba(183,122,255,.2);
+}
 
-    font-size:15px;
+.loginBox button{
+    width:100%;
+    margin-top:4px;
+    padding:11px;
+    border:1px solid #8d58bd;
+    border-radius:8px;
+    background:linear-gradient(135deg,#3b155c,#6b2c91);
+    color:white;
+    font-family:inherit;
+    font-size:14px;
+    cursor:pointer;
+}
 
-    text-align:center;
+.loginBox button:hover{
+    background:linear-gradient(135deg,#512071,#7c35a5);
+}
 
+.loginBox button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+#errorLogin{
+    min-height:18px;
+    margin-top:10px;
+    color:#ff9d9d;
+    font-size:12px;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+#adminApp{
+    display:none;
+    width:100%;
+    max-width:1180px;
+    margin:auto;
+    padding:18px 14px 30px;
+}
+
+.adminHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:18px;
+    padding:12px 15px;
+    border:1px solid rgba(180,115,240,.28);
+    border-radius:12px;
+    background:rgba(18,7,29,.82);
+}
+
+.adminTitle{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.adminTitle .symbol{
+    font-size:24px;
+}
+
+.adminTitle h1{
+    margin:0;
+    font-size:23px;
+    font-weight:normal;
+    color:#e1c4ff;
+}
+
+.adminTitle small{
+    display:block;
+    margin-top:2px;
+    color:#a996b2;
+    font-size:11px;
+}
+
+.logoutBtn{
+    border:1px solid #633b7d;
+    background:#12091b;
+    color:#d6bde2;
+    padding:7px 11px;
+    border-radius:7px;
+    font-family:inherit;
+    font-size:12px;
+    cursor:pointer;
+}
+
+.logoutBtn:hover{
+    background:#261036;
+    color:white;
+}
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
     margin-bottom:14px;
 }
 
-.login-input:focus{
-    border-color:#c17aff;
-
-    box-shadow:
-        0 0 15px rgba(160,70,255,.3);
-}
-
-.login-button{
-    width:100%;
-
-    padding:14px;
-
-    border-radius:12px;
-
-    border:1px solid rgba(215,170,255,.65);
-
-    background:
-        linear-gradient(
-            135deg,
-            #68199b,
-            #3d104e
-        );
-
-    color:white;
-
-    font-family:Georgia,serif;
-
-    font-size:15px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:
-        0 0 20px rgba(145,55,230,.25);
-}
-
-.login-button:hover{
-    transform:translateY(-1px);
-
-    box-shadow:
-        0 0 30px rgba(180,90,255,.5);
-}
-
-.login-error{
-    margin-top:15px;
-
-    padding:10px;
-
+.statCard{
+    min-width:0;
+    padding:12px 13px;
+    border:1px solid rgba(179,110,240,.27);
     border-radius:10px;
-
-    border:1px solid rgba(230,100,130,.35);
-
-    background:rgba(130,20,40,.3);
-
-    color:#ffc6d1;
-
-    font-size:13px;
+    background:rgba(17,7,27,.88);
 }
 
-/* =====================================
-   ADMIN
-===================================== */
-
-#adminApp{
-    position:relative;
-    z-index:1;
-
-    min-height:100vh;
-
-    padding:35px 20px 60px;
-}
-
-.admin-container{
-    width:min(1200px,100%);
-    margin:auto;
-}
-
-/* =====================================
-   HEADER
-===================================== */
-
-.admin-header{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:20px;
-
-    margin-bottom:30px;
-
-    padding-bottom:25px;
-
-    border-bottom:
-        1px solid
-        rgba(190,130,235,.2);
-}
-
-.admin-brand{
+.statTop{
     display:flex;
     align-items:center;
-    gap:15px;
-}
-
-.admin-symbol{
-    font-size:35px;
-
-    color:#d5a6ff;
-
-    text-shadow:
-        0 0 15px #9d4edd,
-        0 0 30px #6d1e9f;
-}
-
-.admin-title{
-    margin:0;
-
-    font-family:"Trebuchet MS",Arial,sans-serif;
-
-    font-size:clamp(24px,5vw,38px);
-
-    letter-spacing:2px;
-
-    color:#f3e5ff;
-}
-
-.admin-subtitle{
-    margin-top:5px;
-
-    color:#aa94b5;
-
-    font-size:13px;
-}
-
-.logout-button{
-    border:1px solid rgba(190,130,235,.35);
-
-    background:rgba(30,7,40,.75);
-
-    color:#e3d0eb;
-
-    padding:10px 16px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-family:Georgia,serif;
-
-    transition:.25s;
-}
-
-.logout-button:hover{
-    border-color:#c17aff;
-
-    background:rgba(80,25,105,.5);
-}
-
-/* =====================================
-   ESTADÍSTICAS
-===================================== */
-
-.stats-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
-
-    margin-bottom:30px;
-}
-
-.stat-card{
-    padding:22px 16px;
-
-    border-radius:17px;
-
-    border:
-        1px solid
-        rgba(190,130,235,.3);
-
-    background:
-        rgba(35,8,45,.55);
-
-    text-align:center;
-
-    box-shadow:
-        0 0 20px
-        rgba(130,50,210,.08);
-}
-
-.stat-icon{
-    font-size:25px;
-
-    margin-bottom:8px;
-}
-
-.stat-number{
-    font-size:30px;
-
-    font-weight:bold;
-
-    color:#f3e4ff;
-}
-
-.stat-label{
-    margin-top:5px;
-
-    color:#bca6c7;
-
+    gap:7px;
+    color:#bca7c7;
     font-size:11px;
-
-    letter-spacing:1px;
 }
 
-/* =====================================
+.statIcon{
+    font-size:17px;
+}
+
+.statNumber{
+    margin-top:5px;
+    font-size:24px;
+    color:#e5c8ff;
+    line-height:1;
+}
+
+/* =========================
    PANEL
-===================================== */
+========================= */
 
 .panel{
-    border:
-        1px solid
-        rgba(190,130,235,.3);
-
-    border-radius:20px;
-
-    background:
-        rgba(22,5,30,.7);
-
-    box-shadow:
-        0 0 30px
-        rgba(130,50,210,.1);
-
     overflow:hidden;
+    border:1px solid rgba(179,110,240,.28);
+    border-radius:11px;
+    background:rgba(13,5,22,.91);
 }
 
-.panel-header{
+.panelHeader{
     display:flex;
-
-    justify-content:space-between;
-
     align-items:center;
-
-    gap:15px;
-
-    padding:20px;
-
-    border-bottom:
-        1px solid
-        rgba(190,130,235,.18);
+    justify-content:space-between;
+    gap:10px;
+    padding:11px 13px;
+    border-bottom:1px solid rgba(179,110,240,.2);
 }
 
-.panel-title{
+.panelHeader h2{
     margin:0;
-
-    font-size:20px;
-
-    color:#ead7f1;
+    font-size:15px;
+    font-weight:normal;
+    color:#dfc1f5;
 }
 
-.panel-actions{
-    display:flex;
-
-    gap:8px;
-
-    flex-wrap:wrap;
-}
-
-.action-button{
-    padding:9px 13px;
-
-    border-radius:9px;
-
-    border:
-        1px solid
-        rgba(190,130,235,.35);
-
-    background:
-        rgba(35,8,45,.8);
-
-    color:#eee0f4;
-
+.refreshBtn{
+    border:1px solid #65427b;
+    background:#110819;
+    color:#d8c2e4;
+    border-radius:6px;
+    padding:6px 9px;
+    font-family:inherit;
+    font-size:11px;
     cursor:pointer;
-
-    font-family:Georgia,serif;
-
-    font-size:12px;
-
-    transition:.2s;
 }
 
-.action-button:hover{
-    border-color:#c17aff;
-
-    background:
-        rgba(80,25,105,.55);
+.refreshBtn:hover{
+    background:#251030;
 }
 
-/* =====================================
+/* =========================
    FILTROS
-===================================== */
+========================= */
 
 .filters{
     display:grid;
-
-    grid-template-columns:
-        1fr
-        180px
-        180px;
-
-    gap:10px;
-
-    padding:18px;
-
-    border-bottom:
-        1px solid
-        rgba(190,130,235,.15);
+    grid-template-columns:1.6fr 1fr 1fr;
+    gap:8px;
+    padding:10px 12px;
+    border-bottom:1px solid rgba(179,110,240,.16);
 }
 
-.filter-input,
-.filter-select{
+.filters input,
+.filters select{
     width:100%;
-
-    padding:11px 12px;
-
-    border-radius:10px;
-
-    border:
-        1px solid
-        rgba(190,130,235,.3);
-
-    background:
-        rgba(8,2,12,.8);
-
-    color:#fff;
-
+    padding:8px 9px;
+    border:1px solid #493255;
+    border-radius:6px;
     outline:none;
-
-    font-family:Georgia,serif;
+    background:#09050d;
+    color:#eee3f3;
+    font-family:inherit;
+    font-size:11px;
 }
 
-.filter-input:focus,
-.filter-select:focus{
-    border-color:#c17aff;
-
-    box-shadow:
-        0 0 10px
-        rgba(160,70,255,.2);
+.filters input:focus,
+.filters select:focus{
+    border-color:#9561b8;
 }
 
-/* =====================================
+/* =========================
    TABLA
-===================================== */
+========================= */
 
-.table-wrapper{
+.tableWrap{
     width:100%;
-
     overflow-x:auto;
 }
 
 table{
     width:100%;
-
+    min-width:700px;
     border-collapse:collapse;
-
-    min-width:850px;
-}
-
-thead{
-    background:
-        rgba(60,15,80,.45);
 }
 
 th{
-    padding:14px 12px;
-
+    padding:8px 9px;
+    background:#12081b;
+    color:#a991b6;
+    border-bottom:1px solid rgba(179,110,240,.2);
     text-align:left;
-
-    color:#d9c3e5;
-
-    font-size:12px;
-
-    letter-spacing:1px;
-
-    white-space:nowrap;
+    font-size:10px;
+    font-weight:normal;
+    text-transform:uppercase;
+    letter-spacing:.3px;
 }
 
 td{
-    padding:14px 12px;
-
-    border-top:
-        1px solid
-        rgba(190,130,235,.1);
-
-    color:#e8dcec;
-
-    font-size:13px;
-
+    padding:8px 9px;
+    border-bottom:1px solid rgba(179,110,240,.10);
+    color:#ded0e4;
+    font-size:11px;
     vertical-align:middle;
 }
 
-tbody tr{
-    transition:.2s;
-}
-
 tbody tr:hover{
-    background:
-        rgba(90,25,120,.18);
+    background:rgba(128,65,170,.07);
 }
 
-/* =====================================
+.empty,
+.loading{
+    padding:25px 15px;
+    text-align:center;
+    color:#9d8ba5;
+    font-size:12px;
+}
+
+/* =========================
    BADGES
-===================================== */
+========================= */
 
 .badge{
     display:inline-block;
-
-    padding:5px 9px;
-
+    padding:3px 6px;
     border-radius:20px;
-
-    font-size:11px;
-
+    font-size:9px;
     white-space:nowrap;
 }
 
-.badge-yes{
-    color:#e5c8ff;
-
-    border:
-        1px solid
-        rgba(190,120,255,.45);
-
-    background:
-        rgba(110,40,150,.3);
+.badgeYes{
+    background:rgba(78,180,117,.12);
+    border:1px solid rgba(100,210,135,.28);
+    color:#9fe6b3;
 }
 
-.badge-no{
-    color:#d3c4d8;
-
-    border:
-        1px solid
-        rgba(150,130,160,.3);
-
-    background:
-        rgba(60,50,65,.3);
+.badgeNo{
+    background:rgba(220,80,80,.10);
+    border:1px solid rgba(220,100,100,.25);
+    color:#f1a2a2;
 }
 
-.category-badge{
-    display:inline-flex;
+.badgeNeutral{
+    background:rgba(170,130,190,.10);
+    border:1px solid rgba(170,130,190,.2);
+    color:#c8b6cf;
+}
 
-    align-items:center;
+/* =========================
+   MENSAJES
+========================= */
 
-    gap:5px;
-
-    margin:2px;
-
-    padding:4px 7px;
-
-    border-radius:8px;
-
-    background:
-        rgba(80,25,105,.35);
-
-    border:
-        1px solid
-        rgba(190,130,235,.2);
-
+.message{
+    display:none;
+    margin:10px 12px;
+    padding:9px 11px;
+    border-radius:7px;
     font-size:11px;
 }
 
-/* =====================================
-   LOADING
-===================================== */
+.message.error{
+    display:block;
+    color:#ffb1b1;
+    background:rgba(120,30,30,.15);
+    border:1px solid rgba(210,80,80,.25);
+}
 
-.loading{
-    padding:50px 20px;
-
+.adminFooter{
+    padding-top:12px;
     text-align:center;
-
-    color:#bca7c5;
+    color:#75657d;
+    font-size:10px;
 }
 
-.loading-symbol{
-    font-size:30px;
-
-    animation:spin 2s linear infinite;
-
-    display:inline-block;
-
-    margin-bottom:10px;
-}
-
-@keyframes spin{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-/* =====================================
-   VACÍO
-===================================== */
-
-.empty{
-    padding:55px 20px;
-
-    text-align:center;
-
-    color:#b6a2be;
-}
-
-.empty-icon{
-    font-size:40px;
-
-    margin-bottom:10px;
-}
-
-/* =====================================
-   ERROR
-===================================== */
-
-.admin-error{
-    margin-bottom:20px;
-
-    padding:13px 15px;
-
-    border-radius:12px;
-
-    border:
-        1px solid
-        rgba(230,100,130,.35);
-
-    background:
-        rgba(130,20,40,.25);
-
-    color:#ffcbd5;
-
-    font-size:13px;
-}
-
-/* =====================================
-   FOOTER
-===================================== */
-
-.admin-footer{
-    text-align:center;
-
-    margin-top:30px;
-
-    color:#796681;
-
-    font-size:11px;
-}
-
-/* =====================================
+/* =========================
    RESPONSIVE
-===================================== */
+========================= */
 
 @media(max-width:850px){
 
-    .stats-grid{
-        grid-template-columns:
-            repeat(2,1fr);
+    #adminApp{
+        padding:12px 10px 25px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .filters{
         grid-template-columns:1fr 1fr;
     }
 
-    .filters .filter-input{
-        grid-column:1/-1;
+    .filters input{
+        grid-column:1 / -1;
     }
-
 }
 
-@media(max-width:600px){
+@media(max-width:500px){
 
-    #adminApp{
-        padding:
-            22px 12px
-            40px;
+    .adminHeader{
+        padding:10px 11px;
     }
 
-    .admin-header{
-        align-items:flex-start;
+    .adminTitle h1{
+        font-size:19px;
     }
 
-    .admin-title{
-        font-size:24px;
+    .adminTitle .symbol{
+        font-size:21px;
     }
 
-    .admin-symbol{
-        font-size:28px;
+    .adminTitle small{
+        font-size:9px;
     }
 
-    .logout-button{
-        padding:8px 11px;
-
-        font-size:11px;
+    .logoutBtn{
+        padding:6px 8px;
+        font-size:10px;
     }
 
-    .stats-grid{
-        gap:8px;
+    .stats{
+        gap:7px;
     }
 
-    .stat-card{
-        padding:16px 8px;
+    .statCard{
+        padding:10px;
     }
 
-    .stat-number{
-        font-size:24px;
-    }
-
-    .panel-header{
-        flex-direction:column;
-        align-items:flex-start;
+    .statNumber{
+        font-size:21px;
     }
 
     .filters{
         grid-template-columns:1fr;
     }
 
-    .filters .filter-input{
+    .filters input{
         grid-column:auto;
     }
 
+    .panelHeader{
+        padding:9px 10px;
+    }
+
+    .panelHeader h2{
+        font-size:13px;
+    }
 }
-
-@media(max-width:420px){
-
-    .login-box{
-        padding:28px 18px;
-    }
-
-    .login-title{
-        font-size:23px;
-    }
-
-    .stats-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .stat-label{
-        font-size:9px;
-    }
-
-}
-
 </style>
-
 </head>
 
 <body>
 
-
-<!-- =====================================
-     ESTRELLAS
-===================================== -->
-
-<div
-    class="stars"
-    id="stars">
-</div>
-
-
-<!-- =====================================
+<!-- =========================
      LOGIN
-===================================== -->
+========================= -->
 
-<div id="loginScreen">
+<section id="loginScreen">
 
-    <div class="login-box">
+    <div class="loginBox">
 
-        <div class="login-symbol">
-            ✦
-        </div>
+        <div class="loginSymbol">✦</div>
 
-        <div class="login-title">
-            ADMINISTRACIÓN
-        </div>
+        <h1>Administración</h1>
 
-        <div class="login-subtitle">
-            Panel privado de confirmaciones
-            <br>
-            <span style="color:#d3b4e3;">
-                VELUNARA
-            </span>
-        </div>
+        <p>Panel privado de Velunara</p>
 
         <input
-            id="adminPassword"
-            class="login-input"
+            type="email"
+            id="adminEmail"
+            placeholder="Correo electrónico"
+            autocomplete="username"
+        >
+
+        <input
             type="password"
+            id="adminPassword"
             placeholder="Contraseña"
             autocomplete="current-password"
         >
 
         <button
             id="loginButton"
-            class="login-button">
-            INICIAR SESIÓN
+            onclick="login()"
+        >
+            Iniciar sesión
         </button>
 
-        <div
-            id="loginError"
-            class="login-error hidden">
-            Contraseña incorrecta.
-        </div>
+        <div id="errorLogin"></div>
 
     </div>
 
-</div>
+</section>
 
 
-<!-- =====================================
-     ADMIN APP
-===================================== -->
+<!-- =========================
+     ADMIN
+========================= -->
 
-<div
-    id="adminApp"
-    class="hidden">
+<main id="adminApp">
 
-    <div class="admin-container">
+    <header class="adminHeader">
 
+        <div class="adminTitle">
 
-        <!-- HEADER -->
+            <div class="symbol">✦</div>
 
-        <header class="admin-header">
-
-            <div class="admin-brand">
-
-                <div class="admin-symbol">
-                    ✦
-                </div>
-
-                <div>
-
-                    <h1 class="admin-title">
-                        VELUNARA
-                    </h1>
-
-                    <div class="admin-subtitle">
-                        Panel de administración
-                    </div>
-
-                </div>
-
+            <div>
+                <h1>Velunara</h1>
+                <small>Panel de administración</small>
             </div>
+
+        </div>
+
+        <button
+            class="logoutBtn"
+            onclick="logout()"
+        >
+            Cerrar sesión
+        </button>
+
+    </header>
+
+
+    <!-- ESTADÍSTICAS -->
+
+    <section class="stats">
+
+        <div class="statCard">
+
+            <div class="statTop">
+                <span class="statIcon">💌</span>
+                <span>Confirmaciones</span>
+            </div>
+
+            <div
+                class="statNumber"
+                id="statConfirmaciones"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="statCard">
+
+            <div class="statTop">
+                <span class="statIcon">✨</span>
+                <span>Asistirán</span>
+            </div>
+
+            <div
+                class="statNumber"
+                id="statAsistiran"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="statCard">
+
+            <div class="statTop">
+                <span class="statIcon">👤</span>
+                <span>Adultos</span>
+            </div>
+
+            <div
+                class="statNumber"
+                id="statAdultos"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="statCard">
+
+            <div class="statTop">
+                <span class="statIcon">🧒</span>
+                <span>Niños</span>
+            </div>
+
+            <div
+                class="statNumber"
+                id="statNinos"
+            >
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- TABLA -->
+
+    <section class="panel">
+
+        <div class="panelHeader">
+
+            <h2>
+                Confirmaciones de invitados
+            </h2>
 
             <button
-                id="logoutButton"
-                class="logout-button">
-                CERRAR SESIÓN
+                class="refreshBtn"
+                onclick="loadConfirmations()"
+            >
+                ↻ Actualizar
             </button>
 
-        </header>
-
-
-        <!-- ERROR -->
-
-        <div
-            id="adminError"
-            class="admin-error hidden">
         </div>
 
 
-        <!-- ESTADÍSTICAS -->
+        <div class="filters">
 
-        <section class="stats-grid">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Buscar por nombre..."
+                oninput="applyFilters()"
+            >
 
-            <div class="stat-card">
+            <select
+                id="attendanceFilter"
+                onchange="applyFilters()"
+            >
 
-                <div class="stat-icon">
-                    👥
-                </div>
+                <option value="todos">
+                    Todas las respuestas
+                </option>
 
-                <div
-                    class="stat-number"
-                    id="totalConfirmations">
-                    0
-                </div>
+                <option value="si">
+                    Asistirán
+                </option>
 
-                <div class="stat-label">
-                    CONFIRMACIONES
-                </div>
+                <option value="no">
+                    No asistirán
+                </option>
 
-            </div>
+            </select>
 
 
-            <div class="stat-card">
+            <select
+                id="categoryFilter"
+                onchange="applyFilters()"
+            >
 
-                <div class="stat-icon">
-                    💜
-                </div>
+                <option value="todos">
+                    Todas las categorías
+                </option>
 
-                <div
-                    class="stat-number"
-                    id="totalAttending">
-                    0
-                </div>
+                <option value="adultos">
+                    Con adultos
+                </option>
 
-                <div class="stat-label">
-                    ASISTIRÁN
-                </div>
+                <option value="ninos">
+                    Con niños
+                </option>
 
-            </div>
+            </select>
 
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    👨‍👩‍👧
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="totalAdults">
-                    0
-                </div>
-
-                <div class="stat-label">
-                    ADULTOS
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">
-                    🧸
-                </div>
-
-                <div
-                    class="stat-number"
-                    id="totalChildren">
-                    0
-                </div>
-
-                <div class="stat-label">
-                    NIÑOS
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONFIRMACIONES -->
-
-        <section class="panel">
-
-            <div class="panel-header">
-
-                <h2 class="panel-title">
-                    ✦ Confirmaciones
-                </h2>
-
-                <div class="panel-actions">
-
-                    <button
-                        id="refreshButton"
-                        class="action-button">
-                        ↻ ACTUALIZAR
-                    </button>
-
-                    <button
-                        id="exportButton"
-                        class="action-button">
-                        ↓ EXPORTAR
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- FILTROS -->
-
-            <div class="filters">
-
-                <input
-                    id="searchInput"
-                    class="filter-input"
-                    type="search"
-                    placeholder="Buscar por nombre o teléfono..."
-                >
-
-                <select
-                    id="attendanceFilter"
-                    class="filter-select">
-
-                    <option value="todos">
-                        Todas
-                    </option>
-
-                    <option value="si">
-                        Sí asistirán
-                    </option>
-
-                    <option value="no">
-                        No asistirán
-                    </option>
-
-                </select>
-
-
-                <select
-                    id="categoryFilter"
-                    class="filter-select">
-
-                    <option value="todos">
-                        Todas las categorías
-                    </option>
-
-                    <option value="adultos">
-                        Con adultos
-                    </option>
-
-                    <option value="ninos">
-                        Con niños
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- TABLA -->
-
-            <div class="table-wrapper">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                NOMBRE
-                            </th>
-
-                            <th>
-                                ASISTENCIA
-                            </th>
-
-                            <th>
-                                ADULTOS
-                            </th>
-
-                            <th>
-                                NIÑOS
-                            </th>
-
-                            <th>
-                                TOTAL
-                            </th>
-
-                            <th>
-                                TELÉFONO
-                            </th>
-
-                            <th>
-                                FECHA
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody
-                        id="confirmationsBody">
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-            <!-- LOADING -->
-
-            <div
-                id="loading"
-                class="loading">
-
-                <div class="loading-symbol">
-                    ✦
-                </div>
-
-                <div>
-                    Cargando confirmaciones...
-                </div>
-
-            </div>
-
-
-            <!-- VACÍO -->
-
-            <div
-                id="empty"
-                class="empty hidden">
-
-                <div class="empty-icon">
-                    ✦
-                </div>
-
-                <div>
-                    No hay confirmaciones que mostrar.
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <div class="admin-footer">
-            Panel privado · Velunara · 2026
         </div>
 
+
+        <div id="message"></div>
+
+
+        <div class="tableWrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Asistencia</th>
+                        <th>Adultos</th>
+                        <th>Niños</th>
+                        <th>Total</th>
+                        <th>Teléfono</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="loading"
+                        >
+                            Cargando confirmaciones...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <div class="adminFooter">
+        Velunara · Panel privado
     </div>
 
-</div>
+</main>
 
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =====================================
+/* =========================
    SUPABASE
-===================================== */
+========================= */
 
 const SUPABASE_URL =
     "https://ibdjtobuadgzozbggxxu.supabase.co";
@@ -1226,62 +780,20 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
 
+
 const supabaseClient =
-    window.supabase.createClient(
+    supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
 
 
-/* =====================================
-   CONTRASEÑA DEL ADMIN
-=====================================
-
-   IMPORTANTE:
-   Esta contraseña es una protección
-   de interfaz, no una seguridad real
-   contra alguien que conozca el código.
-
-===================================== */
-
-const ADMIN_PASSWORD =
-    "VELUNARA_ADMIN_2026";
+let confirmations = [];
 
 
-/* =====================================
-   ESTRELLAS
-===================================== */
-
-const stars =
-    document.getElementById("stars");
-
-for(let i = 0; i < 80; i++){
-
-    const star =
-        document.createElement("div");
-
-    star.className = "star";
-
-    star.style.left =
-        Math.random() * 100 + "%";
-
-    star.style.top =
-        Math.random() * 100 + "%";
-
-    star.style.animationDelay =
-        Math.random() * 3 + "s";
-
-    star.style.animationDuration =
-        (2 + Math.random() * 3) + "s";
-
-    stars.appendChild(star);
-
-}
-
-
-/* =====================================
+/* =========================
    ELEMENTOS
-===================================== */
+========================= */
 
 const loginScreen =
     document.getElementById(
@@ -1291,6 +803,11 @@ const loginScreen =
 const adminApp =
     document.getElementById(
         "adminApp"
+    );
+
+const adminEmail =
+    document.getElementById(
+        "adminEmail"
     );
 
 const adminPassword =
@@ -1303,131 +820,660 @@ const loginButton =
         "loginButton"
     );
 
-const loginError =
+const errorLogin =
     document.getElementById(
-        "loginError"
+        "errorLogin"
     );
 
-const logoutButton =
+const tableBody =
     document.getElementById(
-        "logoutButton"
+        "tableBody"
     );
 
-const adminError =
+const message =
     document.getElementById(
-        "adminError"
-    );
-
-const loading =
-    document.getElementById(
-        "loading"
-    );
-
-const empty =
-    document.getElementById(
-        "empty"
-    );
-
-const confirmationsBody =
-    document.getElementById(
-        "confirmationsBody"
-    );
-
-const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
-
-const attendanceFilter =
-    document.getElementById(
-        "attendanceFilter"
-    );
-
-const categoryFilter =
-    document.getElementById(
-        "categoryFilter"
-    );
-
-const refreshButton =
-    document.getElementById(
-        "refreshButton"
-    );
-
-const exportButton =
-    document.getElementById(
-        "exportButton"
+        "message"
     );
 
 
-let confirmations = [];
+/* =========================
+   LOGIN CON SUPABASE AUTH
+========================= */
+
+async function login(){
+
+    const email =
+        adminEmail.value
+            .trim()
+            .toLowerCase();
+
+    const password =
+        adminPassword.value;
 
 
-/* =====================================
-   LOGIN
-===================================== */
+    errorLogin.textContent = "";
+
+
+    if(!email){
+
+        errorLogin.textContent =
+            "Escribe el correo.";
+
+        adminEmail.focus();
+
+        return;
+    }
+
+
+    if(!password){
+
+        errorLogin.textContent =
+            "Escribe la contraseña.";
+
+        adminPassword.focus();
+
+        return;
+    }
+
+
+    loginButton.disabled = true;
+
+    loginButton.textContent =
+        "Comprobando...";
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth
+                .signInWithPassword({
+                    email:email,
+                    password:password
+                });
+
+
+        if(error){
+
+            console.error(error);
+
+
+            errorLogin.textContent =
+                "El correo o la contraseña no son correctos.";
+
+            adminPassword.value = "";
+
+            return;
+        }
+
+
+        if(!data.session){
+
+            errorLogin.textContent =
+                "No se pudo iniciar la sesión.";
+
+            return;
+        }
+
+
+        showAdmin();
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        errorLogin.textContent =
+            "No se pudo iniciar sesión. Revisa tu conexión a Internet.";
+
+    }finally{
+
+        loginButton.disabled = false;
+
+        loginButton.textContent =
+            "Iniciar sesión";
+
+    }
+
+}
+
+
+/* =========================
+   MOSTRAR ADMIN
+========================= */
 
 function showAdmin(){
 
-    loginScreen.classList.add(
-        "hidden"
-    );
+    loginScreen.style.display =
+        "none";
 
-    adminApp.classList.remove(
-        "hidden"
-    );
+    adminApp.style.display =
+        "block";
 
     loadConfirmations();
 
 }
 
 
-function showLogin(){
+/* =========================
+   CERRAR SESIÓN
+========================= */
 
-    adminApp.classList.add(
-        "hidden"
-    );
+async function logout(){
 
-    loginScreen.classList.remove(
-        "hidden"
-    );
+    await supabaseClient.auth.signOut();
+
+
+    adminApp.style.display =
+        "none";
+
+    loginScreen.style.display =
+        "flex";
+
+
+    adminEmail.value = "";
 
     adminPassword.value = "";
+
+    errorLogin.textContent = "";
 
 }
 
 
-loginButton.addEventListener(
-    "click",
-    () => {
+/* =========================
+   COMPROBAR SESIÓN REAL
+========================= */
+
+async function checkSession(){
+
+    try{
+
+        const {
+            data
+        } =
+            await supabaseClient.auth
+                .getSession();
+
 
         if(
-            adminPassword.value ===
-            ADMIN_PASSWORD
+            data &&
+            data.session
         ){
-
-            loginError.classList.add(
-                "hidden"
-            );
-
-            sessionStorage.setItem(
-                "velunara_admin",
-                "true"
-            );
 
             showAdmin();
 
-        }else{
+        }
 
-            loginError.textContent =
-                "Contraseña incorrecta.";
+    }catch(error){
 
-            loginError.classList.remove(
-                "hidden"
+        console.error(error);
+
+    }
+
+}
+
+
+checkSession();
+
+
+/* =========================
+   CARGAR CONFIRMACIONES
+========================= */
+
+async function loadConfirmations(){
+
+    tableBody.innerHTML = `
+        <tr>
+            <td
+                colspan="6"
+                class="loading"
+            >
+                Cargando confirmaciones...
+            </td>
+        </tr>
+    `;
+
+
+    hideMessage();
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("confirmaciones")
+                .select("*");
+
+
+        if(error){
+
+            console.error(error);
+
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td
+                        colspan="6"
+                        class="empty"
+                    >
+                        No se pudieron cargar las confirmaciones.
+                    </td>
+                </tr>
+            `;
+
+
+            showMessage(
+                "No se pudieron cargar las confirmaciones. Revisa los permisos de la tabla.",
+                "error"
             );
 
-            adminPassword.value = "";
 
-            adminPassword.focus();
+            return;
+        }
+
+
+        confirmations =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+        updateStats();
+
+        applyFilters();
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        tableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+                    Ocurrió un problema al cargar los datos.
+                </td>
+            </tr>
+        `;
+
+
+        showMessage(
+            "Ocurrió un problema al cargar los datos. Intenta actualizar la página.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+function updateStats(){
+
+    const total =
+        confirmations.length;
+
+
+    const attending =
+        confirmations.filter(
+            row =>
+                String(
+                    row.asistencia || ""
+                ).toLowerCase() === "si"
+        );
+
+
+    let adults = 0;
+
+    let children = 0;
+
+
+    attending.forEach(row => {
+
+        adults +=
+            Number(row.adultos) || 0;
+
+        children +=
+            Number(row.ninos) || 0;
+
+    });
+
+
+    document.getElementById(
+        "statConfirmaciones"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "statAsistiran"
+    ).textContent =
+        adults + children;
+
+
+    document.getElementById(
+        "statAdultos"
+    ).textContent =
+        adults;
+
+
+    document.getElementById(
+        "statNinos"
+    ).textContent =
+        children;
+
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+function applyFilters(){
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    const attendance =
+        document.getElementById(
+            "attendanceFilter"
+        ).value;
+
+
+    const category =
+        document.getElementById(
+            "categoryFilter"
+        ).value;
+
+
+    const filtered =
+        confirmations.filter(row => {
+
+            const name =
+                String(
+                    row.nombre || ""
+                ).toLowerCase();
+
+
+            const rowAttendance =
+                String(
+                    row.asistencia || ""
+                ).toLowerCase();
+
+
+            const adults =
+                Number(row.adultos) || 0;
+
+
+            const children =
+                Number(row.ninos) || 0;
+
+
+            if(
+                search &&
+                !name.includes(search)
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                attendance !== "todos" &&
+                rowAttendance !== attendance
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                category === "adultos" &&
+                adults <= 0
+            ){
+
+                return false;
+
+            }
+
+
+            if(
+                category === "ninos" &&
+                children <= 0
+            ){
+
+                return false;
+
+            }
+
+
+            return true;
+
+        });
+
+
+    renderTable(filtered);
+
+}
+
+
+/* =========================
+   TABLA
+========================= */
+
+function renderTable(rows){
+
+    if(!rows.length){
+
+        tableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="empty"
+                >
+                    No hay confirmaciones que coincidan.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tableBody.innerHTML =
+        rows.map(row => {
+
+            const nombre =
+                escapeHTML(
+                    row.nombre ||
+                    "Sin nombre"
+                );
+
+
+            const asistencia =
+                String(
+                    row.asistencia || ""
+                ).toLowerCase();
+
+
+            let badge =
+                `<span class="badge badgeNeutral">Sin respuesta</span>`;
+
+
+            if(
+                asistencia === "si"
+            ){
+
+                badge =
+                    `<span class="badge badgeYes">Asistirá</span>`;
+
+            }
+
+
+            if(
+                asistencia === "no"
+            ){
+
+                badge =
+                    `<span class="badge badgeNo">No asistirá</span>`;
+
+            }
+
+
+            const adultos =
+                Number(row.adultos) || 0;
+
+
+            const ninos =
+                Number(row.ninos) || 0;
+
+
+            let personas =
+                Number(row.personas);
+
+
+            if(
+                !Number.isFinite(personas)
+            ){
+
+                personas =
+                    adultos + ninos;
+
+            }
+
+
+            const telefono =
+                escapeHTML(
+                    row.telefono ||
+                    "No indicado"
+                );
+
+
+            return `
+                <tr>
+
+                    <td>
+                        ${nombre}
+                    </td>
+
+                    <td>
+                        ${badge}
+                    </td>
+
+                    <td>
+                        ${adultos}
+                    </td>
+
+                    <td>
+                        ${ninos}
+                    </td>
+
+                    <td>
+                        ${personas}
+                    </td>
+
+                    <td>
+                        ${telefono}
+                    </td>
+
+                </tr>
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================
+   SEGURIDAD HTML
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================
+   MENSAJES
+========================= */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.className =
+        "message " + type;
+
+    message.textContent =
+        text;
+
+}
+
+
+function hideMessage(){
+
+    message.className = "";
+
+    message.textContent = "";
+
+}
+
+
+/* =========================
+   ENTER PARA LOGIN
+========================= */
+
+adminEmail.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            login();
 
         }
 
@@ -1437,700 +1483,15 @@ loginButton.addEventListener(
 
 adminPassword.addEventListener(
     "keydown",
-    event => {
+    function(event){
 
-        if(event.key === "Enter"){
+        if(
+            event.key === "Enter"
+        ){
 
-            loginButton.click();
-
-        }
-
-    }
-);
-
-
-logoutButton.addEventListener(
-    "click",
-    () => {
-
-        sessionStorage.removeItem(
-            "velunara_admin"
-        );
-
-        showLogin();
-
-    }
-);
-
-
-/* =====================================
-   SESIÓN
-===================================== */
-
-if(
-    sessionStorage.getItem(
-        "velunara_admin"
-    ) === "true"
-){
-
-    showAdmin();
-
-}
-
-
-/* =====================================
-   CARGAR CONFIRMACIONES
-===================================== */
-
-async function loadConfirmations(){
-
-    loading.classList.remove(
-        "hidden"
-    );
-
-    empty.classList.add(
-        "hidden"
-    );
-
-    adminError.classList.add(
-        "hidden"
-    );
-
-
-    try{
-
-        const result =
-            await supabaseClient
-                .from("confirmaciones")
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending:false
-                    }
-                );
-
-
-        if(result.error){
-
-            throw result.error;
+            login();
 
         }
-
-
-        confirmations =
-            result.data || [];
-
-
-        updateStatistics();
-
-        renderTable();
-
-
-    }catch(error){
-
-        console.error(
-            "Error cargando confirmaciones:",
-            error
-        );
-
-
-        adminError.textContent =
-            error?.message ||
-            "No se pudieron cargar las confirmaciones.";
-
-        adminError.classList.remove(
-            "hidden"
-        );
-
-        confirmations = [];
-
-        updateStatistics();
-
-        renderTable();
-
-    }finally{
-
-        loading.classList.add(
-            "hidden"
-        );
-
-    }
-
-}
-
-
-/* =====================================
-   ESTADÍSTICAS
-===================================== */
-
-function updateStatistics(){
-
-    const total =
-        confirmations.length;
-
-
-    const attending =
-        confirmations.filter(
-            item =>
-                String(
-                    item.asistencia || ""
-                ).toLowerCase() === "si"
-        );
-
-
-    const adults =
-        attending.reduce(
-            (sum,item) =>
-                sum +
-                Number(item.adultos || 0),
-            0
-        );
-
-
-    const children =
-        attending.reduce(
-            (sum,item) =>
-                sum +
-                Number(item.ninos || 0),
-            0
-        );
-
-
-    document.getElementById(
-        "totalConfirmations"
-    ).textContent =
-        total;
-
-
-    document.getElementById(
-        "totalAttending"
-    ).textContent =
-        adults + children;
-
-
-    document.getElementById(
-        "totalAdults"
-    ).textContent =
-        adults;
-
-
-    document.getElementById(
-        "totalChildren"
-    ).textContent =
-        children;
-
-}
-
-
-/* =====================================
-   FILTRAR
-===================================== */
-
-function getFilteredConfirmations(){
-
-    const search =
-        searchInput.value
-            .trim()
-            .toLowerCase();
-
-
-    const attendance =
-        attendanceFilter.value;
-
-
-    const category =
-        categoryFilter.value;
-
-
-    return confirmations.filter(
-        item => {
-
-            const nombre =
-                String(
-                    item.nombre || ""
-                ).toLowerCase();
-
-
-            const telefono =
-                String(
-                    item.telefono || ""
-                ).toLowerCase();
-
-
-            const asistencia =
-                String(
-                    item.asistencia || ""
-                ).toLowerCase();
-
-
-            const adultos =
-                Number(
-                    item.adultos || 0
-                );
-
-
-            const ninos =
-                Number(
-                    item.ninos || 0
-                );
-
-
-            const matchesSearch =
-                !search ||
-                nombre.includes(search) ||
-                telefono.includes(search);
-
-
-            const matchesAttendance =
-                attendance === "todos" ||
-                asistencia === attendance;
-
-
-            const matchesCategory =
-                category === "todos" ||
-                (
-                    category === "adultos" &&
-                    adultos > 0
-                ) ||
-                (
-                    category === "ninos" &&
-                    ninos > 0
-                );
-
-
-            return (
-                matchesSearch &&
-                matchesAttendance &&
-                matchesCategory
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================
-   FORMATO FECHA
-===================================== */
-
-function formatDate(value){
-
-    if(!value){
-
-        return "Sin fecha";
-
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return String(value);
-
-    }
-
-
-    return date.toLocaleString(
-        "es-MX",
-        {
-            dateStyle:"short",
-            timeStyle:"short"
-        }
-    );
-
-}
-
-
-/* =====================================
-   ESCAPE HTML
-===================================== */
-
-function escapeHtml(value){
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-/* =====================================
-   TABLA
-===================================== */
-
-function renderTable(){
-
-    const filtered =
-        getFilteredConfirmations();
-
-
-    confirmationsBody.innerHTML = "";
-
-
-    if(!filtered.length){
-
-        empty.classList.remove(
-            "hidden"
-        );
-
-        return;
-
-    }
-
-
-    empty.classList.add(
-        "hidden"
-    );
-
-
-    filtered.forEach(
-        item => {
-
-            const tr =
-                document.createElement("tr");
-
-
-            const nombre =
-                escapeHtml(
-                    item.nombre ||
-                    "Sin nombre"
-                );
-
-
-            const asistencia =
-                String(
-                    item.asistencia || ""
-                ).toLowerCase();
-
-
-            const adultos =
-                Number(
-                    item.adultos || 0
-                );
-
-
-            const ninos =
-                Number(
-                    item.ninos || 0
-                );
-
-
-            /*
-             * Si personas existe en Supabase,
-             * lo usamos. Si no, calculamos
-             * adultos + niños.
-             */
-
-            const total =
-                Number(
-                    item.personas ??
-                    (adultos + ninos)
-                );
-
-
-            const telefono =
-                escapeHtml(
-                    item.telefono ||
-                    "No proporcionado"
-                );
-
-
-            const date =
-                formatDate(
-                    item.created_at
-                );
-
-
-            let attendanceHtml;
-
-
-            if(asistencia === "si"){
-
-                attendanceHtml =
-                    `
-                    <span class="badge badge-yes">
-                        💜 SÍ ASISTE
-                    </span>
-                    `;
-
-            }else{
-
-                attendanceHtml =
-                    `
-                    <span class="badge badge-no">
-                        🤍 NO ASISTE
-                    </span>
-                    `;
-
-            }
-
-
-            tr.innerHTML = `
-
-                <td>
-                    <strong>
-                        ${nombre}
-                    </strong>
-                </td>
-
-                <td>
-                    ${attendanceHtml}
-                </td>
-
-                <td>
-                    <span class="category-badge">
-                        👨‍👩‍👧 ${adultos}
-                    </span>
-                </td>
-
-                <td>
-                    <span class="category-badge">
-                        🧸 ${ninos}
-                    </span>
-                </td>
-
-                <td>
-                    <strong>
-                        ${total}
-                    </strong>
-                </td>
-
-                <td>
-                    ${telefono}
-                </td>
-
-                <td>
-                    ${date}
-                </td>
-
-            `;
-
-
-            confirmationsBody.appendChild(
-                tr
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================
-   FILTROS EVENTOS
-===================================== */
-
-searchInput.addEventListener(
-    "input",
-    renderTable
-);
-
-attendanceFilter.addEventListener(
-    "change",
-    renderTable
-);
-
-categoryFilter.addEventListener(
-    "change",
-    renderTable
-);
-
-
-/* =====================================
-   ACTUALIZAR
-===================================== */
-
-refreshButton.addEventListener(
-    "click",
-    async () => {
-
-        refreshButton.disabled =
-            true;
-
-        refreshButton.textContent =
-            "↻ CARGANDO...";
-
-
-        await loadConfirmations();
-
-
-        refreshButton.disabled =
-            false;
-
-        refreshButton.textContent =
-            "↻ ACTUALIZAR";
-
-    }
-);
-
-
-/* =====================================
-   EXPORTAR CSV
-===================================== */
-
-exportButton.addEventListener(
-    "click",
-    () => {
-
-        const filtered =
-            getFilteredConfirmations();
-
-
-        if(!filtered.length){
-
-            alert(
-                "No hay confirmaciones para exportar."
-            );
-
-            return;
-
-        }
-
-
-        const rows = [
-
-            [
-                "Nombre",
-                "Asistencia",
-                "Adultos",
-                "Niños",
-                "Total",
-                "Telefono",
-                "Fecha"
-            ]
-
-        ];
-
-
-        filtered.forEach(
-            item => {
-
-                const adultos =
-                    Number(
-                        item.adultos || 0
-                    );
-
-                const ninos =
-                    Number(
-                        item.ninos || 0
-                    );
-
-                const total =
-                    Number(
-                        item.personas ??
-                        (adultos + ninos)
-                    );
-
-
-                rows.push([
-
-                    item.nombre || "",
-
-                    item.asistencia || "",
-
-                    adultos,
-
-                    ninos,
-
-                    total,
-
-                    item.telefono || "",
-
-                    formatDate(
-                        item.created_at
-                    )
-
-                ]);
-
-            }
-        );
-
-
-        const csv =
-            rows
-                .map(
-                    row =>
-                        row
-                            .map(
-                                value =>
-                                    `"${String(value)
-                                        .replace(
-                                            /"/g,
-                                            '""'
-                                        )}"`
-                            )
-                            .join(",")
-                )
-                .join("\n");
-
-
-        const blob =
-            new Blob(
-                [
-                    "\uFEFF" +
-                    csv
-                ],
-                {
-                    type:
-                        "text/csv;charset=utf-8;"
-                }
-            );
-
-
-        const url =
-            URL.createObjectURL(blob);
-
-
-        const link =
-            document.createElement("a");
-
-
-        link.href = url;
-
-        link.download =
-            "confirmaciones-velunara.csv";
-
-
-        document.body.appendChild(
-            link
-        );
-
-        link.click();
-
-        link.remove();
-
-        URL.revokeObjectURL(
-            url
-        );
 
     }
 );
@@ -2139,4 +1500,4 @@ exportButton.addEventListener(
 
 </body>
 </html>
-```
+
