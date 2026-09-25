@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Velunara | Invitación</title>
 
@@ -15,22 +15,21 @@
 
 <style>
 
+/* =========================
+   GENERAL
+========================= */
+
 *{
     box-sizing:border-box;
 }
 
 html{
     scroll-behavior:smooth;
-    width:100%;
-    min-width:0;
 }
 
 body{
     margin:0;
-    width:100%;
-    min-width:0;
     min-height:100vh;
-
     background:
         radial-gradient(
             circle at 50% 10%,
@@ -39,26 +38,157 @@ body{
             #100719 72%,
             #07030c 100%
         );
-
     color:white;
     font-family:Georgia,serif;
     overflow-x:hidden;
 }
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+.hidden{
+    display:none !important;
+}
+
+
+/* =========================
+   ESTRELLAS
+========================= */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:-1;
-
+    opacity:.45;
     background-image:
-        radial-gradient(circle,rgba(255,255,255,.8) 1px,transparent 1px),
-        radial-gradient(circle,rgba(210,170,255,.5) 1px,transparent 1px);
+        radial-gradient(circle,#ffffff 1px,transparent 1px),
+        radial-gradient(circle,#d9b7ff 1px,transparent 1px);
+    background-size:95px 95px,145px 145px;
+    background-position:10px 20px,60px 80px;
+    z-index:0;
+}
 
-    background-size:90px 90px,150px 150px;
-    background-position:20px 30px,70px 100px;
-    opacity:.25;
+
+/* =========================
+   VIDEO 1
+========================= */
+
+#introVideoScreen{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    height:100dvh;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    z-index:9999;
+    background:#09030f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:1;
+    visibility:visible;
+    transition:
+        opacity 1.8s ease,
+        visibility 1.8s ease;
+}
+
+#introVideoScreen.fade-out{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+#introVideo{
+    position:absolute;
+    inset:0;
+    display:block;
+
+    width:100vw;
+    height:100vh;
+    height:100dvh;
+
+    min-width:100vw;
+    min-height:100vh;
+    min-height:100dvh;
+
+    margin:0;
+    padding:0;
+
+    object-fit:cover;
+    object-position:center center;
+
+    background:#000;
+
+    opacity:0;
+    transform:scale(1.04);
+
+    transition:
+        opacity 2s ease,
+        transform 3s ease;
+}
+
+#introVideo.visible{
+    opacity:1;
+    transform:scale(1);
+}
+
+#introStart{
+    position:absolute;
+    z-index:2;
+    text-align:center;
+    padding:25px;
+    opacity:1;
+    transform:translateY(0);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+#introStart.hidden-start{
+    opacity:0;
+    transform:translateY(-15px);
+    pointer-events:none;
+}
+
+.introStartTitle{
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(34px,7vw,70px);
+    font-weight:900;
+    letter-spacing:4px;
+    color:#f1ddff;
+    text-shadow:
+        0 0 12px rgba(210,160,255,.8),
+        0 0 35px rgba(150,80,210,.6);
+}
+
+.introStartText{
+    margin-top:14px;
+    font-size:18px;
+    color:#e8d8f2;
+}
+
+#startInvitation{
+    margin-top:30px;
+    padding:15px 28px;
+    border:1px solid #cba5ec;
+    border-radius:30px;
+    background:rgba(80,35,110,.75);
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    letter-spacing:1px;
+    transition:.3s;
+}
+
+#startInvitation:hover{
+    transform:scale(1.05);
+    background:rgba(110,55,145,.85);
 }
 
 
@@ -70,23 +200,14 @@ body::before{
     position:fixed;
     top:18px;
     left:50%;
-
     transform:translateX(-50%);
-
     z-index:500;
-
     width:min(90%,500px);
-
     padding:13px 20px;
-
     text-align:center;
-
     border-radius:20px;
-
     background:rgba(25,8,39,.88);
-
     border:1px solid rgba(211,172,240,.3);
-
     box-shadow:0 10px 30px rgba(0,0,0,.35);
 
     opacity:1;
@@ -109,229 +230,58 @@ body::before{
     display:none;
 }
 
-.scroll-tutorial-title{
-    font-size:17px;
-    letter-spacing:1px;
-    margin-bottom:7px;
-}
-
-.scroll-tutorial-text{
+.tutorial-title{
     font-size:14px;
-    opacity:.9;
+    letter-spacing:2px;
+    color:#ead8f5;
 }
 
-.scroll-tutorial-arrow{
+.tutorial-text{
+    margin-top:5px;
+    font-size:15px;
+}
+
+.tutorial-arrow{
+    margin-top:4px;
     font-size:30px;
-    line-height:1;
-    margin-top:6px;
-
-    animation:
-        arrowMove 1.2s ease-in-out infinite;
+    color:#dcbcf6;
+    animation:arrowDown 1.2s infinite ease-in-out;
 }
 
-@keyframes arrowMove{
-
+@keyframes arrowDown{
     0%,100%{
         transform:translateY(0);
     }
-
     50%{
         transform:translateY(8px);
     }
-
 }
 
 
 /* =========================
-   VIDEO 1
-========================= */
-
-#introVideoScreen{
-    position:fixed;
-    inset:0;
-
-    z-index:9999;
-
-    width:100vw;
-    height:100vh;
-    height:100dvh;
-
-    background:#09030f;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    overflow:hidden;
-
-    opacity:1;
-    visibility:visible;
-
-    transition:
-        opacity 1.8s ease,
-        visibility 1.8s ease;
-}
-
-#introVideo{
-    display:block;
-
-    width:100vw;
-    height:100vh;
-    height:100dvh;
-
-    object-fit:cover;
-    object-position:center;
-
-    opacity:0;
-
-    transform:scale(1.03);
-
-    transition:
-        opacity 2s ease,
-        transform 3s ease;
-}
-
-#introVideo.visible{
-    opacity:1;
-    transform:scale(1);
-}
-
-#introVideoScreen.fade-out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-#introVideoScreen::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 35%,
-            rgba(0,0,0,.48) 100%
-        );
-}
-
-#introStart{
-    position:absolute;
-    z-index:2;
-
-    width:100%;
-    max-width:700px;
-
-    text-align:center;
-
-    padding:25px;
-
-    opacity:1;
-    transform:translateY(0);
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
-}
-
-#introStart.hidden-start{
-    opacity:0;
-    transform:translateY(-15px);
-    pointer-events:none;
-}
-
-.introStartTitle{
-    font-family:"Cinzel Decorative",Georgia,serif;
-
-    font-size:clamp(30px,6vw,60px);
-
-    font-weight:900;
-
-    letter-spacing:3px;
-
-    color:#f1ddff;
-
-    text-shadow:
-        0 0 10px rgba(210,160,255,.75),
-        0 0 30px rgba(150,80,210,.55),
-        0 5px 15px rgba(0,0,0,.8);
-
-    margin-bottom:15px;
-}
-
-.introStartText{
-    font-size:18px;
-    color:#eadcf5;
-    margin-bottom:25px;
-}
-
-#startInvitation{
-    border:none;
-
-    padding:14px 25px;
-
-    border-radius:30px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #cba8ed,
-            #754494
-        );
-
-    color:white;
-
-    font-family:Georgia,serif;
-
-    font-size:15px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.45),
-        0 0 20px rgba(170,100,220,.3);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-#startInvitation:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.5),
-        0 0 25px rgba(180,110,230,.5);
-}
-
-
-/* =========================
-   CONTENIDO
+   CONTENIDO PRINCIPAL
 ========================= */
 
 main{
+    position:relative;
+    z-index:2;
     width:100%;
-    max-width:100%;
-    padding:120px 20px 70px;
+    padding:100px 20px 80px;
+}
+
+.hero{
+    width:100%;
+    max-width:1150px;
+    margin:auto;
+    text-align:center;
 }
 
 .main-title{
-    width:100%;
-
     margin:0 0 35px;
 
-    text-align:center;
-
     font-family:"Cinzel Decorative",Georgia,serif;
-
     font-size:clamp(42px,7vw,82px);
-
     font-weight:900;
-
     letter-spacing:4px;
 
     color:#f1ddff;
@@ -345,42 +295,37 @@ main{
 }
 
 @keyframes titleAppear{
-
     from{
         opacity:0;
-        transform:translateY(-25px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
-
 }
+
+
+/* =========================
+   FOTO + TIMER
+========================= */
 
 .hero-content{
     width:100%;
     max-width:1050px;
-
     margin:0 auto;
-
     display:flex;
-
     flex-direction:row;
-
     align-items:center;
     justify-content:center;
-
     gap:55px;
 }
 
 .photo1-container{
     width:min(360px,40vw);
-
     flex-shrink:0;
 
     padding:7px;
-
     border-radius:22px;
 
     background:
@@ -393,5 +338,1281 @@ main{
 
     box-shadow:
         0 0 25px rgba(168,113,217,.35),
-        0 20px 45px rgba(0,0,0,.
+        0 20px 45px rgba(0,0,0,.5);
+}
+
+.photo1-container img{
+    display:block;
+    width:100%;
+    border-radius:16px;
+}
+
+.countdown-area{
+    width:360px;
+    max-width:100%;
+}
+
+.countdown-title{
+    font-size:19px;
+    color:#e9d8f5;
+    margin-bottom:18px;
+}
+
+.countdown{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.time-box{
+    padding:15px 8px;
+    border-radius:15px;
+    background:rgba(51,20,70,.75);
+    border:1px solid rgba(208,166,238,.3);
+    box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+
+.time-number{
+    font-size:30px;
+    font-weight:bold;
+}
+
+.time-label{
+    margin-top:4px;
+    font-size:11px;
+    color:#cdb8da;
+}
+
+
+/* =========================
+   INVITACIÓN
+========================= */
+
+.invitation-section{
+    margin:90px auto 0;
+    width:100%;
+    max-width:700px;
+    text-align:center;
+}
+
+.invitation-section img{
+    display:block;
+    width:min(600px,94vw);
+    height:auto;
+    margin:auto;
+    border-radius:18px;
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.6),
+        0 0 30px rgba(150,90,200,.2);
+}
+
+
+/* =========================
+   CONFIRMACIÓN
+========================= */
+
+.confirm-section{
+    margin:70px auto 0;
+    text-align:center;
+}
+
+.confirm-help{
+    margin-top:42px;
+    font-size:16px;
+    color:#e9d7f4;
+}
+
+.confirm-arrow{
+    font-size:34px;
+    color:#d7b5f4;
+    margin-bottom:7px;
+    animation:arrowDown 1.2s infinite ease-in-out;
+}
+
+.confirm-button{
+    margin-top:18px;
+    padding:15px 30px;
+    border:1px solid #d2afea;
+    border-radius:30px;
+    background:
+        linear-gradient(
+            135deg,
+            #6c3789,
+            #3e1d58
+        );
+    color:white;
+    font-size:15px;
+    letter-spacing:1px;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:.3s;
+}
+
+.confirm-button:hover{
+    transform:translateY(-2px) scale(1.03);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:7000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+
+    background:rgba(5,1,10,.78);
+    backdrop-filter:blur(7px);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
+}
+
+.modal.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.modal-content{
+    width:min(430px,94vw);
+    padding:28px;
+    border-radius:24px;
+    background:
+        linear-gradient(
+            145deg,
+            #281038,
+            #13081c
+        );
+    border:1px solid rgba(210,170,240,.35);
+    box-shadow:0 25px 70px rgba(0,0,0,.65);
+
+    transform:translateY(25px) scale(.97);
+    transition:transform .7s ease;
+}
+
+.modal.show .modal-content{
+    transform:translateY(0) scale(1);
+}
+
+.modal-title{
+    text-align:center;
+    font-family:"Cinzel Decorative",Georgia,serif;
+    color:#ead8f7;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-size:14px;
+    color:#d8c4e4;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid rgba(214,177,237,.3);
+    outline:none;
+    background:#100719;
+    color:white;
+}
+
+.radio-group{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.radio-option{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.radio-option input{
+    width:auto;
+}
+
+.form-actions{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+.form-actions button{
+    flex:1;
+    padding:13px;
+    border-radius:15px;
+    border:1px solid rgba(214,177,237,.3);
+    cursor:pointer;
+}
+
+.cancel-button{
+    background:#211025;
+    color:#ddd;
+}
+
+.save-button{
+    background:#65347d;
+    color:white;
+}
+
+.save-button:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+#formMessage{
+    min-height:20px;
+    margin-top:14px;
+    text-align:center;
+    font-size:14px;
+}
+
+
+/* =========================
+   VIDEO 2 FINAL
+========================= */
+
+#finalVideoScreen{
+    position:fixed;
+    inset:0;
+    z-index:10000;
+
+    background:#08030c;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity 1.8s ease,
+        visibility 1.8s ease;
+}
+
+#finalVideoScreen.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+#finalVideoScreen.fade-out{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+#finalVideo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    opacity:0;
+    transform:scale(1.03);
+
+    transition:
+        opacity 1.8s ease,
+        transform 2.5s ease;
+}
+
+#finalVideoScreen.show #finalVideo{
+    opacity:1;
+    transform:scale(1);
+}
+
+
+/* =========================
+   CELEBRACIÓN
+========================= */
+
+#celebration{
+    position:fixed;
+    inset:0;
+    z-index:9000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    padding:25px;
+
+    background:
+        radial-gradient(
+            circle,
+            #4b1c69,
+            #170820 70%,
+            #07030c
+        );
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
+
+#celebration.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.celebration-content{
+    max-width:600px;
+}
+
+.celebration-title{
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(35px,7vw,70px);
+    color:#f0dcff;
+    text-shadow:
+        0 0 15px rgba(210,160,255,.8),
+        0 0 40px rgba(150,80,210,.6);
+}
+
+.celebration-text{
+    margin-top:20px;
+    color:#e5d4ed;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.music-button{
+    margin-top:25px;
+    padding:14px 25px;
+    border-radius:30px;
+    border:1px solid #d3afe9;
+    background:#63347e;
+    color:white;
+    cursor:pointer;
+}
+
+
+/* =========================
+   PARTY MODE
+========================= */
+
+#partyMode{
+    position:fixed;
+    inset:0;
+    z-index:8500;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #55216d,
+            #17091f 65%,
+            #07030c
+        );
+
+    padding:30px;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#partyMode.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.party-title{
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(38px,8vw,80px);
+    color:#f1ddff;
+}
+
+.party-text{
+    margin-top:20px;
+    font-size:20px;
+    color:#e8d6f0;
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+#finalScreen{
+    position:fixed;
+    inset:0;
+    z-index:8000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    padding:25px;
+
+    background:
+        radial-gradient(
+            circle,
+            #47205c,
+            #100616 75%
+        );
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
+
+#finalScreen.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.final-title{
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(34px,7vw,70px);
+    color:#f0dcff;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:750px){
+
+    main{
+        padding-top:100px;
+    }
+
+    .hero-content{
+        flex-direction:column;
+        gap:30px;
+    }
+
+    .photo1-container{
+        width:min(360px,82vw);
+    }
+
+    .countdown-area{
+        width:100%;
+        min-width:0;
+    }
+
+    .countdown{
+        width:100%;
+    }
+
+    .main-title{
+        letter-spacing:2px;
+        font-size:clamp(42px,11vw,65px);
+    }
+
+    .countdown-title{
+        font-size:21px;
+    }
+
+    .time-number{
+        font-size:32px;
+    }
+
+    .time-label{
+        font-size:12px;
+    }
+
+    .confirm-help{
+        font-size:18px;
+    }
+
+    .confirm-button{
+        font-size:17px;
+        padding:16px 25px;
+    }
+
+    .invitation-section{
+        margin-top:70px;
+    }
+
+    .scroll-tutorial{
+        top:12px;
+        width:92%;
+    }
+
+    .tutorial-title{
+        font-size:16px;
+    }
+
+    .tutorial-text{
+        font-size:17px;
+    }
+
+    /*
+       VIDEO 1:
+       ocupa absolutamente toda la pantalla
+       vertical del teléfono.
+    */
+
+    #introVideoScreen{
+        position:fixed;
+        inset:0;
+        width:100vw;
+        height:100vh;
+        height:100dvh;
+        overflow:hidden;
+    }
+
+    #introVideo{
+        position:absolute;
+        inset:0;
+
+        width:100vw;
+        height:100vh;
+        height:100dvh;
+
+        min-width:100vw;
+        min-height:100vh;
+        min-height:100dvh;
+
+        object-fit:cover;
+        object-position:center center;
+    }
+
+    #introStart{
+        width:100%;
+        padding:20px;
+    }
+
+    .introStartTitle{
+        font-size:clamp(34px,10vw,55px);
+    }
+
+    .introStartText{
+        font-size:20px;
+    }
+
+    #startInvitation{
+        font-size:17px;
+        padding:16px 28px;
+    }
+
+    .modal-content{
+        width:min(450px,94vw);
+        padding:23px;
+    }
+
+    .modal-title{
+        font-size:24px;
+    }
+
+    .form-group label{
+        font-size:16px;
+    }
+
+    .form-group input{
+        font-size:17px;
+        padding:14px;
+    }
+
+    .radio-option{
+        font-size:17px;
+    }
+
+    .form-actions button{
+        font-size:16px;
+    }
+}
+
+
+/* =========================
+   MOBILE VERTICAL
+========================= */
+
+@media screen and (max-width:750px) and (orientation:portrait){
+
+    #introVideoScreen{
+        width:100vw;
+        height:100vh;
+        height:100dvh;
+    }
+
+    #introVideo{
+        width:100vw;
+        height:100vh;
+        height:100dvh;
+
+        min-width:100vw;
+        min-height:100vh;
+        min-height:100dvh;
+
+        object-fit:cover;
+        object-position:center center;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     VIDEO 1
+========================= -->
+
+<div id="introVideoScreen">
+
+    <video
+        id="introVideo"
+        src="videoinicio1.mp4"
+        playsinline
+        preload="auto">
+    </video>
+
+    <div id="introStart">
+
+        <div class="introStartTitle">
+            ✨ VELUNARA ✨
+        </div>
+
+        <div class="introStartText">
+            Tu invitación está por comenzar
+        </div>
+
+        <button
+            id="startInvitation"
+            type="button">
+            ▶ INICIAR INVITACIÓN
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TUTORIAL
+========================= -->
+
+<div
+    class="scroll-tutorial"
+    id="scrollTutorial">
+
+    <div class="tutorial-title">
+        ✦ CÓMO VER LA INVITACIÓN ✦
+    </div>
+
+    <div class="tutorial-text">
+        ☝ DESLIZA HACIA ABAJO
+    </div>
+
+    <div class="tutorial-arrow">
+        ↓
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
+<main id="mainContent">
+
+    <section class="hero">
+
+        <h1 class="main-title">
+            VELUNARA
+        </h1>
+
+        <div class="hero-content">
+
+            <div class="photo1-container">
+
+                <img
+                    src="foto1.jpg"
+                    alt="Velunara">
+
+            </div>
+
+
+            <div class="countdown-area">
+
+                <div class="countdown-title">
+                    Faltan...
+                </div>
+
+                <div class="countdown">
+
+                    <div class="time-box">
+                        <div
+                            class="time-number"
+                            id="days">
+                            00
+                        </div>
+                        <div class="time-label">
+                            DÍAS
+                        </div>
+                    </div>
+
+                    <div class="time-box">
+                        <div
+                            class="time-number"
+                            id="hours">
+                            00
+                        </div>
+                        <div class="time-label">
+                            HORAS
+                        </div>
+                    </div>
+
+                    <div class="time-box">
+                        <div
+                            class="time-number"
+                            id="minutes">
+                            00
+                        </div>
+                        <div class="time-label">
+                            MINUTOS
+                        </div>
+                    </div>
+
+                    <div class="time-box">
+                        <div
+                            class="time-number"
+                            id="seconds">
+                            00
+                        </div>
+                        <div class="time-label">
+                            SEGUNDOS
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <section
+            class="invitation-section"
+            id="invitationSection">
+
+            <img
+                src="foto2.jpg"
+                alt="Invitación de Velunara">
+
+        </section>
+
+
+        <section class="confirm-section">
+
+            <div class="confirm-help">
+
+                <div class="confirm-arrow">
+                    ↓
+                </div>
+
+                PICA AQUÍ PARA CONFIRMAR TU ASISTENCIA
+
+            </div>
+
+            <button
+                class="confirm-button"
+                id="openForm"
+                type="button">
+
+                💜 CONFIRMAR ASISTENCIA
+
+            </button>
+
+        </section>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="formModal">
+
+    <div class="modal-content">
+
+        <h2 class="modal-title">
+            Confirmar asistencia
+        </h2>
+
+        <form id="confirmationForm">
+
+            <div class="form-group">
+
+                <label for="nombre">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    maxlength="80"
+                    autocomplete="name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="personas">
+                    Número de personas
+                </label>
+
+                <input
+                    type="number"
+                    id="personas"
+                    min="1"
+                    max="20"
+                    value="1"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    ¿Asistirás?
+                </label>
+
+                <div class="radio-group">
+
+                    <label class="radio-option">
+
+                        <input
+                            type="radio"
+                            name="asistencia"
+                            value="true">
+
+                        Sí, asistiré
+
+                    </label>
+
+                    <label class="radio-option">
+
+                        <input
+                            type="radio"
+                            name="asistencia"
+                            value="false">
+
+                        No podré asistir
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="telefono">
+                    Teléfono
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefono"
+                    maxlength="25"
+                    autocomplete="tel">
+
+            </div>
+
+
+            <div id="formMessage"></div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    id="closeForm">
+
+                    CANCELAR
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="save-button"
+                    id="guardarBtn">
+
+                    💜 GUARDAR
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CELEBRACIÓN
+========================= -->
+
+<div
+    id="celebration"
+    class="hidden">
+
+    <div class="celebration-content">
+
+        <div class="celebration-title">
+            ✨ ¡ES HOY! ✨
+        </div>
+
+        <div class="celebration-text">
+            ¡Feliz cumpleaños, Velunara!<br>
+            Hoy comienza la celebración.
+        </div>
+
+        <button
+            class="music-button"
+            id="playMusic"
+            type="button">
+
+            🎵 ESCUCHAR MAÑANITAS
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<audio
+    id="music"
+    src="mananitas.mp3"
+    preload="auto">
+</audio>
+
+
+<!-- =========================
+     PARTY MODE
+========================= -->
+
+<div
+    id="partyMode"
+    class="hidden">
+
+    <div>
+
+        <div class="party-title">
+            ✨ ¡LA FIESTA HA COMENZADO! ✨
+        </div>
+
+        <div class="party-text">
+            Velunara está celebrando su día especial 💜
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FINAL SCREEN
+========================= -->
+
+<div
+    id="finalScreen">
+
+    <div>
+
+        <div class="final-title">
+            ✨ ¡FELICIDADES, VELUNARA! ✨
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     VIDEO 2 FINAL
+========================= -->
+
+<div
+    id="finalVideoScreen">
+
+    <video
+        id="finalVideo"
+        src="video2.mp4"
+        playsinline
+        preload="auto">
+    </video>
+
+</div>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+    "https://ibdjtobuadgzozbggxxu.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const introVideoScreen =
+    document.getElementById("introVideoScreen");
+
+const introVideo =
+    document.getElementById("introVideo");
+
+const introStart =
+    document.getElementById("introStart");
+
+const startInvitation =
+    document.getElementById("startInvitation");
+
+const scrollTutorial =
+    document.getElementById("scrollTutorial");
+
+const invitationSection =
+    document.getElementById("invitationSection");
+
+const formModal =
+    document.getElementById("formModal");
+
+const openForm =
+    document.getElementById("openForm");
+
+const closeFormButton =
+    document.getElementById("closeForm");
+
+const confirmationForm =
+    document.getElementById("confirmationForm");
+
+const guardarBtn =
+    document.getElementById("guardarBtn");
+
+const formMessage =
+    document.getElementById("formMessage");
+
+const finalVideoScreen =
+    document.getElementById("finalVideoScreen");
+
+const finalVideo =
+    document.getElementById("finalVideo");
+
+const music =
+    document.getElementById("music");
+
+const celebration =
+    document.getElementById("celebration");
+
+const partyMode =
+    document.getElementById("partyMode");
+
+const finalScreen =
+    document.getElementById("finalScreen");
+
+
+/* =========================
+   VIDEO 1
+========================= */
+
+function finishIntro(){
+
+    introVideoScreen.classList.add("fade-out");
+
+}
+
+startInvitation.addEventListener(
+    "click",
+    async () => {
+
+        introStart.classList.add(
+            "hidden-start"
+        );
+
+        introVideo.classList.add(
+            "visible"
+        );
+
+        /*
+           Forzamos las dimensiones de la
+           pantalla para móviles.
+        */
+
+        introVideo.style.width = "100vw";
+        introVideo.style.height = "100dvh";
+        introVideo.style.minWidth = "100vw";
+        introVideo.style.minHeight = "100dvh";
+        introVideo.style.objectFit = "cover";
+
+        try{
+
+            introVideo.currentTime = 0;
+
+            introVideo.muted = false;
+            introVideo.volume = 1;
+
+            await introVideo.play();
+
+        }catch(error){
+
+            console.log(
+                "El navegador bloqueó el audio. Intentando reproducción silenciosa."
+            );
+
+            try{
+
+                introVideo.muted = true;
+                introVideo.volume = 0;
+
+                await introVideo.play();
+
+            }catch(error2){
+
+                console.error(
+                    "No se pudo reproducir el Video 1:",
+                    error2
+                );
+
+                finishIntro();
+
+            }
+
+        }
+
+    }
+);
+
+introVideo.addEventListener(
+    "ended",
+    finishIntro
+);
+
+
+/* =========================
+   TUTORIAL
+========================= */
+
+let tutorialRemoved = false;
+
+function updateTutorial(){
+
+    if(tutorialRemoved){
+        return;
+    }
+
+    const rect =
+        invitationSection.getBoundingClientRect();
+
+    if(rect.top <= window.innerHeight * 0.75){
+
+        scrollTutorial.classList.add(
+            "fade-out"
+        );
+
+        setTimeout(
+            () => {
+
+                scrollTutorial.classList.add(
+                    "permanently-hidden"
+                );
+
+                tutorialRemoved = true;
+
+            },
+            1000
+        );
+
+    }
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateTutorial,
+    {
+        passive:true
+    }
+);
+
+
+/* =========================
+   MODAL
+========================= */
+
+openForm.addEventListener(
+    "click",
+    () => {
+
+        formModal.classList.add("show");
+
+    }
+);
+
+function closeModal(){
+
+    formModal.classList.remove("show");
+
+}
+
+closeFormButton.addEventListener(
 ```
