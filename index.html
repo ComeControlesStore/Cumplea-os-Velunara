@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,6 +63,7 @@ body{
         opacity:.25;
         transform:scale(.8);
     }
+
     50%{
         opacity:1;
         transform:scale(1.4);
@@ -71,7 +71,7 @@ body{
 }
 
 /* =========================
-   VIDEO DE INTRODUCCIÓN
+   VIDEO INTRODUCCIÓN
 ========================= */
 
 #introVideoScreen{
@@ -84,7 +84,9 @@ body{
     justify-content:center;
     opacity:1;
     visibility:visible;
-    transition:opacity 1.25s ease,visibility 1.25s ease;
+    transition:
+        opacity 1.25s ease,
+        visibility 1.25s ease;
 }
 
 #introVideoScreen.fade-out{
@@ -101,6 +103,7 @@ body{
     opacity:0;
     visibility:hidden;
     transform:scale(1.04);
+
     transition:
         opacity .9s ease,
         transform 1.2s ease,
@@ -122,6 +125,7 @@ body{
     border-radius:20px;
     background:rgba(20,5,30,.75);
     backdrop-filter:blur(10px);
+
     box-shadow:
         0 0 40px rgba(160,70,255,.35),
         inset 0 0 30px rgba(255,255,255,.03);
@@ -131,9 +135,11 @@ body{
     font-family:"Cinzel Decorative",Georgia,serif;
     font-size:clamp(30px,7vw,70px);
     color:#fff;
+
     text-shadow:
         0 0 10px #9c4dff,
         0 0 25px #7a25d6;
+
     margin-bottom:25px;
 }
 
@@ -147,13 +153,18 @@ body{
     font-family:Georgia,serif;
     font-size:16px;
     letter-spacing:1px;
-    box-shadow:0 0 20px rgba(157,65,255,.4);
+
+    box-shadow:
+        0 0 20px rgba(157,65,255,.4);
+
     transition:.3s;
 }
 
 #startVideo:hover{
     transform:scale(1.06);
-    box-shadow:0 0 30px rgba(180,100,255,.65);
+
+    box-shadow:
+        0 0 30px rgba(180,100,255,.65);
 }
 
 /* =========================
@@ -169,11 +180,16 @@ body{
     text-align:center;
     width:min(92%,500px);
     padding:10px 18px;
+
     border:1px solid rgba(210,170,255,.4);
     border-radius:20px;
+
     background:rgba(20,5,30,.75);
     backdrop-filter:blur(10px);
-    box-shadow:0 0 20px rgba(150,60,255,.25);
+
+    box-shadow:
+        0 0 20px rgba(150,60,255,.25);
+
     transition:
         opacity .65s ease,
         transform .65s ease;
@@ -207,6 +223,7 @@ body{
     0%,100%{
         transform:translateY(0);
     }
+
     50%{
         transform:translateY(7px);
     }
@@ -234,6 +251,7 @@ section{
     padding:
         110px 20px
         70px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -256,6 +274,7 @@ section{
     margin:0;
     color:#fff;
     letter-spacing:2px;
+
     text-shadow:
         0 0 10px rgba(194,118,255,.8),
         0 0 30px rgba(130,50,220,.6),
@@ -272,7 +291,9 @@ section{
     width:min(850px,92%);
     margin-top:45px;
     padding:8px;
+
     border:1px solid rgba(190,120,255,.6);
+
     box-shadow:
         0 0 25px rgba(150,50,255,.35),
         0 0 70px rgba(100,30,170,.15);
@@ -316,10 +337,14 @@ section{
 .count-box{
     min-width:95px;
     padding:18px 14px;
+
     border:1px solid rgba(200,140,255,.35);
     border-radius:15px;
+
     background:rgba(40,10,55,.45);
-    box-shadow:0 0 20px rgba(130,50,210,.15);
+
+    box-shadow:
+        0 0 20px rgba(130,50,210,.15);
 }
 
 .count-number{
@@ -341,10 +366,12 @@ section{
 #invitationReveal{
     min-height:100vh;
     padding:90px 20px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
+
     text-align:center;
 }
 
@@ -355,10 +382,12 @@ section{
 }
 
 @keyframes magicPulse{
+
     0%,100%{
         opacity:.5;
         transform:scale(.9);
     }
+
     50%{
         opacity:1;
         transform:scale(1.1);
@@ -379,7 +408,9 @@ section{
 .invitation-card{
     width:min(850px,94%);
     padding:8px;
+
     border:1px solid rgba(180,100,255,.65);
+
     box-shadow:
         0 0 30px rgba(140,50,230,.3),
         0 0 70px rgba(100,20,170,.15);
@@ -403,21 +434,30 @@ section{
 .confirm-btn{
     margin-top:18px;
     padding:15px 30px;
+
     border-radius:30px;
     border:1px solid rgba(215,170,255,.7);
+
     background:linear-gradient(135deg,#5d168d,#32103f);
+
     color:white;
     font-family:Georgia,serif;
     font-size:15px;
     letter-spacing:1px;
+
     cursor:pointer;
-    box-shadow:0 0 25px rgba(145,55,230,.3);
+
+    box-shadow:
+        0 0 25px rgba(145,55,230,.3);
+
     transition:.3s;
 }
 
 .confirm-btn:hover{
     transform:translateY(-2px) scale(1.03);
-    box-shadow:0 0 35px rgba(180,90,255,.55);
+
+    box-shadow:
+        0 0 35px rgba(180,90,255,.55);
 }
 
 /* =========================
@@ -428,11 +468,14 @@ section{
     position:fixed;
     inset:0;
     z-index:50000;
+
     background:rgba(0,0,0,.75);
     backdrop-filter:blur(8px);
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     padding:20px;
 }
 
@@ -440,15 +483,19 @@ section{
     width:min(500px,100%);
     max-height:90vh;
     overflow-y:auto;
+
     padding:30px;
     border-radius:22px;
+
     border:1px solid rgba(205,155,255,.5);
+
     background:
         linear-gradient(
             145deg,
             rgba(39,10,52,.97),
             rgba(14,3,20,.98)
         );
+
     box-shadow:
         0 0 40px rgba(130,40,210,.4),
         inset 0 0 30px rgba(255,255,255,.025);
@@ -483,11 +530,15 @@ section{
 .form-group select{
     width:100%;
     padding:13px 14px;
+
     border-radius:12px;
     border:1px solid rgba(190,130,230,.35);
+
     background:rgba(10,2,15,.75);
     color:white;
+
     outline:none;
+
     font-family:Georgia,serif;
     font-size:15px;
 }
@@ -495,11 +546,13 @@ section{
 .form-group input:focus,
 .form-group select:focus{
     border-color:#c17aff;
-    box-shadow:0 0 12px rgba(160,70,255,.25);
+
+    box-shadow:
+        0 0 12px rgba(160,70,255,.25);
 }
 
 /* =========================
-   CATEGORÍAS ADULTOS / NIÑOS
+   ADULTOS / NIÑOS
 ========================= */
 
 .category-title{
@@ -567,9 +620,12 @@ section{
     display:block;
     padding:13px 10px;
     text-align:center;
+
     border:1px solid rgba(190,130,235,.3);
     border-radius:12px;
+
     background:rgba(15,3,22,.65);
+
     cursor:pointer;
     transition:.25s;
 }
@@ -577,7 +633,9 @@ section{
 .attendance-option input:checked + label{
     border-color:#c57cff;
     background:rgba(105,35,145,.45);
-    box-shadow:0 0 18px rgba(160,70,255,.25);
+
+    box-shadow:
+        0 0 18px rgba(160,70,255,.25);
 }
 
 .modal-actions{
@@ -590,10 +648,14 @@ section{
 .modal-btn{
     padding:13px;
     border-radius:12px;
+
     border:1px solid rgba(200,145,235,.4);
+
     cursor:pointer;
+
     font-family:Georgia,serif;
     color:#fff;
+
     background:rgba(35,8,45,.8);
 }
 
@@ -608,9 +670,12 @@ section{
 .error-message{
     margin-top:15px;
     padding:10px;
+
     border-radius:10px;
+
     background:rgba(130,20,40,.3);
     border:1px solid rgba(230,100,130,.35);
+
     color:#ffc6d1;
     font-size:13px;
     text-align:center;
@@ -624,15 +689,18 @@ section{
     position:fixed;
     inset:0;
     z-index:55000;
+
     background:
         radial-gradient(
             circle at center,
             rgba(110,30,160,.35),
             rgba(5,1,8,.98) 70%
         );
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
     padding:25px;
 }
@@ -642,10 +710,12 @@ section{
 }
 
 @keyframes celebrateIn{
+
     from{
         opacity:0;
         transform:scale(.8);
     }
+
     to{
         opacity:1;
         transform:scale(1);
@@ -655,6 +725,7 @@ section{
 .celebration-title{
     font-family:"Cinzel Decorative",Georgia,serif;
     font-size:clamp(35px,8vw,80px);
+
     text-shadow:
         0 0 15px #b86aff,
         0 0 35px #7520b4;
@@ -669,12 +740,24 @@ section{
 .music-btn{
     margin-top:30px;
     padding:14px 25px;
+
     border:1px solid rgba(220,175,255,.55);
     border-radius:30px;
+
     background:rgba(60,15,80,.7);
     color:#fff;
+
     font-family:Georgia,serif;
     cursor:pointer;
+
+    transition:.3s;
+}
+
+.music-btn:hover{
+    transform:scale(1.04);
+
+    box-shadow:
+        0 0 25px rgba(180,90,255,.4);
 }
 
 /* =========================
@@ -685,15 +768,18 @@ section{
     position:fixed;
     inset:0;
     z-index:52000;
+
     background:
         radial-gradient(
             circle,
             rgba(70,20,100,.55),
             rgba(5,1,8,.98)
         );
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
     padding:25px;
 }
@@ -701,6 +787,7 @@ section{
 .party-title{
     font-family:"Cinzel Decorative",Georgia,serif;
     font-size:clamp(35px,8vw,75px);
+
     text-shadow:
         0 0 15px #a94fff,
         0 0 35px #6d1eac;
@@ -712,19 +799,23 @@ section{
 }
 
 /* =========================
-   VIDEO FINAL
+   VIDEO 2
 ========================= */
 
 #finalVideoScreen{
     position:fixed;
     inset:0;
     z-index:65000;
+
     background:#000;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     opacity:1;
     visibility:visible;
+
     transition:
         opacity 1.25s ease,
         visibility 1.25s ease;
@@ -751,15 +842,18 @@ section{
     position:fixed;
     inset:0;
     z-index:51000;
+
     background:
         radial-gradient(
             circle at center,
             rgba(80,20,110,.45),
             #07020a 75%
         );
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
     padding:25px;
 }
@@ -767,6 +861,7 @@ section{
 .final-title{
     font-family:"Cinzel Decorative",Georgia,serif;
     font-size:clamp(30px,7vw,70px);
+
     text-shadow:
         0 0 15px #a855f7,
         0 0 35px #6f20a0;
@@ -832,6 +927,7 @@ section{
     .modal-box{
         padding:23px 18px;
     }
+
 }
 
 @media(max-width:420px){
@@ -886,6 +982,11 @@ section{
     #introStartTitle{
         font-size:32px;
     }
+
+    .music-btn{
+        max-width:90%;
+    }
+
 }
 
 </style>
@@ -922,7 +1023,7 @@ section{
 
 
 <!-- =========================
-     VIDEO FINAL
+     VIDEO 2
 ========================= -->
 
 <div id="finalVideoScreen" class="hidden">
@@ -1014,39 +1115,54 @@ section{
         <div class="countdown">
 
             <div class="count-box">
+
                 <div class="count-number" id="days">
                     0
                 </div>
+
                 <div class="count-label">
                     DÍAS
                 </div>
+
             </div>
 
+
             <div class="count-box">
+
                 <div class="count-number" id="hours">
                     0
                 </div>
+
                 <div class="count-label">
                     HORAS
                 </div>
+
             </div>
 
+
             <div class="count-box">
+
                 <div class="count-number" id="minutes">
                     0
                 </div>
+
                 <div class="count-label">
                     MINUTOS
                 </div>
+
             </div>
 
+
             <div class="count-box">
+
                 <div class="count-number" id="seconds">
                     0
                 </div>
+
                 <div class="count-label">
                     SEGUNDOS
                 </div>
+
             </div>
 
         </div>
@@ -1087,7 +1203,9 @@ section{
         <button
             class="confirm-btn"
             id="openModal">
+
             💜 CONFIRMAR ASISTENCIA
+
         </button>
 
     </section>
@@ -1096,7 +1214,7 @@ section{
 
 
 <!-- =========================
-     MODAL CONFIRMACIÓN
+     MODAL
 ========================= -->
 
 <div
@@ -1114,8 +1232,6 @@ section{
         </div>
 
 
-        <!-- NOMBRE -->
-
         <div class="form-group">
 
             <label for="guestName">
@@ -1130,8 +1246,6 @@ section{
 
         </div>
 
-
-        <!-- CATEGORÍAS -->
 
         <div class="form-group">
 
@@ -1193,8 +1307,6 @@ section{
         </div>
 
 
-        <!-- TELÉFONO -->
-
         <div class="form-group">
 
             <label for="phone">
@@ -1238,6 +1350,7 @@ section{
 
                 </div>
 
+
                 <div class="attendance-option">
 
                     <input
@@ -1268,13 +1381,17 @@ section{
             <button
                 class="modal-btn"
                 id="closeModal">
+
                 CERRAR
+
             </button>
 
             <button
                 class="modal-btn primary"
                 id="submitConfirmation">
+
                 GUARDAR CONFIRMACIÓN
+
             </button>
 
         </div>
@@ -1305,7 +1422,9 @@ section{
         <button
             class="music-btn"
             id="musicButton">
+
             🎵 REPRODUCIR LAS MAÑANITAS
+
         </button>
 
     </div>
@@ -1787,16 +1906,21 @@ submitConfirmation.addEventListener(
                 .trim();
 
 
-        const asistenciaElement =
-            document.querySelector(
-                'input[name="attendance"]:checked'
-            );
-
+        /*
+         * Aquí NO usamos "si" o "no"
+         * para Supabase.
+         *
+         * La columna asistencia es BOOLEAN,
+         * por lo que enviamos:
+         *
+         * Sí = true
+         * No = false
+         */
 
         const asistencia =
-            asistenciaElement
-                ? asistenciaElement.value
-                : "no";
+            document.getElementById(
+                "attendanceYes"
+            ).checked;
 
 
         if(!nombre){
@@ -1814,7 +1938,7 @@ submitConfirmation.addEventListener(
 
 
         if(
-            asistencia === "si" &&
+            asistencia &&
             adultos + ninos <= 0
         ){
 
@@ -1840,14 +1964,17 @@ submitConfirmation.addEventListener(
         try{
 
             /*
-             * personas conserva el total,
-             * mientras adultos y ninos
-             * guardan las categorías.
+             * Total de personas.
              */
 
             const personas =
                 adultos + ninos;
 
+
+            /*
+             * IMPORTANTE:
+             * asistencia es BOOLEAN.
+             */
 
             const data = {
 
@@ -1865,8 +1992,8 @@ submitConfirmation.addEventListener(
 
 
             /*
-             * Solo agregamos teléfono si
-             * el usuario escribió uno.
+             * Solo agregamos teléfono
+             * si fue escrito.
              */
 
             if(telefono){
@@ -1884,9 +2011,8 @@ submitConfirmation.addEventListener(
 
 
             /*
-             * Si la tabla todavía no tiene
-             * la columna telefono, intentamos
-             * guardar nuevamente sin ella.
+             * Si todavía no existe la columna
+             * telefono, guardamos sin teléfono.
              */
 
             if(
@@ -1929,6 +2055,10 @@ submitConfirmation.addEventListener(
             }
 
 
+            /*
+             * CONFIRMACIÓN GUARDADA
+             */
+
             confirmationModal.classList.add(
                 "hidden"
             );
@@ -1943,6 +2073,10 @@ submitConfirmation.addEventListener(
                     "hidden"
                 );
 
+
+            /*
+             * Limpiar formulario.
+             */
 
             document
                 .getElementById("guestName")
@@ -1964,22 +2098,19 @@ submitConfirmation.addEventListener(
                 .value = "";
 
 
-            setTimeout(
-                () => {
+            /*
+             * Volvemos a dejar seleccionada
+             * la opción Sí.
+             */
 
-                    document
-                        .getElementById(
-                            "celebration"
-                        )
-                        .classList.add(
-                            "hidden"
-                        );
+            document
+                .getElementById("attendanceYes")
+                .checked = true;
 
-                    playVideo2();
 
-                },
-                1800
-            );
+            document
+                .getElementById("attendanceNo")
+                .checked = false;
 
 
         }catch(error){
@@ -2027,32 +2158,6 @@ const musicButton =
     );
 
 
-musicButton.addEventListener(
-    "click",
-    async () => {
-
-        try{
-
-            birthdayAudio.currentTime = 0;
-
-            await birthdayAudio.play();
-
-            musicButton.textContent =
-                "🎵 LAS MAÑANITAS ESTÁN SONANDO";
-
-        }catch(error){
-
-            console.error(
-                "No se pudo reproducir el audio:",
-                error
-            );
-
-        }
-
-    }
-);
-
-
 /* ==========================================
    VIDEO 2
 ========================================== */
@@ -2068,63 +2173,84 @@ const finalVideo =
     );
 
 
-async function playVideo2(){
-
-    finalVideoScreen.classList.remove(
-        "hidden"
-    );
-
-    finalVideoScreen.classList.remove(
-        "fade-out"
-    );
-
-    finalVideo.currentTime = 0;
-
-    try{
-
-        finalVideo.muted = false;
-
-        await finalVideo.play();
-
-    }catch(error){
-
-        try{
-
-            finalVideo.muted = true;
-
-            await finalVideo.play();
-
-        }catch(secondError){
-
-            console.error(
-                "No se pudo reproducir el video 2:",
-                secondError
-            );
-
-        }
-
-    }
-
-}
-
+/*
+ * Cuando termina el video 2,
+ * aparece el modo fiesta.
+ */
 
 finalVideo.addEventListener(
     "ended",
     () => {
 
+        finalVideo.pause();
+
+        finalVideo.currentTime = 0;
+
+
         finalVideoScreen.classList.add(
             "fade-out"
         );
 
+
         setTimeout(
             () => {
 
-                finalVideo.pause();
-
-                finalVideo.currentTime = 0;
-
                 finalVideoScreen.classList.add(
                     "hidden"
+                );
+
+                finalVideoScreen.classList.remove(
+                    "fade-out"
+                );
+
+
+                /*
+                 * Detener Las Mañanitas
+                 * cuando termina el video.
+                 */
+
+                birthdayAudio.pause();
+
+                birthdayAudio.currentTime = 0;
+
+
+                /*
+                 * Mostrar modo fiesta.
+                 */
+
+                const partyMode =
+                    document.getElementById(
+                        "partyMode"
+                    );
+
+                partyMode.classList.remove(
+                    "hidden"
+                );
+
+
+                /*
+                 * Después de unos segundos,
+                 * aparece la pantalla final.
+                 */
+
+                setTimeout(
+                    () => {
+
+                        partyMode.classList.add(
+                            "hidden"
+                        );
+
+
+                        document
+                            .getElementById(
+                                "finalScreen"
+                            )
+                            .classList.remove(
+                                "hidden"
+                            );
+
+                    },
+                    4500
                 );
 
             },
@@ -2136,100 +2262,107 @@ finalVideo.addEventListener(
 
 
 /* ==========================================
-   MODO FIESTA
+   BOTÓN DE LAS MAÑANITAS
 ========================================== */
 
-const partyStart =
-    new Date(
-        "2026-09-27T16:00:00"
-    ).getTime();
+musicButton.addEventListener(
+    "click",
+    async () => {
 
-const partyEnd =
-    new Date(
-        "2026-09-27T20:00:00"
-    ).getTime();
+        try{
 
+            /*
+             * Reiniciar Las Mañanitas.
+             */
 
-function updatePartyMode(){
+            birthdayAudio.currentTime = 0;
 
-    const now =
-        Date.now();
-
-    const partyMode =
-        document.getElementById(
-            "partyMode"
-        );
+            await birthdayAudio.play();
 
 
-    if(
-        now >= partyStart &&
-        now < partyEnd
-    ){
+            musicButton.textContent =
+                "🎵 LAS MAÑANITAS ESTÁN SONANDO";
 
-        partyMode.classList.remove(
-            "hidden"
-        );
 
-    }else{
+            /*
+             * Ocultar celebración.
+             */
 
-        partyMode.classList.add(
-            "hidden"
-        );
+            document
+                .getElementById("celebration")
+                .classList.add(
+                    "hidden"
+                );
+
+
+            /*
+             * Mostrar video 2.
+             */
+
+            finalVideoScreen.classList.remove(
+                "hidden"
+            );
+
+            finalVideoScreen.classList.remove(
+                "fade-out"
+            );
+
+
+            finalVideo.currentTime = 0;
+
+
+            try{
+
+                finalVideo.muted = false;
+
+                await finalVideo.play();
+
+            }catch(videoError){
+
+                /*
+                 * Si el navegador bloquea
+                 * el audio del video,
+                 * lo reproducimos en silencio.
+                 */
+
+                try{
+
+                    finalVideo.muted = true;
+
+                    await finalVideo.play();
+
+                }catch(secondVideoError){
+
+                    console.error(
+                        "No se pudo reproducir el video 2:",
+                        secondVideoError
+                    );
+
+                }
+
+            }
+
+        }catch(error){
+
+            console.error(
+                "No se pudo reproducir Las Mañanitas:",
+                error
+            );
+
+            /*
+             * Si el navegador bloquea el audio,
+             * dejamos el botón disponible.
+             */
+
+            musicButton.textContent =
+                "🎵 TOCA AQUÍ PARA REPRODUCIR";
+
+        }
 
     }
-
-}
-
-
-updatePartyMode();
-
-setInterval(
-    updatePartyMode,
-    1000
-);
-
-
-/* ==========================================
-   PANTALLA FINAL
-========================================== */
-
-const finalDate =
-    new Date(
-        "2026-09-28T00:00:00"
-    ).getTime();
-
-
-function updateFinalScreen(){
-
-    const now =
-        Date.now();
-
-    const finalScreen =
-        document.getElementById(
-            "finalScreen"
-        );
-
-
-    if(now >= finalDate){
-
-        finalScreen.classList.remove(
-            "hidden"
-        );
-
-    }
-
-}
-
-
-updateFinalScreen();
-
-setInterval(
-    updateFinalScreen,
-    1000
 );
 
 </script>
 
 </body>
 </html>
-```
