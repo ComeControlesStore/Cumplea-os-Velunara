@@ -1,859 +1,929 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Administración | Velunara</title>
-
-    <meta
-        name="robots"
-        content="noindex,nofollow,noarchive"
-    >
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-        defer>
-    </script>
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap"
-        rel="stylesheet"
-    >
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            margin: 0;
-            min-height: 100%;
-        }
-
-        body {
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    #35144f 0%,
-                    #210d35 40%,
-                    #100719 75%,
-                    #07030c 100%
-                );
-
-            color: white;
-            font-family: Georgia, serif;
-            overflow-x: hidden;
-        }
-
-        button,
-        input {
-            font-family: inherit;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* =========================
-           ESTRELLAS
-        ========================= */
-
-        body::before {
-            content: "";
-
-            position: fixed;
-            inset: 0;
-
-            pointer-events: none;
-
-            opacity: .35;
-
-            background-image:
-                radial-gradient(
-                    circle,
-                    #ffffff 1px,
-                    transparent 1px
-                ),
-                radial-gradient(
-                    circle,
-                    #d9b7ff 1px,
-                    transparent 1px
-                );
-
-            background-size:
-                95px 95px,
-                145px 145px;
-
-            background-position:
-                10px 20px,
-                60px 80px;
 
-            z-index: 0;
-        }
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Administración | Velunara</title>
+
+<meta
+    name="robots"
+    content="noindex,nofollow,noarchive"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:#08030c;
+    color:#fff;
+    font-family:Georgia,"Times New Roman",serif;
+    overflow-x:hidden;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =====================================
+   ESTRELLAS
+===================================== */
+
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+}
 
-        /* =========================
-           LOGIN
-        ========================= */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:#fff;
+    border-radius:50%;
+    opacity:.7;
+    animation:twinkle 3s infinite ease-in-out;
+}
 
-        #loginScreen {
-            position: relative;
-            z-index: 2;
+@keyframes twinkle{
 
-            min-height: 100vh;
+    0%,100%{
+        opacity:.2;
+        transform:scale(.8);
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    50%{
+        opacity:1;
+        transform:scale(1.4);
+    }
 
-            padding: 25px;
-        }
+}
 
-        .login-box {
-            width: min(420px, 94vw);
+/* =====================================
+   LOGIN
+===================================== */
 
-            padding: 35px 30px;
+#loginScreen{
+    position:fixed;
+    inset:0;
+    z-index:10000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 
-            border-radius: 25px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(95,30,125,.4),
+            #08030c 70%
+        );
+}
 
-            background:
-                linear-gradient(
-                    145deg,
-                    #281038,
-                    #13081c
-                );
+.login-box{
+    position:relative;
+    z-index:1;
 
-            border: 1px solid rgba(210, 170, 240, .35);
+    width:min(430px,100%);
 
-            box-shadow:
-                0 25px 70px rgba(0, 0, 0, .65);
+    padding:35px 28px;
 
-            text-align: center;
+    border:1px solid rgba(205,155,255,.5);
+    border-radius:24px;
 
-            animation:
-                loginAppear
-                .8s ease both;
-        }
+    background:
+        linear-gradient(
+            145deg,
+            rgba(39,10,52,.97),
+            rgba(14,3,20,.98)
+        );
 
-        @keyframes loginAppear {
-            from {
-                opacity: 0;
-                transform:
-                    translateY(25px)
-                    scale(.97);
-            }
+    box-shadow:
+        0 0 45px rgba(130,40,210,.4),
+        inset 0 0 30px rgba(255,255,255,.025);
 
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-        }
+    text-align:center;
+}
 
-        .login-title {
-            margin: 0;
+.login-symbol{
+    font-size:38px;
+    color:#d6aaff;
 
-            font-family:
-                "Cinzel Decorative",
-                Georgia,
-                serif;
+    text-shadow:
+        0 0 15px #9d4edd,
+        0 0 30px #6d1e9f;
 
-            font-size:
-                clamp(
-                    32px,
-                    8vw,
-                    50px
-                );
+    margin-bottom:12px;
+}
 
-            color: #f1ddff;
+.login-title{
+    font-family:"Trebuchet MS",Arial,sans-serif;
 
-            text-shadow:
-                0 0 12px
-                rgba(210, 160, 255, .7);
-        }
+    font-size:28px;
 
-        .login-subtitle {
-            margin: 12px 0 30px;
+    letter-spacing:2px;
 
-            color: #d9c5e5;
+    color:#f4e7ff;
 
-            font-size: 15px;
-        }
+    margin-bottom:8px;
+}
 
-        /* =========================
-           CAMPOS
-        ========================= */
+.login-subtitle{
+    color:#bfaac9;
 
-        .field {
-            text-align: left;
-            margin-bottom: 18px;
-        }
+    font-size:14px;
 
-        .field label {
-            display: block;
+    line-height:1.6;
 
-            margin-bottom: 7px;
+    margin-bottom:25px;
+}
 
-            font-size: 14px;
-            color: #d9c5e5;
-        }
+.login-input{
+    width:100%;
 
-        .field input {
-            width: 100%;
+    padding:14px;
 
-            padding: 13px 14px;
+    border-radius:12px;
 
-            border-radius: 12px;
+    border:1px solid rgba(190,130,230,.35);
 
-            border:
-                1px solid
-                rgba(214, 177, 237, .3);
+    background:rgba(10,2,15,.8);
 
-            outline: none;
+    color:#fff;
 
-            background: #100719;
+    outline:none;
 
-            color: white;
+    font-family:Georgia,serif;
 
-            font-size: 15px;
-        }
+    font-size:15px;
 
-        .field input:focus {
-            border-color: #c99ee8;
+    text-align:center;
 
-            box-shadow:
-                0 0 0 3px
-                rgba(180, 110, 220, .12);
-        }
+    margin-bottom:14px;
+}
 
-        /* =========================
-           PASSWORD
-        ========================= */
+.login-input:focus{
+    border-color:#c17aff;
 
-        .password-wrapper {
-            position: relative;
-            width: 100%;
-        }
+    box-shadow:
+        0 0 15px rgba(160,70,255,.3);
+}
 
-        .password-wrapper input {
-            padding-right: 50px;
-        }
+.login-button{
+    width:100%;
 
-        .password-toggle {
-            position: absolute;
+    padding:14px;
 
-            right: 8px;
-            top: 50%;
+    border-radius:12px;
 
-            transform: translateY(-50%);
+    border:1px solid rgba(215,170,255,.65);
 
-            width: 38px;
-            height: 38px;
+    background:
+        linear-gradient(
+            135deg,
+            #68199b,
+            #3d104e
+        );
 
-            border: 0;
-            border-radius: 10px;
+    color:white;
 
-            background: transparent;
+    font-family:Georgia,serif;
 
-            color: #e6d1f2;
+    font-size:15px;
 
-            cursor: pointer;
+    cursor:pointer;
 
-            font-size: 18px;
-        }
+    transition:.3s;
 
-        .password-toggle:hover {
-            background:
-                rgba(255, 255, 255, .06);
-        }
+    box-shadow:
+        0 0 20px rgba(145,55,230,.25);
+}
 
-        /* =========================
-           LOGIN BUTTON
-        ========================= */
+.login-button:hover{
+    transform:translateY(-1px);
 
-        .login-button {
-            width: 100%;
+    box-shadow:
+        0 0 30px rgba(180,90,255,.5);
+}
 
-            margin-top: 8px;
+.login-error{
+    margin-top:15px;
 
-            padding: 14px;
+    padding:10px;
 
-            border-radius: 15px;
+    border-radius:10px;
 
-            border:
-                1px solid
-                rgba(214, 177, 237, .4);
+    border:1px solid rgba(230,100,130,.35);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #6c3789,
-                    #3e1d58
-                );
+    background:rgba(130,20,40,.3);
 
-            color: white;
+    color:#ffc6d1;
 
-            cursor: pointer;
+    font-size:13px;
+}
 
-            font-size: 15px;
+/* =====================================
+   ADMIN
+===================================== */
 
-            letter-spacing: 1px;
+#adminApp{
+    position:relative;
+    z-index:1;
 
-            transition: .3s;
-        }
+    min-height:100vh;
 
-        .login-button:hover {
-            transform:
-                translateY(-2px)
-                scale(1.01);
+    padding:35px 20px 60px;
+}
 
-            box-shadow:
-                0 10px 30px
-                rgba(0, 0, 0, .35);
-        }
+.admin-container{
+    width:min(1200px,100%);
+    margin:auto;
+}
 
-        .login-button:disabled {
-            opacity: .55;
-            cursor: not-allowed;
-            transform: none;
-        }
+/* =====================================
+   HEADER
+===================================== */
 
-        #loginMessage {
-            min-height: 20px;
+.admin-header{
+    display:flex;
 
-            margin-top: 15px;
+    justify-content:space-between;
 
-            font-size: 14px;
+    align-items:center;
 
-            color: #ff9b9b;
-        }
+    gap:20px;
 
-        /* =========================
-           ADMIN
-        ========================= */
+    margin-bottom:30px;
 
-        #adminScreen {
-            position: relative;
-            z-index: 2;
+    padding-bottom:25px;
 
-            min-height: 100vh;
+    border-bottom:
+        1px solid
+        rgba(190,130,235,.2);
+}
 
-            padding:
-                30px
-                25px
-                60px;
-        }
+.admin-brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
 
-        .admin-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: auto;
-        }
+.admin-symbol{
+    font-size:35px;
 
-        /* =========================
-           HEADER
-        ========================= */
+    color:#d5a6ff;
 
-        .admin-header {
-            display: flex;
+    text-shadow:
+        0 0 15px #9d4edd,
+        0 0 30px #6d1e9f;
+}
 
-            align-items: center;
-            justify-content: space-between;
+.admin-title{
+    margin:0;
 
-            gap: 20px;
+    font-family:"Trebuchet MS",Arial,sans-serif;
 
-            margin-bottom: 30px;
+    font-size:clamp(24px,5vw,38px);
 
-            padding-bottom: 20px;
+    letter-spacing:2px;
 
-            border-bottom:
-                1px solid
-                rgba(214, 177, 237, .18);
-        }
+    color:#f3e5ff;
+}
 
-        .admin-title {
-            margin: 0;
+.admin-subtitle{
+    margin-top:5px;
 
-            font-family:
-                "Cinzel Decorative",
-                Georgia,
-                serif;
+    color:#aa94b5;
 
-            font-size:
-                clamp(
-                    28px,
-                    5vw,
-                    45px
-                );
+    font-size:13px;
+}
 
-            color: #f1ddff;
+.logout-button{
+    border:1px solid rgba(190,130,235,.35);
 
-            text-shadow:
-                0 0 10px
-                rgba(210, 160, 255, .55);
-        }
+    background:rgba(30,7,40,.75);
 
-        .admin-subtitle {
-            margin-top: 7px;
+    color:#e3d0eb;
 
-            color: #cdb8da;
+    padding:10px 16px;
 
-            font-size: 14px;
-        }
+    border-radius:10px;
 
-        .header-actions {
-            display: flex;
+    cursor:pointer;
 
-            gap: 10px;
+    font-family:Georgia,serif;
 
-            flex-wrap: wrap;
+    transition:.25s;
+}
 
-            justify-content: flex-end;
-        }
+.logout-button:hover{
+    border-color:#c17aff;
 
-        .header-button {
-            padding:
-                11px
-                16px;
+    background:rgba(80,25,105,.5);
+}
 
-            border-radius: 12px;
+/* =====================================
+   ESTADÍSTICAS
+===================================== */
 
-            border:
-                1px solid
-                rgba(214, 177, 237, .3);
+.stats-grid{
+    display:grid;
 
-            background: #211025;
+    grid-template-columns:
+        repeat(4,1fr);
 
-            color: white;
+    gap:15px;
 
-            cursor: pointer;
+    margin-bottom:30px;
+}
 
-            transition: .25s;
-        }
+.stat-card{
+    padding:22px 16px;
 
-        .header-button:hover {
-            background: #34203d;
+    border-radius:17px;
 
-            transform:
-                translateY(-1px);
-        }
+    border:
+        1px solid
+        rgba(190,130,235,.3);
 
-        .header-button:disabled {
-            opacity: .55;
+    background:
+        rgba(35,8,45,.55);
 
-            cursor: not-allowed;
+    text-align:center;
 
-            transform: none;
-        }
+    box-shadow:
+        0 0 20px
+        rgba(130,50,210,.08);
+}
 
-        /* =========================
-           ESTADÍSTICAS
-        ========================= */
+.stat-icon{
+    font-size:25px;
 
-        .stats {
-            display: grid;
+    margin-bottom:8px;
+}
 
-            grid-template-columns:
-                repeat(5, 1fr);
+.stat-number{
+    font-size:30px;
 
-            gap: 15px;
+    font-weight:bold;
 
-            margin-bottom: 25px;
-        }
+    color:#f3e4ff;
+}
 
-        .stat-card {
-            padding: 22px;
+.stat-label{
+    margin-top:5px;
 
-            border-radius: 18px;
+    color:#bca6c7;
 
-            background:
-                rgba(35, 14, 48, .82);
+    font-size:11px;
 
-            border:
-                1px solid
-                rgba(214, 177, 237, .2);
+    letter-spacing:1px;
+}
 
-            box-shadow:
-                0 12px 35px
-                rgba(0, 0, 0, .25);
-        }
+/* =====================================
+   PANEL
+===================================== */
 
-        .stat-label {
-            font-size: 13px;
+.panel{
+    border:
+        1px solid
+        rgba(190,130,235,.3);
 
-            color: #cdb8da;
+    border-radius:20px;
 
-            margin-bottom: 8px;
-        }
+    background:
+        rgba(22,5,30,.7);
 
-        .stat-number {
-            font-size: 32px;
+    box-shadow:
+        0 0 30px
+        rgba(130,50,210,.1);
 
-            font-weight: bold;
+    overflow:hidden;
+}
 
-            color: #f0dcff;
-        }
+.panel-header{
+    display:flex;
 
-        /* =========================
-           TABLA
-        ========================= */
+    justify-content:space-between;
 
-        .table-card {
-            background:
-                rgba(20, 8, 28, .9);
+    align-items:center;
 
-            border:
-                1px solid
-                rgba(214, 177, 237, .2);
+    gap:15px;
 
-            border-radius: 20px;
+    padding:20px;
 
-            overflow: hidden;
+    border-bottom:
+        1px solid
+        rgba(190,130,235,.18);
+}
 
-            box-shadow:
-                0 20px 60px
-                rgba(0, 0, 0, .35);
-        }
+.panel-title{
+    margin:0;
 
-        .table-title {
-            padding:
-                20px
-                22px;
+    font-size:20px;
 
-            border-bottom:
-                1px solid
-                rgba(214, 177, 237, .15);
+    color:#ead7f1;
+}
 
-            font-size: 18px;
+.panel-actions{
+    display:flex;
 
-            color: #ead8f5;
-        }
+    gap:8px;
 
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-        }
+    flex-wrap:wrap;
+}
 
-        table {
-            width: 100%;
+.action-button{
+    padding:9px 13px;
 
-            border-collapse: collapse;
+    border-radius:9px;
 
-            min-width: 900px;
-        }
+    border:
+        1px solid
+        rgba(190,130,235,.35);
 
-        thead {
-            background:
-                rgba(75, 35, 95, .45);
-        }
+    background:
+        rgba(35,8,45,.8);
 
-        th,
-        td {
-            padding:
-                14px
-                15px;
+    color:#eee0f4;
 
-            text-align: left;
+    cursor:pointer;
 
-            border-bottom:
-                1px solid
-                rgba(214, 177, 237, .1);
-        }
+    font-family:Georgia,serif;
 
-        th {
-            font-size: 13px;
+    font-size:12px;
 
-            color: #d8c4e4;
+    transition:.2s;
+}
 
-            font-weight: normal;
+.action-button:hover{
+    border-color:#c17aff;
 
-            white-space: nowrap;
-        }
+    background:
+        rgba(80,25,105,.55);
+}
 
-        td {
-            font-size: 14px;
+/* =====================================
+   FILTROS
+===================================== */
 
-            color: #f2e9f5;
-        }
+.filters{
+    display:grid;
 
-        tbody tr {
-            transition:
-                background .2s ease;
-        }
+    grid-template-columns:
+        1fr
+        180px
+        180px;
 
-        tbody tr:hover {
-            background:
-                rgba(255, 255, 255, .025);
-        }
+    gap:10px;
 
-        /* =========================
-           ASISTENCIA
-        ========================= */
+    padding:18px;
 
-        .status {
-            display: inline-block;
+    border-bottom:
+        1px solid
+        rgba(190,130,235,.15);
+}
 
-            padding:
-                6px
-                10px;
+.filter-input,
+.filter-select{
+    width:100%;
 
-            border-radius: 20px;
+    padding:11px 12px;
 
-            font-size: 12px;
-        }
+    border-radius:10px;
 
-        .status.yes {
-            background:
-                rgba(60, 170, 90, .15);
+    border:
+        1px solid
+        rgba(190,130,235,.3);
 
-            color: #b9f7c3;
+    background:
+        rgba(8,2,12,.8);
 
-            border:
-                1px solid
-                rgba(120, 230, 140, .2);
-        }
+    color:#fff;
 
-        .status.no {
-            background:
-                rgba(200, 70, 70, .12);
+    outline:none;
 
-            color: #ffb4b4;
+    font-family:Georgia,serif;
+}
 
-            border:
-                1px solid
-                rgba(255, 120, 120, .2);
-        }
+.filter-input:focus,
+.filter-select:focus{
+    border-color:#c17aff;
 
-        /* =========================
-           ELIMINAR
-        ========================= */
+    box-shadow:
+        0 0 10px
+        rgba(160,70,255,.2);
+}
 
-        .delete-button {
-            padding:
-                7px
-                11px;
+/* =====================================
+   TABLA
+===================================== */
 
-            border-radius: 9px;
+.table-wrapper{
+    width:100%;
 
-            border:
-                1px solid
-                rgba(255, 130, 130, .25);
+    overflow-x:auto;
+}
 
-            background:
-                rgba(110, 30, 40, .35);
+table{
+    width:100%;
 
-            color: #ffbaba;
+    border-collapse:collapse;
 
-            cursor: pointer;
+    min-width:850px;
+}
 
-            transition: .2s;
-        }
+thead{
+    background:
+        rgba(60,15,80,.45);
+}
 
-        .delete-button:hover {
-            background:
-                rgba(150, 40, 50, .5);
-        }
+th{
+    padding:14px 12px;
 
-        /* =========================
-           MENSAJES
-        ========================= */
+    text-align:left;
 
-        #adminMessage {
-            min-height: 22px;
+    color:#d9c3e5;
 
-            margin:
-                15px
-                20px;
+    font-size:12px;
 
-            text-align: center;
+    letter-spacing:1px;
 
-            font-size: 14px;
-        }
+    white-space:nowrap;
+}
 
-        .empty {
-            padding:
-                45px
-                20px;
+td{
+    padding:14px 12px;
 
-            text-align: center;
+    border-top:
+        1px solid
+        rgba(190,130,235,.1);
 
-            color: #bca8c7;
-        }
+    color:#e8dcec;
 
-        /* =========================
-           MOBILE
-        ========================= */
+    font-size:13px;
 
-        @media (max-width: 900px) {
+    vertical-align:middle;
+}
 
-            .stats {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-        }
+tbody tr{
+    transition:.2s;
+}
 
-        @media (max-width: 700px) {
+tbody tr:hover{
+    background:
+        rgba(90,25,120,.18);
+}
 
-            #adminScreen {
-                padding:
-                    20px
-                    14px
-                    40px;
-            }
+/* =====================================
+   BADGES
+===================================== */
 
-            .admin-header {
-                align-items: flex-start;
+.badge{
+    display:inline-block;
 
-                flex-direction: column;
-            }
+    padding:5px 9px;
 
-            .header-actions {
-                width: 100%;
+    border-radius:20px;
 
-                justify-content: flex-start;
-            }
+    font-size:11px;
 
-            .header-button {
-                flex: 1;
+    white-space:nowrap;
+}
 
-                min-width: 120px;
-            }
+.badge-yes{
+    color:#e5c8ff;
 
-            .stats {
-                grid-template-columns: 1fr;
-            }
+    border:
+        1px solid
+        rgba(190,120,255,.45);
 
-            .stat-card {
-                padding: 18px;
-            }
+    background:
+        rgba(110,40,150,.3);
+}
 
-            .stat-number {
-                font-size: 28px;
-            }
+.badge-no{
+    color:#d3c4d8;
 
-            .login-box {
-                padding:
-                    30px
-                    22px;
-            }
-        }
+    border:
+        1px solid
+        rgba(150,130,160,.3);
 
-    </style>
+    background:
+        rgba(60,50,65,.3);
+}
+
+.category-badge{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin:2px;
+
+    padding:4px 7px;
+
+    border-radius:8px;
+
+    background:
+        rgba(80,25,105,.35);
+
+    border:
+        1px solid
+        rgba(190,130,235,.2);
+
+    font-size:11px;
+}
+
+/* =====================================
+   LOADING
+===================================== */
+
+.loading{
+    padding:50px 20px;
+
+    text-align:center;
+
+    color:#bca7c5;
+}
+
+.loading-symbol{
+    font-size:30px;
+
+    animation:spin 2s linear infinite;
+
+    display:inline-block;
+
+    margin-bottom:10px;
+}
+
+@keyframes spin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* =====================================
+   VACÍO
+===================================== */
+
+.empty{
+    padding:55px 20px;
+
+    text-align:center;
+
+    color:#b6a2be;
+}
+
+.empty-icon{
+    font-size:40px;
+
+    margin-bottom:10px;
+}
+
+/* =====================================
+   ERROR
+===================================== */
+
+.admin-error{
+    margin-bottom:20px;
+
+    padding:13px 15px;
+
+    border-radius:12px;
+
+    border:
+        1px solid
+        rgba(230,100,130,.35);
+
+    background:
+        rgba(130,20,40,.25);
+
+    color:#ffcbd5;
+
+    font-size:13px;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.admin-footer{
+    text-align:center;
+
+    margin-top:30px;
+
+    color:#796681;
+
+    font-size:11px;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:850px){
+
+    .stats-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .filters{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filters .filter-input{
+        grid-column:1/-1;
+    }
+
+}
+
+@media(max-width:600px){
+
+    #adminApp{
+        padding:
+            22px 12px
+            40px;
+    }
+
+    .admin-header{
+        align-items:flex-start;
+    }
+
+    .admin-title{
+        font-size:24px;
+    }
+
+    .admin-symbol{
+        font-size:28px;
+    }
+
+    .logout-button{
+        padding:8px 11px;
+
+        font-size:11px;
+    }
+
+    .stats-grid{
+        gap:8px;
+    }
+
+    .stat-card{
+        padding:16px 8px;
+    }
+
+    .stat-number{
+        font-size:24px;
+    }
+
+    .panel-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .filters .filter-input{
+        grid-column:auto;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .login-box{
+        padding:28px 18px;
+    }
+
+    .login-title{
+        font-size:23px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat-label{
+        font-size:9px;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-    <!-- =========================
-         LOGIN
-    ========================= -->
 
-    <section id="loginScreen">
+<!-- =====================================
+     ESTRELLAS
+===================================== -->
 
-        <div class="login-box">
+<div
+    class="stars"
+    id="stars">
+</div>
 
-            <h1 class="login-title">
-                VELUNARA
-            </h1>
 
-            <div class="login-subtitle">
-                Panel de administración
-            </div>
+<!-- =====================================
+     LOGIN
+===================================== -->
 
-            <form id="loginForm">
+<div id="loginScreen">
 
-                <div class="field">
+    <div class="login-box">
 
-                    <label for="email">
-                        Correo
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        autocomplete="username"
-                        required
-                    >
-
-                </div>
-
-                <div class="field">
-
-                    <label for="password">
-                        Contraseña
-                    </label>
-
-                    <div class="password-wrapper">
-
-                        <input
-                            type="password"
-                            id="password"
-                            autocomplete="current-password"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            id="togglePassword"
-                            class="password-toggle"
-                            aria-label="Mostrar contraseña"
-                            title="Mostrar contraseña"
-                        >
-                            👁️
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <button
-                    type="submit"
-                    class="login-button"
-                    id="loginButton"
-                >
-                    🔐 INICIAR SESIÓN
-                </button>
-
-                <div id="loginMessage"></div>
-
-            </form>
-
+        <div class="login-symbol">
+            ✦
         </div>
 
-    </section>
+        <div class="login-title">
+            ADMINISTRACIÓN
+        </div>
+
+        <div class="login-subtitle">
+            Panel privado de confirmaciones
+            <br>
+            <span style="color:#d3b4e3;">
+                VELUNARA
+            </span>
+        </div>
+
+        <input
+            id="adminPassword"
+            class="login-input"
+            type="password"
+            placeholder="Contraseña"
+            autocomplete="current-password"
+        >
+
+        <button
+            id="loginButton"
+            class="login-button">
+            INICIAR SESIÓN
+        </button>
+
+        <div
+            id="loginError"
+            class="login-error hidden">
+            Contraseña incorrecta.
+        </div>
+
+    </div>
+
+</div>
 
 
-    <!-- =========================
-         ADMIN
-    ========================= -->
+<!-- =====================================
+     ADMIN APP
+===================================== -->
 
-    <section
-        id="adminScreen"
-        class="hidden"
-    >
+<div
+    id="adminApp"
+    class="hidden">
 
-        <div class="admin-container">
+    <div class="admin-container">
 
-            <!-- HEADER -->
 
-            <header class="admin-header">
+        <!-- HEADER -->
+
+        <header class="admin-header">
+
+            <div class="admin-brand">
+
+                <div class="admin-symbol">
+                    ✦
+                </div>
 
                 <div>
 
@@ -862,1079 +932,1211 @@
                     </h1>
 
                     <div class="admin-subtitle">
-                        Confirmaciones de asistencia
+                        Panel de administración
                     </div>
 
                 </div>
 
-                <div class="header-actions">
+            </div>
+
+            <button
+                id="logoutButton"
+                class="logout-button">
+                CERRAR SESIÓN
+            </button>
+
+        </header>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="adminError"
+            class="admin-error hidden">
+        </div>
+
+
+        <!-- ESTADÍSTICAS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="totalConfirmations">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    CONFIRMACIONES
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💜
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="totalAttending">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    ASISTIRÁN
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👨‍👩‍👧
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="totalAdults">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    ADULTOS
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🧸
+                </div>
+
+                <div
+                    class="stat-number"
+                    id="totalChildren">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    NIÑOS
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONFIRMACIONES -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2 class="panel-title">
+                    ✦ Confirmaciones
+                </h2>
+
+                <div class="panel-actions">
 
                     <button
-                        type="button"
-                        class="header-button"
                         id="refreshButton"
-                    >
+                        class="action-button">
                         ↻ ACTUALIZAR
                     </button>
 
                     <button
-                        type="button"
-                        class="header-button"
-                        id="logoutButton"
-                    >
-                        CERRAR SESIÓN
+                        id="exportButton"
+                        class="action-button">
+                        ↓ EXPORTAR
                     </button>
 
                 </div>
 
-            </header>
+            </div>
 
 
-            <!-- ESTADÍSTICAS -->
+            <!-- FILTROS -->
 
-            <section class="stats">
+            <div class="filters">
 
-                <div class="stat-card">
+                <input
+                    id="searchInput"
+                    class="filter-input"
+                    type="search"
+                    placeholder="Buscar por nombre o teléfono..."
+                >
 
-                    <div class="stat-label">
-                        Confirmaciones
-                    </div>
+                <select
+                    id="attendanceFilter"
+                    class="filter-select">
 
-                    <div
-                        class="stat-number"
-                        id="totalConfirmaciones"
-                    >
-                        0
-                    </div>
+                    <option value="todos">
+                        Todas
+                    </option>
 
-                </div>
+                    <option value="si">
+                        Sí asistirán
+                    </option>
 
-
-                <div class="stat-card">
-
-                    <div class="stat-label">
-                        Personas
-                    </div>
-
-                    <div
-                        class="stat-number"
-                        id="totalPersonas"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-label">
-                        Adultos
-                    </div>
-
-                    <div
-                        class="stat-number"
-                        id="totalAdultos"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-label">
-                        Niños
-                    </div>
-
-                    <div
-                        class="stat-number"
-                        id="totalNinos"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-label">
+                    <option value="no">
                         No asistirán
-                    </div>
+                    </option>
 
-                    <div
-                        class="stat-number"
-                        id="totalNoAsistiran"
-                    >
-                        0
-                    </div>
+                </select>
 
-                </div>
 
-            </section>
+                <select
+                    id="categoryFilter"
+                    class="filter-select">
+
+                    <option value="todos">
+                        Todas las categorías
+                    </option>
+
+                    <option value="adultos">
+                        Con adultos
+                    </option>
+
+                    <option value="ninos">
+                        Con niños
+                    </option>
+
+                </select>
+
+            </div>
 
 
             <!-- TABLA -->
 
-            <section class="table-card">
+            <div class="table-wrapper">
 
-                <div class="table-title">
-                    Lista de confirmaciones
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                NOMBRE
+                            </th>
+
+                            <th>
+                                ASISTENCIA
+                            </th>
+
+                            <th>
+                                ADULTOS
+                            </th>
+
+                            <th>
+                                NIÑOS
+                            </th>
+
+                            <th>
+                                TOTAL
+                            </th>
+
+                            <th>
+                                TELÉFONO
+                            </th>
+
+                            <th>
+                                FECHA
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody
+                        id="confirmationsBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- LOADING -->
+
+            <div
+                id="loading"
+                class="loading">
+
+                <div class="loading-symbol">
+                    ✦
                 </div>
 
-                <div class="table-wrapper">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Nombre
-                                </th>
-
-                                <th>
-                                    Personas
-                                </th>
-
-                                <th>
-                                    Adultos
-                                </th>
-
-                                <th>
-                                    Niños
-                                </th>
-
-                                <th>
-                                    Asistencia
-                                </th>
-
-                                <th>
-                                    Teléfono
-                                </th>
-
-                                <th>
-                                    Fecha
-                                </th>
-
-                                <th>
-                                    Acción
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody
-                            id="guestTableBody"
-                        ></tbody>
-
-                    </table>
-
+                <div>
+                    Cargando confirmaciones...
                 </div>
 
-                <div
-                    id="emptyMessage"
-                    class="empty hidden"
-                >
-                    No hay confirmaciones todavía.
+            </div>
+
+
+            <!-- VACÍO -->
+
+            <div
+                id="empty"
+                class="empty hidden">
+
+                <div class="empty-icon">
+                    ✦
                 </div>
 
-                <div id="adminMessage"></div>
+                <div>
+                    No hay confirmaciones que mostrar.
+                </div>
 
-            </section>
+            </div>
 
+        </section>
+
+
+        <div class="admin-footer">
+            Panel privado · Velunara · 2026
         </div>
 
-    </section>
+    </div>
+
+</div>
 
 
-    <script>
+<script>
 
-        /* =========================
-           ESPERAR SUPABASE
-        ========================= */
+/* =====================================
+   SUPABASE
+===================================== */
 
-        window.addEventListener(
-            "load",
-            init
+const SUPABASE_URL =
+    "https://ibdjtobuadgzozbggxxu.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =====================================
+   CONTRASEÑA DEL ADMIN
+=====================================
+
+   IMPORTANTE:
+   Esta contraseña es una protección
+   de interfaz, no una seguridad real
+   contra alguien que conozca el código.
+
+===================================== */
+
+const ADMIN_PASSWORD =
+    "VELUNARA_ADMIN_2026";
+
+
+/* =====================================
+   ESTRELLAS
+===================================== */
+
+const stars =
+    document.getElementById("stars");
+
+for(let i = 0; i < 80; i++){
+
+    const star =
+        document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 3 + "s";
+
+    star.style.animationDuration =
+        (2 + Math.random() * 3) + "s";
+
+    stars.appendChild(star);
+
+}
+
+
+/* =====================================
+   ELEMENTOS
+===================================== */
+
+const loginScreen =
+    document.getElementById(
+        "loginScreen"
+    );
+
+const adminApp =
+    document.getElementById(
+        "adminApp"
+    );
+
+const adminPassword =
+    document.getElementById(
+        "adminPassword"
+    );
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+const loginError =
+    document.getElementById(
+        "loginError"
+    );
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+const adminError =
+    document.getElementById(
+        "adminError"
+    );
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+const empty =
+    document.getElementById(
+        "empty"
+    );
+
+const confirmationsBody =
+    document.getElementById(
+        "confirmationsBody"
+    );
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+const attendanceFilter =
+    document.getElementById(
+        "attendanceFilter"
+    );
+
+const categoryFilter =
+    document.getElementById(
+        "categoryFilter"
+    );
+
+const refreshButton =
+    document.getElementById(
+        "refreshButton"
+    );
+
+const exportButton =
+    document.getElementById(
+        "exportButton"
+    );
+
+
+let confirmations = [];
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+function showAdmin(){
+
+    loginScreen.classList.add(
+        "hidden"
+    );
+
+    adminApp.classList.remove(
+        "hidden"
+    );
+
+    loadConfirmations();
+
+}
+
+
+function showLogin(){
+
+    adminApp.classList.add(
+        "hidden"
+    );
+
+    loginScreen.classList.remove(
+        "hidden"
+    );
+
+    adminPassword.value = "";
+
+}
+
+
+loginButton.addEventListener(
+    "click",
+    () => {
+
+        if(
+            adminPassword.value ===
+            ADMIN_PASSWORD
+        ){
+
+            loginError.classList.add(
+                "hidden"
+            );
+
+            sessionStorage.setItem(
+                "velunara_admin",
+                "true"
+            );
+
+            showAdmin();
+
+        }else{
+
+            loginError.textContent =
+                "Contraseña incorrecta.";
+
+            loginError.classList.remove(
+                "hidden"
+            );
+
+            adminPassword.value = "";
+
+            adminPassword.focus();
+
+        }
+
+    }
+);
+
+
+adminPassword.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Enter"){
+
+            loginButton.click();
+
+        }
+
+    }
+);
+
+
+logoutButton.addEventListener(
+    "click",
+    () => {
+
+        sessionStorage.removeItem(
+            "velunara_admin"
         );
 
+        showLogin();
 
-        /* =========================
-           CONFIGURACIÓN
-        ========================= */
-
-        const SUPABASE_URL =
-            "https://ibdjtobuadgzozbggxxu.supabase.co";
-
-        const SUPABASE_KEY =
-            "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
+    }
+);
 
 
-        const supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_KEY,
-                {
-                    auth: {
-                        persistSession: true,
-                        autoRefreshToken: true,
-                        detectSessionInUrl: true
+/* =====================================
+   SESIÓN
+===================================== */
+
+if(
+    sessionStorage.getItem(
+        "velunara_admin"
+    ) === "true"
+){
+
+    showAdmin();
+
+}
+
+
+/* =====================================
+   CARGAR CONFIRMACIONES
+===================================== */
+
+async function loadConfirmations(){
+
+    loading.classList.remove(
+        "hidden"
+    );
+
+    empty.classList.add(
+        "hidden"
+    );
+
+    adminError.classList.add(
+        "hidden"
+    );
+
+
+    try{
+
+        const result =
+            await supabaseClient
+                .from("confirmaciones")
+                .select("*")
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
                     }
-                }
-            );
+                );
 
 
-        /* =========================
-           ELEMENTOS
-        ========================= */
+        if(result.error){
 
-        const loginScreen =
-            document.getElementById(
-                "loginScreen"
-            );
-
-        const adminScreen =
-            document.getElementById(
-                "adminScreen"
-            );
-
-        const loginForm =
-            document.getElementById(
-                "loginForm"
-            );
-
-        const loginButton =
-            document.getElementById(
-                "loginButton"
-            );
-
-        const loginMessage =
-            document.getElementById(
-                "loginMessage"
-            );
-
-        const togglePassword =
-            document.getElementById(
-                "togglePassword"
-            );
-
-        const passwordInput =
-            document.getElementById(
-                "password"
-            );
-
-        const refreshButton =
-            document.getElementById(
-                "refreshButton"
-            );
-
-        const logoutButton =
-            document.getElementById(
-                "logoutButton"
-            );
-
-        const guestTableBody =
-            document.getElementById(
-                "guestTableBody"
-            );
-
-        const emptyMessage =
-            document.getElementById(
-                "emptyMessage"
-            );
-
-        const adminMessage =
-            document.getElementById(
-                "adminMessage"
-            );
-
-        const totalConfirmaciones =
-            document.getElementById(
-                "totalConfirmaciones"
-            );
-
-        const totalPersonas =
-            document.getElementById(
-                "totalPersonas"
-            );
-
-        const totalAdultos =
-            document.getElementById(
-                "totalAdultos"
-            );
-
-        const totalNinos =
-            document.getElementById(
-                "totalNinos"
-            );
-
-        const totalNoAsistiran =
-            document.getElementById(
-                "totalNoAsistiran"
-            );
-
-
-        /* =========================
-           ESTADO
-        ========================= */
-
-        let loadingGuests = false;
-
-
-        /* =========================
-           MOSTRAR LOGIN
-        ========================= */
-
-        function showLogin() {
-
-            loginScreen.classList.remove(
-                "hidden"
-            );
-
-            adminScreen.classList.add(
-                "hidden"
-            );
+            throw result.error;
 
         }
 
 
-        /* =========================
-           MOSTRAR ADMIN
-        ========================= */
+        confirmations =
+            result.data || [];
 
-        function showAdmin() {
 
-            loginScreen.classList.add(
-                "hidden"
+        updateStatistics();
+
+        renderTable();
+
+
+    }catch(error){
+
+        console.error(
+            "Error cargando confirmaciones:",
+            error
+        );
+
+
+        adminError.textContent =
+            error?.message ||
+            "No se pudieron cargar las confirmaciones.";
+
+        adminError.classList.remove(
+            "hidden"
+        );
+
+        confirmations = [];
+
+        updateStatistics();
+
+        renderTable();
+
+    }finally{
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   ESTADÍSTICAS
+===================================== */
+
+function updateStatistics(){
+
+    const total =
+        confirmations.length;
+
+
+    const attending =
+        confirmations.filter(
+            item =>
+                String(
+                    item.asistencia || ""
+                ).toLowerCase() === "si"
+        );
+
+
+    const adults =
+        attending.reduce(
+            (sum,item) =>
+                sum +
+                Number(item.adultos || 0),
+            0
+        );
+
+
+    const children =
+        attending.reduce(
+            (sum,item) =>
+                sum +
+                Number(item.ninos || 0),
+            0
+        );
+
+
+    document.getElementById(
+        "totalConfirmations"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "totalAttending"
+    ).textContent =
+        adults + children;
+
+
+    document.getElementById(
+        "totalAdults"
+    ).textContent =
+        adults;
+
+
+    document.getElementById(
+        "totalChildren"
+    ).textContent =
+        children;
+
+}
+
+
+/* =====================================
+   FILTRAR
+===================================== */
+
+function getFilteredConfirmations(){
+
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const attendance =
+        attendanceFilter.value;
+
+
+    const category =
+        categoryFilter.value;
+
+
+    return confirmations.filter(
+        item => {
+
+            const nombre =
+                String(
+                    item.nombre || ""
+                ).toLowerCase();
+
+
+            const telefono =
+                String(
+                    item.telefono || ""
+                ).toLowerCase();
+
+
+            const asistencia =
+                String(
+                    item.asistencia || ""
+                ).toLowerCase();
+
+
+            const adultos =
+                Number(
+                    item.adultos || 0
+                );
+
+
+            const ninos =
+                Number(
+                    item.ninos || 0
+                );
+
+
+            const matchesSearch =
+                !search ||
+                nombre.includes(search) ||
+                telefono.includes(search);
+
+
+            const matchesAttendance =
+                attendance === "todos" ||
+                asistencia === attendance;
+
+
+            const matchesCategory =
+                category === "todos" ||
+                (
+                    category === "adultos" &&
+                    adultos > 0
+                ) ||
+                (
+                    category === "ninos" &&
+                    ninos > 0
+                );
+
+
+            return (
+                matchesSearch &&
+                matchesAttendance &&
+                matchesCategory
             );
 
-            adminScreen.classList.remove(
-                "hidden"
+        }
+    );
+
+}
+
+
+/* =====================================
+   FORMATO FECHA
+===================================== */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "Sin fecha";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleString(
+        "es-MX",
+        {
+            dateStyle:"short",
+            timeStyle:"short"
+        }
+    );
+
+}
+
+
+/* =====================================
+   ESCAPE HTML
+===================================== */
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================
+   TABLA
+===================================== */
+
+function renderTable(){
+
+    const filtered =
+        getFilteredConfirmations();
+
+
+    confirmationsBody.innerHTML = "";
+
+
+    if(!filtered.length){
+
+        empty.classList.remove(
+            "hidden"
+        );
+
+        return;
+
+    }
+
+
+    empty.classList.add(
+        "hidden"
+    );
+
+
+    filtered.forEach(
+        item => {
+
+            const tr =
+                document.createElement("tr");
+
+
+            const nombre =
+                escapeHtml(
+                    item.nombre ||
+                    "Sin nombre"
+                );
+
+
+            const asistencia =
+                String(
+                    item.asistencia || ""
+                ).toLowerCase();
+
+
+            const adultos =
+                Number(
+                    item.adultos || 0
+                );
+
+
+            const ninos =
+                Number(
+                    item.ninos || 0
+                );
+
+
+            /*
+             * Si personas existe en Supabase,
+             * lo usamos. Si no, calculamos
+             * adultos + niños.
+             */
+
+            const total =
+                Number(
+                    item.personas ??
+                    (adultos + ninos)
+                );
+
+
+            const telefono =
+                escapeHtml(
+                    item.telefono ||
+                    "No proporcionado"
+                );
+
+
+            const date =
+                formatDate(
+                    item.created_at
+                );
+
+
+            let attendanceHtml;
+
+
+            if(asistencia === "si"){
+
+                attendanceHtml =
+                    `
+                    <span class="badge badge-yes">
+                        💜 SÍ ASISTE
+                    </span>
+                    `;
+
+            }else{
+
+                attendanceHtml =
+                    `
+                    <span class="badge badge-no">
+                        🤍 NO ASISTE
+                    </span>
+                    `;
+
+            }
+
+
+            tr.innerHTML = `
+
+                <td>
+                    <strong>
+                        ${nombre}
+                    </strong>
+                </td>
+
+                <td>
+                    ${attendanceHtml}
+                </td>
+
+                <td>
+                    <span class="category-badge">
+                        👨‍👩‍👧 ${adultos}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="category-badge">
+                        🧸 ${ninos}
+                    </span>
+                </td>
+
+                <td>
+                    <strong>
+                        ${total}
+                    </strong>
+                </td>
+
+                <td>
+                    ${telefono}
+                </td>
+
+                <td>
+                    ${date}
+                </td>
+
+            `;
+
+
+            confirmationsBody.appendChild(
+                tr
             );
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   FILTROS EVENTOS
+===================================== */
+
+searchInput.addEventListener(
+    "input",
+    renderTable
+);
+
+attendanceFilter.addEventListener(
+    "change",
+    renderTable
+);
+
+categoryFilter.addEventListener(
+    "change",
+    renderTable
+);
+
+
+/* =====================================
+   ACTUALIZAR
+===================================== */
+
+refreshButton.addEventListener(
+    "click",
+    async () => {
+
+        refreshButton.disabled =
+            true;
+
+        refreshButton.textContent =
+            "↻ CARGANDO...";
+
+
+        await loadConfirmations();
+
+
+        refreshButton.disabled =
+            false;
+
+        refreshButton.textContent =
+            "↻ ACTUALIZAR";
+
+    }
+);
+
+
+/* =====================================
+   EXPORTAR CSV
+===================================== */
+
+exportButton.addEventListener(
+    "click",
+    () => {
+
+        const filtered =
+            getFilteredConfirmations();
+
+
+        if(!filtered.length){
+
+            alert(
+                "No hay confirmaciones para exportar."
+            );
+
+            return;
 
         }
 
 
-        /* =========================
-           PASSWORD
-        ========================= */
+        const rows = [
 
-        togglePassword.addEventListener(
-            "click",
-            () => {
+            [
+                "Nombre",
+                "Asistencia",
+                "Adultos",
+                "Niños",
+                "Total",
+                "Telefono",
+                "Fecha"
+            ]
 
-                const showing =
-                    passwordInput.type ===
-                    "text";
+        ];
 
-                passwordInput.type =
-                    showing
-                        ? "password"
-                        : "text";
 
-                togglePassword.textContent =
-                    showing
-                        ? "👁️"
-                        : "🙈";
+        filtered.forEach(
+            item => {
 
-                togglePassword.setAttribute(
-                    "aria-label",
-                    showing
-                        ? "Mostrar contraseña"
-                        : "Ocultar contraseña"
-                );
+                const adultos =
+                    Number(
+                        item.adultos || 0
+                    );
+
+                const ninos =
+                    Number(
+                        item.ninos || 0
+                    );
+
+                const total =
+                    Number(
+                        item.personas ??
+                        (adultos + ninos)
+                    );
+
+
+                rows.push([
+
+                    item.nombre || "",
+
+                    item.asistencia || "",
+
+                    adultos,
+
+                    ninos,
+
+                    total,
+
+                    item.telefono || "",
+
+                    formatDate(
+                        item.created_at
+                    )
+
+                ]);
 
             }
         );
 
 
-        /* =========================
-           LOGIN
-        ========================= */
-
-        loginForm.addEventListener(
-            "submit",
-            async event => {
-
-                event.preventDefault();
-
-                loginMessage.textContent = "";
-
-                loginButton.disabled = true;
-
-                loginButton.textContent =
-                    "INICIANDO SESIÓN...";
-
-
-                const email =
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim();
-
-                const password =
-                    passwordInput.value;
-
-
-                try {
-
-                    const {
-                        data,
-                        error
-                    } =
-                        await supabaseClient.auth
-                            .signInWithPassword({
-                                email,
-                                password
-                            });
-
-
-                    if (error) {
-
-                        console.error(
-                            "ERROR LOGIN:",
-                            error
-                        );
-
-                        loginMessage.textContent =
-                            "Correo o contraseña incorrectos.";
-
-                        return;
-
-                    }
-
-
-                    if (data.session) {
-
-                        showAdmin();
-
-                        await loadGuests();
-
-                    }
-
-                } catch (error) {
-
-                    console.error(
-                        "ERROR:",
-                        error
-                    );
-
-                    loginMessage.textContent =
-                        "No se pudo iniciar sesión.";
-
-                } finally {
-
-                    loginButton.disabled =
-                        false;
-
-                    loginButton.textContent =
-                        "🔐 INICIAR SESIÓN";
-
-                }
-
-            }
-        );
-
-
-        /* =========================
-           CARGAR CONFIRMACIONES
-        ========================= */
-
-        async function loadGuests() {
-
-            if (loadingGuests) {
-                return;
-            }
-
-            loadingGuests = true;
-
-            refreshButton.disabled = true;
-
-            refreshButton.textContent =
-                "↻ CARGANDO...";
-
-            adminMessage.textContent = "";
-
-
-            try {
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient
-                        .from("confirmaciones")
-                        .select(
-                            "id,nombre,personas,adultos,ninos,asistencia,telefono,fecha"
-                        )
-                        .order(
-                            "fecha",
-                            {
-                                ascending: false
-                            }
-                        );
-
-
-                if (error) {
-
-                    console.error(
-                        "ERROR AL CARGAR:",
-                        error
-                    );
-
-                    adminMessage.textContent =
-                        "No se pudieron cargar las confirmaciones.";
-
-                    adminMessage.style.color =
-                        "#ff9b9b";
-
-                    return;
-
-                }
-
-
-                const guests =
-                    data || [];
-
-
-                renderGuests(
-                    guests
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "ERROR:",
-                    error
-                );
-
-                adminMessage.textContent =
-                    "Ocurrió un error al cargar los datos.";
-
-                adminMessage.style.color =
-                    "#ff9b9b";
-
-            } finally {
-
-                loadingGuests = false;
-
-                refreshButton.disabled =
-                    false;
-
-                refreshButton.textContent =
-                    "↻ ACTUALIZAR";
-
-            }
-
-        }
-
-
-        /* =========================
-           MOSTRAR TABLA
-        ========================= */
-
-        function renderGuests(guests) {
-
-            guestTableBody.replaceChildren();
-
-
-            if (
-                !guests ||
-                guests.length === 0
-            ) {
-
-                emptyMessage.classList.remove(
-                    "hidden"
-                );
-
-            } else {
-
-                emptyMessage.classList.add(
-                    "hidden"
-                );
-
-            }
-
-
-            let confirmaciones = 0;
-            let personasTotales = 0;
-            let adultosTotales = 0;
-            let ninosTotales = 0;
-            let personasNoAsistiran = 0;
-
-
-            guests.forEach(
-                guest => {
-
-                    confirmaciones++;
-
-
-                    const personas =
-                        Number(
-                            guest.personas
-                        ) || 0;
-
-                    const adultos =
-                        Number(
-                            guest.adultos
-                        ) || 0;
-
-                    const ninos =
-                        Number(
-                            guest.ninos
-                        ) || 0;
-
-
-                    personasTotales +=
-                        personas;
-
-                    adultosTotales +=
-                        adultos;
-
-                    ninosTotales +=
-                        ninos;
-
-
-                    if (!guest.asistencia) {
-
-                        personasNoAsistiran +=
-                            personas;
-
-                    }
-
-
-                    const row =
-                        document.createElement(
-                            "tr"
-                        );
-
-
-                    /* NOMBRE */
-
-                    const nameCell =
-                        document.createElement(
-                            "td"
-                        );
-
-                    nameCell.textContent =
-                        guest.nombre || "";
-
-                    row.appendChild(
-                        nameCell
-                    );
-
-
-                    /* PERSONAS */
-
-                    const peopleCell =
-                        document.createElement(
-                            "td"
-                        );
-
-                    peopleCell.textContent =
-                        String(personas);
-
-                    row.appendChild(
-                        peopleCell
-                    );
-
-
-                    /* ADULTOS */
-
-                    const adultsCell =
-                        document.createElement(
-                            "td"
-                        );
-
-                    adultsCell.textContent =
-                        String(adultos);
-
-                    row.appendChild(
-                        adultsCell
-                    );
-
-
-                    /* NIÑOS */
-
-                    const childrenCell =
-                        document.createElement(
-                            "td"
-                        );
-
-                    childrenCell.textContent =
-                        String(ninos);
-
-                    row.appendChild(
-                        childrenCell
-                    );
-
-
-                    /* ASISTENCIA */
-
-                    const attendanceCell =
-                        document.createElement(
-                            "td"
-                        );
-
-                    const status =
-                        document.createElement(
-                            "span"
-                        );
-
-                    status.classList.add(
-                        "status",
-                        guest.asistencia
-                            ? "yes"
-                            : "no"
-                    );
-
-                    status.textContent =
-                        guest.asistencia
-                            ? "Sí asistirá"
-                            : "No asistirá";
-
-                    attendanceCell.appendChild(
-                        status
-                    );
-
-                    row.appendChild(
-                        attendanceCell
-                    );
-
-
-                    /* TELÉFONO */
-
-                    const phoneCell =
-                        document.createElement(
-                            "td"
-                        );
-
-                    phoneCell.textContent =
-                        guest.telefono ||
-                        "No proporcionado";
-
-                    row.appendChild(
-                        phoneCell
-                    );
-
-
-                    /* FECHA */
-
-                    const dateCell =
-                        document.createElement(
-                            "td"
-                        );
-
-
-                    if (guest.fecha) {
-
-                        const date =
-                            new Date(
-                                guest.fecha
-                            );
-
-                        dateCell.textContent =
-                            date.toLocaleString(
-                                "es-MX",
-                                {
-                                    dateStyle:
-                                        "short",
-                                    timeStyle:
-                                        "short"
-                                }
-                            );
-
-                    } else {
-
-                        dateCell.textContent =
-                            "Sin fecha";
-
-                    }
-
-
-                    row.appendChild(
-                        dateCell
-                    );
-
-
-                    /* ELIMINAR */
-
-                    const actionCell =
-                        document.createElement(
-                            "td"
-                        );
-
-
-                    const deleteButton =
-                        document.createElement(
-                            "button"
-                        );
-
-                    deleteButton.type =
-                        "button";
-
-                    deleteButton.className =
-                        "delete-button";
-
-                    deleteButton.textContent =
-                        "ELIMINAR";
-
-
-                    deleteButton.addEventListener(
-                        "click",
-                        () => {
-
-                            deleteGuest(
-                                guest.id,
-                                guest.nombre
-                            );
-
-                        }
-                    );
-
-
-                    actionCell.appendChild(
-                        deleteButton
-                    );
-
-                    row.appendChild(
-                        actionCell
-                    );
-
-
-                    guestTableBody.appendChild(
+        const csv =
+            rows
+                .map(
+                    row =>
                         row
-                    );
+                            .map(
+                                value =>
+                                    `"${String(value)
+                                        .replace(
+                                            /"/g,
+                                            '""'
+                                        )}"`
+                            )
+                            .join(",")
+                )
+                .join("\n");
 
+
+        const blob =
+            new Blob(
+                [
+                    "\uFEFF" +
+                    csv
+                ],
+                {
+                    type:
+                        "text/csv;charset=utf-8;"
                 }
             );
 
 
-            totalConfirmaciones.textContent =
-                String(
-                    confirmaciones
-                );
-
-            totalPersonas.textContent =
-                String(
-                    personasTotales
-                );
-
-            totalAdultos.textContent =
-                String(
-                    adultosTotales
-                );
-
-            totalNinos.textContent =
-                String(
-                    ninosTotales
-                );
-
-            totalNoAsistiran.textContent =
-                String(
-                    personasNoAsistiran
-                );
-
-        }
+        const url =
+            URL.createObjectURL(blob);
 
 
-        /* =========================
-           ELIMINAR
-        ========================= */
-
-        async function deleteGuest(
-            id,
-            nombre
-        ) {
-
-            const confirmar =
-                window.confirm(
-                    "¿Eliminar la confirmación de " +
-                    nombre +
-                    "?"
-                );
+        const link =
+            document.createElement("a");
 
 
-            if (!confirmar) {
-                return;
-            }
+        link.href = url;
+
+        link.download =
+            "confirmaciones-velunara.csv";
 
 
-            adminMessage.textContent =
-                "Eliminando...";
-
-            adminMessage.style.color =
-                "#e8d6f0";
-
-
-            try {
-
-                const {
-                    error
-                } =
-                    await supabaseClient
-                        .from("confirmaciones")
-                        .delete()
-                        .eq(
-                            "id",
-                            id
-                        );
-
-
-                if (error) {
-
-                    console.error(
-                        "ERROR AL ELIMINAR:",
-                        error
-                    );
-
-                    adminMessage.textContent =
-                        "No se pudo eliminar la confirmación.";
-
-                    adminMessage.style.color =
-                        "#ff9b9b";
-
-                    return;
-
-                }
-
-
-                adminMessage.textContent =
-                    "Confirmación eliminada.";
-
-                adminMessage.style.color =
-                    "#c8ffcf";
-
-
-                await loadGuests();
-
-
-                setTimeout(
-                    () => {
-
-                        adminMessage.textContent =
-                            "";
-
-                    },
-                    2000
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "ERROR:",
-                    error
-                );
-
-                adminMessage.textContent =
-                    "Ocurrió un error al eliminar.";
-
-                adminMessage.style.color =
-                    "#ff9b9b";
-
-            }
-
-        }
-
-
-        /* =========================
-           ACTUALIZAR
-        ========================= */
-
-        refreshButton.addEventListener(
-            "click",
-            loadGuests
+        document.body.appendChild(
+            link
         );
 
+        link.click();
 
-        /* =========================
-           CERRAR SESIÓN
-        ========================= */
+        link.remove();
 
-        logoutButton.addEventListener(
-            "click",
-            async () => {
-
-                await supabaseClient.auth.signOut();
-
-                showLogin();
-
-            }
+        URL.revokeObjectURL(
+            url
         );
 
+    }
+);
 
-        /* =========================
-           CAMBIOS DE AUTENTICACIÓN
-        ========================= */
-
-        supabaseClient.auth.onAuthStateChange(
-            (
-                event,
-                session
-            ) => {
-
-                if (session) {
-
-                    showAdmin();
-
-                } else {
-
-                    showLogin();
-
-                }
-
-            }
-        );
-
-
-        /* =========================
-           INICIO
-        ========================= */
-
-        async function init() {
-
-            try {
-
-                const {
-                    data
-                } =
-                    await supabaseClient.auth
-                        .getSession();
-
-
-                if (data.session) {
-
-                    showAdmin();
-
-                    await loadGuests();
-
-                } else {
-
-                    showLogin();
-
-                }
-
-            } catch (error) {
-
-                console.error(
-                    "ERROR DE INICIO:",
-                    error
-                );
-
-                showLogin();
-
-            }
-
-        }
-
-    </script>
+</script>
 
 </body>
 </html>
+```
