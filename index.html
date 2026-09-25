@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -293,31 +293,70 @@ body::before{
     text-transform:uppercase;
 }
 
-.scroll-hint{
-    margin-top:65px;
 
-    color:#a98eb8;
+/* =========================================================
+   TUTORIAL DE DESPLAZAMIENTO
+========================================================= */
 
-    font-size:12px;
+.scroll-tutorial{
+    margin-top:60px;
 
-    letter-spacing:3px;
+    text-align:center;
 
-    animation:float 2s infinite ease-in-out;
+    color:#fff;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transition:
+        opacity .5s ease,
+        transform .5s ease;
 }
 
-.scroll-arrow{
-    margin-top:10px;
-    font-size:24px;
+.scroll-tutorial.hidden-tutorial{
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-10px);
 }
 
-@keyframes float{
+.scroll-tutorial-text{
+    font-size:17px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    text-shadow:
+        0 0 8px rgba(190,120,255,.8),
+        0 2px 8px rgba(0,0,0,.8);
+}
+
+.scroll-tutorial-arrow{
+    margin-top:8px;
+
+    font-size:50px;
+
+    line-height:1;
+
+    color:#d7a6ff;
+
+    text-shadow:
+        0 0 10px rgba(190,100,255,.9),
+        0 0 30px rgba(150,50,220,.7);
+
+    animation:
+        tutorialArrow 1.2s infinite ease-in-out;
+}
+
+@keyframes tutorialArrow{
 
     0%,100%{
         transform:translateY(0);
     }
 
     50%{
-        transform:translateY(8px);
+        transform:translateY(13px);
     }
 
 }
@@ -495,13 +534,33 @@ body::before{
 
 
 /* =========================================================
+   TEXTO DEL BOTÓN
+========================================================= */
+
+.confirm-help{
+    margin-top:25px;
+
+    color:#d7c5df;
+
+    font-size:16px;
+
+    letter-spacing:1px;
+
+    text-align:center;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.8);
+}
+
+
+/* =========================================================
    BOTÓN
 ========================================================= */
 
 .confirm-button{
-    margin-top:45px;
+    margin-top:12px;
 
-    padding:16px 34px;
+    padding:17px 36px;
 
     border:1px solid #c17cff;
 
@@ -514,7 +573,9 @@ body::before{
 
     color:white;
 
-    font-size:14px;
+    font-size:15px;
+
+    font-weight:bold;
 
     letter-spacing:2px;
 
@@ -1021,17 +1082,34 @@ body::before{
         letter-spacing:1px;
     }
 
+    .scroll-tutorial{
+        margin-top:50px;
+    }
+
+    .scroll-tutorial-text{
+        font-size:16px;
+    }
+
+    .scroll-tutorial-arrow{
+        font-size:48px;
+    }
+
     .invitation-reveal{
         padding-top:90px;
     }
 
-    /*
-       En celular se mantiene grande,
-       como estaba originalmente.
-    */
-
     .invitation-image-wrapper{
         width:94vw;
+    }
+
+    .confirm-help{
+        font-size:15px;
+        line-height:1.5;
+        padding:0 15px;
+    }
+
+    .confirm-button{
+        padding:17px 25px;
     }
 
     .modal-box{
@@ -1043,7 +1121,6 @@ body::before{
 
 /* =========================================================
    PC
-   SOLO AQUÍ HACEMOS FOTO2 MÁS PEQUEÑA
 ========================================================= */
 
 @media(min-width:751px){
@@ -1151,7 +1228,10 @@ body::before{
 
             <!-- CONTADOR -->
 
-            <div class="countdown-area">
+            <div
+                class="countdown-area"
+                id="countdownSection"
+            >
 
                 <div class="countdown-title">
                     FALTAN PARA LA CELEBRACIÓN
@@ -1230,11 +1310,18 @@ body::before{
         </div>
 
 
-        <div class="scroll-hint">
+        <!-- TUTORIAL -->
 
-            DESLIZA HACIA ABAJO
+        <div
+            class="scroll-tutorial"
+            id="scrollTutorial"
+        >
 
-            <div class="scroll-arrow">
+            <div class="scroll-tutorial-text">
+                DESLIZA HACIA ABAJO PARA CONTINUAR
+            </div>
+
+            <div class="scroll-tutorial-arrow">
                 ↓
             </div>
 
@@ -1278,13 +1365,20 @@ body::before{
         </div>
 
 
+        <!-- AYUDA -->
+
+        <div class="confirm-help">
+            Pica aquí para confirmar tu asistencia
+        </div>
+
+
         <!-- CONFIRMAR -->
 
         <button
             class="confirm-button"
             id="openForm"
         >
-            CONFIRMAR ASISTENCIA
+            💜 CONFIRMAR ASISTENCIA
         </button>
 
 
@@ -1670,6 +1764,16 @@ const playMusic =
         "playMusic"
     );
 
+const scrollTutorial =
+    document.getElementById(
+        "scrollTutorial"
+    );
+
+const countdownSection =
+    document.getElementById(
+        "countdownSection"
+    );
+
 
 /* =========================================================
    ESTRELLAS
@@ -1800,6 +1904,259 @@ updateCountdown();
 setInterval(
     updateCountdown,
     1000
+);
+
+
+/* =========================================================
+   TUTORIAL AUTOMÁTICO
+========================================================= */
+
+let tutorialUserInteracted =
+    false;
+
+let automaticScrolling =
+    false;
+
+let firstAutoScrollTimer =
+    null;
+
+let secondAutoScrollTimer =
+    null;
+
+
+/* Ocultar tutorial */
+
+function hideScrollTutorial(){
+
+    scrollTutorial.classList.add(
+        "hidden-tutorial"
+    );
+
+}
+
+
+/* Cancelar desplazamientos automáticos */
+
+function cancelAutomaticTutorial(){
+
+    if(automaticScrolling){
+        return;
+    }
+
+    tutorialUserInteracted =
+        true;
+
+    clearTimeout(
+        firstAutoScrollTimer
+    );
+
+    clearTimeout(
+        secondAutoScrollTimer
+    );
+
+    hideScrollTutorial();
+
+}
+
+
+/* Detectar interacción manual */
+
+window.addEventListener(
+    "scroll",
+    function(){
+
+        if(
+            window.scrollY > 10 &&
+            !automaticScrolling
+        ){
+
+            cancelAutomaticTutorial();
+
+        }
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* También cancelar si la persona toca/clica */
+
+window.addEventListener(
+    "wheel",
+    cancelAutomaticTutorial,
+    {
+        passive:true
+    }
+);
+
+window.addEventListener(
+    "touchstart",
+    cancelAutomaticTutorial,
+    {
+        passive:true
+    }
+);
+
+
+/* Click en el tutorial */
+
+scrollTutorial.addEventListener(
+    "click",
+    function(){
+
+        tutorialUserInteracted =
+            true;
+
+        clearTimeout(
+            firstAutoScrollTimer
+        );
+
+        clearTimeout(
+            secondAutoScrollTimer
+        );
+
+        hideScrollTutorial();
+
+        automaticScrolling =
+            true;
+
+        countdownSection.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+        setTimeout(
+            function(){
+
+                automaticScrolling =
+                    false;
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+/* Iniciar tutorial */
+
+function startAutomaticTutorial(){
+
+    firstAutoScrollTimer =
+        setTimeout(
+            function(){
+
+                if(
+                    tutorialUserInteracted
+                ){
+                    return;
+                }
+
+
+                const now =
+                    new Date();
+
+
+                if(
+                    now >= partyStart
+                ){
+                    return;
+                }
+
+
+                hideScrollTutorial();
+
+                automaticScrolling =
+                    true;
+
+
+                countdownSection.scrollIntoView({
+                    behavior:"smooth",
+                    block:"center"
+                });
+
+
+                setTimeout(
+                    function(){
+
+                        automaticScrolling =
+                            false;
+
+                    },
+                    1800
+                );
+
+
+                /*
+                   Después de llegar al contador
+                   comienza el segundo minuto.
+                */
+
+                secondAutoScrollTimer =
+                    setTimeout(
+                        function(){
+
+                            if(
+                                tutorialUserInteracted
+                            ){
+                                return;
+                            }
+
+
+                            const currentTime =
+                                new Date();
+
+
+                            if(
+                                currentTime >= partyStart
+                            ){
+                                return;
+                            }
+
+
+                            automaticScrolling =
+                                true;
+
+
+                            invitationReveal.scrollIntoView({
+                                behavior:"smooth",
+                                block:"start"
+                            });
+
+
+                            setTimeout(
+                                function(){
+
+                                    automaticScrolling =
+                                        false;
+
+                                    hideScrollTutorial();
+
+                                },
+                                1800
+                            );
+
+                        },
+                        60000
+                    );
+
+            },
+            60000
+        );
+
+}
+
+
+window.addEventListener(
+    "load",
+    function(){
+
+        startAutomaticTutorial();
+
+    }
 );
 
 
@@ -2160,6 +2517,14 @@ function updatePageState(){
         now >= finalDate
     ){
 
+        clearTimeout(
+            firstAutoScrollTimer
+        );
+
+        clearTimeout(
+            secondAutoScrollTimer
+        );
+
         publicContent.classList.add(
             "hidden"
         );
@@ -2188,6 +2553,14 @@ function updatePageState(){
         now >= partyStart &&
         now < partyEnd
     ){
+
+        clearTimeout(
+            firstAutoScrollTimer
+        );
+
+        clearTimeout(
+            secondAutoScrollTimer
+        );
 
         publicContent.classList.add(
             "hidden"
@@ -2286,3 +2659,4 @@ setInterval(
 
 </body>
 </html>
+```
