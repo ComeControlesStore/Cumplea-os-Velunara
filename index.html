@@ -9,7 +9,7 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">
 
 <link
 href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap"
@@ -82,7 +82,9 @@ body{
 #introVideoScreen{
     position:fixed;
     inset:0;
+
     z-index:60000;
+
     background:#000;
 
     display:flex;
@@ -106,7 +108,9 @@ body{
 #introVideo{
     width:100%;
     height:100%;
+
     object-fit:cover;
+
     display:block;
 
     opacity:0;
@@ -123,11 +127,13 @@ body{
 #introVideo.visible{
     opacity:1;
     visibility:visible;
+
     transform:scale(1);
 }
 
 #introStart{
     position:absolute;
+
     z-index:2;
 
     text-align:center;
@@ -135,6 +141,7 @@ body{
     padding:30px;
 
     border:1px solid rgba(205,160,255,.5);
+
     border-radius:20px;
 
     background:rgba(20,5,30,.75);
@@ -215,6 +222,7 @@ body{
     padding:10px 18px;
 
     border:1px solid rgba(210,170,255,.4);
+
     border-radius:20px;
 
     background:rgba(20,5,30,.75);
@@ -231,26 +239,34 @@ body{
 
 .fixed-tutorial.tutorial-hidden{
     opacity:0;
-    transform:translate(-50%,-20px);
+
+    transform:
+        translate(-50%,-20px);
 }
 
 .tutorial-title{
     font-size:13px;
+
     letter-spacing:2px;
+
     color:#e8cfff;
 }
 
 .tutorial-text{
     margin-top:4px;
+
     font-size:14px;
+
     color:#fff;
 }
 
 .tutorial-arrow{
     font-size:27px;
+
     line-height:25px;
 
-    animation:arrowMove 1.2s infinite ease-in-out;
+    animation:
+        arrowMove 1.2s infinite ease-in-out;
 
     color:#d9b1ff;
 }
@@ -273,6 +289,7 @@ body{
 
 main{
     position:relative;
+
     z-index:1;
 }
 
@@ -287,12 +304,16 @@ section{
 .hero{
     min-height:100vh;
 
-    padding:110px 20px 70px;
+    padding:
+        110px 20px
+        70px;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
@@ -300,16 +321,24 @@ section{
 
 .small-title{
     font-size:15px;
+
     letter-spacing:3px;
+
     color:#d7b7ed;
+
     margin-bottom:20px;
+
     text-transform:uppercase;
 }
 
 .main-title{
-    font-family:"Cinzel Decorative",Georgia,serif;
+    font-family:
+        "Cinzel Decorative",
+        Georgia,
+        serif;
 
-    font-size:clamp(48px,10vw,105px);
+    font-size:
+        clamp(48px,10vw,105px);
 
     line-height:1;
 
@@ -328,7 +357,8 @@ section{
 .subtitle{
     margin-top:20px;
 
-    font-size:clamp(15px,3vw,22px);
+    font-size:
+        clamp(15px,3vw,22px);
 
     color:#dfc5ed;
 }
@@ -340,7 +370,9 @@ section{
 
     padding:8px;
 
-    border:1px solid rgba(190,120,255,.6);
+    border:
+        1px solid
+        rgba(190,120,255,.6);
 
     box-shadow:
         0 0 25px rgba(150,50,255,.35),
@@ -349,7 +381,9 @@ section{
 
 .hero-photo{
     width:100%;
+
     display:block;
+
     height:auto;
 }
 
@@ -367,20 +401,27 @@ section{
 
 .countdown-section{
     padding:70px 20px;
+
     text-align:center;
 }
 
 .section-title{
     font-size:15px;
+
     letter-spacing:3px;
+
     color:#d6b5e9;
+
     margin-bottom:25px;
 }
 
 .countdown{
     display:flex;
+
     justify-content:center;
+
     flex-wrap:wrap;
+
     gap:15px;
 }
 
@@ -389,18 +430,23 @@ section{
 
     padding:18px 14px;
 
-    border:1px solid rgba(200,140,255,.35);
+    border:
+        1px solid
+        rgba(200,140,255,.35);
 
     border-radius:15px;
 
-    background:rgba(40,10,55,.45);
+    background:
+        rgba(40,10,55,.45);
 
     box-shadow:
-        0 0 20px rgba(130,50,210,.15);
+        0 0 20px
+        rgba(130,50,210,.15);
 }
 
 .count-number{
     font-size:32px;
+
     font-weight:bold;
 }
 
@@ -424,9 +470,11 @@ section{
     padding:90px 20px;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
@@ -445,18 +493,21 @@ section{
 
     0%,100%{
         opacity:.5;
+
         transform:scale(.9);
     }
 
     50%{
         opacity:1;
+
         transform:scale(1.1);
     }
 
 }
 
 .reveal-title{
-    font-size:clamp(25px,6vw,48px);
+    font-size:
+        clamp(25px,6vw,48px);
 
     margin:15px 0;
 
@@ -465,6 +516,7 @@ section{
 
 .reveal-text{
     color:#cbb5d9;
+
     margin-bottom:30px;
 }
 
@@ -473,7 +525,9 @@ section{
 
     padding:8px;
 
-    border:1px solid rgba(180,100,255,.65);
+    border:
+        1px solid
+        rgba(180,100,255,.65);
 
     box-shadow:
         0 0 30px rgba(140,50,230,.3),
@@ -482,6 +536,7 @@ section{
 
 .invitation-card img{
     width:100%;
+
     display:block;
 }
 
@@ -500,7 +555,9 @@ section{
 
     border-radius:30px;
 
-    border:1px solid rgba(215,170,255,.7);
+    border:
+        1px solid
+        rgba(215,170,255,.7);
 
     background:
         linear-gradient(
@@ -520,7 +577,8 @@ section{
     cursor:pointer;
 
     box-shadow:
-        0 0 25px rgba(145,55,230,.3);
+        0 0 25px
+        rgba(145,55,230,.3);
 
     transition:.3s;
 }
@@ -537,17 +595,20 @@ section{
 
 .modal{
     position:fixed;
+
     inset:0;
 
     z-index:50000;
 
-    background:rgba(0,0,0,.75);
+    background:
+        rgba(0,0,0,.75);
 
     backdrop-filter:blur(8px);
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     padding:20px;
@@ -564,7 +625,9 @@ section{
 
     border-radius:22px;
 
-    border:1px solid rgba(205,155,255,.5);
+    border:
+        1px solid
+        rgba(205,155,255,.5);
 
     background:
         linear-gradient(
@@ -574,7 +637,8 @@ section{
         );
 
     box-shadow:
-        0 0 40px rgba(130,40,210,.4);
+        0 0 40px
+        rgba(130,40,210,.4);
 }
 
 .modal-title{
@@ -618,9 +682,12 @@ section{
 
     border-radius:12px;
 
-    border:1px solid rgba(190,130,230,.35);
+    border:
+        1px solid
+        rgba(190,130,230,.35);
 
-    background:rgba(10,2,15,.75);
+    background:
+        rgba(10,2,15,.75);
 
     color:white;
 
@@ -635,7 +702,8 @@ section{
     border-color:#c17aff;
 
     box-shadow:
-        0 0 12px rgba(160,70,255,.25);
+        0 0 12px
+        rgba(160,70,255,.25);
 }
 
 /* =========================
@@ -653,15 +721,19 @@ section{
 .people-grid{
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
     gap:12px;
 }
 
 .people-card{
-    border:1px solid rgba(190,130,235,.35);
+    border:
+        1px solid
+        rgba(190,130,235,.35);
 
-    background:rgba(20,5,28,.6);
+    background:
+        rgba(20,5,28,.6);
 
     border-radius:14px;
 
@@ -672,6 +744,7 @@ section{
 
 .people-card .people-icon{
     font-size:27px;
+
     margin-bottom:6px;
 }
 
@@ -694,7 +767,8 @@ section{
 .attendance-options{
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
     gap:10px;
 }
@@ -718,11 +792,14 @@ section{
 
     text-align:center;
 
-    border:1px solid rgba(190,130,235,.3);
+    border:
+        1px solid
+        rgba(190,130,235,.3);
 
     border-radius:12px;
 
-    background:rgba(15,3,22,.65);
+    background:
+        rgba(15,3,22,.65);
 
     cursor:pointer;
 
@@ -732,16 +809,19 @@ section{
 .attendance-option input:checked + label{
     border-color:#c57cff;
 
-    background:rgba(105,35,145,.45);
+    background:
+        rgba(105,35,145,.45);
 
     box-shadow:
-        0 0 18px rgba(160,70,255,.25);
+        0 0 18px
+        rgba(160,70,255,.25);
 }
 
 .modal-actions{
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+        1fr 1fr;
 
     gap:10px;
 
@@ -753,7 +833,9 @@ section{
 
     border-radius:12px;
 
-    border:1px solid rgba(200,145,235,.4);
+    border:
+        1px solid
+        rgba(200,145,235,.4);
 
     cursor:pointer;
 
@@ -761,7 +843,8 @@ section{
 
     color:#fff;
 
-    background:rgba(35,8,45,.8);
+    background:
+        rgba(35,8,45,.8);
 }
 
 .modal-btn.primary{
@@ -780,9 +863,12 @@ section{
 
     border-radius:10px;
 
-    background:rgba(130,20,40,.3);
+    background:
+        rgba(130,20,40,.3);
 
-    border:1px solid rgba(230,100,130,.35);
+    border:
+        1px solid
+        rgba(230,100,130,.35);
 
     color:#ffc6d1;
 
@@ -792,11 +878,12 @@ section{
 }
 
 /* =========================
-   CELEBRACIÓN
+   PANTALLA 27
 ========================= */
 
 #celebration{
     position:fixed;
+
     inset:0;
 
     z-index:55000;
@@ -811,6 +898,7 @@ section{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     text-align:center;
@@ -819,27 +907,34 @@ section{
 }
 
 .celebration-box{
-    animation:celebrateIn .8s ease;
+    animation:
+        celebrateIn .8s ease;
 }
 
 @keyframes celebrateIn{
 
     from{
         opacity:0;
+
         transform:scale(.8);
     }
 
     to{
         opacity:1;
+
         transform:scale(1);
     }
 
 }
 
 .celebration-title{
-    font-family:"Cinzel Decorative",Georgia,serif;
+    font-family:
+        "Cinzel Decorative",
+        Georgia,
+        serif;
 
-    font-size:clamp(35px,8vw,80px);
+    font-size:
+        clamp(35px,8vw,80px);
 
     text-shadow:
         0 0 15px #b86aff,
@@ -849,17 +944,20 @@ section{
 .celebration-text{
     margin-top:15px;
 
-    font-size:clamp(18px,4vw,28px);
+    font-size:
+        clamp(18px,4vw,28px);
 
     color:#e6cef2;
 }
 
 /* =========================
-   VIDEO 2 VERTICAL
+   VIDEO 2
+   VERTICAL
 ========================= */
 
 #finalVideoScreen{
     position:fixed;
+
     inset:0;
 
     z-index:65000;
@@ -869,124 +967,31 @@ section{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
-    opacity:1;
-    visibility:visible;
-
-    transition:
-        opacity 1.25s ease,
-        visibility 1.25s ease;
-}
-
-#finalVideoScreen.fade-out{
-    opacity:0;
-    visibility:hidden;
-
-    pointer-events:none;
+    overflow:hidden;
 }
 
 #finalVideo{
-    width:auto;
-    height:100%;
+    /*
+     * Llenamos toda la pantalla.
+     * Si el archivo es horizontal,
+     * se recortan los lados para
+     * que quede visualmente vertical.
+     */
 
-    max-width:100%;
+    width:100vw;
 
-    object-fit:contain;
+    height:100vh;
+
+    object-fit:cover;
+
+    object-position:center;
 
     display:block;
 
     background:#000;
-}
-
-/* =========================
-   FIESTA
-========================= */
-
-#partyMode{
-    position:fixed;
-    inset:0;
-
-    z-index:52000;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(70,20,100,.55),
-            rgba(5,1,8,.98)
-        );
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    padding:25px;
-}
-
-.party-title{
-    font-family:"Cinzel Decorative",Georgia,serif;
-
-    font-size:clamp(35px,8vw,75px);
-
-    text-shadow:
-        0 0 15px #a94fff,
-        0 0 35px #6d1eac;
-}
-
-.party-text{
-    font-size:clamp(16px,4vw,25px);
-
-    color:#ddc6e9;
-}
-
-/* =========================
-   FINAL
-========================= */
-
-#finalScreen{
-    position:fixed;
-    inset:0;
-
-    z-index:51000;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(80,20,110,.45),
-            #07020a 75%
-        );
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    padding:25px;
-}
-
-.final-title{
-    font-family:"Cinzel Decorative",Georgia,serif;
-
-    font-size:clamp(30px,7vw,70px);
-
-    text-shadow:
-        0 0 15px #a855f7,
-        0 0 35px #6f20a0;
-}
-
-.final-text{
-    max-width:600px;
-
-    margin:20px auto;
-
-    line-height:1.7;
-
-    color:#d9c5e2;
 }
 
 /* =========================
@@ -996,11 +1001,14 @@ section{
 @media(max-width:750px){
 
     .hero{
-        padding:100px 15px 50px;
+        padding:
+            100px 15px
+            50px;
     }
 
     .fixed-tutorial{
         width:94%;
+
         padding:8px 12px;
     }
 
@@ -1022,6 +1030,7 @@ section{
 
     .count-box{
         min-width:75px;
+
         padding:14px 10px;
     }
 
@@ -1041,16 +1050,12 @@ section{
         padding:23px 18px;
     }
 
-    /*
-     * En celulares el video vertical
-     * ocupa la altura completa.
-     */
-
     #finalVideo{
-        width:auto;
-        height:100%;
-        max-width:100%;
-        object-fit:contain;
+        width:100vw;
+
+        height:100vh;
+
+        object-fit:cover;
     }
 
 }
@@ -1063,6 +1068,7 @@ section{
 
     .small-title{
         font-size:12px;
+
         letter-spacing:2px;
     }
 
@@ -1076,6 +1082,7 @@ section{
 
     .count-box{
         min-width:68px;
+
         padding:11px 7px;
     }
 
@@ -1101,6 +1108,7 @@ section{
 
     #introStart{
         width:90%;
+
         padding:25px 15px;
     }
 
@@ -1116,7 +1124,7 @@ section{
 <body>
 
 <!-- =========================
-     INTRO
+     VIDEO INTRO
 ========================= -->
 
 <div id="introVideoScreen">
@@ -1190,7 +1198,9 @@ section{
 
 <main>
 
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
     <section class="hero">
 
@@ -1223,7 +1233,9 @@ section{
     </section>
 
 
-    <!-- COUNTDOWN -->
+    <!-- =========================
+         CUENTA REGRESIVA
+    ========================= -->
 
     <section class="countdown-section">
 
@@ -1247,6 +1259,7 @@ section{
 
             </div>
 
+
             <div class="count-box">
 
                 <div
@@ -1261,6 +1274,7 @@ section{
 
             </div>
 
+
             <div class="count-box">
 
                 <div
@@ -1274,6 +1288,7 @@ section{
                 </div>
 
             </div>
+
 
             <div class="count-box">
 
@@ -1294,7 +1309,9 @@ section{
     </section>
 
 
-    <!-- INVITACIÓN -->
+    <!-- =========================
+         INVITACIÓN
+    ========================= -->
 
     <section id="invitationReveal">
 
@@ -1442,10 +1459,7 @@ section{
         </div>
 
 
-        <!--
-            IMPORTANTE:
-            Supabase recibe TRUE o FALSE.
-        -->
+        <!-- ASISTENCIA -->
 
         <div class="form-group">
 
@@ -1506,6 +1520,7 @@ section{
 
             </button>
 
+
             <button
                 class="modal-btn primary"
                 id="submitConfirmation">
@@ -1522,7 +1537,7 @@ section{
 
 
 <!-- =========================
-     CELEBRACIÓN
+     PANTALLA DEL 27
 ========================= -->
 
 <div
@@ -1542,74 +1557,6 @@ section{
     </div>
 
 </div>
-
-
-<!-- =========================
-     FIESTA
-========================= -->
-
-<div
-    id="partyMode"
-    class="hidden">
-
-    <div>
-
-        <div class="party-title">
-            🖤✨
-        </div>
-
-        <div class="party-title">
-            ¡ES HORA DE CELEBRAR!
-        </div>
-
-        <div class="party-text">
-            La fiesta de Velunara está comenzando.
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     FINAL
-========================= -->
-
-<div
-    id="finalScreen"
-    class="hidden">
-
-    <div>
-
-        <div class="final-title">
-            ✨ ¡FELICIDADES, VELUNARA! ✨
-        </div>
-
-        <div class="final-text">
-
-            Gracias por formar parte de este
-            momento tan especial.
-
-            <br><br>
-
-            💜 27 de septiembre de 2026 💜
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     AUDIO
-========================= -->
-
-<audio
-    id="birthdayAudio"
-    src="mananitas.mp3"
-    preload="auto">
-</audio>
 
 
 <script>
@@ -1663,7 +1610,7 @@ for(let i = 0; i < 90; i++){
 
 
 /* ==========================================
-   VIDEO INTRO
+   INTRO
 ========================================== */
 
 const introVideoScreen =
@@ -1848,7 +1795,6 @@ function updateCountdown(){
             .textContent = "0";
 
         return;
-
     }
 
 
@@ -1858,6 +1804,7 @@ function updateCountdown(){
             (1000 * 60 * 60 * 24)
         );
 
+
     const hours =
         Math.floor(
             (
@@ -1866,6 +1813,7 @@ function updateCountdown(){
             ) % 24
         );
 
+
     const minutes =
         Math.floor(
             (
@@ -1873,6 +1821,7 @@ function updateCountdown(){
                 (1000 * 60)
             ) % 60
         );
+
 
     const seconds =
         Math.floor(
@@ -1993,7 +1942,137 @@ confirmationModal.addEventListener(
 
 
 /* ==========================================
-   GUARDAR
+   FECHA ACTUAL
+========================================== */
+
+const specialDate =
+    new Date(
+        "2026-09-27T00:00:00"
+    );
+
+
+/*
+ * Solo se considera el evento especial
+ * cuando estamos en el 27 de septiembre
+ * de 2026.
+ */
+
+function esDiaEspecial(){
+
+    const ahora =
+        new Date();
+
+    return (
+        ahora.getFullYear() ===
+            specialDate.getFullYear()
+
+        &&
+
+        ahora.getMonth() ===
+            specialDate.getMonth()
+
+        &&
+
+        ahora.getDate() ===
+            specialDate.getDate()
+    );
+
+}
+
+
+/* ==========================================
+   VIDEO 2
+========================================== */
+
+const finalVideoScreen =
+    document.getElementById(
+        "finalVideoScreen"
+    );
+
+const finalVideo =
+    document.getElementById(
+        "finalVideo"
+    );
+
+
+function reproducirVideo2(){
+
+    finalVideoScreen.classList.remove(
+        "hidden"
+    );
+
+    finalVideo.currentTime = 0;
+
+    finalVideo.muted = false;
+
+
+    const promesa =
+        finalVideo.play();
+
+
+    if(promesa){
+
+        promesa.catch(
+            () => {
+
+                finalVideo.muted = true;
+
+                finalVideo.play()
+                    .catch(
+                        error => {
+
+                            console.error(
+                                "No se pudo reproducir video2:",
+                                error
+                            );
+
+                        }
+                    );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   CUANDO TERMINA VIDEO 2
+========================================== */
+
+finalVideo.addEventListener(
+    "ended",
+    () => {
+
+        finalVideo.pause();
+
+        finalVideo.currentTime = 0;
+
+        finalVideoScreen.classList.add(
+            "hidden"
+        );
+
+
+        /*
+         * Regresamos a la invitación.
+         */
+
+        document
+            .getElementById(
+                "invitationReveal"
+            )
+            .scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+    }
+);
+
+
+/* ==========================================
+   GUARDAR CONFIRMACIÓN
 ========================================== */
 
 submitConfirmation.addEventListener(
@@ -2044,12 +2123,7 @@ submitConfirmation.addEventListener(
 
 
         /*
-         * AQUÍ ESTÁ LA CORRECCIÓN.
-         *
-         * Supabase recibe un BOOLEAN:
-         *
-         * true  = asistencia
-         * false = no asistencia
+         * BOOLEAN REAL PARA SUPABASE
          */
 
         const asistencia =
@@ -2130,7 +2204,6 @@ submitConfirmation.addEventListener(
             console.log(
                 "Enviando asistencia:",
                 asistencia,
-                "Tipo:",
                 typeof asistencia
             );
 
@@ -2142,8 +2215,8 @@ submitConfirmation.addEventListener(
 
 
             /*
-             * Si la columna teléfono
-             * no existe, guardamos sin ella.
+             * Si teléfono no existe,
+             * guardamos sin teléfono.
              */
 
             if(
@@ -2186,9 +2259,9 @@ submitConfirmation.addEventListener(
             }
 
 
-            /* =================================
-               GUARDADO CORRECTO
-            ================================= */
+            /*
+             * CERRAR MODAL
+             */
 
             confirmationModal.classList.add(
                 "hidden"
@@ -2199,34 +2272,40 @@ submitConfirmation.addEventListener(
 
 
             /*
-             * SI = celebración.
-             *
-             * NO = solamente se guarda.
+             * =================================
+             * SOLO EL 27 + SÍ
+             * =================================
              */
 
-            if(asistencia){
+            if(
+                asistencia &&
+                esDiaEspecial()
+            ){
 
-                document
-                    .getElementById(
+                const celebration =
+                    document.getElementById(
                         "celebration"
-                    )
-                    .classList.remove(
-                        "hidden"
                     );
 
 
+                celebration.classList.remove(
+                    "hidden"
+                );
+
+
                 /*
-                 * Las Mañanitas comienzan
-                 * automáticamente.
-                 *
-                 * Esto corresponde al
-                 * 27 de septiembre.
+                 * Mostrar el mensaje durante
+                 * un momento y después video2.
                  */
 
                 setTimeout(
                     () => {
 
-                        iniciarCelebracion();
+                        celebration.classList.add(
+                            "hidden"
+                        );
+
+                        reproducirVideo2();
 
                     },
                     1800
@@ -2235,7 +2314,9 @@ submitConfirmation.addEventListener(
             }
 
 
-            /* Limpiar formulario */
+            /*
+             * LIMPIAR FORMULARIO
+             */
 
             document
                 .getElementById(
@@ -2307,237 +2388,6 @@ submitConfirmation.addEventListener(
 
     }
 );
-
-
-/* ==========================================
-   AUDIO
-========================================== */
-
-const birthdayAudio =
-    document.getElementById(
-        "birthdayAudio"
-    );
-
-
-/* ==========================================
-   VIDEO 2
-========================================== */
-
-const finalVideoScreen =
-    document.getElementById(
-        "finalVideoScreen"
-    );
-
-const finalVideo =
-    document.getElementById(
-        "finalVideo"
-    );
-
-
-/*
- * Esta función:
- *
- * 1. Oculta celebración.
- * 2. Reproduce Las Mañanitas.
- * 3. Después reproduce video2.
- */
-
-async function iniciarCelebracion(){
-
-    const celebration =
-        document.getElementById(
-            "celebration"
-        );
-
-
-    celebration.classList.add(
-        "hidden"
-    );
-
-
-    /*
-     * Primero reproducimos
-     * Las Mañanitas.
-     */
-
-    try{
-
-        birthdayAudio.currentTime = 0;
-
-        await birthdayAudio.play();
-
-    }catch(error){
-
-        console.error(
-            "No se pudieron reproducir Las Mañanitas:",
-            error
-        );
-
-    }
-
-
-    /*
-     * Cuando termine Las Mañanitas,
-     * comienza video2.
-     */
-
-    birthdayAudio.onended =
-        () => {
-
-            reproducirVideo2();
-
-        };
-
-}
-
-
-/* ==========================================
-   REPRODUCIR VIDEO 2
-========================================== */
-
-async function reproducirVideo2(){
-
-    finalVideoScreen.classList.remove(
-        "hidden"
-    );
-
-    finalVideoScreen.classList.remove(
-        "fade-out"
-    );
-
-
-    finalVideo.currentTime = 0;
-
-
-    try{
-
-        /*
-         * Intentamos con sonido.
-         */
-
-        finalVideo.muted = false;
-
-        await finalVideo.play();
-
-    }catch(error){
-
-        /*
-         * Algunos navegadores
-         * bloquean reproducción con audio.
-         */
-
-        try{
-
-            finalVideo.muted = true;
-
-            await finalVideo.play();
-
-        }catch(secondError){
-
-            console.error(
-                "No se pudo reproducir video2:",
-                secondError
-            );
-
-        }
-
-    }
-
-}
-
-
-/* ==========================================
-   CUANDO TERMINA VIDEO 2
-========================================== */
-
-finalVideo.addEventListener(
-    "ended",
-    () => {
-
-        finalVideo.pause();
-
-        finalVideo.currentTime = 0;
-
-
-        finalVideoScreen.classList.add(
-            "fade-out"
-        );
-
-
-        setTimeout(
-            () => {
-
-                finalVideoScreen.classList.add(
-                    "hidden"
-                );
-
-
-                finalVideoScreen.classList.remove(
-                    "fade-out"
-                );
-
-
-                /*
-                 * Mostrar fiesta.
-                 */
-
-                const partyMode =
-                    document.getElementById(
-                        "partyMode"
-                    );
-
-                partyMode.classList.remove(
-                    "hidden"
-                );
-
-
-                /*
-                 * Después mostrar pantalla final.
-                 */
-
-                setTimeout(
-                    () => {
-
-                        partyMode.classList.add(
-                            "hidden"
-                        );
-
-
-                        document
-                            .getElementById(
-                                "finalScreen"
-                            )
-                            .classList.remove(
-                                "hidden"
-                            );
-
-                    },
-                    4500
-                );
-
-            },
-            1300
-        );
-
-    }
-);
-
-
-/* ==========================================
-   FECHA ESPECIAL
-========================================== */
-
-const specialDate =
-    new Date(
-        "2026-09-27T00:00:00"
-    );
-
-
-/*
- * El flujo de Mañanitas solamente
- * se utiliza para la celebración
- * del 27 de septiembre de 2026.
- */
 
 </script>
 
