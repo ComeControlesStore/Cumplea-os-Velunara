@@ -2,26 +2,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Velunara</title>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap"
-    rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-
-/* =========================
-   GENERAL
-========================= */
 
 *{
     box-sizing:border-box;
@@ -31,8 +19,7 @@ html{
     scroll-behavior:smooth;
 }
 
-html,
-body{
+html,body{
     margin:0;
     padding:0;
     width:100%;
@@ -75,13 +62,8 @@ body::after{
         radial-gradient(circle,#fff 1px,transparent 1px),
         radial-gradient(circle,#c89cff 1px,transparent 1px);
 
-    background-size:
-        95px 95px,
-        145px 145px;
-
-    background-position:
-        10px 20px,
-        50px 70px;
+    background-size:95px 95px,145px 145px;
+    background-position:10px 20px,50px 70px;
 }
 
 
@@ -98,10 +80,7 @@ body::after{
 
     text-align:center;
 
-    padding:
-        12px
-        10px
-        13px;
+    padding:10px 10px 11px;
 
     background:
         linear-gradient(
@@ -124,36 +103,32 @@ body::after{
 
 .tutorialTitle{
     color:#d9aaff;
-    font-size:14px;
-    letter-spacing:2px;
-    margin-bottom:4px;
+    font-size:12px;
+    letter-spacing:1.5px;
+    margin-bottom:3px;
 }
 
 .tutorialText{
     color:#fff;
-    font-size:13px;
+    font-size:11px;
 }
 
 .tutorialArrow{
     color:#c987ff;
-    font-size:25px;
-    line-height:20px;
+    font-size:21px;
+    line-height:17px;
 
-    animation:
-        arrowMove 1.2s infinite;
+    animation:arrowMove 1.2s infinite;
 }
 
 @keyframes arrowMove{
-
-    0%,
-    100%{
+    0%,100%{
         transform:translateY(0);
     }
 
     50%{
-        transform:translateY(6px);
+        transform:translateY(5px);
     }
-
 }
 
 
@@ -202,17 +177,14 @@ body::after{
 
     text-align:center;
 
-    padding:
-        80px
-        20px
-        40px;
+    padding:70px 20px 35px;
 }
 
 .heroSmall{
     color:#c7a7d8;
-    font-size:14px;
-    letter-spacing:2px;
-    margin-bottom:12px;
+    font-size:11px;
+    letter-spacing:1.5px;
+    margin-bottom:9px;
 }
 
 .heroTitle{
@@ -220,8 +192,7 @@ body::after{
 
     font-family:"Cinzel Decorative",serif;
 
-    font-size:
-        clamp(42px,9vw,82px);
+    font-size:clamp(34px,7vw,62px);
 
     line-height:1.05;
 
@@ -233,35 +204,33 @@ body::after{
 }
 
 .heroSubtitle{
-    margin-top:13px;
+    margin-top:9px;
 
     color:#d5c1df;
 
-    font-size:
-        clamp(13px,2vw,18px);
+    font-size:12px;
 
-    letter-spacing:1px;
+    letter-spacing:.7px;
 }
 
 
 /* =========================
-   FOTO PRINCIPAL
+   FOTO 1
 ========================= */
 
 .heroPhoto{
-    width:min(430px,76vw);
-    max-height:48vh;
+    width:min(330px,62vw);
+    max-height:40vh;
 
     object-fit:contain;
 
-    margin-top:28px;
+    margin-top:20px;
 
-    border:
-        3px solid rgba(192,121,255,.72);
+    border:3px solid rgba(192,121,255,.72);
 
-    border-radius:12px;
+    border-radius:11px;
 
-    padding:6px;
+    padding:5px;
 
     background:#0d0613;
 
@@ -278,24 +247,23 @@ body::after{
 ========================= */
 
 .countdownTitle{
-    margin-top:24px;
+    margin-top:18px;
 
     color:#bfa7cb;
 
-    font-size:11px;
+    font-size:9px;
 
-    letter-spacing:2px;
+    letter-spacing:1.5px;
 }
 
 #countdown{
-    margin-top:8px;
+    margin-top:6px;
 
     color:#e1baff;
 
-    font-size:
-        clamp(18px,4vw,27px);
+    font-size:15px;
 
-    letter-spacing:2px;
+    letter-spacing:1px;
 }
 
 
@@ -315,21 +283,17 @@ body::after{
 
     text-align:center;
 
-    padding:
-        55px
-        20px;
+    padding:45px 20px;
 }
 
 .magicSymbol{
     color:#c47eff;
-    font-size:35px;
+    font-size:27px;
 
-    animation:
-        magicGlow 2s infinite alternate;
+    animation:magicGlow 2s infinite alternate;
 }
 
 @keyframes magicGlow{
-
     from{
         opacity:.55;
         transform:scale(.95);
@@ -339,42 +303,36 @@ body::after{
         opacity:1;
         transform:scale(1.08);
     }
-
 }
 
 .revealTitle{
-    margin:
-        10px
-        0
-        20px;
+    margin:7px 0 15px;
 
     font-family:"Cinzel Decorative",serif;
 
-    font-size:
-        clamp(23px,5vw,38px);
+    font-size:clamp(19px,4vw,29px);
 
     color:#dfb9ff;
 }
 
 
 /* =========================
-   FOTO INVITACIÓN
+   FOTO 2
 ========================= */
 
 .invitationPhoto{
-    width:min(390px,72vw);
-    max-height:52vh;
+    width:min(310px,60vw);
+    max-height:42vh;
 
     object-fit:contain;
 
     display:block;
 
-    padding:6px;
+    padding:5px;
 
-    border:
-        3px solid rgba(192,121,255,.72);
+    border:3px solid rgba(192,121,255,.72);
 
-    border-radius:12px;
+    border-radius:11px;
 
     background:#0d0613;
 
@@ -382,7 +340,7 @@ body::after{
         0 0 18px rgba(160,70,255,.30),
         0 0 45px rgba(120,40,200,.13);
 
-    margin-bottom:24px;
+    margin-bottom:18px;
 }
 
 
@@ -392,17 +350,20 @@ body::after{
 
 .confirmText{
     color:#c7b2d1;
-    font-size:13px;
-    margin-bottom:12px;
+    font-size:11px;
+    margin-bottom:9px;
 }
 
-.confirmButton{
-    padding:
-        11px
-        20px;
 
-    border:
-        1px solid #a35fd1;
+/*
+   ESTE BOTÓN CONSERVA SU TAMAÑO
+   ==============================
+*/
+
+.confirmButton{
+    padding:11px 20px;
+
+    border:1px solid #a35fd1;
 
     border-radius:25px;
 
@@ -454,8 +415,7 @@ body::after{
 
     padding:18px;
 
-    background:
-        rgba(4,1,7,.82);
+    background:rgba(4,1,7,.82);
 
     backdrop-filter:blur(5px);
 }
@@ -464,8 +424,7 @@ body::after{
     width:100%;
     max-width:420px;
 
-    max-height:
-        calc(100dvh - 35px);
+    max-height:calc(100dvh - 35px);
 
     overflow-y:auto;
 
@@ -478,8 +437,7 @@ body::after{
             #1b0b29
         );
 
-    border:
-        1px solid rgba(192,121,255,.5);
+    border:1px solid rgba(192,121,255,.5);
 
     border-radius:15px;
 
@@ -490,16 +448,13 @@ body::after{
 }
 
 .modalBox h2{
-    margin:
-        0
-        0
-        16px;
+    margin:0 0 16px;
 
     color:#dfbaff;
 
     font-family:"Cinzel Decorative",serif;
 
-    font-size:21px;
+    font-size:19px;
 }
 
 .modalBox label{
@@ -507,14 +462,11 @@ body::after{
 
     text-align:left;
 
-    margin:
-        11px
-        0
-        5px;
+    margin:10px 0 5px;
 
     color:#cbb7d5;
 
-    font-size:12px;
+    font-size:11px;
 }
 
 .modalBox input[type="text"],
@@ -522,10 +474,9 @@ body::after{
 .modalBox input[type="number"]{
     width:100%;
 
-    padding:10px;
+    padding:9px;
 
-    border:
-        1px solid #513260;
+    border:1px solid #513260;
 
     border-radius:7px;
 
@@ -541,24 +492,21 @@ body::after{
 .modalBox input:focus{
     border-color:#a970cf;
 
-    box-shadow:
-        0 0 8px rgba(169,112,207,.18);
+    box-shadow:0 0 8px rgba(169,112,207,.18);
 }
 
 .categoryRow{
     display:grid;
 
-    grid-template-columns:
-        1fr 1fr;
+    grid-template-columns:1fr 1fr;
 
     gap:9px;
 }
 
 .categoryBox{
-    padding:10px;
+    padding:9px;
 
-    border:
-        1px solid #513260;
+    border:1px solid #513260;
 
     border-radius:8px;
 
@@ -587,16 +535,14 @@ body::after{
 
 .modalButtons{
     display:flex;
-
     gap:8px;
-
-    margin-top:18px;
+    margin-top:17px;
 }
 
 .modalButtons button{
     flex:1;
 
-    padding:10px;
+    padding:9px;
 
     border-radius:8px;
 
@@ -627,13 +573,13 @@ body::after{
 }
 
 .formError{
-    min-height:18px;
+    min-height:17px;
 
-    margin-top:10px;
+    margin-top:9px;
 
     color:#ff9d9d;
 
-    font-size:12px;
+    font-size:11px;
 }
 
 
@@ -654,14 +600,13 @@ body::after{
 
     text-align:center;
 
-    padding:40px 20px;
+    padding:35px 20px;
 }
 
 .celebrationTitle{
     font-family:"Cinzel Decorative",serif;
 
-    font-size:
-        clamp(28px,7vw,55px);
+    font-size:clamp(23px,5vw,40px);
 
     color:#e2bdff;
 
@@ -670,20 +615,19 @@ body::after{
 }
 
 .celebrationText{
-    margin-top:10px;
+    margin-top:8px;
 
     color:#d0bfd8;
 
-    font-size:16px;
+    font-size:13px;
 }
 
 .musicButton{
-    margin-top:24px;
+    margin-top:20px;
 
-    padding:12px 19px;
+    padding:10px 17px;
 
-    border:
-        1px solid #a45ed0;
+    border:1px solid #a45ed0;
 
     border-radius:25px;
 
@@ -697,6 +641,8 @@ body::after{
     color:white;
 
     font-family:inherit;
+
+    font-size:12px;
 
     cursor:pointer;
 }
@@ -718,8 +664,7 @@ body::after{
 
     opacity:0;
 
-    transition:
-        opacity 1.2s ease;
+    transition:opacity 1.2s ease;
 }
 
 #video2Container.show{
@@ -767,14 +712,12 @@ body::after{
 }
 
 .partyIcon{
-    font-size:50px;
+    font-size:40px;
 
-    animation:
-        partyPulse 1.2s infinite alternate;
+    animation:partyPulse 1.2s infinite alternate;
 }
 
 @keyframes partyPulse{
-
     from{
         transform:scale(.95);
     }
@@ -782,26 +725,24 @@ body::after{
     to{
         transform:scale(1.12);
     }
-
 }
 
 .partyTitle{
-    margin-top:15px;
+    margin-top:12px;
 
     font-family:"Cinzel Decorative",serif;
 
-    font-size:
-        clamp(25px,7vw,48px);
+    font-size:clamp(21px,5vw,37px);
 
     color:#e1b9ff;
 }
 
 .partyText{
-    margin-top:8px;
+    margin-top:7px;
 
     color:#cdb7d7;
 
-    font-size:14px;
+    font-size:12px;
 }
 
 
@@ -822,121 +763,102 @@ body::after{
 
     text-align:center;
 
-    padding:40px 20px;
+    padding:35px 20px;
 }
 
 .finalTitle{
     font-family:"Cinzel Decorative",serif;
 
-    font-size:
-        clamp(25px,6vw,45px);
+    font-size:clamp(21px,5vw,36px);
 
     color:#dfbaff;
 }
 
 .finalText{
-    max-width:520px;
+    max-width:470px;
 
-    margin-top:14px;
+    margin-top:11px;
 
     color:#cdb9d6;
 
-    line-height:1.7;
+    line-height:1.6;
 
-    font-size:14px;
+    font-size:12px;
 }
 
 .finalDate{
-    margin-top:18px;
+    margin-top:14px;
 
     color:#d8aaff;
 
-    font-size:15px;
+    font-size:13px;
 }
 
 
 /* =========================
-   MÓVIL
+   CELULAR
 ========================= */
 
 @media(max-width:750px){
 
     .hero{
-        padding:
-            75px
-            15px
-            35px;
+        padding:65px 15px 30px;
     }
 
     .heroPhoto{
-        width:min(330px,70vw);
-        max-height:40vh;
-        margin-top:22px;
+        width:58vw;
+        max-height:37vh;
     }
 
     .invitationPhoto{
-        width:min(320px,68vw);
-        max-height:43vh;
-    }
-
-    .tutorialTitle{
-        font-size:12px;
-        letter-spacing:1.5px;
-    }
-
-    .tutorialText{
-        font-size:12px;
+        width:56vw;
+        max-height:39vh;
     }
 
 }
 
 
 /* =========================
-   MÓVIL PEQUEÑO
+   CELULAR PEQUEÑO
 ========================= */
 
 @media(max-width:420px){
 
     .hero{
-        padding:
-            70px
-            12px
-            30px;
+        padding:65px 12px 25px;
     }
 
     .heroSmall{
-        font-size:11px;
+        font-size:10px;
     }
 
     .heroTitle{
-        font-size:39px;
+        font-size:35px;
     }
 
     .heroSubtitle{
-        font-size:12px;
+        font-size:11px;
     }
 
     .heroPhoto{
-        width:62vw;
-        max-height:35vh;
-        padding:5px;
-        margin-top:18px;
+        width:55vw;
+        max-height:34vh;
+        padding:4px;
+        margin-top:16px;
     }
 
     .invitationPhoto{
-        width:60vw;
-        max-height:38vh;
-        padding:5px;
+        width:53vw;
+        max-height:36vh;
+        padding:4px;
     }
 
     .reveal{
-        padding:
-            45px
-            12px;
+        padding:40px 12px;
     }
 
     .revealTitle{
-        font-size:21px;
+        font-size:19px;
     }
 
     .modalBox{
@@ -951,25 +873,22 @@ body::after{
 
 
 /* =========================
-   ERROR GENERAL
+   ERROR
 ========================= */
 
 .simpleError{
     color:#ffaaaa;
-    font-size:12px;
+    font-size:11px;
     margin-top:8px;
 }
 
 </style>
-
 </head>
 
 <body>
 
 
-<!-- =========================
-     TUTORIAL
-========================= -->
+<!-- TUTORIAL -->
 
 <div id="tutorial">
 
@@ -988,9 +907,7 @@ body::after{
 </div>
 
 
-<!-- =========================
-     VIDEO INICIAL
-========================= -->
+<!-- VIDEO INICIAL -->
 
 <div id="introVideoContainer">
 
@@ -1011,9 +928,7 @@ body::after{
 </div>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero">
 
@@ -1029,13 +944,11 @@ body::after{
         ✦ Una noche mágica está por comenzar ✦
     </div>
 
-
     <img
         src="foto1.jpg"
         class="heroPhoto"
         alt="Velunara"
     >
-
 
     <div class="countdownTitle">
         FALTAN PARA LA CELEBRACIÓN
@@ -1048,9 +961,7 @@ body::after{
 </section>
 
 
-<!-- =========================
-     REVELACIÓN
-========================= -->
+<!-- REVELACIÓN -->
 
 <section class="reveal">
 
@@ -1062,13 +973,11 @@ body::after{
         La magia comienza aquí
     </h2>
 
-
     <img
         src="foto2.jpg"
         class="invitationPhoto"
         alt="Invitación Velunara"
     >
-
 
     <div class="confirmText">
         Pica aquí para confirmar tu asistencia
@@ -1084,9 +993,7 @@ body::after{
 </section>
 
 
-<!-- =========================
-     MODAL
-========================= -->
+<!-- MODAL -->
 
 <div id="modal">
 
@@ -1095,7 +1002,6 @@ body::after{
         <h2>
             Confirmar asistencia
         </h2>
-
 
         <label for="guestName">
             Nombre
@@ -1106,7 +1012,6 @@ body::after{
             id="guestName"
             placeholder="Escribe tu nombre"
         >
-
 
         <div class="categoryRow">
 
@@ -1126,7 +1031,6 @@ body::after{
 
             </div>
 
-
             <div class="categoryBox">
 
                 <label for="children">
@@ -1145,7 +1049,6 @@ body::after{
 
         </div>
 
-
         <label for="phone">
             Teléfono
             <span style="color:#817087;">
@@ -1159,11 +1062,9 @@ body::after{
             placeholder="Tu número de teléfono"
         >
 
-
         <label>
             ¿Asistirás?
         </label>
-
 
         <div class="radioRow">
 
@@ -1177,7 +1078,6 @@ body::after{
                 Sí asistiré
             </label>
 
-
             <label>
                 <input
                     type="radio"
@@ -1189,12 +1089,10 @@ body::after{
 
         </div>
 
-
         <div
             id="formError"
             class="formError"
         ></div>
-
 
         <div class="modalButtons">
 
@@ -1220,9 +1118,7 @@ body::after{
 </div>
 
 
-<!-- =========================
-     CELEBRACIÓN
-========================= -->
+<!-- CELEBRACIÓN -->
 
 <section id="celebration">
 
@@ -1250,9 +1146,7 @@ body::after{
 ></audio>
 
 
-<!-- =========================
-     VIDEO 2
-========================= -->
+<!-- VIDEO 2 -->
 
 <div id="video2Container">
 
@@ -1271,9 +1165,7 @@ body::after{
 </div>
 
 
-<!-- =========================
-     PARTY MODE
-========================= -->
+<!-- MODO FIESTA -->
 
 <section id="partyMode">
 
@@ -1296,9 +1188,7 @@ body::after{
 </section>
 
 
-<!-- =========================
-     FINAL
-========================= -->
+<!-- FINAL -->
 
 <section id="finalScreen">
 
@@ -1332,7 +1222,6 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
 
-
 const supabaseClient =
     supabase.createClient(
         SUPABASE_URL,
@@ -1340,79 +1229,49 @@ const supabaseClient =
     );
 
 
-/* =========================
-   ELEMENTOS
-========================= */
+/* ELEMENTOS */
 
 const tutorial =
-    document.getElementById(
-        "tutorial"
-    );
+    document.getElementById("tutorial");
 
 const introVideo =
-    document.getElementById(
-        "introVideo"
-    );
+    document.getElementById("introVideo");
 
 const introVideoContainer =
-    document.getElementById(
-        "introVideoContainer"
-    );
+    document.getElementById("introVideoContainer");
 
 const modal =
-    document.getElementById(
-        "modal"
-    );
+    document.getElementById("modal");
 
 const formError =
-    document.getElementById(
-        "formError"
-    );
+    document.getElementById("formError");
 
 const saveButton =
-    document.getElementById(
-        "saveButton"
-    );
+    document.getElementById("saveButton");
 
 const countdown =
-    document.getElementById(
-        "countdown"
-    );
+    document.getElementById("countdown");
 
 const celebration =
-    document.getElementById(
-        "celebration"
-    );
+    document.getElementById("celebration");
 
 const birthdayMusic =
-    document.getElementById(
-        "birthdayMusic"
-    );
+    document.getElementById("birthdayMusic");
 
 const video2Container =
-    document.getElementById(
-        "video2Container"
-    );
+    document.getElementById("video2Container");
 
 const video2 =
-    document.getElementById(
-        "video2"
-    );
+    document.getElementById("video2");
 
 const partyMode =
-    document.getElementById(
-        "partyMode"
-    );
+    document.getElementById("partyMode");
 
 const finalScreen =
-    document.getElementById(
-        "finalScreen"
-    );
+    document.getElementById("finalScreen");
 
 
-/* =========================
-   VIDEO INICIAL
-========================= */
+/* VIDEO INICIAL */
 
 introVideo.addEventListener(
     "ended",
@@ -1424,7 +1283,6 @@ introVideo.addEventListener(
 
     }
 );
-
 
 setTimeout(
     function(){
@@ -1438,12 +1296,9 @@ setTimeout(
 );
 
 
-/* =========================
-   TUTORIAL
-========================= */
+/* TUTORIAL */
 
 let tutorialHidden = false;
-
 
 function checkTutorial(){
 
@@ -1451,21 +1306,15 @@ function checkTutorial(){
         return;
     }
 
-
     const reveal =
-        document.querySelector(
-            ".reveal"
-        );
-
+        document.querySelector(".reveal");
 
     if(!reveal){
         return;
     }
 
-
     const rect =
         reveal.getBoundingClientRect();
-
 
     if(
         rect.top <
@@ -1482,13 +1331,11 @@ function checkTutorial(){
 
 }
 
-
 window.addEventListener(
     "scroll",
     checkTutorial,
     {passive:true}
 );
-
 
 window.addEventListener(
     "load",
@@ -1496,15 +1343,12 @@ window.addEventListener(
 );
 
 
-/* =========================
-   CUENTA REGRESIVA
-========================= */
+/* CUENTA REGRESIVA */
 
 const eventDate =
     new Date(
         "2026-09-27T00:00:00"
     );
-
 
 function updateCountdown(){
 
@@ -1515,7 +1359,6 @@ function updateCountdown(){
         eventDate.getTime() -
         now.getTime();
 
-
     if(difference <= 0){
 
         countdown.textContent =
@@ -1524,45 +1367,35 @@ function updateCountdown(){
         return;
     }
 
-
     const days =
         Math.floor(
             difference /
             (1000 * 60 * 60 * 24)
         );
 
-
     const hours =
         Math.floor(
             (difference /
-            (1000 * 60 * 60)) %
-            24
+            (1000 * 60 * 60)) % 24
         );
-
 
     const minutes =
         Math.floor(
             (difference /
-            (1000 * 60)) %
-            60
+            (1000 * 60)) % 60
         );
-
 
     const seconds =
         Math.floor(
-            (difference / 1000) %
-            60
+            (difference / 1000) % 60
         );
-
 
     countdown.textContent =
         `${days} días · ${hours} h · ${minutes} min · ${seconds} s`;
 
 }
 
-
 updateCountdown();
-
 
 setInterval(
     updateCountdown,
@@ -1570,104 +1403,82 @@ setInterval(
 );
 
 
-/* =========================
-   MODAL
-========================= */
+/* MODAL */
 
 function openModal(){
 
     modal.style.display =
         "flex";
 
-    formError.textContent = "";
+    formError.textContent =
+        "";
 
     document
-        .getElementById(
-            "guestName"
-        )
+        .getElementById("guestName")
         .focus();
 
 }
-
 
 function closeModal(){
 
     modal.style.display =
         "none";
 
-    formError.textContent = "";
+    formError.textContent =
+        "";
 
 }
-
 
 modal.addEventListener(
     "click",
     function(event){
 
-        if(
-            event.target === modal
-        ){
-
+        if(event.target === modal){
             closeModal();
-
         }
 
     }
 );
 
 
-/* =========================
-   GUARDAR CONFIRMACIÓN
-========================= */
+/* GUARDAR */
 
 async function saveConfirmation(){
 
-    formError.textContent = "";
-
+    formError.textContent =
+        "";
 
     const name =
         document
-            .getElementById(
-                "guestName"
-            )
+            .getElementById("guestName")
             .value
             .trim();
-
 
     const adults =
         Math.max(
             0,
             Number(
                 document
-                    .getElementById(
-                        "adults"
-                    )
+                    .getElementById("adults")
                     .value
             ) || 0
         );
-
 
     const children =
         Math.max(
             0,
             Number(
                 document
-                    .getElementById(
-                        "children"
-                    )
+                    .getElementById("children")
                     .value
             ) || 0
         );
 
-
     const phone =
         document
-            .getElementById(
-                "phone"
-            )
+            .getElementById("phone")
             .value
             .trim();
-
 
     const attendance =
         document
@@ -1675,7 +1486,6 @@ async function saveConfirmation(){
                 'input[name="attendance"]:checked'
             )
             ?.value;
-
 
     if(!name){
 
@@ -1685,7 +1495,6 @@ async function saveConfirmation(){
         return;
     }
 
-
     if(!attendance){
 
         formError.textContent =
@@ -1693,7 +1502,6 @@ async function saveConfirmation(){
 
         return;
     }
-
 
     if(
         attendance === "si" &&
@@ -1706,13 +1514,11 @@ async function saveConfirmation(){
         return;
     }
 
-
     saveButton.disabled =
         true;
 
     saveButton.textContent =
         "Guardando...";
-
 
     const payload = {
 
@@ -1729,14 +1535,9 @@ async function saveConfirmation(){
 
     };
 
-
     if(phone){
-
-        payload.telefono =
-            phone;
-
+        payload.telefono = phone;
     }
-
 
     try{
 
@@ -1744,13 +1545,6 @@ async function saveConfirmation(){
             await supabaseClient
                 .from("confirmaciones")
                 .insert([payload]);
-
-
-        /*
-           Si la tabla todavía no tiene
-           la columna telefono, intentamos
-           guardar sin teléfono.
-        */
 
         if(
             result.error &&
@@ -1777,7 +1571,6 @@ async function saveConfirmation(){
 
             };
 
-
             result =
                 await supabaseClient
                     .from("confirmaciones")
@@ -1787,13 +1580,11 @@ async function saveConfirmation(){
 
         }
 
-
         if(result.error){
 
             console.error(
                 result.error
             );
-
 
             formError.textContent =
                 "No se pudo guardar la confirmación. Revisa la conexión o los permisos de la base de datos.";
@@ -1801,17 +1592,13 @@ async function saveConfirmation(){
             return;
         }
 
-
         closeModal();
 
-
         showCelebration();
-
 
     }catch(error){
 
         console.error(error);
-
 
         formError.textContent =
             "Ocurrió un error al guardar. Intenta nuevamente.";
@@ -1829,9 +1616,7 @@ async function saveConfirmation(){
 }
 
 
-/* =========================
-   CELEBRACIÓN
-========================= */
+/* CELEBRACIÓN */
 
 function showCelebration(){
 
@@ -1845,40 +1630,29 @@ function showCelebration(){
 }
 
 
-/* =========================
-   MÚSICA
-========================= */
+/* MÚSICA */
 
 function playMusic(){
 
     birthdayMusic.currentTime =
         0;
 
-
     birthdayMusic.play()
         .catch(
             function(error){
-
-                console.error(
-                    error
-                );
-
+                console.error(error);
             }
         );
 
-
     celebration.style.display =
         "none";
-
 
     playVideo2();
 
 }
 
 
-/* =========================
-   VIDEO 2
-========================= */
+/* VIDEO 2 */
 
 function playVideo2(){
 
@@ -1886,24 +1660,17 @@ function playVideo2(){
         "show"
     );
 
-
     video2.currentTime =
         0;
-
 
     video2.play()
         .catch(
             function(error){
-
-                console.error(
-                    error
-                );
-
+                console.error(error);
             }
         );
 
 }
-
 
 video2.addEventListener(
     "ended",
@@ -1912,7 +1679,6 @@ video2.addEventListener(
         video2Container.classList.remove(
             "show"
         );
-
 
         setTimeout(
             function(){
@@ -1930,15 +1696,12 @@ video2.addEventListener(
 );
 
 
-/* =========================
-   MODO FIESTA
-========================= */
+/* MODO FIESTA */
 
 function showPartyMode(){
 
     partyMode.style.display =
         "flex";
-
 
     setTimeout(
         function(){
@@ -1946,10 +1709,8 @@ function showPartyMode(){
             partyMode.style.display =
                 "none";
 
-
             finalScreen.style.display =
                 "flex";
-
 
             finalScreen.scrollIntoView({
                 behavior:"smooth"
@@ -1962,9 +1723,7 @@ function showPartyMode(){
 }
 
 
-/* =========================
-   TECLADO
-========================= */
+/* ESC */
 
 document.addEventListener(
     "keydown",
@@ -1986,3 +1745,4 @@ document.addEventListener(
 
 </body>
 </html>
+
