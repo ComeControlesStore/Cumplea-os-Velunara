@@ -26,10 +26,6 @@ body{
     color:white;
 }
 
-/* =========================
-   LOGIN
-========================= */
-
 .login-screen{
     min-height:100vh;
     display:flex;
@@ -129,10 +125,6 @@ body{
     font-size:14px;
 }
 
-/* =========================
-   ADMIN
-========================= */
-
 .admin{
     display:none;
     min-height:100vh;
@@ -188,10 +180,6 @@ header{
     color:#ff9da8 !important;
 }
 
-/* =========================
-   CONTENIDO
-========================= */
-
 .container{
     width:min(1200px,94%);
     margin:35px auto;
@@ -210,10 +198,6 @@ header{
 .welcome p{
     color:#b9a9c8;
 }
-
-/* =========================
-   ESTADÍSTICAS
-========================= */
 
 .stats{
     display:grid;
@@ -251,10 +235,6 @@ header{
 .stat-card.no .number{
     color:#ff8996;
 }
-
-/* =========================
-   TABLA
-========================= */
 
 .table-container{
     background:rgba(15,8,22,.9);
@@ -340,10 +320,6 @@ tr:hover td{
     background:rgba(220,40,60,.25);
 }
 
-/* =========================
-   ESTADOS
-========================= */
-
 .loading{
     padding:45px;
     text-align:center;
@@ -360,10 +336,6 @@ tr:hover td{
     font-size:40px;
     margin-bottom:10px;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media(max-width:700px){
 
@@ -409,11 +381,6 @@ tr:hover td{
 
 <body>
 
-
-<!-- =========================
-     LOGIN
-========================= -->
-
 <section class="login-screen" id="loginScreen">
 
     <div class="login-box">
@@ -446,7 +413,6 @@ tr:hover td{
 
             </div>
 
-
             <div class="input-group">
 
                 <label for="password">
@@ -463,7 +429,6 @@ tr:hover td{
 
             </div>
 
-
             <button
                 type="submit"
                 class="login-button"
@@ -473,7 +438,6 @@ tr:hover td{
             </button>
 
         </form>
-
 
         <div
             class="login-error"
@@ -485,15 +449,7 @@ tr:hover td{
 </section>
 
 
-
-<!-- =========================
-     PANEL ADMIN
-========================= -->
-
-<section
-    class="admin"
-    id="adminPanel"
->
+<section class="admin" id="adminPanel">
 
 <header>
 
@@ -508,7 +464,6 @@ tr:hover td{
         </h1>
 
     </div>
-
 
     <div class="header-actions">
 
@@ -530,7 +485,6 @@ tr:hover td{
 
 <div class="container">
 
-
     <div class="welcome">
 
         <h2>
@@ -543,8 +497,6 @@ tr:hover td{
 
     </div>
 
-
-    <!-- ESTADÍSTICAS -->
 
     <div class="stats">
 
@@ -598,8 +550,6 @@ tr:hover td{
     </div>
 
 
-    <!-- TABLA -->
-
     <div class="table-container">
 
         <div class="table-header">
@@ -609,7 +559,6 @@ tr:hover td{
             </h3>
 
         </div>
-
 
         <div
             class="table-wrapper"
@@ -627,7 +576,6 @@ tr:hover td{
 </div>
 
 </section>
-
 
 
 <script>
@@ -688,6 +636,15 @@ const totalNotAttending =
 
 
 /* =========================
+   CONTROL DE CARGAS
+========================= */
+
+let guestsLoaded = false;
+
+let loadingGuests = false;
+
+
+/* =========================
    ESCAPAR HTML
 ========================= */
 
@@ -715,8 +672,6 @@ function showAdmin(){
     loginScreen.style.display = "none";
     adminPanel.style.display = "block";
 
-    loadGuests();
-
 }
 
 
@@ -728,6 +683,8 @@ function showLogin(){
 
     adminPanel.style.display = "none";
     loginScreen.style.display = "flex";
+
+    guestsLoaded = false;
 
 }
 
@@ -796,6 +753,8 @@ loginForm.addEventListener(
 
             showAdmin();
 
+            await loadGuestsOnce();
+
         }
 
 
@@ -810,10 +769,31 @@ loginForm.addEventListener(
 
 
 /* =========================
+   CARGAR UNA SOLA VEZ
+========================= */
+
+async function loadGuestsOnce(){
+
+    if(guestsLoaded || loadingGuests){
+        return;
+    }
+
+    await loadGuests();
+
+}
+
+
+/* =========================
    CARGAR INVITADOS
 ========================= */
 
 async function loadGuests(){
+
+    if(loadingGuests){
+        return;
+    }
+
+    loadingGuests = true;
 
     tableArea.innerHTML = `
         <div class="loading">
@@ -832,6 +812,9 @@ async function loadGuests(){
             .order("fecha",{
                 ascending:false
             });
+
+
+    loadingGuests = false;
 
 
     if(error){
@@ -855,6 +838,8 @@ async function loadGuests(){
         return;
     }
 
+
+    guestsLoaded = true;
 
     updateStats(data || []);
 
@@ -1037,29 +1022,12 @@ function renderGuests(guests){
 
                 <tr>
 
-                    <th>
-                        Nombre
-                    </th>
-
-                    <th>
-                        Personas
-                    </th>
-
-                    <th>
-                        Asistencia
-                    </th>
-
-                    <th>
-                        Teléfono
-                    </th>
-
-                    <th>
-                        Fecha
-                    </th>
-
-                    <th>
-                        Acción
-                    </th>
+                    <th>Nombre</th>
+                    <th>Personas</th>
+                    <th>Asistencia</th>
+                    <th>Teléfono</th>
+                    <th>Fecha</th>
+                    <th>Acción</th>
 
                 </tr>
 
@@ -1116,6 +1084,8 @@ async function deleteGuest(id){
     }
 
 
+    guestsLoaded = false;
+
     await loadGuests();
 
 }
@@ -1127,9 +1097,15 @@ async function deleteGuest(id){
 
 refreshButton.addEventListener(
     "click",
-    function(){
+    async function(){
 
-        loadGuests();
+        if(loadingGuests){
+            return;
+        }
+
+        guestsLoaded = false;
+
+        await loadGuests();
 
     }
 );
@@ -1152,33 +1128,7 @@ logoutButton.addEventListener(
 
 
 /* =========================
-   COMPROBAR SESIÓN
-========================= */
-
-async function checkSession(){
-
-    const {
-        data
-    } =
-        await supabaseClient.auth
-            .getSession();
-
-
-    if(data.session){
-
-        showAdmin();
-
-    }else{
-
-        showLogin();
-
-    }
-
-}
-
-
-/* =========================
-   CAMBIOS DE SESIÓN
+   SESIÓN
 ========================= */
 
 supabaseClient.auth.onAuthStateChange(
@@ -1201,6 +1151,30 @@ supabaseClient.auth.onAuthStateChange(
 /* =========================
    INICIAR
 ========================= */
+
+async function checkSession(){
+
+    const {
+        data
+    } =
+        await supabaseClient.auth
+            .getSession();
+
+
+    if(data.session){
+
+        showAdmin();
+
+        await loadGuestsOnce();
+
+    }else{
+
+        showLogin();
+
+    }
+
+}
+
 
 checkSession();
 
