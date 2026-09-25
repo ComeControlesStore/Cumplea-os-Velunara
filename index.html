@@ -1,20 +1,11 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Velunara | Invitación</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;500;600;700;900&family=Cormorant+Garamond:wght@400;500;600&display=swap"
-    rel="stylesheet"
->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -41,12 +32,68 @@ body{
     overflow-x:hidden;
 }
 
-button{
+button,
+input,
+select{
     font-family:inherit;
 }
 
 .hidden{
     display:none !important;
+}
+
+
+/* =========================================================
+   VIDEO DE INICIO
+========================================================= */
+
+#introVideoScreen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    background:#000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    opacity:1;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
+
+#introVideoScreen.fade-out{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+#introVideo{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:0;
+
+    animation:introVideoAppear 1.5s ease forwards;
+}
+
+@keyframes introVideoAppear{
+
+    from{
+        opacity:0;
+        transform:scale(1.03);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
 }
 
 
@@ -84,11 +131,16 @@ body::before{
 
 .star{
     position:absolute;
+
     width:2px;
     height:2px;
+
     background:#fff;
+
     border-radius:50%;
+
     opacity:.7;
+
     animation:twinkle 3s infinite alternate;
 }
 
@@ -123,12 +175,11 @@ body::before{
 .hero{
     min-height:100vh;
 
-    padding:
-        50px 20px
-        160px;
+    padding:50px 20px 80px;
 
     display:flex;
     flex-direction:column;
+
     justify-content:center;
     align-items:center;
 
@@ -162,7 +213,6 @@ body::before{
 }
 
 .small-title{
-
     color:#c9a5ff;
 
     letter-spacing:6px;
@@ -174,39 +224,20 @@ body::before{
     margin-bottom:15px;
 }
 
-
-/* =========================================================
-   VELUNARA
-========================================================= */
-
 .main-title{
+    font-size:clamp(42px,8vw,82px);
 
-    font-family:
-        "Cinzel Decorative",
-        "Times New Roman",
-        serif;
+    font-weight:normal;
 
-    font-size:
-        clamp(38px,8vw,82px);
-
-    font-weight:600;
-
-    letter-spacing:
-        clamp(2px,1vw,8px);
-
-    line-height:1.1;
-
-    color:#f4eaff;
+    letter-spacing:5px;
 
     text-shadow:
-        0 0 10px rgba(190,120,255,.8),
-        0 0 25px rgba(150,60,230,.65),
-        0 0 55px rgba(100,20,170,.5);
+        0 0 15px rgba(170,80,255,.7),
+        0 0 40px rgba(120,30,200,.5);
 }
 
 .subtitle{
-
-    margin-top:12px;
+    margin-top:10px;
 
     color:#ddd;
 
@@ -221,7 +252,6 @@ body::before{
 ========================================================= */
 
 .hero-content{
-
     width:min(1050px,100%);
 
     margin-top:45px;
@@ -229,14 +259,12 @@ body::before{
     display:flex;
 
     justify-content:center;
-
     align-items:center;
 
     gap:55px;
 }
 
 .photo1-container{
-
     width:280px;
 
     flex-shrink:0;
@@ -245,16 +273,13 @@ body::before{
 }
 
 .photo1-container::before{
-
     content:"";
 
     position:absolute;
 
     inset:-8px;
 
-    border:
-        1px solid
-        rgba(204,145,255,.7);
+    border:1px solid rgba(204,145,255,.7);
 
     box-shadow:
         0 0 20px rgba(160,70,255,.5),
@@ -264,22 +289,18 @@ body::before{
 }
 
 .photo1-container::after{
-
     content:"";
 
     position:absolute;
 
     inset:-18px;
 
-    border:
-        1px solid
-        rgba(150,80,220,.25);
+    border:1px solid rgba(150,80,220,.25);
 
     transform:rotate(2deg);
 }
 
 .photo1-container img{
-
     width:100%;
 
     display:block;
@@ -288,24 +309,19 @@ body::before{
 
     z-index:2;
 
-    border:
-        4px solid
-        #160b20;
+    border:4px solid #160b20;
 
     box-shadow:
-        0 0 30px
-        rgba(160,50,255,.4);
+        0 0 30px rgba(160,50,255,.4);
 }
 
 .countdown-area{
-
     flex:1;
 
     max-width:620px;
 }
 
 .countdown-title{
-
     color:#cda5ff;
 
     font-size:18px;
@@ -316,7 +332,6 @@ body::before{
 }
 
 .countdown{
-
     display:grid;
 
     grid-template-columns:
@@ -326,7 +341,6 @@ body::before{
 }
 
 .time-box{
-
     padding:20px 10px;
 
     background:
@@ -337,15 +351,11 @@ body::before{
         rgba(192,125,255,.4);
 
     box-shadow:
-        inset 0 0 25px
-        rgba(100,30,150,.12),
-
-        0 0 15px
-        rgba(100,30,150,.1);
+        inset 0 0 25px rgba(100,30,150,.12),
+        0 0 15px rgba(100,30,150,.1);
 }
 
 .time-number{
-
     display:block;
 
     font-size:
@@ -354,12 +364,10 @@ body::before{
     color:#fff;
 
     text-shadow:
-        0 0 12px
-        rgba(190,120,255,.7);
+        0 0 12px rgba(190,120,255,.7);
 }
 
 .time-label{
-
     display:block;
 
     margin-top:5px;
@@ -375,52 +383,19 @@ body::before{
 
 
 /* =========================================================
-   TUTORIAL FIJO
+   TUTORIAL
 ========================================================= */
 
-.scroll-hint{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:
-        max(18px, env(safe-area-inset-bottom));
-
-    transform:
-        translateX(-50%);
-
-    width:
-        min(390px, calc(100vw - 24px));
-
-    padding:
-        13px 18px 15px;
-
-    z-index:900;
+.scroll-tutorial{
+    margin-top:60px;
 
     text-align:center;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(24,8,35,.96),
-            rgba(8,2,14,.97)
-        );
+    color:#fff;
 
-    border:
-        1px solid
-        rgba(210,150,255,.75);
+    cursor:pointer;
 
-    border-radius:18px;
-
-    box-shadow:
-        0 0 18px
-        rgba(170,80,255,.45),
-
-        0 0 45px
-        rgba(100,20,150,.3);
-
-    backdrop-filter:blur(8px);
+    user-select:none;
 
     opacity:1;
 
@@ -428,87 +403,68 @@ body::before{
 
     transition:
         opacity .9s ease,
+        transform .9s ease,
         visibility .9s ease;
 }
 
-.scroll-hint.fade-out{
-
+.scroll-tutorial.fade-out{
     opacity:0;
-
     visibility:hidden;
-
     pointer-events:none;
+
+    transform:translateY(-12px);
 }
 
-.scroll-guide-title{
-
-    color:#fff;
-
-    font-size:
-        clamp(14px,3.5vw,18px);
+.scroll-tutorial-text{
+    font-size:17px;
 
     font-weight:bold;
 
     letter-spacing:1px;
 
     text-shadow:
-        0 0 10px
-        rgba(210,150,255,.8);
+        0 0 8px rgba(190,120,255,.8),
+        0 2px 8px rgba(0,0,0,.8);
 }
 
-.scroll-guide-text{
+.scroll-tutorial-arrow{
+    margin-top:8px;
 
-    margin-top:4px;
-
-    color:#dbcbe5;
-
-    font-size:
-        clamp(11px,2.8vw,14px);
-
-    line-height:1.35;
-}
-
-.scroll-hint .scroll-arrow{
-
-    margin-top:3px;
-
-    font-size:32px;
+    font-size:50px;
 
     line-height:1;
 
-    color:#d7a5ff;
+    color:#d7a6ff;
 
     text-shadow:
-        0 0 10px #a94fff,
-        0 0 25px #8b2fc9;
+        0 0 10px rgba(190,100,255,.9),
+        0 0 30px rgba(150,50,220,.7);
 
     animation:
-        arrowDown 1s infinite ease-in-out;
+        tutorialArrow 1.2s infinite ease-in-out;
 }
 
-@keyframes arrowDown{
+@keyframes tutorialArrow{
 
     0%,100%{
         transform:translateY(0);
     }
 
     50%{
-        transform:translateY(9px);
+        transform:translateY(13px);
     }
+
 }
 
 
 /* =========================================================
-   TRANSICIÓN
+   TRANSICIÓN + FOTO 2
 ========================================================= */
 
 .invitation-reveal{
-
     min-height:100vh;
 
-    padding:
-        120px 20px
-        150px;
+    padding:120px 20px 100px;
 
     display:flex;
 
@@ -522,15 +478,13 @@ body::before{
 }
 
 .magic-transition{
-
     text-align:center;
 
     margin-bottom:55px;
 
     opacity:0;
 
-    transform:
-        translateY(40px);
+    transform:translateY(40px);
 
     transition:
         opacity 1.3s ease,
@@ -539,29 +493,22 @@ body::before{
 
 .invitation-reveal.visible
 .magic-transition{
-
     opacity:1;
 
-    transform:
-        translateY(0);
+    transform:translateY(0);
 }
 
 .magic-symbol{
-
     font-size:38px;
 
     color:#c48cff;
 
     animation:
-        magicPulse 2.5s
-        infinite ease-in-out,
-
-        rotateMagic 10s
-        linear infinite;
+        magicPulse 2.5s infinite ease-in-out,
+        rotateMagic 10s linear infinite;
 }
 
 .magic-text{
-
     margin-top:12px;
 
     color:#cdb9d8;
@@ -576,15 +523,11 @@ body::before{
 @keyframes magicPulse{
 
     0%,100%{
-
-        text-shadow:
-            0 0 5px #9d4edd;
-
+        text-shadow:0 0 5px #9d4edd;
         opacity:.5;
     }
 
     50%{
-
         text-shadow:
             0 0 10px #c77dff,
             0 0 30px #9d4edd,
@@ -592,6 +535,7 @@ body::before{
 
         opacity:1;
     }
+
 }
 
 @keyframes rotateMagic{
@@ -603,6 +547,7 @@ body::before{
     to{
         transform:rotate(360deg);
     }
+
 }
 
 
@@ -611,7 +556,6 @@ body::before{
 ========================================================= */
 
 .invitation-image-wrapper{
-
     width:min(750px,95vw);
 
     position:relative;
@@ -647,7 +591,6 @@ body::before{
 }
 
 .invitation-image-wrapper::before{
-
     content:"";
 
     position:absolute;
@@ -665,20 +608,17 @@ body::before{
 
     opacity:0;
 
-    transition:
-        opacity 2s ease;
+    transition:opacity 2s ease;
 
     pointer-events:none;
 }
 
 .invitation-reveal.visible
 .invitation-image-wrapper::before{
-
     opacity:1;
 }
 
 .invitation-image-wrapper img{
-
     width:100%;
 
     height:auto;
@@ -689,87 +629,57 @@ body::before{
 
     z-index:2;
 
-    border:
-        5px solid
-        #17091f;
+    border:5px solid #17091f;
 
     box-shadow:
-        0 0 20px
-        rgba(172,84,255,.5),
-
-        0 0 70px
-        rgba(120,40,180,.25);
+        0 0 20px rgba(172,84,255,.5),
+        0 0 70px rgba(120,40,180,.25);
 }
 
 
 /* =========================================================
-   GUÍA CONFIRMAR
+   CONFIRMACIÓN
 ========================================================= */
 
-.confirm-guide{
+.confirm-help{
+    margin-top:35px;
 
-    margin-top:30px;
+    color:#fff;
 
-    text-align:center;
+    font-size:16px;
 
-    color:#eadcf2;
-
-    font-size:
-        clamp(13px,3vw,17px);
+    font-weight:bold;
 
     letter-spacing:1px;
 
-    animation:
-        confirmGuidePulse
-        1.8s infinite ease-in-out;
-}
-
-.confirm-guide strong{
-
-    color:#d39cff;
+    text-align:center;
 
     text-shadow:
-        0 0 10px
-        rgba(200,120,255,.7);
+        0 0 8px rgba(190,120,255,.8),
+        0 2px 8px rgba(0,0,0,.8);
 }
 
-.confirm-guide-arrow{
+.confirm-help::after{
+    content:"↓";
 
-    margin-top:4px;
+    display:block;
 
-    font-size:28px;
+    margin-top:7px;
 
-    color:#d5a1ff;
+    font-size:38px;
+
+    color:#d7a6ff;
+
+    animation:
+        tutorialArrow 1.2s infinite ease-in-out;
 }
-
-@keyframes confirmGuidePulse{
-
-    0%,100%{
-        transform:translateY(0);
-        opacity:.75;
-    }
-
-    50%{
-        transform:translateY(-5px);
-        opacity:1;
-    }
-}
-
-
-/* =========================================================
-   BOTÓN
-========================================================= */
 
 .confirm-button{
+    margin-top:10px;
 
-    margin-top:12px;
+    padding:17px 36px;
 
-    padding:
-        16px 34px;
-
-    border:
-        1px solid
-        #c17cff;
+    border:1px solid #c17cff;
 
     background:
         linear-gradient(
@@ -780,15 +690,16 @@ body::before{
 
     color:white;
 
-    font-size:14px;
+    font-size:15px;
+
+    font-weight:bold;
 
     letter-spacing:2px;
 
     cursor:pointer;
 
     box-shadow:
-        0 0 15px
-        rgba(180,80,255,.25);
+        0 0 15px rgba(180,80,255,.25);
 
     transition:
         transform .25s ease,
@@ -797,22 +708,11 @@ body::before{
 }
 
 .confirm-button:hover{
-
-    transform:
-        translateY(-3px);
+    transform:translateY(-3px);
 
     box-shadow:
-        0 0 20px
-        rgba(200,100,255,.6),
-
-        0 0 45px
-        rgba(130,40,200,.3);
-}
-
-.confirm-button:active{
-
-    transform:
-        translateY(0);
+        0 0 20px rgba(200,100,255,.6),
+        0 0 45px rgba(130,40,200,.3);
 }
 
 
@@ -821,7 +721,6 @@ body::before{
 ========================================================= */
 
 .modal{
-
     position:fixed;
 
     inset:0;
@@ -829,8 +728,7 @@ body::before{
     background:
         rgba(3,0,7,.88);
 
-    backdrop-filter:
-        blur(8px);
+    backdrop-filter:blur(8px);
 
     display:flex;
 
@@ -844,12 +742,9 @@ body::before{
 }
 
 .modal-box{
+    width:min(500px,100%);
 
-    width:
-        min(500px,100%);
-
-    max-height:
-        90vh;
+    max-height:90vh;
 
     overflow-y:auto;
 
@@ -867,14 +762,12 @@ body::before{
     padding:35px;
 
     box-shadow:
-        0 0 35px
-        rgba(130,40,190,.3);
+        0 0 35px rgba(130,40,190,.3);
 
     position:relative;
 }
 
 .modal-title{
-
     text-align:center;
 
     font-size:28px;
@@ -885,7 +778,6 @@ body::before{
 }
 
 .modal-subtitle{
-
     text-align:center;
 
     color:#ad9ab8;
@@ -896,7 +788,6 @@ body::before{
 }
 
 .close-modal{
-
     position:absolute;
 
     top:12px;
@@ -914,12 +805,10 @@ body::before{
 }
 
 .form-group{
-
     margin-bottom:20px;
 }
 
 .form-group label{
-
     display:block;
 
     color:#d7c2df;
@@ -931,7 +820,6 @@ body::before{
 
 .form-group input,
 .form-group select{
-
     width:100%;
 
     padding:13px;
@@ -945,13 +833,10 @@ body::before{
     color:white;
 
     outline:none;
-
-    font-family:inherit;
 }
 
 .form-group input:focus,
 .form-group select:focus{
-
     border-color:#b66aff;
 
     box-shadow:
@@ -960,7 +845,6 @@ body::before{
 }
 
 .submit-button{
-
     width:100%;
 
     padding:15px;
@@ -981,19 +865,15 @@ body::before{
 }
 
 .submit-button:hover{
-
     background:#75309a;
 }
 
 .submit-button:disabled{
-
-    opacity:.65;
-
-    cursor:wait;
+    opacity:.6;
+    cursor:not-allowed;
 }
 
 .form-message{
-
     margin-top:15px;
 
     text-align:center;
@@ -1009,7 +889,6 @@ body::before{
 ========================================================= */
 
 .celebration{
-
     position:fixed;
 
     inset:0;
@@ -1035,7 +914,6 @@ body::before{
 }
 
 .celebration-content{
-
     position:relative;
 
     z-index:10;
@@ -1045,15 +923,10 @@ body::before{
 }
 
 .celebration-title{
-
-    font-family:
-        "Cinzel Decorative",
-        serif;
-
     font-size:
-        clamp(32px,8vw,75px);
+        clamp(38px,8vw,75px);
 
-    font-weight:600;
+    font-weight:normal;
 
     text-shadow:
         0 0 20px #c77dff,
@@ -1061,7 +934,6 @@ body::before{
 }
 
 .celebration-subtitle{
-
     margin-top:15px;
 
     color:#e4d4ea;
@@ -1070,11 +942,9 @@ body::before{
 }
 
 .play-music{
-
     margin-top:30px;
 
-    padding:
-        14px 25px;
+    padding:14px 25px;
 
     background:transparent;
 
@@ -1100,10 +970,10 @@ body::before{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
 .spark{
-
     position:absolute;
 
     width:5px;
@@ -1118,14 +988,12 @@ body::before{
         0 0 20px #9b4dca;
 
     animation:
-        sparkFly
-        linear forwards;
+        sparkFly linear forwards;
 }
 
 @keyframes sparkFly{
 
     from{
-
         transform:
             translate(0,0)
             scale(1);
@@ -1134,13 +1002,13 @@ body::before{
     }
 
     to{
-
         transform:
             translate(var(--x),var(--y))
             scale(0);
 
         opacity:0;
     }
+
 }
 
 
@@ -1149,7 +1017,6 @@ body::before{
 ========================================================= */
 
 .party-mode{
-
     position:fixed;
 
     inset:0;
@@ -1174,31 +1041,23 @@ body::before{
 }
 
 .party-content{
-
     padding:30px;
 }
 
 .party-icon{
-
     font-size:65px;
 
     animation:
-        partyFloat
-        2s infinite ease-in-out;
+        partyFloat 2s infinite ease-in-out;
 }
 
 .party-title{
-
     margin-top:20px;
 
-    font-family:
-        "Cinzel Decorative",
-        serif;
-
     font-size:
-        clamp(30px,8vw,80px);
+        clamp(40px,8vw,80px);
 
-    font-weight:600;
+    font-weight:normal;
 
     text-shadow:
         0 0 20px #c77dff,
@@ -1206,7 +1065,6 @@ body::before{
 }
 
 .party-text{
-
     margin-top:15px;
 
     color:#d8c4df;
@@ -1217,18 +1075,17 @@ body::before{
 @keyframes partyFloat{
 
     0%,100%{
-
         transform:
             translateY(0)
             rotate(-3deg);
     }
 
     50%{
-
         transform:
             translateY(-15px)
             rotate(3deg);
     }
+
 }
 
 
@@ -1237,7 +1094,6 @@ body::before{
 ========================================================= */
 
 .final-screen{
-
     position:fixed;
 
     inset:0;
@@ -1263,22 +1119,15 @@ body::before{
 }
 
 .final-content{
-
     animation:
-        finalAppear
-        2s ease;
+        finalAppear 2s ease;
 }
 
 .final-title{
-
-    font-family:
-        "Cinzel Decorative",
-        serif;
-
     font-size:
-        clamp(30px,8vw,80px);
+        clamp(38px,8vw,80px);
 
-    font-weight:600;
+    font-weight:normal;
 
     color:#fff;
 
@@ -1288,7 +1137,6 @@ body::before{
 }
 
 .final-text{
-
     margin-top:25px;
 
     color:#d9c8df;
@@ -1301,20 +1149,15 @@ body::before{
 @keyframes finalAppear{
 
     from{
-
         opacity:0;
-
-        transform:
-            scale(.8);
+        transform:scale(.8);
     }
 
     to{
-
         opacity:1;
-
-        transform:
-            scale(1);
+        transform:scale(1);
     }
+
 }
 
 
@@ -1325,76 +1168,74 @@ body::before{
 @media(max-width:750px){
 
     .hero{
-
         padding-top:35px;
-
-        padding-bottom:160px;
     }
 
     .hero-content{
-
         flex-direction:column;
 
         gap:45px;
     }
 
     .photo1-container{
-
-        width:
-            min(270px,75vw);
+        width:min(270px,75vw);
     }
 
     .countdown-area{
-
         width:100%;
     }
 
     .countdown{
-
         gap:7px;
     }
 
     .time-box{
-
-        padding:
-            14px 5px;
+        padding:14px 5px;
     }
 
     .time-label{
-
         font-size:9px;
-
         letter-spacing:1px;
     }
 
-    .invitation-reveal{
+    .scroll-tutorial{
+        margin-top:50px;
+    }
 
-        padding:
-            90px 15px
-            160px;
+    .scroll-tutorial-text{
+        font-size:16px;
+    }
+
+    .scroll-tutorial-arrow{
+        font-size:48px;
+    }
+
+    .invitation-reveal{
+        padding-top:90px;
     }
 
     .invitation-image-wrapper{
-
         width:94vw;
     }
 
-    .modal-box{
+    .confirm-help{
+        font-size:15px;
 
-        padding:
-            25px 20px;
+        line-height:1.5;
+
+        padding:0 15px;
     }
 
-    .scroll-hint{
+    .confirm-button{
+        padding:17px 25px;
+    }
 
-        width:
-            calc(100vw - 20px);
+    .modal-box{
+        padding:25px 20px;
+    }
 
-        padding:
-            11px 12px 13px;
-
-        bottom:
-            max(10px, env(safe-area-inset-bottom));
+    #introVideo{
+        object-fit:cover;
     }
 
 }
@@ -1407,9 +1248,7 @@ body::before{
 @media(min-width:751px){
 
     .invitation-image-wrapper{
-
-        width:
-            min(600px,85vw);
+        width:min(600px,85vw);
     }
 
 }
@@ -1422,49 +1261,32 @@ body::before{
 @media(max-width:420px){
 
     .main-title{
-
-        letter-spacing:1px;
+        letter-spacing:2px;
     }
 
     .subtitle{
-
         font-size:15px;
     }
 
     .countdown-title{
-
         font-size:14px;
     }
 
     .time-number{
-
         font-size:27px;
     }
 
     .magic-text{
-
         font-size:11px;
-
         letter-spacing:2px;
     }
 
     .confirm-button{
-
         width:90%;
 
         font-size:12px;
 
         padding:15px;
-    }
-
-    .scroll-guide-title{
-
-        font-size:13px;
-    }
-
-    .scroll-guide-text{
-
-        font-size:11px;
     }
 
 }
@@ -1473,6 +1295,24 @@ body::before{
 </head>
 
 <body>
+
+
+<!-- =========================================================
+     VIDEO DE INICIO
+========================================================= -->
+
+<div id="introVideoScreen">
+
+    <video
+        id="introVideo"
+        src="videoinicio1.mp4"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+    ></video>
+
+</div>
 
 
 <!-- =========================================================
@@ -1491,9 +1331,6 @@ body::before{
 
 <div id="publicContent">
 
-
-    <!-- HERO -->
-
     <section class="hero">
 
         <div class="small-title">
@@ -1509,10 +1346,7 @@ body::before{
         </div>
 
 
-        <div
-            class="hero-content"
-            id="countdownSection"
-        >
+        <div class="hero-content">
 
             <div class="photo1-container">
 
@@ -1524,7 +1358,10 @@ body::before{
             </div>
 
 
-            <div class="countdown-area">
+            <div
+                class="countdown-area"
+                id="countdownSection"
+            >
 
                 <div class="countdown-title">
                     FALTAN PARA LA CELEBRACIÓN
@@ -1602,10 +1439,36 @@ body::before{
 
         </div>
 
+
+        <div
+            class="scroll-tutorial"
+            id="scrollTutorial"
+        >
+
+            <div class="scroll-tutorial-text">
+                👇 AQUÍ EMPIEZA LA INVITACIÓN
+            </div>
+
+            <div
+                class="scroll-tutorial-text"
+                style="margin-top:7px;font-size:14px;"
+            >
+                Desliza hacia abajo para ver el contador
+                y después la invitación
+            </div>
+
+            <div class="scroll-tutorial-arrow">
+                ↓
+            </div>
+
+        </div>
+
     </section>
 
 
-    <!-- INVITACIÓN -->
+    <!-- =====================================================
+         INVITACIÓN
+    ====================================================== -->
 
     <section
         class="invitation-reveal"
@@ -1625,10 +1488,7 @@ body::before{
         </div>
 
 
-        <div
-            class="invitation-image-wrapper"
-            id="invitationImage"
-        >
+        <div class="invitation-image-wrapper">
 
             <img
                 src="foto2.jpg"
@@ -1638,22 +1498,15 @@ body::before{
         </div>
 
 
-        <div class="confirm-guide">
-
-            👇
-            <strong>PICA AQUÍ</strong>
-            PARA CONFIRMAR TU ASISTENCIA
-
-            <div class="confirm-guide-arrow">
-                ↓
-            </div>
-
+        <div class="confirm-help">
+            👇 PICA AQUÍ PARA CONFIRMAR TU ASISTENCIA
         </div>
 
 
         <button
             class="confirm-button"
             id="openForm"
+            type="button"
         >
             💜 CONFIRMAR ASISTENCIA
         </button>
@@ -1664,45 +1517,20 @@ body::before{
 
 
 <!-- =========================================================
-     TUTORIAL FIJO
-========================================================= -->
-
-<div
-    class="scroll-hint"
-    id="scrollHint"
->
-
-    <div class="scroll-guide-title">
-        👇 AQUÍ EMPIEZA LA INVITACIÓN
-    </div>
-
-    <div class="scroll-guide-text">
-        Desliza hacia abajo para ver el contador
-        y después la invitación
-    </div>
-
-    <div class="scroll-arrow">
-        ↓
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     MODAL RSVP
+     MODAL
 ========================================================= -->
 
 <div
     class="modal hidden"
-    id="rsvpModal"
+    id="formModal"
 >
 
     <div class="modal-box">
 
-
         <button
             class="close-modal"
             id="closeForm"
+            type="button"
             aria-label="Cerrar"
         >
             ×
@@ -1719,14 +1547,7 @@ body::before{
         </p>
 
 
-        <form
-            id="confirmationForm"
-            onsubmit="
-                event.preventDefault();
-                guardarConfirmacion();
-            "
-        >
-
+        <form id="confirmationForm">
 
             <div class="form-group">
 
@@ -1798,7 +1619,9 @@ body::before{
 
                     Teléfono
 
-                    <span style="color:#8e7a96;">
+                    <span
+                        style="color:#8e7a96;"
+                    >
                         (opcional)
                     </span>
 
@@ -1827,7 +1650,6 @@ body::before{
             <div
                 class="form-message"
                 id="formMessage"
-                aria-live="polite"
             ></div>
 
         </form>
@@ -1838,7 +1660,7 @@ body::before{
 
 
 <!-- =========================================================
-     CELEBRACIÓN
+     CELEBRACIÓN DE MEDIANOCHE
 ========================================================= -->
 
 <div
@@ -1859,6 +1681,7 @@ body::before{
         <button
             class="play-music"
             id="playMusic"
+            type="button"
         >
             🎵 REPRODUCIR LAS MAÑANITAS
         </button>
@@ -1914,7 +1737,6 @@ body::before{
         <div class="final-text">
 
             Gracias por haber formado parte
-
             <br>
 
             de este día tan especial.
@@ -1930,7 +1752,9 @@ body::before{
 </div>
 
 
-<!-- AUDIO -->
+<!-- =========================================================
+     AUDIO
+========================================================= -->
 
 <audio
     id="birthdayMusic"
@@ -2007,6 +1831,16 @@ const finalDate =
    ELEMENTOS
 ========================================================= */
 
+const introVideoScreen =
+    document.getElementById(
+        "introVideoScreen"
+    );
+
+const introVideo =
+    document.getElementById(
+        "introVideo"
+    );
+
 const publicContent =
     document.getElementById(
         "publicContent"
@@ -2029,7 +1863,7 @@ const finalScreen =
 
 const formModal =
     document.getElementById(
-        "rsvpModal"
+        "formModal"
     );
 
 const openForm =
@@ -2037,9 +1871,19 @@ const openForm =
         "openForm"
     );
 
-const closeFormButton =
+const closeForm =
     document.getElementById(
         "closeForm"
+    );
+
+const confirmationForm =
+    document.getElementById(
+        "confirmationForm"
+    );
+
+const formMessage =
+    document.getElementById(
+        "formMessage"
     );
 
 const music =
@@ -2052,9 +1896,9 @@ const playMusic =
         "playMusic"
     );
 
-const scrollHint =
+const scrollTutorial =
     document.getElementById(
-        "scrollHint"
+        "scrollTutorial"
     );
 
 const countdownSection =
@@ -2062,10 +1906,115 @@ const countdownSection =
         "countdownSection"
     );
 
-const invitationImage =
+const invitationReveal =
     document.getElementById(
-        "invitationImage"
+        "invitationReveal"
     );
+
+
+/* =========================================================
+   VIDEO DE INICIO
+========================================================= */
+
+let introFinished = false;
+
+function finishIntro(){
+
+    if(introFinished){
+        return;
+    }
+
+    introFinished = true;
+
+    introVideoScreen.classList.add(
+        "fade-out"
+    );
+
+    setTimeout(
+        () => {
+            introVideoScreen.classList.add(
+                "hidden"
+            );
+        },
+        1500
+    );
+}
+
+
+/*
+   El video termina normalmente
+*/
+
+introVideo.addEventListener(
+    "ended",
+    finishIntro
+);
+
+
+/*
+   Si el archivo tiene algún problema,
+   la invitación no queda bloqueada.
+*/
+
+introVideo.addEventListener(
+    "error",
+    finishIntro
+);
+
+
+/*
+   Intentar reproducirlo.
+   Está muted para que los navegadores
+   permitan autoplay.
+*/
+
+introVideo.play().catch(
+    () => {
+
+        /*
+           Si Chrome bloquea el autoplay,
+           un clic permite reproducirlo.
+        */
+
+        document.addEventListener(
+            "click",
+            function playIntroOnce(){
+
+                introVideo.play()
+                    .catch(() => {});
+
+                document.removeEventListener(
+                    "click",
+                    playIntroOnce
+                );
+
+            },
+            {
+                once:true
+            }
+        );
+
+    }
+);
+
+
+/*
+   Si por alguna razón el video no tiene duración
+   o tarda demasiado, no bloqueamos la invitación.
+*/
+
+setTimeout(
+    () => {
+
+        if(!introFinished){
+
+            finishIntro();
+
+        }
+
+    },
+    15000
+);
 
 
 /* =========================================================
@@ -2077,11 +2026,7 @@ const starsContainer =
         "stars"
     );
 
-for(
-    let i = 0;
-    i < 100;
-    i++
-){
+for(let i = 0; i < 100; i++){
 
     const star =
         document.createElement(
@@ -2125,9 +2070,7 @@ function updateCountdown(){
         countdownDate - now;
 
 
-    if(
-        difference <= 0
-    ){
+    if(difference <= 0){
 
         document.getElementById(
             "days"
@@ -2183,34 +2126,22 @@ function updateCountdown(){
     document.getElementById(
         "days"
     ).textContent =
-        String(days).padStart(
-            2,
-            "0"
-        );
+        String(days).padStart(2,"0");
 
     document.getElementById(
         "hours"
     ).textContent =
-        String(hours).padStart(
-            2,
-            "0"
-        );
+        String(hours).padStart(2,"0");
 
     document.getElementById(
         "minutes"
     ).textContent =
-        String(minutes).padStart(
-            2,
-            "0"
-        );
+        String(minutes).padStart(2,"0");
 
     document.getElementById(
         "seconds"
     ).textContent =
-        String(seconds).padStart(
-            2,
-            "0"
-        );
+        String(seconds).padStart(2,"0");
 }
 
 updateCountdown();
@@ -2222,13 +2153,264 @@ setInterval(
 
 
 /* =========================================================
-   TRANSICIÓN
+   TUTORIAL
 ========================================================= */
 
-const invitationReveal =
-    document.getElementById(
-        "invitationReveal"
+let tutorialUserInteracted =
+    false;
+
+let automaticScrolling =
+    false;
+
+let firstAutoScrollTimer =
+    null;
+
+let secondAutoScrollTimer =
+    null;
+
+
+function hideScrollTutorial(){
+
+    scrollTutorial.classList.add(
+        "fade-out"
     );
+
+}
+
+
+function cancelAutomaticTutorial(){
+
+    if(automaticScrolling){
+        return;
+    }
+
+    tutorialUserInteracted =
+        true;
+
+    clearTimeout(
+        firstAutoScrollTimer
+    );
+
+    clearTimeout(
+        secondAutoScrollTimer
+    );
+
+    hideScrollTutorial();
+
+}
+
+
+window.addEventListener(
+    "scroll",
+    function(){
+
+        if(
+            window.scrollY > 10 &&
+            !automaticScrolling
+        ){
+
+            cancelAutomaticTutorial();
+
+        }
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+window.addEventListener(
+    "wheel",
+    cancelAutomaticTutorial,
+    {
+        passive:true
+    }
+);
+
+window.addEventListener(
+    "touchmove",
+    cancelAutomaticTutorial,
+    {
+        passive:true
+    }
+);
+
+
+window.addEventListener(
+    "keydown",
+    function(event){
+
+        const keys = [
+            "ArrowDown",
+            "ArrowUp",
+            "PageDown",
+            "PageUp",
+            " ",
+            "Home",
+            "End"
+        ];
+
+        if(keys.includes(event.key)){
+            cancelAutomaticTutorial();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CLICK DEL TUTORIAL
+========================================================= */
+
+scrollTutorial.addEventListener(
+    "click",
+    function(){
+
+        tutorialUserInteracted =
+            true;
+
+        clearTimeout(
+            firstAutoScrollTimer
+        );
+
+        clearTimeout(
+            secondAutoScrollTimer
+        );
+
+        hideScrollTutorial();
+
+        automaticScrolling =
+            true;
+
+        countdownSection.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+        setTimeout(
+            function(){
+
+                automaticScrolling =
+                    false;
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+/* =========================================================
+   AUTO-SCROLL
+========================================================= */
+
+function startAutomaticTutorial(){
+
+    firstAutoScrollTimer =
+        setTimeout(
+            function(){
+
+                if(
+                    tutorialUserInteracted
+                ){
+                    return;
+                }
+
+                const now =
+                    new Date();
+
+                if(
+                    now >= partyStart
+                ){
+                    return;
+                }
+
+                hideScrollTutorial();
+
+                automaticScrolling =
+                    true;
+
+                countdownSection.scrollIntoView({
+                    behavior:"smooth",
+                    block:"center"
+                });
+
+                setTimeout(
+                    function(){
+
+                        automaticScrolling =
+                            false;
+
+                    },
+                    1800
+                );
+
+
+                secondAutoScrollTimer =
+                    setTimeout(
+                        function(){
+
+                            if(
+                                tutorialUserInteracted
+                            ){
+                                return;
+                            }
+
+                            const currentTime =
+                                new Date();
+
+                            if(
+                                currentTime >= partyStart
+                            ){
+                                return;
+                            }
+
+                            automaticScrolling =
+                                true;
+
+                            invitationReveal.scrollIntoView({
+                                behavior:"smooth",
+                                block:"start"
+                            });
+
+                            setTimeout(
+                                function(){
+
+                                    automaticScrolling =
+                                        false;
+
+                                    hideScrollTutorial();
+
+                                },
+                                1800
+                            );
+
+                        },
+                        60000
+                    );
+
+            },
+            60000
+        );
+
+}
+
+
+window.addEventListener(
+    "load",
+    function(){
+
+        startAutomaticTutorial();
+
+    }
+);
+
+
+/* =========================================================
+   TRANSICIÓN DE FOTO 2
+========================================================= */
 
 const revealObserver =
     new IntersectionObserver(
@@ -2264,289 +2446,7 @@ revealObserver.observe(
 
 
 /* =========================================================
-   TUTORIAL AUTOMÁTICO
-========================================================= */
-
-let tutorialActive =
-    true;
-
-let autoScrolling =
-    false;
-
-let autoScrollTimersStarted =
-    false;
-
-let autoScrollTimer1 =
-    null;
-
-let autoScrollTimer2 =
-    null;
-
-
-/* =========================================================
-   DESVANECER TUTORIAL
-========================================================= */
-
-function hideScrollTutorial(){
-
-    if(
-        !tutorialActive
-    ){
-
-        return;
-    }
-
-    tutorialActive =
-        false;
-
-    scrollHint.classList.add(
-        "fade-out"
-    );
-
-    clearTimeout(
-        autoScrollTimer1
-    );
-
-    clearTimeout(
-        autoScrollTimer2
-    );
-
-    setTimeout(
-        () => {
-
-            scrollHint.classList.add(
-                "hidden"
-            );
-
-        },
-        900
-    );
-}
-
-
-/* =========================================================
-   SCROLL AUTOMÁTICO
-========================================================= */
-
-function smoothScrollTo(
-    element
-){
-
-    if(!element){
-
-        return;
-    }
-
-    autoScrolling =
-        true;
-
-    element.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
-
-    setTimeout(
-        () => {
-
-            autoScrolling =
-                false;
-
-        },
-        1800
-    );
-}
-
-
-/* =========================================================
-   INICIAR TUTORIAL AUTOMÁTICO
-========================================================= */
-
-function startAutoScrollTutorial(){
-
-    if(
-        autoScrollTimersStarted
-    ){
-
-        return;
-    }
-
-    autoScrollTimersStarted =
-        true;
-
-
-    /* Primer minuto */
-
-    autoScrollTimer1 =
-        setTimeout(
-            () => {
-
-                if(
-                    !tutorialActive
-                ){
-
-                    return;
-                }
-
-                smoothScrollTo(
-                    countdownSection
-                );
-
-
-                /* Segundo minuto */
-
-                autoScrollTimer2 =
-                    setTimeout(
-                        () => {
-
-                            if(
-                                !tutorialActive
-                            ){
-
-                                return;
-                            }
-
-                            smoothScrollTo(
-                                invitationImage
-                            );
-
-                        },
-                        60000
-                    );
-
-            },
-            60000
-        );
-}
-
-
-/* =========================================================
-   DETECTAR SCROLL CON MOUSE
-========================================================= */
-
-window.addEventListener(
-    "wheel",
-    () => {
-
-        if(
-            autoScrolling
-        ){
-
-            return;
-        }
-
-        hideScrollTutorial();
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-/* =========================================================
-   DETECTAR SCROLL TÁCTIL
-========================================================= */
-
-let touchStartY =
-    null;
-
-window.addEventListener(
-    "touchstart",
-    event => {
-
-        touchStartY =
-            event.touches[0].clientY;
-
-    },
-    {
-        passive:true
-    }
-);
-
-window.addEventListener(
-    "touchmove",
-    event => {
-
-        if(
-            autoScrolling
-        ){
-
-            return;
-        }
-
-        if(
-            touchStartY === null
-        ){
-
-            return;
-        }
-
-        const currentY =
-            event.touches[0].clientY;
-
-        const movement =
-            Math.abs(
-                currentY -
-                touchStartY
-            );
-
-
-        if(
-            movement > 12
-        ){
-
-            hideScrollTutorial();
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-/* =========================================================
-   TECLAS
-========================================================= */
-
-window.addEventListener(
-    "keydown",
-    event => {
-
-        if(
-            autoScrolling
-        ){
-
-            return;
-        }
-
-        const keys = [
-            "ArrowDown",
-            "ArrowUp",
-            "PageDown",
-            "PageUp",
-            " ",
-            "End",
-            "Home"
-        ];
-
-        if(
-            keys.includes(
-                event.key
-            )
-        ){
-
-            hideScrollTutorial();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   ABRIR FORMULARIO
+   MODAL
 ========================================================= */
 
 openForm.addEventListener(
@@ -2564,14 +2464,11 @@ openForm.addEventListener(
 );
 
 
-/* =========================================================
-   CERRAR FORMULARIO
-========================================================= */
-
-closeFormButton.addEventListener(
+closeForm.addEventListener(
     "click",
     closeModal
 );
+
 
 formModal.addEventListener(
     "click",
@@ -2589,6 +2486,7 @@ formModal.addEventListener(
     }
 );
 
+
 function closeModal(){
 
     formModal.classList.add(
@@ -2602,7 +2500,7 @@ function closeModal(){
 
 
 /* =========================================================
-   GUARDAR CONFIRMACIÓN
+   SUPABASE
 ========================================================= */
 
 async function guardarConfirmacion(){
@@ -2634,15 +2532,6 @@ async function guardarConfirmacion(){
             "guardarBtn"
         );
 
-    const formMessage =
-        document.getElementById(
-            "formMessage"
-        );
-
-
-    /* =====================================================
-       LIMPIAR MENSAJE
-    ===================================================== */
 
     formMessage.textContent =
         "";
@@ -2650,10 +2539,6 @@ async function guardarConfirmacion(){
     formMessage.style.color =
         "";
 
-
-    /* =====================================================
-       NOMBRE
-    ===================================================== */
 
     if(!nombre){
 
@@ -2667,9 +2552,7 @@ async function guardarConfirmacion(){
     }
 
 
-    if(
-        nombre.length < 2
-    ){
+    if(nombre.length < 2){
 
         formMessage.textContent =
             "El nombre es demasiado corto.";
@@ -2681,9 +2564,7 @@ async function guardarConfirmacion(){
     }
 
 
-    if(
-        nombre.length > 80
-    ){
+    if(nombre.length > 80){
 
         formMessage.textContent =
             "El nombre es demasiado largo.";
@@ -2694,10 +2575,6 @@ async function guardarConfirmacion(){
         return;
     }
 
-
-    /* =====================================================
-       PERSONAS
-    ===================================================== */
 
     if(
         !Number.isInteger(personas) ||
@@ -2715,10 +2592,6 @@ async function guardarConfirmacion(){
     }
 
 
-    /* =====================================================
-       ASISTENCIA
-    ===================================================== */
-
     if(
         asistencia !== "true" &&
         asistencia !== "false"
@@ -2734,13 +2607,7 @@ async function guardarConfirmacion(){
     }
 
 
-    /* =====================================================
-       TELÉFONO
-    ===================================================== */
-
-    if(
-        telefono.length > 25
-    ){
+    if(telefono.length > 25){
 
         formMessage.textContent =
             "El teléfono es demasiado largo.";
@@ -2752,31 +2619,18 @@ async function guardarConfirmacion(){
     }
 
 
-    /* =====================================================
-       DESACTIVAR BOTÓN
-    ===================================================== */
+    botonGuardar.disabled =
+        true;
 
-    if(botonGuardar){
-
-        botonGuardar.disabled =
-            true;
-
-        botonGuardar.textContent =
-            "GUARDANDO...";
-    }
+    botonGuardar.textContent =
+        "GUARDANDO...";
 
 
     try{
 
-        /* =================================================
-           INSERTAR
-
-           NO se utiliza .select()
-
-           El visitante únicamente necesita INSERT.
-        ================================================= */
-
-        const { error } =
+        const {
+            error
+        } =
             await supabaseClient
                 .from(
                     "confirmaciones"
@@ -2790,8 +2644,7 @@ async function guardarConfirmacion(){
                             personas,
 
                         asistencia:
-                            asistencia ===
-                            "true",
+                            asistencia === "true",
 
                         telefono:
                             telefono ||
@@ -2800,16 +2653,57 @@ async function guardarConfirmacion(){
                 ]);
 
 
-        /* =================================================
-           ERROR
-        ================================================= */
-
         if(error){
 
             console.error(
                 "ERROR DE SUPABASE:",
                 error
             );
+
+
+            if(
+                error.code === "23505"
+            ){
+
+                const message =
+                    error.message ||
+                    "";
+
+
+                if(
+                    message.includes(
+                        "confirmaciones_nombre_unico"
+                    )
+                ){
+
+                    formMessage.textContent =
+                        "⚠️ Ese nombre ya tiene una confirmación.";
+
+                }
+                else if(
+                    message.includes(
+                        "confirmaciones_telefono_unico"
+                    )
+                ){
+
+                    formMessage.textContent =
+                        "⚠️ Ese número ya tiene una confirmación.";
+
+                }
+                else{
+
+                    formMessage.textContent =
+                        "⚠️ Esta persona ya tiene una confirmación.";
+
+                }
+
+
+                formMessage.style.color =
+                    "#ffcf70";
+
+                return;
+            }
+
 
             formMessage.textContent =
                 "No se pudo guardar la confirmación.";
@@ -2821,10 +2715,6 @@ async function guardarConfirmacion(){
         }
 
 
-        /* =================================================
-           ÉXITO
-        ================================================= */
-
         formMessage.textContent =
             "💜 Confirmación guardada correctamente.";
 
@@ -2832,34 +2722,22 @@ async function guardarConfirmacion(){
             "#c8ffcf";
 
 
-        /* =================================================
-           LIMPIAR
-        ================================================= */
-
         document.getElementById(
             "nombre"
-        ).value =
-            "";
+        ).value = "";
 
         document.getElementById(
             "personas"
-        ).value =
-            "1";
+        ).value = "1";
 
         document.getElementById(
             "asistencia"
-        ).value =
-            "";
+        ).value = "";
 
         document.getElementById(
             "telefono"
-        ).value =
-            "";
+        ).value = "";
 
-
-        /* =================================================
-           CERRAR
-        ================================================= */
 
         setTimeout(
             () => {
@@ -2872,7 +2750,6 @@ async function guardarConfirmacion(){
             },
             1800
         );
-
 
     }
     catch(error){
@@ -2891,18 +2768,27 @@ async function guardarConfirmacion(){
     }
     finally{
 
-        if(botonGuardar){
+        botonGuardar.disabled =
+            false;
 
-            botonGuardar.disabled =
-                false;
-
-            botonGuardar.textContent =
-                "💜 GUARDAR";
-        }
+        botonGuardar.textContent =
+            "💜 GUARDAR";
 
     }
 
 }
+
+
+confirmationForm.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        guardarConfirmacion();
+
+    }
+);
 
 
 /* =========================================================
@@ -2975,7 +2861,8 @@ function createSparks(){
 
 
                 setTimeout(
-                    () => spark.remove(),
+                    () =>
+                        spark.remove(),
                     4000
                 );
 
@@ -2999,6 +2886,7 @@ function showMidnightCelebration(){
     );
 
     createSparks();
+
 }
 
 
@@ -3019,6 +2907,11 @@ playMusic.addEventListener(
 
         }
         catch(error){
+
+            console.error(
+                "ERROR DE AUDIO:",
+                error
+            );
 
             playMusic.textContent =
                 "No se pudo reproducir el audio";
@@ -3042,11 +2935,12 @@ music.addEventListener(
 
 
 /* =========================================================
-   ESTADOS
+   ESTADOS DE LA PÁGINA
 ========================================================= */
 
 let midnightShown =
     false;
+
 
 function updatePageState(){
 
@@ -3054,13 +2948,21 @@ function updatePageState(){
         new Date();
 
 
-    /* =====================================================
+    /* ---------------------------------------------
        28 SEPTIEMBRE 00:00
-    ===================================================== */
+    --------------------------------------------- */
 
     if(
         now >= finalDate
     ){
+
+        clearTimeout(
+            firstAutoScrollTimer
+        );
+
+        clearTimeout(
+            secondAutoScrollTimer
+        );
 
         publicContent.classList.add(
             "hidden"
@@ -3078,22 +2980,26 @@ function updatePageState(){
             "hidden"
         );
 
-        scrollHint.classList.add(
-            "fade-out"
-        );
-
         return;
     }
 
 
-    /* =====================================================
+    /* ---------------------------------------------
        27 SEPTIEMBRE 16:00 - 20:00
-    ===================================================== */
+    --------------------------------------------- */
 
     if(
         now >= partyStart &&
         now < partyEnd
     ){
+
+        clearTimeout(
+            firstAutoScrollTimer
+        );
+
+        clearTimeout(
+            secondAutoScrollTimer
+        );
 
         publicContent.classList.add(
             "hidden"
@@ -3107,17 +3013,13 @@ function updatePageState(){
             "hidden"
         );
 
-        scrollHint.classList.add(
-            "fade-out"
-        );
-
         return;
     }
 
 
-    /* =====================================================
+    /* ---------------------------------------------
        27 SEPTIEMBRE 00:00 - 16:00
-    ===================================================== */
+    --------------------------------------------- */
 
     if(
         now >= countdownDate
@@ -3134,6 +3036,7 @@ function updatePageState(){
 
         const celebrationKey =
             "velunara_midnight_2026";
+
 
         const alreadyShown =
             localStorage.getItem(
@@ -3162,9 +3065,9 @@ function updatePageState(){
     }
 
 
-    /* =====================================================
+    /* ---------------------------------------------
        ANTES DEL 27
-    ===================================================== */
+    --------------------------------------------- */
 
     publicContent.classList.remove(
         "hidden"
@@ -3192,27 +3095,8 @@ setInterval(
     1000
 );
 
-
-/* =========================================================
-   INICIAR TUTORIAL
-========================================================= */
-
-const currentDate =
-    new Date();
-
-if(
-    currentDate < partyStart &&
-    currentDate < finalDate &&
-    !publicContent.classList.contains(
-        "hidden"
-    )
-){
-
-    startAutoScrollTutorial();
-
-}
-
 </script>
 
 </body>
 </html>
+```
