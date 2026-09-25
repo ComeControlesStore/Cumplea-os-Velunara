@@ -1,24 +1,25 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Velunara | Invitación</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
-/* =========================================================
+/* =========================
    GENERAL
-========================================================= */
+========================= */
 
 *{
-    margin:0;
-    padding:0;
     box-sizing:border-box;
 }
 
@@ -27,19 +28,24 @@ html{
 }
 
 body{
+    margin:0;
+    min-height:100vh;
     background:
         radial-gradient(
-            circle at 50% 20%,
-            #35154f 0%,
-            #210d35 45%,
-            #100719 100%
+            circle at 50% 10%,
+            #35144f 0%,
+            #210d35 38%,
+            #100719 72%,
+            #07030c 100%
         );
     color:white;
-    font-family:Georgia,"Times New Roman",serif;
+    font-family:Georgia,serif;
     overflow-x:hidden;
 }
 
-button{
+button,
+input,
+select{
     font-family:inherit;
 }
 
@@ -48,1493 +54,853 @@ button{
 }
 
 
-/* =========================================================
-   FONDO
-========================================================= */
+/* =========================
+   ESTRELLAS
+========================= */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
-    z-index:-3;
-
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(120,45,160,.28),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 20% 80%,
-            rgba(70,15,100,.35),
-            transparent 40%
-        ),
-        linear-gradient(
-            180deg,
-            #160822,
-            #0b0410
-        );
+    pointer-events:none;
+    opacity:.45;
+    background-image:
+        radial-gradient(circle,#ffffff 1px,transparent 1px),
+        radial-gradient(circle,#d9b7ff 1px,transparent 1px);
+    background-size:95px 95px,145px 145px;
+    background-position:10px 20px,60px 80px;
+    z-index:0;
 }
 
-.stars{
+
+/* =========================
+   VIDEO 1
+========================= */
+
+#introVideoScreen{
     position:fixed;
     inset:0;
-    z-index:-2;
-    pointer-events:none;
-    overflow:hidden;
-}
-
-.star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:#fff;
-    border-radius:50%;
-    opacity:.7;
-    animation:twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle{
-
-    from{
-        opacity:.2;
-        transform:scale(.7);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1.5);
-    }
-
-}
-
-
-/* =========================================================
-   TUTORIAL FIJO
-========================================================= */
-
-.fixed-tutorial{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-    right:0;
-
-    width:100%;
-
     z-index:9999;
-
+    background:#09030f;
     display:flex;
-    flex-direction:column;
     align-items:center;
+    justify-content:center;
+    opacity:1;
+    visibility:visible;
+    transition:
+        opacity 1.8s ease,
+        visibility 1.8s ease;
+}
 
-    padding:
-        max(10px,env(safe-area-inset-top))
-        15px
-        10px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(8,3,12,.98),
-            rgba(8,3,12,.90),
-            rgba(8,3,12,0)
-        );
-
+#introVideoScreen.fade-out{
+    opacity:0;
+    visibility:hidden;
     pointer-events:none;
+}
 
+#introVideo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transform:scale(1.04);
+    transition:
+        opacity 2s ease,
+        transform 3s ease;
+}
+
+#introVideo.visible{
+    opacity:1;
+    transform:scale(1);
+}
+
+#introStart{
+    position:absolute;
+    z-index:2;
     text-align:center;
+    padding:25px;
+    opacity:1;
+    transform:translateY(0);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
-.fixed-tutorial-title{
+#introStart.hidden-start{
+    opacity:0;
+    transform:translateY(-15px);
+    pointer-events:none;
+}
 
-    color:#d9b5ff;
-
-    font-size:11px;
-
-    letter-spacing:3px;
-
-    text-transform:uppercase;
-
+.introStartTitle{
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(34px,7vw,70px);
+    font-weight:900;
+    letter-spacing:4px;
+    color:#f1ddff;
     text-shadow:
-        0 0 8px rgba(190,100,255,.8);
-
-    margin-bottom:5px;
+        0 0 12px rgba(210,160,255,.8),
+        0 0 35px rgba(150,80,210,.6);
 }
 
-.fixed-tutorial-content{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
+.introStartText{
+    margin-top:14px;
+    font-size:18px;
+    color:#e8d8f2;
 }
 
-.tutorial-instruction{
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:8px;
-
+#startInvitation{
+    margin-top:30px;
+    padding:15px 28px;
+    border:1px solid #cba5ec;
+    border-radius:30px;
+    background:rgba(80,35,110,.75);
     color:white;
-
-    font-size:14px;
-
-    font-weight:bold;
-
+    cursor:pointer;
+    font-size:15px;
     letter-spacing:1px;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.9),
-        0 0 10px rgba(190,100,255,.7);
+    transition:.3s;
 }
 
-.tutorial-icon{
+#startInvitation:hover{
+    transform:scale(1.05);
+    background:rgba(110,55,145,.85);
+}
 
-    font-size:20px;
 
-    filter:
-        drop-shadow(
-            0 0 6px rgba(190,100,255,.8)
-        );
+/* =========================
+   TUTORIAL
+========================= */
+
+.scroll-tutorial{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:500;
+    width:min(90%,500px);
+    padding:13px 20px;
+    text-align:center;
+    border-radius:20px;
+    background:rgba(25,8,39,.88);
+    border:1px solid rgba(211,172,240,.3);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease,
+        visibility 1s ease;
+}
+
+.scroll-tutorial.fade-out{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translate(-50%,-25px);
+}
+
+.scroll-tutorial.permanently-hidden{
+    display:none;
+}
+
+.tutorial-title{
+    font-size:14px;
+    letter-spacing:2px;
+    color:#ead8f5;
+}
+
+.tutorial-text{
+    margin-top:5px;
+    font-size:15px;
 }
 
 .tutorial-arrow{
-
-    margin-top:0;
-
-    color:#d8a7ff;
-
-    font-size:35px;
-
-    line-height:.8;
-
-    text-shadow:
-        0 0 8px rgba(190,100,255,1),
-        0 0 20px rgba(150,50,220,.8);
-
-    animation:
-        fixedTutorialArrow
-        1.2s
-        infinite
-        ease-in-out;
+    margin-top:4px;
+    font-size:30px;
+    color:#dcbcf6;
+    animation:arrowDown 1.2s infinite ease-in-out;
 }
 
-@keyframes fixedTutorialArrow{
-
+@keyframes arrowDown{
     0%,100%{
         transform:translateY(0);
-        opacity:.75;
     }
-
     50%{
-        transform:translateY(7px);
-        opacity:1;
+        transform:translateY(8px);
     }
-
 }
 
 
-/* =========================================================
-   CONTENIDO
-========================================================= */
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
 
-#publicContent{
-    min-height:100vh;
+main{
+    position:relative;
+    z-index:2;
+    width:100%;
+    padding:100px 20px 80px;
 }
-
-
-/* =========================================================
-   HERO
-========================================================= */
 
 .hero{
-
-    min-height:100vh;
-
-    padding:130px 20px 80px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-    align-items:center;
-
+    width:100%;
+    max-width:1150px;
+    margin:auto;
     text-align:center;
-
-    position:relative;
-}
-
-.hero::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:10%;
-    right:10%;
-    bottom:0;
-
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #9d5cff,
-            #d8b4ff,
-            #9d5cff,
-            transparent
-        );
-
-    opacity:.7;
-}
-
-.small-title{
-
-    color:#c9a5ff;
-
-    letter-spacing:6px;
-
-    text-transform:uppercase;
-
-    font-size:13px;
-
-    margin-bottom:15px;
 }
 
 .main-title{
+    margin:0 0 35px;
 
-    font-size:clamp(42px,8vw,82px);
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(42px,7vw,82px);
+    font-weight:900;
+    letter-spacing:4px;
 
-    font-weight:normal;
-
-    letter-spacing:5px;
+    color:#f1ddff;
 
     text-shadow:
-        0 0 15px rgba(170,80,255,.7),
-        0 0 40px rgba(120,30,200,.5);
+        0 0 8px rgba(210,160,255,.75),
+        0 0 22px rgba(150,80,210,.55),
+        0 4px 12px rgba(0,0,0,.8);
+
+    animation:titleAppear 1.8s ease both;
 }
 
-.subtitle{
-
-    margin-top:10px;
-
-    color:#ddd;
-
-    font-size:18px;
-
-    letter-spacing:2px;
+@keyframes titleAppear{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 
-/* =========================================================
-   FOTO 1 + CONTADOR
-   FOTO IZQUIERDA / TIMER DERECHA
-========================================================= */
+/* =========================
+   FOTO + TIMER
+========================= */
 
 .hero-content{
-
-    width:min(1050px,100%);
-
-    margin-top:45px;
-
+    width:100%;
+    max-width:1050px;
+    margin:0 auto;
     display:flex;
-
-    justify-content:center;
+    flex-direction:row;
     align-items:center;
-
+    justify-content:center;
     gap:55px;
 }
 
 .photo1-container{
-
-    width:320px;
-
+    width:min(360px,40vw);
     flex-shrink:0;
 
-    position:relative;
-
-    padding:6px;
+    padding:7px;
+    border-radius:22px;
 
     background:
         linear-gradient(
             135deg,
-            #d7b3f5,
-            #633d7d,
-            #b783d8
+            #d7b7f4,
+            #67447f,
+            #b18bd4
         );
 
     box-shadow:
-        0 0 25px rgba(160,70,255,.4),
+        0 0 25px rgba(168,113,217,.35),
         0 20px 45px rgba(0,0,0,.5);
 }
 
-.photo1-container::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-8px;
-
-    border:1px solid rgba(204,145,255,.7);
-
-    box-shadow:
-        0 0 20px rgba(160,70,255,.5),
-        inset 0 0 20px rgba(160,70,255,.15);
-
-    transform:rotate(-2deg);
-
-    pointer-events:none;
-}
-
-.photo1-container::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-18px;
-
-    border:1px solid rgba(150,80,220,.25);
-
-    transform:rotate(2deg);
-
-    pointer-events:none;
-}
-
 .photo1-container img{
-
-    width:100%;
-
     display:block;
-
-    position:relative;
-
-    z-index:2;
-
-    border:4px solid #160b20;
-
-    box-shadow:
-        0 0 30px rgba(160,50,255,.4);
+    width:100%;
+    border-radius:16px;
 }
 
 .countdown-area{
-
-    flex:1;
-
-    max-width:620px;
-
-    text-align:center;
+    width:360px;
+    max-width:100%;
 }
 
 .countdown-title{
-
-    color:#cda5ff;
-
-    font-size:18px;
-
-    letter-spacing:3px;
-
-    margin-bottom:25px;
+    font-size:19px;
+    color:#e9d8f5;
+    margin-bottom:18px;
 }
 
 .countdown{
-
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
-    gap:14px;
+    gap:10px;
 }
 
 .time-box{
-
-    padding:20px 10px;
-
-    background:
-        rgba(25,10,35,.72);
-
-    border:1px solid rgba(192,125,255,.4);
-
-    box-shadow:
-        inset 0 0 25px rgba(100,30,150,.12),
-        0 0 15px rgba(100,30,150,.1);
+    padding:15px 8px;
+    border-radius:15px;
+    background:rgba(51,20,70,.75);
+    border:1px solid rgba(208,166,238,.3);
+    box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
 
 .time-number{
-
-    display:block;
-
-    font-size:clamp(30px,5vw,48px);
-
-    color:#fff;
-
-    text-shadow:
-        0 0 12px rgba(190,120,255,.7);
+    font-size:30px;
+    font-weight:bold;
 }
 
 .time-label{
-
-    display:block;
-
-    margin-top:5px;
-
+    margin-top:4px;
     font-size:11px;
-
-    color:#bdaacb;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
+    color:#cdb8da;
 }
 
 
-/* =========================================================
-   TRANSICIÓN + FOTO 2
-========================================================= */
+/* =========================
+   INVITACIÓN
+========================= */
 
-.invitation-reveal{
-
-    min-height:100vh;
-
-    padding:120px 20px 100px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    position:relative;
-}
-
-.magic-transition{
-
-    text-align:center;
-
-    margin-bottom:55px;
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    transition:
-        opacity 1.3s ease,
-        transform 1.3s ease;
-}
-
-.invitation-reveal.visible .magic-transition{
-
-    opacity:1;
-
-    transform:translateY(0);
-}
-
-.magic-symbol{
-
-    font-size:38px;
-
-    color:#c48cff;
-
-    animation:
-        magicPulse 2.5s infinite ease-in-out,
-        rotateMagic 10s linear infinite;
-}
-
-.magic-text{
-
-    margin-top:12px;
-
-    color:#cdb9d8;
-
-    font-size:14px;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
-}
-
-@keyframes magicPulse{
-
-    0%,100%{
-        text-shadow:0 0 5px #9d4edd;
-        opacity:.5;
-    }
-
-    50%{
-        text-shadow:
-            0 0 10px #c77dff,
-            0 0 30px #9d4edd,
-            0 0 60px #6a0dad;
-
-        opacity:1;
-    }
-
-}
-
-@keyframes rotateMagic{
-
-    from{
-        transform:rotate(0);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-
-/* =========================================================
-   FOTO 2
-========================================================= */
-
-.invitation-image-wrapper{
-
-    width:min(750px,95vw);
-
-    position:relative;
-
-    opacity:0;
-
-    transform:
-        translateY(80px)
-        scale(.88);
-
-    filter:
-        brightness(.35)
-        blur(4px);
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s cubic-bezier(.2,.8,.2,1),
-        filter 1.5s ease;
-}
-
-.invitation-reveal.visible
-.invitation-image-wrapper{
-
-    opacity:1;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    filter:
-        brightness(1)
-        blur(0);
-}
-
-.invitation-image-wrapper::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-20px;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(174,90,255,.5),
-            transparent 65%
-        );
-
-    filter:blur(25px);
-
-    opacity:0;
-
-    transition:opacity 2s ease;
-
-    pointer-events:none;
-}
-
-.invitation-reveal.visible
-.invitation-image-wrapper::before{
-
-    opacity:1;
-}
-
-.invitation-image-wrapper img{
-
+.invitation-section{
+    margin:90px auto 0;
     width:100%;
+    max-width:700px;
+    text-align:center;
+}
 
-    height:auto;
-
+.invitation-section img{
     display:block;
-
-    position:relative;
-
-    z-index:2;
-
-    border:5px solid #17091f;
-
+    width:min(600px,94vw);
+    height:auto;
+    margin:auto;
+    border-radius:18px;
     box-shadow:
-        0 0 20px rgba(172,84,255,.5),
-        0 0 70px rgba(120,40,180,.25);
+        0 20px 60px rgba(0,0,0,.6),
+        0 0 30px rgba(150,90,200,.2);
 }
 
 
-/* =========================================================
-   AYUDA DE CONFIRMACIÓN
-   FLECHA ARRIBA DEL TEXTO
-========================================================= */
+/* =========================
+   CONFIRMACIÓN
+========================= */
+
+.confirm-section{
+    margin:70px auto 0;
+    text-align:center;
+}
 
 .confirm-help{
-
-    margin-top:35px;
-
-    color:#d7c5df;
-
+    margin-top:42px;
     font-size:16px;
-
-    letter-spacing:1px;
-
-    text-align:center;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.8);
+    color:#e9d7f4;
 }
 
 .confirm-arrow{
-
-    display:block;
-
-    color:#d8a7ff;
-
-    font-size:38px;
-
-    line-height:1;
-
-    margin-bottom:10px;
-
-    text-shadow:
-        0 0 8px rgba(190,100,255,1),
-        0 0 20px rgba(150,50,220,.8);
-
-    animation:
-        confirmArrowMove
-        1.2s
-        infinite
-        ease-in-out;
+    font-size:34px;
+    color:#d7b5f4;
+    margin-bottom:7px;
+    animation:arrowDown 1.2s infinite ease-in-out;
 }
-
-@keyframes confirmArrowMove{
-
-    0%,100%{
-        transform:translateY(0);
-        opacity:.75;
-    }
-
-    50%{
-        transform:translateY(8px);
-        opacity:1;
-    }
-
-}
-
-
-/* =========================================================
-   BOTÓN
-========================================================= */
 
 .confirm-button{
-
-    margin-top:12px;
-
-    padding:17px 36px;
-
-    border:1px solid #c17cff;
-
+    margin-top:18px;
+    padding:15px 30px;
+    border:1px solid #d2afea;
+    border-radius:30px;
     background:
         linear-gradient(
             135deg,
-            rgba(80,20,110,.9),
-            rgba(30,5,45,.95)
+            #6c3789,
+            #3e1d58
         );
-
     color:white;
-
     font-size:15px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-
+    letter-spacing:1px;
     cursor:pointer;
-
-    box-shadow:
-        0 0 15px rgba(180,80,255,.25);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:.3s;
 }
 
 .confirm-button:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 0 20px rgba(200,100,255,.6),
-        0 0 45px rgba(130,40,200,.3);
+    transform:translateY(-2px) scale(1.03);
 }
 
 
-/* =========================================================
+/* =========================
    MODAL
-========================================================= */
+========================= */
 
 .modal{
-
     position:fixed;
-
     inset:0;
-
-    background:rgba(3,0,7,.88);
-
-    backdrop-filter:blur(8px);
-
+    z-index:7000;
     display:flex;
-
-    justify-content:center;
     align-items:center;
-
+    justify-content:center;
     padding:20px;
 
-    z-index:10000;
+    background:rgba(5,1,10,.78);
+    backdrop-filter:blur(7px);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
 }
 
-.modal-box{
+.modal.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
 
-    width:min(500px,100%);
-
-    max-height:90vh;
-
-    overflow-y:auto;
-
+.modal-content{
+    width:min(430px,94vw);
+    padding:28px;
+    border-radius:24px;
     background:
         linear-gradient(
             145deg,
-            #18091f,
-            #09040e
+            #281038,
+            #13081c
         );
+    border:1px solid rgba(210,170,240,.35);
+    box-shadow:0 25px 70px rgba(0,0,0,.65);
 
-    border:1px solid rgba(190,120,255,.55);
+    transform:translateY(25px) scale(.97);
+    transition:transform .7s ease;
+}
 
-    padding:35px;
-
-    box-shadow:
-        0 0 35px rgba(130,40,190,.3);
-
-    position:relative;
+.modal.show .modal-content{
+    transform:translateY(0) scale(1);
 }
 
 .modal-title{
-
     text-align:center;
-
-    font-size:28px;
-
-    font-weight:normal;
-
-    margin-bottom:8px;
-}
-
-.modal-subtitle{
-
-    text-align:center;
-
-    color:#ad9ab8;
-
-    font-size:13px;
-
-    margin-bottom:30px;
-}
-
-.close-modal{
-
-    position:absolute;
-
-    top:12px;
-    right:15px;
-
-    background:none;
-
-    border:0;
-
-    color:#c5a7d2;
-
-    font-size:25px;
-
-    cursor:pointer;
+    font-family:"Cinzel Decorative",Georgia,serif;
+    color:#ead8f7;
+    margin-bottom:25px;
 }
 
 .form-group{
-
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
 .form-group label{
-
     display:block;
-
-    color:#d7c2df;
-
-    font-size:13px;
-
     margin-bottom:7px;
+    font-size:14px;
+    color:#d8c4e4;
 }
 
-.form-group input,
-.form-group select{
-
+.form-group input{
     width:100%;
-
-    padding:13px;
-
-    background:#0b0610;
-
-    border:1px solid #4b2a5a;
-
-    color:white;
-
+    padding:12px;
+    border-radius:12px;
+    border:1px solid rgba(214,177,237,.3);
     outline:none;
-
-    font-family:inherit;
+    background:#100719;
+    color:white;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-
-    border-color:#b66aff;
-
-    box-shadow:
-        0 0 10px rgba(180,90,255,.2);
-}
-
-.radio-container{
-
+.radio-group{
     display:flex;
-
-    gap:20px;
+    flex-direction:column;
+    gap:9px;
 }
 
 .radio-option{
-
     display:flex;
-
     align-items:center;
-
-    gap:7px;
-
-    color:#ddd;
-
-    cursor:pointer;
+    gap:8px;
 }
 
 .radio-option input{
-
     width:auto;
 }
 
-.submit-button{
+.form-actions{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
 
-    width:100%;
-
-    padding:15px;
-
-    background:#5c247a;
-
-    border:1px solid #bd78ff;
-
-    color:white;
-
+.form-actions button{
+    flex:1;
+    padding:13px;
+    border-radius:15px;
+    border:1px solid rgba(214,177,237,.3);
     cursor:pointer;
-
-    letter-spacing:2px;
-
-    transition:.25s;
 }
 
-.submit-button:hover{
-
-    background:#75309a;
+.cancel-button{
+    background:#211025;
+    color:#ddd;
 }
 
-.form-message{
+.save-button{
+    background:#65347d;
+    color:white;
+}
 
-    margin-top:15px;
+.save-button:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
 
+#formMessage{
+    min-height:20px;
+    margin-top:14px;
+    text-align:center;
+    font-size:14px;
+}
+
+
+/* =========================
+   VIDEO 2 FINAL
+========================= */
+
+#finalVideoScreen{
+    position:fixed;
+    inset:0;
+    z-index:10000;
+
+    background:#08030c;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity 1.8s ease,
+        visibility 1.8s ease;
+}
+
+#finalVideoScreen.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+#finalVideoScreen.fade-out{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+#finalVideo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    opacity:0;
+    transform:scale(1.03);
+
+    transition:
+        opacity 1.8s ease,
+        transform 2.5s ease;
+}
+
+#finalVideoScreen.show #finalVideo{
+    opacity:1;
+    transform:scale(1);
+}
+
+
+/* =========================
+   CELEBRACIÓN
+========================= */
+
+#celebration{
+    position:fixed;
+    inset:0;
+    z-index:9000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
     text-align:center;
 
-    font-size:13px;
-}
-
-
-/* =========================================================
-   CELEBRACIÓN
-========================================================= */
-
-.celebration{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:20000;
+    padding:25px;
 
     background:
         radial-gradient(
             circle,
-            rgba(80,15,110,.75),
-            rgba(4,1,8,.97) 65%
+            #4b1c69,
+            #170820 70%,
+            #07030c
         );
 
-    display:flex;
+    opacity:1;
+    visibility:visible;
 
-    justify-content:center;
-    align-items:center;
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
 
-    text-align:center;
-
-    overflow:hidden;
+#celebration.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 }
 
 .celebration-content{
-
-    position:relative;
-
-    z-index:10;
-
-    animation:celebrateIn 1.5s ease;
+    max-width:600px;
 }
 
 .celebration-title{
-
-    font-size:clamp(38px,8vw,75px);
-
-    font-weight:normal;
-
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(35px,7vw,70px);
+    color:#f0dcff;
     text-shadow:
-        0 0 20px #c77dff,
-        0 0 50px #8b2fc9;
+        0 0 15px rgba(210,160,255,.8),
+        0 0 40px rgba(150,80,210,.6);
 }
 
-.celebration-subtitle{
-
-    margin-top:15px;
-
-    color:#e4d4ea;
-
+.celebration-text{
+    margin-top:20px;
+    color:#e5d4ed;
     font-size:18px;
+    line-height:1.6;
 }
 
-.play-music{
-
-    margin-top:30px;
-
+.music-button{
+    margin-top:25px;
     padding:14px 25px;
-
-    background:transparent;
-
+    border-radius:30px;
+    border:1px solid #d3afe9;
+    background:#63347e;
     color:white;
-
-    border:1px solid #c17cff;
-
     cursor:pointer;
-
-    letter-spacing:1px;
-}
-
-@keyframes celebrateIn{
-
-    from{
-        opacity:0;
-        transform:scale(.7);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-
-}
-
-.spark{
-
-    position:absolute;
-
-    width:5px;
-    height:5px;
-
-    border-radius:50%;
-
-    background:#dba3ff;
-
-    box-shadow:
-        0 0 8px #dba3ff,
-        0 0 20px #9b4dca;
-
-    animation:sparkFly linear forwards;
-}
-
-@keyframes sparkFly{
-
-    from{
-        transform:
-            translate(0,0)
-            scale(1);
-
-        opacity:1;
-    }
-
-    to{
-        transform:
-            translate(var(--x),var(--y))
-            scale(0);
-
-        opacity:0;
-    }
-
 }
 
 
-/* =========================================================
-   MODO FIESTA
-========================================================= */
+/* =========================
+   PARTY MODE
+========================= */
 
-.party-mode{
-
+#partyMode{
     position:fixed;
-
     inset:0;
+    z-index:8500;
 
-    z-index:15000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
 
     background:
         radial-gradient(
             circle at center,
-            #351052,
-            #100317 65%,
-            #050108
+            #55216d,
+            #17091f 65%,
+            #07030c
         );
 
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-}
-
-.party-content{
-
     padding:30px;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
 }
 
-.party-icon{
-
-    font-size:65px;
-
-    animation:
-        partyFloat 2s infinite ease-in-out;
+#partyMode.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 }
 
 .party-title{
-
-    margin-top:20px;
-
-    font-size:clamp(40px,8vw,80px);
-
-    font-weight:normal;
-
-    text-shadow:
-        0 0 20px #c77dff,
-        0 0 60px #8b2fc9;
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(38px,8vw,80px);
+    color:#f1ddff;
 }
 
 .party-text{
-
-    margin-top:15px;
-
-    color:#d8c4df;
-
-    font-size:18px;
-}
-
-@keyframes partyFloat{
-
-    0%,100%{
-        transform:
-            translateY(0)
-            rotate(-3deg);
-    }
-
-    50%{
-        transform:
-            translateY(-15px)
-            rotate(3deg);
-    }
-
+    margin-top:20px;
+    font-size:20px;
+    color:#e8d6f0;
 }
 
 
-/* =========================================================
-   PANTALLA FINAL
-========================================================= */
+/* =========================
+   FINAL
+========================= */
 
-.final-screen{
-
+#finalScreen{
     position:fixed;
-
     inset:0;
+    z-index:8000;
 
-    z-index:30000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    padding:25px;
 
     background:
         radial-gradient(
-            circle at center,
-            #351052,
-            #09020e 70%
+            circle,
+            #47205c,
+            #100616 75%
         );
 
-    display:flex;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    padding:30px;
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
 }
 
-.final-content{
-
-    animation:finalAppear 2s ease;
+#finalScreen.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
 }
 
 .final-title{
-
-    font-size:clamp(38px,8vw,80px);
-
-    font-weight:normal;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 20px #d38aff,
-        0 0 50px #9c45d0;
-}
-
-.final-text{
-
-    margin-top:25px;
-
-    color:#d9c8df;
-
-    font-size:17px;
-
-    line-height:1.8;
-}
-
-@keyframes finalAppear{
-
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-
+    font-family:"Cinzel Decorative",Georgia,serif;
+    font-size:clamp(34px,7vw,70px);
+    color:#f0dcff;
 }
 
 
-/* =========================================================
-   CELULAR
-========================================================= */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:750px){
 
-    .fixed-tutorial{
-
-        padding:
-            max(8px,env(safe-area-inset-top))
-            10px
-            8px;
-    }
-
-    .fixed-tutorial-title{
-
-        font-size:9px;
-
-        letter-spacing:2px;
-
-        margin-bottom:4px;
-    }
-
-    .tutorial-instruction{
-
-        font-size:12px;
-
-        letter-spacing:.8px;
-    }
-
-    .tutorial-icon{
-
-        font-size:17px;
-    }
-
-    .tutorial-arrow{
-
-        font-size:30px;
-    }
-
-    .hero{
-
-        padding-top:140px;
+    main{
+        padding-top:100px;
     }
 
     .hero-content{
-
         flex-direction:column;
-
-        gap:45px;
+        gap:30px;
     }
 
     .photo1-container{
-
-        width:min(300px,75vw);
+        width:min(360px,82vw);
     }
 
     .countdown-area{
-
         width:100%;
-
-        max-width:600px;
+        min-width:0;
     }
 
     .countdown{
-
-        gap:7px;
-    }
-
-    .time-box{
-
-        padding:14px 5px;
-    }
-
-    .time-label{
-
-        font-size:9px;
-
-        letter-spacing:1px;
-    }
-
-    .invitation-reveal{
-
-        padding-top:90px;
-    }
-
-    .invitation-image-wrapper{
-
-        width:94vw;
-    }
-
-    .confirm-help{
-
-        font-size:15px;
-
-        line-height:1.5;
-
-        padding:0 15px;
-    }
-
-    .confirm-arrow{
-
-        font-size:35px;
-
-        margin-bottom:9px;
-    }
-
-    .confirm-button{
-
-        padding:17px 25px;
-    }
-
-    .modal-box{
-
-        padding:25px 20px;
-    }
-
-}
-
-
-/* =========================================================
-   CELULARES PEQUEÑOS
-========================================================= */
-
-@media(max-width:420px){
-
-    .fixed-tutorial-title{
-
-        font-size:8px;
-
-        letter-spacing:1.5px;
-    }
-
-    .tutorial-instruction{
-
-        font-size:11px;
-    }
-
-    .tutorial-arrow{
-
-        font-size:27px;
+        width:100%;
     }
 
     .main-title{
-
         letter-spacing:2px;
     }
 
-    .subtitle{
-
-        font-size:15px;
+    .invitation-section{
+        margin-top:70px;
     }
 
-    .countdown-title{
-
-        font-size:14px;
+    .scroll-tutorial{
+        top:12px;
+        width:92%;
     }
-
-    .time-number{
-
-        font-size:27px;
-    }
-
-    .magic-text{
-
-        font-size:11px;
-
-        letter-spacing:2px;
-    }
-
-    .confirm-button{
-
-        width:90%;
-
-        font-size:12px;
-
-        padding:15px;
-    }
-
-}
-
-
-/* =========================================================
-   PC
-========================================================= */
-
-@media(min-width:751px){
-
-    .invitation-image-wrapper{
-
-        width:min(600px,85vw);
-    }
-
 }
 
 </style>
-
 </head>
 
 <body>
 
+<!-- =========================
+     VIDEO 1
+========================= -->
 
-<!-- =========================================================
-     TUTORIAL FIJO
-========================================================= -->
+<div id="introVideoScreen">
 
-<div class="fixed-tutorial">
+    <video
+        id="introVideo"
+        src="videoinicio1.mp4"
+        playsinline
+        preload="auto">
+    </video>
 
-    <div class="fixed-tutorial-title">
+    <div id="introStart">
+
+        <div class="introStartTitle">
+            ✨ VELUNARA ✨
+        </div>
+
+        <div class="introStartText">
+            Tu invitación está por comenzar
+        </div>
+
+        <button
+            id="startInvitation"
+            type="button">
+            ▶ INICIAR INVITACIÓN
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     TUTORIAL
+========================= -->
+
+<div
+    class="scroll-tutorial"
+    id="scrollTutorial">
+
+    <div class="tutorial-title">
         ✦ CÓMO VER LA INVITACIÓN ✦
     </div>
 
-    <div class="fixed-tutorial-content">
+    <div class="tutorial-text">
+        ☝ DESLIZA HACIA ABAJO
+    </div>
 
-        <div class="tutorial-instruction">
-
-            <span class="tutorial-icon">
-                ☝
-            </span>
-
-            <span>
-                DESLIZA HACIA ABAJO
-            </span>
-
-        </div>
-
-        <div class="tutorial-arrow">
-            ↓
-        </div>
-
+    <div class="tutorial-arrow">
+        ↓
     </div>
 
 </div>
 
 
-<!-- ESTRELLAS -->
+<!-- =========================
+     CONTENIDO
+========================= -->
 
-<div
-    class="stars"
-    id="stars">
-</div>
-
-
-<!-- =========================================================
-     CONTENIDO PÚBLICO
-========================================================= -->
-
-<div id="publicContent">
-
-
-    <!-- HERO -->
+<main id="mainContent">
 
     <section class="hero">
-
-        <div class="small-title">
-            Una celebración especial
-        </div>
 
         <h1 class="main-title">
             VELUNARA
         </h1>
 
-        <div class="subtitle">
-            ✦ Una noche mágica está por comenzar ✦
-        </div>
-
-
-        <!-- FOTO IZQUIERDA + TIMER DERECHA -->
-
         <div class="hero-content">
 
+            <!-- FOTO IZQUIERDA -->
 
             <div class="photo1-container">
 
@@ -1545,74 +911,58 @@ body::before{
             </div>
 
 
-            <div
-                class="countdown-area"
-                id="countdownSection">
+            <!-- TIMER DERECHA -->
+
+            <div class="countdown-area">
 
                 <div class="countdown-title">
-                    FALTAN PARA LA CELEBRACIÓN
+                    Faltan...
                 </div>
-
 
                 <div class="countdown">
 
                     <div class="time-box">
-
-                        <span
+                        <div
                             class="time-number"
                             id="days">
                             00
-                        </span>
-
-                        <span class="time-label">
-                            Días
-                        </span>
-
+                        </div>
+                        <div class="time-label">
+                            DÍAS
+                        </div>
                     </div>
 
-
                     <div class="time-box">
-
-                        <span
+                        <div
                             class="time-number"
                             id="hours">
                             00
-                        </span>
-
-                        <span class="time-label">
-                            Horas
-                        </span>
-
+                        </div>
+                        <div class="time-label">
+                            HORAS
+                        </div>
                     </div>
 
-
                     <div class="time-box">
-
-                        <span
+                        <div
                             class="time-number"
                             id="minutes">
                             00
-                        </span>
-
-                        <span class="time-label">
-                            Minutos
-                        </span>
-
+                        </div>
+                        <div class="time-label">
+                            MINUTOS
+                        </div>
                     </div>
 
-
                     <div class="time-box">
-
-                        <span
+                        <div
                             class="time-number"
                             id="seconds">
                             00
-                        </span>
-
-                        <span class="time-label">
-                            Segundos
-                        </span>
-
+                        </div>
+                        <div class="time-label">
+                            SEGUNDOS
+                        </div>
                     </div>
 
                 </div>
@@ -1621,101 +971,69 @@ body::before{
 
         </div>
 
-    </section>
 
+        <!-- =========================
+             INVITACIÓN COMPLETA
+        ========================= -->
 
-    <!-- =====================================================
-         INVITACIÓN
-    ====================================================== -->
-
-    <section
-        class="invitation-reveal"
-        id="invitationReveal">
-
-
-        <div class="magic-transition">
-
-            <div class="magic-symbol">
-                ✦
-            </div>
-
-            <div class="magic-text">
-                La magia comienza aquí
-            </div>
-
-        </div>
-
-
-        <div class="invitation-image-wrapper">
+        <section
+            class="invitation-section"
+            id="invitationSection">
 
             <img
                 src="foto2.jpg"
                 alt="Invitación de Velunara">
 
-        </div>
+        </section>
 
 
-        <!-- FLECHA ARRIBA DEL TEXTO -->
+        <!-- =========================
+             CONFIRMAR
+        ========================= -->
 
-        <div class="confirm-help">
+        <section class="confirm-section">
 
-            <div class="confirm-arrow">
-                ↓
+            <div class="confirm-help">
+
+                <div class="confirm-arrow">
+                    ↓
+                </div>
+
+                PICA AQUÍ PARA CONFIRMAR TU ASISTENCIA
+
             </div>
 
-            Pica aquí para confirmar tu asistencia
+            <button
+                class="confirm-button"
+                id="openForm"
+                type="button">
 
-        </div>
+                💜 CONFIRMAR ASISTENCIA
 
+            </button>
 
-        <button
-            class="confirm-button"
-            id="openForm"
-            type="button">
-
-            💜 CONFIRMAR ASISTENCIA
-
-        </button>
-
+        </section>
 
     </section>
 
-</div>
+</main>
 
 
-<!-- =========================================================
+<!-- =========================
      MODAL
-========================================================= -->
+========================= -->
 
 <div
-    class="modal hidden"
+    class="modal"
     id="formModal">
 
-    <div class="modal-box">
-
-        <button
-            class="close-modal"
-            id="closeForm"
-            type="button"
-            aria-label="Cerrar">
-
-            ×
-
-        </button>
-
+    <div class="modal-content">
 
         <h2 class="modal-title">
             Confirmar asistencia
         </h2>
 
-
-        <p class="modal-subtitle">
-            Completa los datos de tu asistencia
-        </p>
-
-
         <form id="confirmationForm">
-
 
             <div class="form-group">
 
@@ -1727,8 +1045,8 @@ body::before{
                     type="text"
                     id="nombre"
                     maxlength="80"
-                    required
-                    placeholder="Tu nombre">
+                    autocomplete="name"
+                    required>
 
             </div>
 
@@ -1756,21 +1074,18 @@ body::before{
                     ¿Asistirás?
                 </label>
 
-
-                <div class="radio-container">
+                <div class="radio-group">
 
                     <label class="radio-option">
 
                         <input
                             type="radio"
                             name="asistencia"
-                            value="true"
-                            checked>
+                            value="true">
 
-                        Sí
+                        Sí, asistiré
 
                     </label>
-
 
                     <label class="radio-option">
 
@@ -1779,7 +1094,7 @@ body::before{
                             name="asistencia"
                             value="false">
 
-                        No
+                        No podré asistir
 
                     </label>
 
@@ -1791,39 +1106,44 @@ body::before{
             <div class="form-group">
 
                 <label for="telefono">
-
                     Teléfono
-
-                    <span style="color:#8e7a96;">
-                        (opcional)
-                    </span>
-
                 </label>
 
                 <input
                     type="tel"
                     id="telefono"
                     maxlength="25"
-                    placeholder="Número de teléfono">
+                    autocomplete="tel">
 
             </div>
-
-
-            <button
-                class="submit-button"
-                id="guardarBtn"
-                type="submit">
-
-                GUARDAR CONFIRMACIÓN
-
-            </button>
 
 
             <div
-                class="form-message"
                 id="formMessage">
             </div>
 
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-button"
+                    id="closeForm">
+
+                    CANCELAR
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="save-button"
+                    id="guardarBtn">
+
+                    💜 GUARDAR
+
+                </button>
+
+            </div>
 
         </form>
 
@@ -1832,30 +1152,31 @@ body::before{
 </div>
 
 
-<!-- =========================================================
+<!-- =========================
      CELEBRACIÓN
-========================================================= -->
+========================= -->
 
 <div
-    class="celebration hidden"
-    id="celebration">
+    id="celebration"
+    class="hidden">
 
     <div class="celebration-content">
 
         <div class="celebration-title">
-            ✨ VELUNARA ✨
+            ✨ ¡ES HOY! ✨
         </div>
 
-        <div class="celebration-subtitle">
-            ¡Ha llegado el gran día!
+        <div class="celebration-text">
+            ¡Feliz cumpleaños, Velunara!<br>
+            Hoy comienza la celebración.
         </div>
 
         <button
-            class="play-music"
+            class="music-button"
             id="playMusic"
             type="button">
 
-            🎵 REPRODUCIR LAS MAÑANITAS
+            🎵 ESCUCHAR MAÑANITAS
 
         </button>
 
@@ -1864,76 +1185,76 @@ body::before{
 </div>
 
 
-<!-- =========================================================
-     MODO FIESTA
-========================================================= -->
-
-<div
-    class="party-mode hidden"
-    id="partyMode">
-
-    <div class="party-content">
-
-        <div class="party-icon">
-            🖤✨
-        </div>
-
-        <div class="party-title">
-            ¡ES HORA DE CELEBRAR!
-        </div>
-
-        <div class="party-text">
-            La fiesta de Velunara está comenzando.
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     PANTALLA FINAL
-========================================================= -->
-
-<div
-    class="final-screen hidden"
-    id="finalScreen">
-
-    <div class="final-content">
-
-        <div class="final-title">
-            ✨ ¡FELICIDADES, VELUNARA! ✨
-        </div>
-
-        <div class="final-text">
-
-            Gracias por haber formado parte
-            <br>
-            de este día tan especial.
-            <br><br>
-            💜 27 de septiembre de 2026 💜
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- AUDIO -->
-
 <audio
-    id="birthdayMusic"
+    id="music"
     src="mananitas.mp3"
     preload="auto">
 </audio>
 
 
+<!-- =========================
+     PARTY MODE
+========================= -->
+
+<div
+    id="partyMode"
+    class="hidden">
+
+    <div>
+
+        <div class="party-title">
+            ✨ ¡LA FIESTA HA COMENZADO! ✨
+        </div>
+
+        <div class="party-text">
+            Velunara está celebrando su día especial 💜
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FINAL SCREEN
+========================= -->
+
+<div
+    id="finalScreen">
+
+    <div>
+
+        <div class="final-title">
+            ✨ ¡FELICIDADES, VELUNARA! ✨
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     VIDEO 2 FINAL
+========================= -->
+
+<div
+    id="finalVideoScreen">
+
+    <video
+        id="finalVideo"
+        src="video2.mp4"
+        playsinline
+        preload="auto">
+    </video>
+
+</div>
+
+
 <script>
 
-/* =========================================================
+/* =========================
    SUPABASE
-========================================================= */
+========================= */
 
 const SUPABASE_URL =
     "https://ibdjtobuadgzozbggxxu.supabase.co";
@@ -1948,184 +1269,74 @@ const supabaseClient =
     );
 
 
-/* =========================================================
-   VIDEO DE INICIO
-========================================================= */
+/* =========================
+   ELEMENTOS
+========================= */
 
 const introVideoScreen =
-    document.createElement("div");
-
-introVideoScreen.id =
-    "introVideoScreen";
-
-introVideoScreen.innerHTML = `
-    <video
-        id="introVideo"
-        src="videoinicio1.mp4"
-        playsinline
-        preload="auto">
-    </video>
-
-    <div id="introStart">
-        <div class="introStartTitle">
-            ✨ VELUNARA ✨
-        </div>
-
-        <div class="introStartText">
-            Tu invitación está por comenzar
-        </div>
-
-        <button id="startInvitation" type="button">
-            ▶ INICIAR INVITACIÓN
-        </button>
-    </div>
-`;
-
-document.body.prepend(
-    introVideoScreen
-);
-
-
-/* =========================================================
-   ESTILOS VIDEO
-========================================================= */
-
-const introStyle =
-    document.createElement("style");
-
-introStyle.textContent = `
-
-#introVideoScreen{
-    position:fixed;
-    inset:0;
-    z-index:50000;
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:1;
-    visibility:visible;
-    transition:
-        opacity 1.5s ease,
-        visibility 1.5s ease;
-}
-
-#introVideoScreen.fade-out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-#introVideo{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    opacity:0;
-    transition:opacity 1.5s ease;
-}
-
-#introVideo.visible{
-    opacity:1;
-}
-
-#introStart{
-    position:absolute;
-    inset:0;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:25px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(49,19,73,.72),
-            rgba(0,0,0,.95)
-        );
-
-    transition:
-        opacity 1s ease,
-        transform 1s ease;
-}
-
-#introStart.hidden-start{
-    opacity:0;
-    transform:scale(1.04);
-    pointer-events:none;
-}
-
-.introStartTitle{
-    font-size:clamp(34px,8vw,75px);
-    color:#ead8ff;
-    letter-spacing:4px;
-
-    text-shadow:
-        0 0 15px rgba(211,169,255,.8),
-        0 0 35px rgba(150,91,205,.6);
-}
-
-.introStartText{
-    color:#e8d8f3;
-    font-size:18px;
-    margin:15px 0 28px;
-}
-
-#startInvitation{
-    border:1px solid #c99aff;
-    border-radius:30px;
-    padding:14px 26px;
-    background:rgba(70,25,95,.85);
-    color:#fff;
-    cursor:pointer;
-    font-size:15px;
-
-    box-shadow:
-        0 0 20px rgba(180,120,240,.3);
-}
-
-`;
-
-document.head.appendChild(
-    introStyle
-);
-
+    document.getElementById("introVideoScreen");
 
 const introVideo =
-    document.getElementById(
-        "introVideo"
-    );
+    document.getElementById("introVideo");
 
 const introStart =
-    document.getElementById(
-        "introStart"
-    );
+    document.getElementById("introStart");
 
 const startInvitation =
-    document.getElementById(
-        "startInvitation"
-    );
+    document.getElementById("startInvitation");
 
+const scrollTutorial =
+    document.getElementById("scrollTutorial");
+
+const invitationSection =
+    document.getElementById("invitationSection");
+
+const formModal =
+    document.getElementById("formModal");
+
+const openForm =
+    document.getElementById("openForm");
+
+const closeFormButton =
+    document.getElementById("closeForm");
+
+const confirmationForm =
+    document.getElementById("confirmationForm");
+
+const guardarBtn =
+    document.getElementById("guardarBtn");
+
+const formMessage =
+    document.getElementById("formMessage");
+
+const finalVideoScreen =
+    document.getElementById("finalVideoScreen");
+
+const finalVideo =
+    document.getElementById("finalVideo");
+
+const music =
+    document.getElementById("music");
+
+const celebration =
+    document.getElementById("celebration");
+
+const partyMode =
+    document.getElementById("partyMode");
+
+const finalScreen =
+    document.getElementById("finalScreen");
+
+
+/* =========================
+   VIDEO 1
+========================= */
 
 function finishIntro(){
 
-    setTimeout(() => {
-
-        introVideoScreen.classList.add(
-            "fade-out"
-        );
-
-        setTimeout(() => {
-
-            introVideoScreen.remove();
-
-        },1600);
-
-    },300);
+    introVideoScreen.classList.add("fade-out");
 
 }
-
 
 startInvitation.addEventListener(
     "click",
@@ -2160,16 +1371,485 @@ startInvitation.addEventListener(
     }
 );
 
-
 introVideo.addEventListener(
     "ended",
     finishIntro
 );
 
 
-/* =========================================================
+/* =========================
+   TUTORIAL
+========================= */
+
+let tutorialRemoved = false;
+
+function updateTutorial(){
+
+    if(tutorialRemoved){
+        return;
+    }
+
+    const rect =
+        invitationSection.getBoundingClientRect();
+
+    /*
+       Cuando la invitación empieza
+       a entrar en pantalla, el tutorial
+       se desvanece.
+    */
+
+    if(rect.top <= window.innerHeight * 0.75){
+
+        scrollTutorial.classList.add(
+            "fade-out"
+        );
+
+        setTimeout(
+            () => {
+
+                scrollTutorial.classList.add(
+                    "permanently-hidden"
+                );
+
+                tutorialRemoved = true;
+
+            },
+            1000
+        );
+
+    }
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateTutorial,
+    {
+        passive:true
+    }
+);
+
+
+/* =========================
+   MODAL
+========================= */
+
+openForm.addEventListener(
+    "click",
+    () => {
+
+        formModal.classList.add("show");
+
+    }
+);
+
+function closeModal(){
+
+    formModal.classList.remove("show");
+
+}
+
+closeFormButton.addEventListener(
+    "click",
+    closeModal
+);
+
+formModal.addEventListener(
+    "click",
+    event => {
+
+        if(event.target === formModal){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   VIDEO 2 FINAL
+========================= */
+
+async function mostrarVideoFinal(){
+
+    finalVideoScreen.classList.remove(
+        "fade-out"
+    );
+
+    finalVideoScreen.classList.add(
+        "show"
+    );
+
+    try{
+
+        finalVideo.currentTime = 0;
+
+        await finalVideo.play();
+
+    }catch(error){
+
+        console.error(
+            "No se pudo reproducir el video final:",
+            error
+        );
+
+    }
+
+}
+
+finalVideo.addEventListener(
+    "ended",
+    () => {
+
+        finalVideoScreen.classList.add(
+            "fade-out"
+        );
+
+        setTimeout(
+            () => {
+
+                finalVideoScreen.classList.remove(
+                    "show"
+                );
+
+                finalVideo.pause();
+
+            },
+            1800
+        );
+
+    }
+);
+
+
+/* =========================
+   GUARDAR CONFIRMACIÓN
+========================= */
+
+confirmationForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+        const nombre =
+            document
+                .getElementById("nombre")
+                .value
+                .trim();
+
+        const personas =
+            Number(
+                document
+                    .getElementById("personas")
+                    .value
+            );
+
+        const asistenciaSeleccionada =
+            document.querySelector(
+                'input[name="asistencia"]:checked'
+            );
+
+        const telefono =
+            document
+                .getElementById("telefono")
+                .value
+                .trim();
+
+
+        formMessage.textContent = "";
+        formMessage.style.color = "";
+
+
+        if(!nombre){
+
+            formMessage.textContent =
+                "Escribe tu nombre.";
+
+            formMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        if(nombre.length < 2){
+
+            formMessage.textContent =
+                "El nombre es demasiado corto.";
+
+            formMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        if(nombre.length > 80){
+
+            formMessage.textContent =
+                "El nombre es demasiado largo.";
+
+            formMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isInteger(personas) ||
+            personas < 1 ||
+            personas > 20
+        ){
+
+            formMessage.textContent =
+                "Indica entre 1 y 20 personas.";
+
+            formMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        if(!asistenciaSeleccionada){
+
+            formMessage.textContent =
+                "Selecciona si asistirás.";
+
+            formMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        if(telefono.length > 25){
+
+            formMessage.textContent =
+                "El teléfono es demasiado largo.";
+
+            formMessage.style.color =
+                "#ff9b9b";
+
+            return;
+
+        }
+
+
+        guardarBtn.disabled = true;
+
+        guardarBtn.textContent =
+            "GUARDANDO...";
+
+
+        try{
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("confirmaciones")
+                    .insert([
+                        {
+                            nombre:
+                                nombre,
+
+                            personas:
+                                personas,
+
+                            asistencia:
+                                asistenciaSeleccionada
+                                    .value === "true",
+
+                            telefono:
+                                telefono || null
+                        }
+                    ]);
+
+
+            if(error){
+
+                console.error(
+                    "ERROR DE SUPABASE:",
+                    error
+                );
+
+
+                if(error.code === "23505"){
+
+                    const message =
+                        error.message || "";
+
+
+                    if(
+                        message.includes(
+                            "confirmaciones_nombre_unico"
+                        )
+                    ){
+
+                        formMessage.textContent =
+                            "⚠️ Ese nombre ya tiene una confirmación.";
+
+                    }
+                    else if(
+                        message.includes(
+                            "confirmaciones_telefono_unico"
+                        )
+                    ){
+
+                        formMessage.textContent =
+                            "⚠️ Ese número ya tiene una confirmación.";
+
+                    }
+                    else{
+
+                        formMessage.textContent =
+                            "⚠️ Esta persona ya tiene una confirmación.";
+
+                    }
+
+                    formMessage.style.color =
+                        "#ffcf70";
+
+                    return;
+
+                }
+
+
+                formMessage.textContent =
+                    "No se pudo guardar la confirmación.";
+
+                formMessage.style.color =
+                    "#ff9b9b";
+
+                return;
+
+            }
+
+
+            formMessage.textContent =
+                "💜 Confirmación guardada correctamente.";
+
+            formMessage.style.color =
+                "#c8ffcf";
+
+
+            /*
+               Esperamos un poco para que
+               el usuario vea que sí se guardó.
+            */
+
+            setTimeout(
+                () => {
+
+                    closeModal();
+
+                    confirmationForm.reset();
+
+                    formMessage.textContent = "";
+
+                    /*
+                       Ahora entra Video 2
+                       con su propio fade.
+                    */
+
+                    mostrarVideoFinal();
+
+                },
+                1200
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "ERROR:",
+                error
+            );
+
+            formMessage.textContent =
+                "Ocurrió un error. Intenta nuevamente.";
+
+            formMessage.style.color =
+                "#ff9b9b";
+
+        }finally{
+
+            setTimeout(
+                () => {
+
+                    guardarBtn.disabled = false;
+
+                    guardarBtn.textContent =
+                        "💜 GUARDAR";
+
+                },
+                1300
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   MAÑANITAS
+========================= */
+
+document
+    .getElementById("playMusic")
+    .addEventListener(
+        "click",
+        async () => {
+
+            try{
+
+                music.volume = 1;
+
+                await music.play();
+
+                document
+                    .getElementById("playMusic")
+                    .textContent =
+                    "🎵 REPRODUCIENDO...";
+
+            }catch(error){
+
+                console.error(
+                    "No se pudo reproducir la música:",
+                    error
+                );
+
+            }
+
+        }
+    );
+
+music.addEventListener(
+    "ended",
+    () => {
+
+        celebration.classList.add(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =========================
    FECHAS
-========================================================= */
+========================= */
 
 const countdownDate =
     new Date(
@@ -2212,136 +1892,22 @@ const finalDate =
     );
 
 
-/* =========================================================
-   ELEMENTOS
-========================================================= */
-
-const publicContent =
-    document.getElementById(
-        "publicContent"
-    );
-
-const celebration =
-    document.getElementById(
-        "celebration"
-    );
-
-const partyMode =
-    document.getElementById(
-        "partyMode"
-    );
-
-const finalScreen =
-    document.getElementById(
-        "finalScreen"
-    );
-
-const formModal =
-    document.getElementById(
-        "formModal"
-    );
-
-const openForm =
-    document.getElementById(
-        "openForm"
-    );
-
-const closeForm =
-    document.getElementById(
-        "closeForm"
-    );
-
-const confirmationForm =
-    document.getElementById(
-        "confirmationForm"
-    );
-
-const formMessage =
-    document.getElementById(
-        "formMessage"
-    );
-
-const music =
-    document.getElementById(
-        "birthdayMusic"
-    );
-
-const playMusic =
-    document.getElementById(
-        "playMusic"
-    );
-
-
-/* =========================================================
-   ESTRELLAS
-========================================================= */
-
-const starsContainer =
-    document.getElementById(
-        "stars"
-    );
-
-for(let i = 0; i < 100; i++){
-
-    const star =
-        document.createElement(
-            "div"
-        );
-
-    star.className =
-        "star";
-
-    star.style.left =
-        Math.random() * 100 + "%";
-
-    star.style.top =
-        Math.random() * 100 + "%";
-
-    star.style.animationDelay =
-        Math.random() * 3 + "s";
-
-    star.style.animationDuration =
-        (2 + Math.random() * 4) + "s";
-
-    starsContainer.appendChild(
-        star
-    );
-
-}
-
-
-/* =========================================================
+/* =========================
    CONTADOR
-========================================================= */
+========================= */
 
 function updateCountdown(){
 
     const now =
         new Date();
 
-    const difference =
+    let difference =
         countdownDate - now;
 
 
-    if(difference <= 0){
+    if(difference < 0){
 
-        document.getElementById(
-            "days"
-        ).textContent = "00";
-
-        document.getElementById(
-            "hours"
-        ).textContent = "00";
-
-        document.getElementById(
-            "minutes"
-        ).textContent = "00";
-
-        document.getElementById(
-            "seconds"
-        ).textContent = "00";
-
-        return;
+        difference = 0;
 
     }
 
@@ -2354,562 +1920,57 @@ function updateCountdown(){
 
     const hours =
         Math.floor(
-            (
-                difference /
-                (1000 * 60 * 60)
-            ) % 24
+            (difference /
+            (1000 * 60 * 60)) % 24
         );
 
     const minutes =
         Math.floor(
-            (
-                difference /
-                (1000 * 60)
-            ) % 60
+            (difference /
+            (1000 * 60)) % 60
         );
 
     const seconds =
         Math.floor(
-            (
-                difference /
-                1000
-            ) % 60
+            (difference /
+            1000) % 60
         );
 
 
-    document.getElementById(
-        "days"
-    ).textContent =
+    document.getElementById("days")
+        .textContent =
         String(days).padStart(2,"0");
 
-    document.getElementById(
-        "hours"
-    ).textContent =
+    document.getElementById("hours")
+        .textContent =
         String(hours).padStart(2,"0");
 
-    document.getElementById(
-        "minutes"
-    ).textContent =
+    document.getElementById("minutes")
+        .textContent =
         String(minutes).padStart(2,"0");
 
-    document.getElementById(
-        "seconds"
-    ).textContent =
+    document.getElementById("seconds")
+        .textContent =
         String(seconds).padStart(2,"0");
 
 }
-
-updateCountdown();
 
 setInterval(
     updateCountdown,
     1000
 );
 
+updateCountdown();
 
-/* =========================================================
-   TRANSICIÓN
-========================================================= */
 
-const invitationReveal =
-    document.getElementById(
-        "invitationReveal"
-    );
-
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(
-                entry => {
-
-                    if(
-                        entry.isIntersecting
-                    ){
-
-                        invitationReveal
-                            .classList
-                            .add(
-                                "visible"
-                            );
-
-                    }
-
-                }
-            );
-
-        },
-        {
-            threshold:.18
-        }
-    );
-
-revealObserver.observe(
-    invitationReveal
-);
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-openForm.addEventListener(
-    "click",
-    () => {
-
-        formModal.classList.remove(
-            "hidden"
-        );
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-);
-
-
-closeForm.addEventListener(
-    "click",
-    closeModal
-);
-
-
-formModal.addEventListener(
-    "click",
-    event => {
-
-        if(
-            event.target ===
-            formModal
-        ){
-
-            closeModal();
-
-        }
-
-    }
-);
-
-
-function closeModal(){
-
-    formModal.classList.add(
-        "hidden"
-    );
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =========================================================
-   GUARDAR CONFIRMACIÓN
-========================================================= */
-
-confirmationForm.addEventListener(
-    "submit",
-    async event => {
-
-        event.preventDefault();
-
-
-        const nombre =
-            document
-                .getElementById(
-                    "nombre"
-                )
-                .value
-                .trim();
-
-        const personas =
-            Number(
-                document
-                    .getElementById(
-                        "personas"
-                    )
-                    .value
-            );
-
-        const asistenciaElement =
-            document.querySelector(
-                'input[name="asistencia"]:checked'
-            );
-
-        const telefono =
-            document
-                .getElementById(
-                    "telefono"
-                )
-                .value
-                .trim();
-
-
-        if(!nombre){
-
-            formMessage.textContent =
-                "Escribe tu nombre.";
-
-            formMessage.style.color =
-                "#ff9b9b";
-
-            return;
-
-        }
-
-
-        if(
-            !Number.isInteger(personas) ||
-            personas < 1 ||
-            personas > 20
-        ){
-
-            formMessage.textContent =
-                "Indica entre 1 y 20 personas.";
-
-            formMessage.style.color =
-                "#ff9b9b";
-
-            return;
-
-        }
-
-
-        if(!asistenciaElement){
-
-            formMessage.textContent =
-                "Selecciona si asistirás.";
-
-            formMessage.style.color =
-                "#ff9b9b";
-
-            return;
-
-        }
-
-
-        if(telefono.length > 25){
-
-            formMessage.textContent =
-                "El teléfono es demasiado largo.";
-
-            formMessage.style.color =
-                "#ff9b9b";
-
-            return;
-
-        }
-
-
-        const boton =
-            document.getElementById(
-                "guardarBtn"
-            );
-
-        boton.disabled = true;
-
-        boton.textContent =
-            "GUARDANDO...";
-
-
-        formMessage.textContent =
-            "";
-
-
-        try{
-
-            const {
-                error
-            } =
-                await supabaseClient
-                    .from(
-                        "confirmaciones"
-                    )
-                    .insert([
-                        {
-                            nombre:
-                                nombre,
-
-                            personas:
-                                personas,
-
-                            asistencia:
-                                asistenciaElement.value === "true",
-
-                            telefono:
-                                telefono ||
-                                null
-                        }
-                    ]);
-
-
-            if(error){
-
-                console.error(
-                    "ERROR DE SUPABASE:",
-                    error
-                );
-
-
-                if(
-                    error.code === "23505"
-                ){
-
-                    const message =
-                        error.message || "";
-
-
-                    if(
-                        message.includes(
-                            "confirmaciones_nombre_unico"
-                        )
-                    ){
-
-                        formMessage.textContent =
-                            "⚠️ Ese nombre ya tiene una confirmación.";
-
-                    }
-                    else if(
-                        message.includes(
-                            "confirmaciones_telefono_unico"
-                        )
-                    ){
-
-                        formMessage.textContent =
-                            "⚠️ Ese número ya tiene una confirmación.";
-
-                    }
-                    else{
-
-                        formMessage.textContent =
-                            "⚠️ Esta persona ya tiene una confirmación.";
-
-                    }
-
-
-                    formMessage.style.color =
-                        "#ffcf70";
-
-                    return;
-
-                }
-
-
-                formMessage.textContent =
-                    "No se pudo guardar la confirmación.";
-
-                formMessage.style.color =
-                    "#ff9b9b";
-
-                return;
-
-            }
-
-
-            formMessage.textContent =
-                "✨ ¡Confirmación guardada correctamente!";
-
-            formMessage.style.color =
-                "#bfffca";
-
-
-            confirmationForm.reset();
-
-
-            setTimeout(
-                () => {
-
-                    closeModal();
-
-                    formMessage.textContent =
-                        "";
-
-                },
-                1800
-            );
-
-
-        }catch(error){
-
-            console.error(
-                "ERROR:",
-                error
-            );
-
-            formMessage.textContent =
-                "Ocurrió un error. Intenta nuevamente.";
-
-            formMessage.style.color =
-                "#ff9b9b";
-
-        }finally{
-
-            boton.disabled =
-                false;
-
-            boton.textContent =
-                "GUARDAR CONFIRMACIÓN";
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   CHISPAS
-========================================================= */
-
-function createSparks(){
-
-    for(
-        let i = 0;
-        i < 80;
-        i++
-    ){
-
-        setTimeout(
-            () => {
-
-                const spark =
-                    document.createElement(
-                        "div"
-                    );
-
-                spark.className =
-                    "spark";
-
-                spark.style.left =
-                    "50%";
-
-                spark.style.top =
-                    "50%";
-
-
-                const angle =
-                    Math.random() *
-                    Math.PI *
-                    2;
-
-                const distance =
-                    100 +
-                    Math.random() *
-                    500;
-
-
-                spark.style.setProperty(
-                    "--x",
-                    Math.cos(angle) *
-                    distance +
-                    "px"
-                );
-
-                spark.style.setProperty(
-                    "--y",
-                    Math.sin(angle) *
-                    distance +
-                    "px"
-                );
-
-
-                spark.style.animationDuration =
-                    (
-                        1.5 +
-                        Math.random() *
-                        2
-                    ) +
-                    "s";
-
-
-                celebration.appendChild(
-                    spark
-                );
-
-
-                setTimeout(
-                    () =>
-                        spark.remove(),
-                    4000
-                );
-
-            },
-            i * 35
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   CELEBRACIÓN
-========================================================= */
-
-function showMidnightCelebration(){
-
-    celebration.classList.remove(
-        "hidden"
-    );
-
-    createSparks();
-
-}
-
-
-/* =========================================================
-   MÚSICA
-========================================================= */
-
-playMusic.addEventListener(
-    "click",
-    async () => {
-
-        try{
-
-            music.currentTime = 0;
-
-            music.volume = 1;
-
-            await music.play();
-
-            playMusic.textContent =
-                "🎵 LAS MAÑANITAS ESTÁN SONANDO";
-
-        }
-        catch(error){
-
-            console.error(
-                "No se pudo reproducir:",
-                error
-            );
-
-            playMusic.textContent =
-                "⚠️ NO SE PUDO REPRODUCIR";
-
-        }
-
-    }
-);
-
-
-music.addEventListener(
-    "ended",
-    () => {
-
-        celebration.classList.add(
-            "hidden"
-        );
-
-    }
-);
-
-
-/* =========================================================
-   ESTADOS DE LA PÁGINA
-========================================================= */
+/* =========================
+   ESTADOS DE LA INVITACIÓN
+========================= */
 
 let midnightShown =
-    false;
+    localStorage.getItem(
+        "velunara_midnight_2026"
+    ) === "true";
 
 
 function updatePageState(){
@@ -2918,15 +1979,15 @@ function updatePageState(){
         new Date();
 
 
-    /* 28 SEPTIEMBRE 00:00 */
+    /* =====================
+       FINAL
+    ===================== */
 
-    if(
-        now >= finalDate
-    ){
+    if(now >= finalDate){
 
-        publicContent.classList.add(
-            "hidden"
-        );
+        document.getElementById(
+            "mainContent"
+        ).classList.add("hidden");
 
         celebration.classList.add(
             "hidden"
@@ -2936,8 +1997,8 @@ function updatePageState(){
             "hidden"
         );
 
-        finalScreen.classList.remove(
-            "hidden"
+        finalScreen.classList.add(
+            "show"
         );
 
         return;
@@ -2945,16 +2006,18 @@ function updatePageState(){
     }
 
 
-    /* 27 SEPTIEMBRE 16:00 - 20:00 */
+    /* =====================
+       FIESTA
+    ===================== */
 
     if(
         now >= partyStart &&
         now < partyEnd
     ){
 
-        publicContent.classList.add(
-            "hidden"
-        );
+        document.getElementById(
+            "mainContent"
+        ).classList.add("hidden");
 
         celebration.classList.add(
             "hidden"
@@ -2969,13 +2032,17 @@ function updatePageState(){
     }
 
 
-    /* 27 SEPTIEMBRE 00:00 - 16:00 */
+    /* =====================
+       DESPUÉS DE LA FIESTA
+    ===================== */
 
-    if(
-        now >= countdownDate
-    ){
+    if(now >= partyEnd){
 
-        publicContent.classList.remove(
+        document.getElementById(
+            "mainContent"
+        ).classList.remove("hidden");
+
+        celebration.classList.add(
             "hidden"
         );
 
@@ -2983,64 +2050,69 @@ function updatePageState(){
             "hidden"
         );
 
+        return;
 
-        const celebrationKey =
-            "velunara_midnight_2026";
-
-
-        const alreadyShown =
-            localStorage.getItem(
-                celebrationKey
-            );
+    }
 
 
-        if(
-            !alreadyShown &&
-            !midnightShown
-        ){
+    /* =====================
+       MEDIANOCHE
+    ===================== */
 
-            midnightShown =
-                true;
+    if(
+        now >= countdownDate &&
+        !midnightShown
+    ){
 
-            localStorage.setItem(
-                celebrationKey,
-                "true"
-            );
+        document.getElementById(
+            "mainContent"
+        ).classList.add("hidden");
 
-            showMidnightCelebration();
+        partyMode.classList.add(
+            "hidden"
+        );
 
-        }
+        celebration.classList.remove(
+            "hidden"
+        );
+
+        midnightShown = true;
+
+        localStorage.setItem(
+            "velunara_midnight_2026",
+            "true"
+        );
 
         return;
 
     }
 
 
-    /* ANTES DEL 27 */
+    /* =====================
+       ANTES DEL EVENTO
+    ===================== */
 
-    publicContent.classList.remove(
-        "hidden"
-    );
+    document.getElementById(
+        "mainContent"
+    ).classList.remove("hidden");
 
     partyMode.classList.add(
         "hidden"
     );
 
-    celebration.classList.add(
-        "hidden"
-    );
-
 }
-
-
-updatePageState();
 
 setInterval(
     updatePageState,
     1000
 );
 
+updatePageState();
+
 </script>
 
 </body>
 </html>
+```
+
+Con esto quedan conectados los elementos principales: **Video 1 → invitación → tutorial que se desvanece y desaparece al llegar a `foto2.jpg` → confirmación → Video 2 final**, además del contador, celebración, modo fiesta y pantalla final.
