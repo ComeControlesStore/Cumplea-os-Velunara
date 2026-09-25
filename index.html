@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,10 +7,10 @@
 
 <title>Velunara | Invitación</title>
 
-<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 /* =========================================================
    GENERAL
 ========================================================= */
@@ -50,9 +50,18 @@ body::before{
     position:fixed;
     inset:0;
     z-index:-3;
+
     background:
-        radial-gradient(circle at 50% 20%, rgba(100,20,130,.25), transparent 35%),
-        radial-gradient(circle at 20% 80%, rgba(40,0,70,.3), transparent 40%),
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(100,20,130,.25),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(40,0,70,.3),
+            transparent 40%
+        ),
         #08030c;
 }
 
@@ -75,19 +84,22 @@ body::before{
 }
 
 @keyframes twinkle{
+
     from{
         opacity:.2;
         transform:scale(.7);
     }
+
     to{
         opacity:1;
         transform:scale(1.5);
     }
+
 }
 
 
 /* =========================================================
-   CONTENIDO PRINCIPAL
+   CONTENIDO
 ========================================================= */
 
 #publicContent{
@@ -101,6 +113,7 @@ body::before{
 
 .hero{
     min-height:100vh;
+
     padding:50px 20px 80px;
 
     display:flex;
@@ -115,19 +128,25 @@ body::before{
 
 .hero::after{
     content:"";
+
     position:absolute;
+
     left:10%;
     right:10%;
     bottom:0;
+
     height:1px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #9d5cff,
-        #d8b4ff,
-        #9d5cff,
-        transparent
-    );
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #9d5cff,
+            #d8b4ff,
+            #9d5cff,
+            transparent
+        );
+
     opacity:.7;
 }
 
@@ -140,9 +159,10 @@ body::before{
 }
 
 .main-title{
-    font-size:clamp(42px, 8vw, 82px);
+    font-size:clamp(42px,8vw,82px);
     font-weight:normal;
     letter-spacing:5px;
+
     text-shadow:
         0 0 15px rgba(170,80,255,.7),
         0 0 40px rgba(120,30,200,.5);
@@ -162,11 +182,13 @@ body::before{
 
 .hero-content{
     width:min(1050px,100%);
+
     margin-top:45px;
 
     display:flex;
     justify-content:center;
     align-items:center;
+
     gap:55px;
 }
 
@@ -179,9 +201,12 @@ body::before{
 
 .photo1-container::before{
     content:"";
+
     position:absolute;
     inset:-8px;
+
     border:1px solid rgba(204,145,255,.7);
+
     box-shadow:
         0 0 20px rgba(160,70,255,.5),
         inset 0 0 20px rgba(160,70,255,.15);
@@ -191,23 +216,27 @@ body::before{
 
 .photo1-container::after{
     content:"";
+
     position:absolute;
     inset:-18px;
+
     border:1px solid rgba(150,80,220,.25);
+
     transform:rotate(2deg);
 }
 
 .photo1-container img{
     width:100%;
     display:block;
+
     position:relative;
     z-index:2;
 
     border:4px solid #160b20;
+
     box-shadow:
         0 0 30px rgba(160,50,255,.4);
 }
-
 
 .countdown-area{
     flex:1;
@@ -231,6 +260,7 @@ body::before{
     padding:20px 10px;
 
     background:rgba(25,10,35,.65);
+
     border:1px solid rgba(192,125,255,.4);
 
     box-shadow:
@@ -240,25 +270,38 @@ body::before{
 
 .time-number{
     display:block;
+
     font-size:clamp(30px,5vw,48px);
+
     color:#fff;
-    text-shadow:0 0 12px rgba(190,120,255,.7);
+
+    text-shadow:
+        0 0 12px rgba(190,120,255,.7);
 }
 
 .time-label{
     display:block;
+
     margin-top:5px;
+
     font-size:11px;
+
     color:#bdaacb;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
 }
 
 .scroll-hint{
     margin-top:65px;
+
     color:#a98eb8;
+
     font-size:12px;
+
     letter-spacing:3px;
+
     animation:float 2s infinite ease-in-out;
 }
 
@@ -268,21 +311,25 @@ body::before{
 }
 
 @keyframes float{
+
     0%,100%{
         transform:translateY(0);
     }
+
     50%{
         transform:translateY(8px);
     }
+
 }
 
 
 /* =========================================================
-   SECCIÓN DE TRANSICIÓN + FOTO 2
+   TRANSICIÓN + FOTO 2
 ========================================================= */
 
 .invitation-reveal{
     min-height:100vh;
+
     padding:120px 20px 100px;
 
     display:flex;
@@ -295,10 +342,13 @@ body::before{
 
 .magic-transition{
     text-align:center;
+
     margin-bottom:55px;
 
     opacity:0;
+
     transform:translateY(40px);
+
     transition:
         opacity 1.3s ease,
         transform 1.3s ease;
@@ -311,6 +361,7 @@ body::before{
 
 .magic-symbol{
     font-size:38px;
+
     color:#c48cff;
 
     animation:
@@ -320,37 +371,50 @@ body::before{
 
 .magic-text{
     margin-top:12px;
+
     color:#cdb9d8;
+
     font-size:14px;
+
     letter-spacing:4px;
+
     text-transform:uppercase;
 }
 
 @keyframes magicPulse{
+
     0%,100%{
         text-shadow:0 0 5px #9d4edd;
         opacity:.5;
     }
+
     50%{
         text-shadow:
             0 0 10px #c77dff,
             0 0 30px #9d4edd,
             0 0 60px #6a0dad;
+
         opacity:1;
     }
+
 }
 
 @keyframes rotateMagic{
+
     from{
         transform:rotate(0);
     }
+
     to{
         transform:rotate(360deg);
     }
+
 }
 
 
-/* FOTO 2 */
+/* =========================================================
+   FOTO 2
+========================================================= */
 
 .invitation-image-wrapper{
     width:min(750px,95vw);
@@ -358,6 +422,7 @@ body::before{
     position:relative;
 
     opacity:0;
+
     transform:
         translateY(80px)
         scale(.88);
@@ -374,6 +439,7 @@ body::before{
 
 .invitation-reveal.visible .invitation-image-wrapper{
     opacity:1;
+
     transform:
         translateY(0)
         scale(1);
@@ -387,6 +453,7 @@ body::before{
     content:"";
 
     position:absolute;
+
     inset:-20px;
 
     background:
@@ -399,18 +466,21 @@ body::before{
     filter:blur(25px);
 
     opacity:0;
+
     transition:opacity 2s ease;
 
     pointer-events:none;
 }
 
-.invitation-reveal.visible .invitation-image-wrapper::before{
+.invitation-reveal.visible
+.invitation-image-wrapper::before{
     opacity:1;
 }
 
 .invitation-image-wrapper img{
     width:100%;
     height:auto;
+
     display:block;
 
     position:relative;
@@ -425,7 +495,7 @@ body::before{
 
 
 /* =========================================================
-   BOTÓN CONFIRMAR
+   BOTÓN
 ========================================================= */
 
 .confirm-button{
@@ -434,6 +504,7 @@ body::before{
     padding:16px 34px;
 
     border:1px solid #c17cff;
+
     background:
         linear-gradient(
             135deg,
@@ -444,6 +515,7 @@ body::before{
     color:white;
 
     font-size:14px;
+
     letter-spacing:2px;
 
     cursor:pointer;
@@ -490,6 +562,7 @@ body::before{
     backdrop-filter:blur(8px);
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -520,27 +593,36 @@ body::before{
 
 .modal-title{
     text-align:center;
+
     font-size:28px;
+
     font-weight:normal;
+
     margin-bottom:8px;
 }
 
 .modal-subtitle{
     text-align:center;
+
     color:#ad9ab8;
+
     font-size:13px;
+
     margin-bottom:30px;
 }
 
 .close-modal{
     position:absolute;
+
     top:12px;
     right:15px;
 
     background:none;
+
     border:0;
 
     color:#c5a7d2;
+
     font-size:25px;
 
     cursor:pointer;
@@ -552,8 +634,11 @@ body::before{
 
 .form-group label{
     display:block;
+
     color:#d7c2df;
+
     font-size:13px;
+
     margin-bottom:7px;
 }
 
@@ -564,6 +649,7 @@ body::before{
     padding:13px;
 
     background:#0b0610;
+
     border:1px solid #4b2a5a;
 
     color:white;
@@ -576,7 +662,9 @@ body::before{
 .form-group input:focus,
 .form-group select:focus{
     border-color:#b66aff;
-    box-shadow:0 0 10px rgba(180,90,255,.2);
+
+    box-shadow:
+        0 0 10px rgba(180,90,255,.2);
 }
 
 .radio-container{
@@ -586,10 +674,13 @@ body::before{
 
 .radio-option{
     display:flex;
+
     align-items:center;
+
     gap:7px;
 
     color:#ddd;
+
     cursor:pointer;
 }
 
@@ -603,6 +694,7 @@ body::before{
     padding:15px;
 
     background:#5c247a;
+
     border:1px solid #bd78ff;
 
     color:white;
@@ -620,17 +712,20 @@ body::before{
 
 .form-message{
     margin-top:15px;
+
     text-align:center;
+
     font-size:13px;
 }
 
 
 /* =========================================================
-   CELEBRACIÓN DE MEDIANOCHE
+   CELEBRACIÓN
 ========================================================= */
 
 .celebration{
     position:fixed;
+
     inset:0;
 
     z-index:2000;
@@ -643,6 +738,7 @@ body::before{
         );
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -653,6 +749,7 @@ body::before{
 
 .celebration-content{
     position:relative;
+
     z-index:10;
 
     animation:celebrateIn 1.5s ease;
@@ -660,6 +757,7 @@ body::before{
 
 .celebration-title{
     font-size:clamp(38px,8vw,75px);
+
     font-weight:normal;
 
     text-shadow:
@@ -669,7 +767,9 @@ body::before{
 
 .celebration-subtitle{
     margin-top:15px;
+
     color:#e4d4ea;
+
     font-size:18px;
 }
 
@@ -690,14 +790,17 @@ body::before{
 }
 
 @keyframes celebrateIn{
+
     from{
         opacity:0;
         transform:scale(.7);
     }
+
     to{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
 .spark{
@@ -718,10 +821,12 @@ body::before{
 }
 
 @keyframes sparkFly{
+
     from{
         transform:
             translate(0,0)
             scale(1);
+
         opacity:1;
     }
 
@@ -729,8 +834,10 @@ body::before{
         transform:
             translate(var(--x),var(--y))
             scale(0);
+
         opacity:0;
     }
+
 }
 
 
@@ -740,6 +847,7 @@ body::before{
 
 .party-mode{
     position:fixed;
+
     inset:0;
 
     z-index:1500;
@@ -753,6 +861,7 @@ body::before{
         );
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -774,6 +883,7 @@ body::before{
     margin-top:20px;
 
     font-size:clamp(40px,8vw,80px);
+
     font-weight:normal;
 
     text-shadow:
@@ -783,18 +893,26 @@ body::before{
 
 .party-text{
     margin-top:15px;
+
     color:#d8c4df;
+
     font-size:18px;
 }
 
 @keyframes partyFloat{
+
     0%,100%{
-        transform:translateY(0) rotate(-3deg);
+        transform:
+            translateY(0)
+            rotate(-3deg);
     }
 
     50%{
-        transform:translateY(-15px) rotate(3deg);
+        transform:
+            translateY(-15px)
+            rotate(3deg);
     }
+
 }
 
 
@@ -804,6 +922,7 @@ body::before{
 
 .final-screen{
     position:fixed;
+
     inset:0;
 
     z-index:3000;
@@ -816,6 +935,7 @@ body::before{
         );
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -830,6 +950,7 @@ body::before{
 
 .final-title{
     font-size:clamp(38px,8vw,80px);
+
     font-weight:normal;
 
     color:#fff;
@@ -845,10 +966,12 @@ body::before{
     color:#d9c8df;
 
     font-size:17px;
+
     line-height:1.8;
 }
 
 @keyframes finalAppear{
+
     from{
         opacity:0;
         transform:scale(.8);
@@ -858,11 +981,12 @@ body::before{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   CELULAR
 ========================================================= */
 
 @media(max-width:750px){
@@ -901,6 +1025,11 @@ body::before{
         padding-top:90px;
     }
 
+    /*
+       En celular se mantiene grande,
+       como estaba originalmente.
+    */
+
     .invitation-image-wrapper{
         width:94vw;
     }
@@ -908,7 +1037,27 @@ body::before{
     .modal-box{
         padding:25px 20px;
     }
+
 }
+
+
+/* =========================================================
+   PC
+   SOLO AQUÍ HACEMOS FOTO2 MÁS PEQUEÑA
+========================================================= */
+
+@media(min-width:751px){
+
+    .invitation-image-wrapper{
+        width:min(600px,85vw);
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUEÑOS
+========================================================= */
 
 @media(max-width:420px){
 
@@ -935,20 +1084,28 @@ body::before{
 
     .confirm-button{
         width:90%;
+
         font-size:12px;
-        padding:15px 15px;
+
+        padding:15px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
+
 <!-- =========================================================
      ESTRELLAS
 ========================================================= -->
 
-<div class="stars" id="stars"></div>
+<div
+    class="stars"
+    id="stars"
+></div>
 
 
 <!-- =========================================================
@@ -957,7 +1114,11 @@ body::before{
 
 <div id="publicContent">
 
-    <!-- HERO -->
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
     <section class="hero">
 
         <div class="small-title">
@@ -975,25 +1136,32 @@ body::before{
 
         <div class="hero-content">
 
+
             <!-- FOTO 1 -->
+
             <div class="photo1-container">
+
                 <img
                     src="foto1.jpg"
                     alt="Velunara"
                 >
+
             </div>
 
 
             <!-- CONTADOR -->
+
             <div class="countdown-area">
 
                 <div class="countdown-title">
                     FALTAN PARA LA CELEBRACIÓN
                 </div>
 
+
                 <div class="countdown">
 
                     <div class="time-box">
+
                         <span
                             class="time-number"
                             id="days"
@@ -1004,9 +1172,12 @@ body::before{
                         <span class="time-label">
                             Días
                         </span>
+
                     </div>
 
+
                     <div class="time-box">
+
                         <span
                             class="time-number"
                             id="hours"
@@ -1017,9 +1188,12 @@ body::before{
                         <span class="time-label">
                             Horas
                         </span>
+
                     </div>
 
+
                     <div class="time-box">
+
                         <span
                             class="time-number"
                             id="minutes"
@@ -1030,9 +1204,12 @@ body::before{
                         <span class="time-label">
                             Minutos
                         </span>
+
                     </div>
 
+
                     <div class="time-box">
+
                         <span
                             class="time-number"
                             id="seconds"
@@ -1043,6 +1220,7 @@ body::before{
                         <span class="time-label">
                             Segundos
                         </span>
+
                     </div>
 
                 </div>
@@ -1053,8 +1231,13 @@ body::before{
 
 
         <div class="scroll-hint">
+
             DESLIZA HACIA ABAJO
-            <div class="scroll-arrow">↓</div>
+
+            <div class="scroll-arrow">
+                ↓
+            </div>
+
         </div>
 
     </section>
@@ -1069,6 +1252,7 @@ body::before{
         id="invitationReveal"
     >
 
+
         <div class="magic-transition">
 
             <div class="magic-symbol">
@@ -1082,7 +1266,7 @@ body::before{
         </div>
 
 
-        <!-- FOTO 2: INVITACIÓN COMPLETA -->
+        <!-- INVITACIÓN -->
 
         <div class="invitation-image-wrapper">
 
@@ -1094,7 +1278,7 @@ body::before{
         </div>
 
 
-        <!-- BOTÓN DE CONFIRMAR -->
+        <!-- CONFIRMAR -->
 
         <button
             class="confirm-button"
@@ -1103,13 +1287,14 @@ body::before{
             CONFIRMAR ASISTENCIA
         </button>
 
+
     </section>
 
 </div>
 
 
 <!-- =========================================================
-     MODAL DEL FORMULARIO
+     MODAL
 ========================================================= -->
 
 <div
@@ -1118,6 +1303,7 @@ body::before{
 >
 
     <div class="modal-box">
+
 
         <button
             class="close-modal"
@@ -1132,12 +1318,14 @@ body::before{
             Confirmar asistencia
         </h2>
 
+
         <p class="modal-subtitle">
             Completa los datos de tu asistencia
         </p>
 
 
         <form id="confirmationForm">
+
 
             <div class="form-group">
 
@@ -1179,7 +1367,9 @@ body::before{
                     ¿Asistirás?
                 </label>
 
+
                 <div class="radio-container">
+
 
                     <label class="radio-option">
 
@@ -1207,6 +1397,7 @@ body::before{
 
                     </label>
 
+
                 </div>
 
             </div>
@@ -1215,11 +1406,15 @@ body::before{
             <div class="form-group">
 
                 <label for="telefono">
+
                     Teléfono
+
                     <span style="color:#8e7a96;">
                         (opcional)
                     </span>
+
                 </label>
+
 
                 <input
                     type="tel"
@@ -1243,6 +1438,7 @@ body::before{
                 id="formMessage"
             ></div>
 
+
         </form>
 
     </div>
@@ -1251,7 +1447,7 @@ body::before{
 
 
 <!-- =========================================================
-     CELEBRACIÓN 12:00 AM
+     CELEBRACIÓN
 ========================================================= -->
 
 <div
@@ -1282,7 +1478,7 @@ body::before{
 
 
 <!-- =========================================================
-     MODO FIESTA 4 PM - 8 PM
+     MODO FIESTA
 ========================================================= -->
 
 <div
@@ -1325,10 +1521,16 @@ body::before{
         </div>
 
         <div class="final-text">
-            Gracias por haber formado parte<br>
-            de este día tan especial.<br><br>
+
+            Gracias por haber formado parte
+            <br>
+
+            de este día tan especial.
+
+            <br><br>
 
             💜 27 de septiembre de 2026 💜
+
         </div>
 
     </div>
@@ -1342,11 +1544,11 @@ body::before{
     id="birthdayMusic"
     src="mananitas.mp3"
     preload="auto"
->
-</audio>
+></audio>
 
 
 <script>
+
 /* =========================================================
    SUPABASE
 ========================================================= */
@@ -1368,24 +1570,45 @@ const supabaseClient =
    FECHAS
 ========================================================= */
 
-/*
-   IMPORTANTE:
-   Los meses de JavaScript empiezan en 0.
-
-   8 = septiembre
-*/
-
 const countdownDate =
-    new Date(2026, 8, 27, 0, 0, 0);
+    new Date(
+        2026,
+        8,
+        27,
+        0,
+        0,
+        0
+    );
 
 const partyStart =
-    new Date(2026, 8, 27, 16, 0, 0);
+    new Date(
+        2026,
+        8,
+        27,
+        16,
+        0,
+        0
+    );
 
 const partyEnd =
-    new Date(2026, 8, 27, 20, 0, 0);
+    new Date(
+        2026,
+        8,
+        27,
+        20,
+        0,
+        0
+    );
 
 const finalDate =
-    new Date(2026, 8, 28, 0, 0, 0);
+    new Date(
+        2026,
+        8,
+        28,
+        0,
+        0,
+        0
+    );
 
 
 /* =========================================================
@@ -1393,37 +1616,59 @@ const finalDate =
 ========================================================= */
 
 const publicContent =
-    document.getElementById("publicContent");
+    document.getElementById(
+        "publicContent"
+    );
 
 const celebration =
-    document.getElementById("celebration");
+    document.getElementById(
+        "celebration"
+    );
 
 const partyMode =
-    document.getElementById("partyMode");
+    document.getElementById(
+        "partyMode"
+    );
 
 const finalScreen =
-    document.getElementById("finalScreen");
+    document.getElementById(
+        "finalScreen"
+    );
 
 const formModal =
-    document.getElementById("formModal");
+    document.getElementById(
+        "formModal"
+    );
 
 const openForm =
-    document.getElementById("openForm");
+    document.getElementById(
+        "openForm"
+    );
 
 const closeForm =
-    document.getElementById("closeForm");
+    document.getElementById(
+        "closeForm"
+    );
 
 const confirmationForm =
-    document.getElementById("confirmationForm");
+    document.getElementById(
+        "confirmationForm"
+    );
 
 const formMessage =
-    document.getElementById("formMessage");
+    document.getElementById(
+        "formMessage"
+    );
 
 const music =
-    document.getElementById("birthdayMusic");
+    document.getElementById(
+        "birthdayMusic"
+    );
 
 const playMusic =
-    document.getElementById("playMusic");
+    document.getElementById(
+        "playMusic"
+    );
 
 
 /* =========================================================
@@ -1431,14 +1676,19 @@ const playMusic =
 ========================================================= */
 
 const starsContainer =
-    document.getElementById("stars");
+    document.getElementById(
+        "stars"
+    );
 
 for(let i = 0; i < 100; i++){
 
     const star =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    star.className = "star";
+    star.className =
+        "star";
 
     star.style.left =
         Math.random() * 100 + "%";
@@ -1452,7 +1702,9 @@ for(let i = 0; i < 100; i++){
     star.style.animationDuration =
         (2 + Math.random() * 4) + "s";
 
-    starsContainer.appendChild(star);
+    starsContainer.appendChild(
+        star
+    );
 }
 
 
@@ -1471,17 +1723,21 @@ function updateCountdown(){
 
     if(difference <= 0){
 
-        document.getElementById("days").textContent =
-            "00";
+        document.getElementById(
+            "days"
+        ).textContent = "00";
 
-        document.getElementById("hours").textContent =
-            "00";
+        document.getElementById(
+            "hours"
+        ).textContent = "00";
 
-        document.getElementById("minutes").textContent =
-            "00";
+        document.getElementById(
+            "minutes"
+        ).textContent = "00";
 
-        document.getElementById("seconds").textContent =
-            "00";
+        document.getElementById(
+            "seconds"
+        ).textContent = "00";
 
         return;
     }
@@ -1489,35 +1745,53 @@ function updateCountdown(){
 
     const days =
         Math.floor(
-            difference / (1000 * 60 * 60 * 24)
+            difference /
+            (1000 * 60 * 60 * 24)
         );
 
     const hours =
         Math.floor(
-            (difference / (1000 * 60 * 60)) % 24
+            (
+                difference /
+                (1000 * 60 * 60)
+            ) % 24
         );
 
     const minutes =
         Math.floor(
-            (difference / (1000 * 60)) % 60
+            (
+                difference /
+                (1000 * 60)
+            ) % 60
         );
 
     const seconds =
         Math.floor(
-            (difference / 1000) % 60
+            (
+                difference /
+                1000
+            ) % 60
         );
 
 
-    document.getElementById("days").textContent =
+    document.getElementById(
+        "days"
+    ).textContent =
         String(days).padStart(2,"0");
 
-    document.getElementById("hours").textContent =
+    document.getElementById(
+        "hours"
+    ).textContent =
         String(hours).padStart(2,"0");
 
-    document.getElementById("minutes").textContent =
+    document.getElementById(
+        "minutes"
+    ).textContent =
         String(minutes).padStart(2,"0");
 
-    document.getElementById("seconds").textContent =
+    document.getElementById(
+        "seconds"
+    ).textContent =
         String(seconds).padStart(2,"0");
 }
 
@@ -1530,27 +1804,35 @@ setInterval(
 
 
 /* =========================================================
-   TRANSICIÓN AL BAJAR
+   TRANSICIÓN
 ========================================================= */
 
 const invitationReveal =
-    document.getElementById("invitationReveal");
+    document.getElementById(
+        "invitationReveal"
+    );
 
 const revealObserver =
     new IntersectionObserver(
         entries => {
 
-            entries.forEach(entry => {
+            entries.forEach(
+                entry => {
 
-                if(entry.isIntersecting){
+                    if(
+                        entry.isIntersecting
+                    ){
 
-                    invitationReveal.classList.add(
-                        "visible"
-                    );
+                        invitationReveal
+                            .classList
+                            .add(
+                                "visible"
+                            );
+
+                    }
 
                 }
-
-            });
+            );
 
         },
         {
@@ -1558,7 +1840,9 @@ const revealObserver =
         }
     );
 
-revealObserver.observe(invitationReveal);
+revealObserver.observe(
+    invitationReveal
+);
 
 
 /* =========================================================
@@ -1593,7 +1877,10 @@ formModal.addEventListener(
     "click",
     event => {
 
-        if(event.target === formModal){
+        if(
+            event.target ===
+            formModal
+        ){
 
             closeModal();
 
@@ -1615,7 +1902,7 @@ function closeModal(){
 
 
 /* =========================================================
-   FORMULARIO SUPABASE
+   SUPABASE FORM
 ========================================================= */
 
 confirmationForm.addEventListener(
@@ -1659,14 +1946,17 @@ confirmationForm.addEventListener(
             error
         } =
             await supabaseClient
-                .from("confirmaciones")
+                .from(
+                    "confirmaciones"
+                )
                 .insert([
                     {
                         nombre,
                         personas,
                         asistencia,
                         telefono:
-                            telefono || null
+                            telefono ||
+                            null
                     }
                 ]);
 
@@ -1712,18 +2002,24 @@ confirmationForm.addEventListener(
 
 
 /* =========================================================
-   CHISPAS DE CELEBRACIÓN
+   CHISPAS
 ========================================================= */
 
 function createSparks(){
 
-    for(let i = 0; i < 80; i++){
+    for(
+        let i = 0;
+        i < 80;
+        i++
+    ){
 
         setTimeout(
             () => {
 
                 const spark =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
 
                 spark.className =
                     "spark";
@@ -1743,7 +2039,8 @@ function createSparks(){
 
                 const distance =
                     100 +
-                    Math.random() * 500;
+                    Math.random() *
+                    500;
 
 
                 spark.style.setProperty(
@@ -1762,9 +2059,11 @@ function createSparks(){
 
 
                 spark.style.animationDuration =
-                    (1.5 +
-                    Math.random() * 2) +
-                    "s";
+                    (
+                        1.5 +
+                        Math.random() *
+                        2
+                    ) + "s";
 
 
                 celebration.appendChild(
@@ -1780,12 +2079,14 @@ function createSparks(){
             },
             i * 35
         );
+
     }
+
 }
 
 
 /* =========================================================
-   CELEBRACIÓN DE MEDIANOCHE
+   CELEBRACIÓN
 ========================================================= */
 
 function showMidnightCelebration(){
@@ -1800,7 +2101,7 @@ function showMidnightCelebration(){
 
 
 /* =========================================================
-   REPRODUCIR MÚSICA
+   MÚSICA
 ========================================================= */
 
 playMusic.addEventListener(
@@ -1826,10 +2127,6 @@ playMusic.addEventListener(
 );
 
 
-/* =========================================================
-   CERRAR CELEBRACIÓN AL TERMINAR AUDIO
-========================================================= */
-
 music.addEventListener(
     "ended",
     () => {
@@ -1843,7 +2140,7 @@ music.addEventListener(
 
 
 /* =========================================================
-   CONTROL DE ESTADOS POR HORA
+   ESTADOS DE LA PÁGINA
 ========================================================= */
 
 let midnightShown =
@@ -1856,10 +2153,12 @@ function updatePageState(){
 
 
     /* ---------------------------------------------
-       DESPUÉS DEL 28 DE SEPTIEMBRE 00:00
+       28 SEPTIEMBRE 00:00
     --------------------------------------------- */
 
-    if(now >= finalDate){
+    if(
+        now >= finalDate
+    ){
 
         publicContent.classList.add(
             "hidden"
@@ -1882,7 +2181,7 @@ function updatePageState(){
 
 
     /* ---------------------------------------------
-       27 DE SEPTIEMBRE 16:00 - 20:00
+       27 SEPTIEMBRE 16:00 - 20:00
     --------------------------------------------- */
 
     if(
@@ -1907,10 +2206,12 @@ function updatePageState(){
 
 
     /* ---------------------------------------------
-       27 DE SEPTIEMBRE 00:00 - 16:00
+       27 SEPTIEMBRE 00:00 - 16:00
     --------------------------------------------- */
 
-    if(now >= countdownDate){
+    if(
+        now >= countdownDate
+    ){
 
         publicContent.classList.remove(
             "hidden"
@@ -1920,11 +2221,6 @@ function updatePageState(){
             "hidden"
         );
 
-
-        /*
-           Se muestra una sola vez por navegador
-           después de llegar la medianoche.
-        */
 
         const celebrationKey =
             "velunara_midnight_2026";
@@ -1940,7 +2236,8 @@ function updatePageState(){
             !midnightShown
         ){
 
-            midnightShown = true;
+            midnightShown =
+                true;
 
             localStorage.setItem(
                 celebrationKey,
@@ -1956,7 +2253,7 @@ function updatePageState(){
 
 
     /* ---------------------------------------------
-       ANTES DE MEDIANOCHE
+       ANTES DEL 27
     --------------------------------------------- */
 
     publicContent.classList.remove(
@@ -1975,7 +2272,7 @@ function updatePageState(){
 
 
 /* =========================================================
-   ACTUALIZAR ESTADO
+   INICIAR
 ========================================================= */
 
 updatePageState();
@@ -1989,3 +2286,4 @@ setInterval(
 
 </body>
 </html>
+```
