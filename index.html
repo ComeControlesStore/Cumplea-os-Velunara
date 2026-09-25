@@ -1,18 +1,26 @@
-```html
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Velunara | Invitación</title>
+
+<title>Velunara</title>
+
+<meta name="robots" content="noindex,nofollow,noarchive">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 html{
@@ -20,44 +28,29 @@ html{
 }
 
 body{
-    background:#08030c;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 50% 15%, #301c42 0%, #160d20 42%, #07050b 100%);
     color:white;
-    font-family:Georgia,"Times New Roman",serif;
+    font-family:Georgia,serif;
     overflow-x:hidden;
 }
 
-button,
-input,
-select{
-    font-family:inherit;
-}
-
-.hidden{
-    display:none !important;
-}
-
-
-/* =========================================================
+/* =========================
    VIDEO DE INICIO
-========================================================= */
+========================= */
 
 #introVideoScreen{
     position:fixed;
     inset:0;
     z-index:9999;
-
     background:#000;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     opacity:1;
     visibility:visible;
-
-    transition:
-        opacity 1.5s ease,
-        visibility 1.5s ease;
+    transition:opacity 1.5s ease, visibility 1.5s ease;
 }
 
 #introVideoScreen.fade-out{
@@ -69,13 +62,9 @@ select{
 #introVideo{
     width:100%;
     height:100%;
-
     object-fit:cover;
-
     opacity:0;
-
-    transition:
-        opacity 1.5s ease;
+    transition:opacity 1.5s ease;
 }
 
 #introVideo.visible{
@@ -85,837 +74,411 @@ select{
 #introStart{
     position:absolute;
     inset:0;
-
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
     text-align:center;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(30,5,45,.25),
-            rgba(0,0,0,.8)
-        );
-
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
+    background:rgba(0,0,0,.38);
+    transition:opacity 1s ease;
+    padding:25px;
 }
 
 #introStart.hidden-start{
     opacity:0;
-    visibility:hidden;
     pointer-events:none;
 }
 
 .introStartTitle{
-    font-size:clamp(38px,8vw,75px);
+    font-family:"Cinzel Decorative",serif;
+    font-size:clamp(30px,7vw,70px);
     letter-spacing:5px;
-    color:white;
-
     text-shadow:
-        0 0 15px #c77dff,
-        0 0 40px #8b2fc9;
+        0 0 12px #b78aff,
+        0 0 30px #6d3e9e;
+    margin-bottom:12px;
 }
 
 .introStartText{
-    margin-top:15px;
-    color:#ddd;
-    font-size:16px;
-    letter-spacing:2px;
+    font-size:17px;
+    opacity:.9;
+    margin-bottom:28px;
 }
 
 #startInvitation{
-    margin-top:30px;
-
-    padding:16px 30px;
-
-    border:1px solid #c17cff;
-
-    background:rgba(35,8,50,.9);
-
+    border:1px solid #c99aff;
+    background:rgba(83,42,117,.75);
     color:white;
-
-    font-size:14px;
-    letter-spacing:2px;
-
+    padding:14px 25px;
+    border-radius:30px;
+    font-family:Georgia,serif;
+    font-size:15px;
     cursor:pointer;
-
-    box-shadow:
-        0 0 20px rgba(180,80,255,.35);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
+    box-shadow:0 0 20px rgba(173,111,255,.35);
+    transition:.3s;
 }
 
 #startInvitation:hover{
-    transform:translateY(-3px);
-
-    background:rgba(75,20,100,.95);
-
-    box-shadow:
-        0 0 30px rgba(190,100,255,.65);
+    transform:scale(1.05);
+    background:#70469a;
 }
 
-
-/* =========================================================
-   FONDO
-========================================================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-3;
-
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            rgba(100,20,130,.25),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 20% 80%,
-            rgba(40,0,70,.3),
-            transparent 40%
-        ),
-        #08030c;
-}
+/* =========================
+   ESTRELLAS
+========================= */
 
 .stars{
     position:fixed;
     inset:0;
-    z-index:-2;
     pointer-events:none;
     overflow:hidden;
+    z-index:0;
 }
 
 .star{
     position:absolute;
-
     width:2px;
     height:2px;
-
-    background:#fff;
-
+    background:white;
     border-radius:50%;
-
     opacity:.7;
-
     animation:twinkle 3s infinite alternate;
 }
 
 @keyframes twinkle{
-    from{
-        opacity:.2;
-        transform:scale(.7);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1.5);
-    }
+    from{opacity:.2;transform:scale(.7)}
+    to{opacity:1;transform:scale(1.3)}
 }
 
-
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
-
-#publicContent{
-    min-height:100vh;
-}
+========================= */
 
 .hero{
+    position:relative;
+    z-index:1;
     min-height:100vh;
-
-    padding:50px 20px 80px;
-
+    padding:75px 20px 100px;
     display:flex;
     flex-direction:column;
-
-    justify-content:center;
     align-items:center;
-
     text-align:center;
-
-    position:relative;
-}
-
-.hero::after{
-    content:"";
-
-    position:absolute;
-
-    left:10%;
-    right:10%;
-    bottom:0;
-
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #9d5cff,
-            #d8b4ff,
-            #9d5cff,
-            transparent
-        );
-
-    opacity:.7;
 }
 
 .small-title{
-    color:#c9a5ff;
-
-    letter-spacing:6px;
-
+    font-size:14px;
+    letter-spacing:4px;
     text-transform:uppercase;
-
-    font-size:13px;
-
-    margin-bottom:15px;
+    opacity:.7;
+    margin-bottom:17px;
 }
 
 .main-title{
-    font-size:clamp(42px,8vw,82px);
-
-    font-weight:normal;
-
+    font-family:"Cinzel Decorative",serif;
+    font-size:clamp(42px,9vw,88px);
+    font-weight:600;
     letter-spacing:5px;
-
+    line-height:1.1;
+    color:#f5eaff;
     text-shadow:
-        0 0 15px rgba(170,80,255,.7),
-        0 0 40px rgba(120,30,200,.5);
+        0 0 10px rgba(204,158,255,.8),
+        0 0 28px rgba(142,77,190,.65),
+        0 0 50px rgba(91,39,129,.5);
 }
 
 .subtitle{
-    margin-top:10px;
-
-    color:#ddd;
-
-    font-size:18px;
-
-    letter-spacing:2px;
+    margin-top:15px;
+    font-size:17px;
+    color:#d9c5ea;
 }
 
-
-/* =========================================================
-   FOTO 1 + CONTADOR
-========================================================= */
-
 .hero-content{
-    width:min(1050px,100%);
-
-    margin-top:45px;
-
+    width:100%;
+    max-width:700px;
     display:flex;
-
-    justify-content:center;
+    flex-direction:column;
     align-items:center;
-
-    gap:55px;
+    margin-top:38px;
 }
 
 .photo1-container{
-    width:280px;
-
-    flex-shrink:0;
-
-    position:relative;
-}
-
-.photo1-container::before{
-    content:"";
-
-    position:absolute;
-
-    inset:-8px;
-
-    border:1px solid rgba(204,145,255,.7);
-
+    width:min(360px,82vw);
+    border-radius:20px;
+    padding:7px;
+    background:linear-gradient(135deg,#d4b5f5,#67447f,#b18bd4);
     box-shadow:
-        0 0 20px rgba(160,70,255,.5),
-        inset 0 0 20px rgba(160,70,255,.15);
-
-    transform:rotate(-2deg);
-}
-
-.photo1-container::after{
-    content:"";
-
-    position:absolute;
-
-    inset:-18px;
-
-    border:1px solid rgba(150,80,220,.25);
-
-    transform:rotate(2deg);
+        0 0 25px rgba(168,113,217,.35),
+        0 20px 45px rgba(0,0,0,.5);
 }
 
 .photo1-container img{
-    width:100%;
-
     display:block;
-
-    position:relative;
-
-    z-index:2;
-
-    border:4px solid #160b20;
-
-    box-shadow:
-        0 0 30px rgba(160,50,255,.4);
+    width:100%;
+    border-radius:15px;
 }
 
-.countdown-area{
-    flex:1;
+/* =========================
+   CONTADOR
+========================= */
 
-    max-width:620px;
+.countdown-area{
+    margin-top:38px;
+    width:100%;
 }
 
 .countdown-title{
-    color:#cda5ff;
-
-    font-size:18px;
-
-    letter-spacing:3px;
-
-    margin-bottom:25px;
+    font-size:17px;
+    letter-spacing:2px;
+    color:#e2d0ef;
+    margin-bottom:20px;
 }
 
 .countdown{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:14px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
-.time-box{
-    padding:20px 10px;
-
-    background:
-        rgba(25,10,35,.65);
-
-    border:
-        1px solid
-        rgba(192,125,255,.4);
-
-    box-shadow:
-        inset 0 0 25px rgba(100,30,150,.12),
-        0 0 15px rgba(100,30,150,.1);
+.count-box{
+    width:75px;
+    padding:15px 8px;
+    border:1px solid rgba(207,165,245,.4);
+    border-radius:14px;
+    background:rgba(50,25,67,.45);
+    box-shadow:0 0 18px rgba(134,79,171,.15);
 }
 
-.time-number{
-    display:block;
-
-    font-size:
-        clamp(30px,5vw,48px);
-
-    color:#fff;
-
-    text-shadow:
-        0 0 12px rgba(190,120,255,.7);
+.count-number{
+    font-size:28px;
+    font-weight:bold;
+    color:#f5eaff;
 }
 
-.time-label{
-    display:block;
-
-    margin-top:5px;
-
+.count-label{
     font-size:11px;
-
-    color:#bdaacb;
-
-    letter-spacing:2px;
-
+    margin-top:5px;
+    opacity:.65;
     text-transform:uppercase;
 }
 
-
-/* =========================================================
-   TUTORIAL
-========================================================= */
+/* =========================
+   GUÍA INICIAL
+========================= */
 
 .scroll-tutorial{
-    margin-top:60px;
-
-    text-align:center;
-
-    color:#fff;
-
-    cursor:pointer;
-
-    user-select:none;
-
-    opacity:1;
-
-    visibility:visible;
-
+    margin-top:55px;
     transition:
         opacity .9s ease,
-        transform .9s ease,
-        visibility .9s ease;
+        visibility .9s ease,
+        transform .9s ease;
 }
 
 .scroll-tutorial.fade-out{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
-
     transform:translateY(-12px);
 }
 
 .scroll-tutorial-text{
-    font-size:17px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    text-shadow:
-        0 0 8px rgba(190,120,255,.8),
-        0 2px 8px rgba(0,0,0,.8);
+    font-size:15px;
+    color:#eadcf5;
+    letter-spacing:.5px;
 }
 
 .scroll-tutorial-arrow{
-    margin-top:8px;
-
-    font-size:50px;
-
-    line-height:1;
-
-    color:#d7a6ff;
-
-    text-shadow:
-        0 0 10px rgba(190,100,255,.9),
-        0 0 30px rgba(150,50,220,.7);
-
-    animation:
-        tutorialArrow 1.2s infinite ease-in-out;
+    margin-top:10px;
+    font-size:34px;
+    color:#d7b5f4;
+    animation:arrowDown 1.2s infinite ease-in-out;
 }
 
-@keyframes tutorialArrow{
+@keyframes arrowDown{
     0%,100%{
         transform:translateY(0);
+        opacity:.55;
     }
-
     50%{
-        transform:translateY(13px);
-    }
-}
-
-
-/* =========================================================
-   INVITACIÓN
-========================================================= */
-
-.invitation-reveal{
-    min-height:100vh;
-
-    padding:120px 20px 100px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    position:relative;
-}
-
-.magic-transition{
-    text-align:center;
-
-    margin-bottom:55px;
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    transition:
-        opacity 1.3s ease,
-        transform 1.3s ease;
-}
-
-.invitation-reveal.visible
-.magic-transition{
-    opacity:1;
-    transform:translateY(0);
-}
-
-.magic-symbol{
-    font-size:38px;
-
-    color:#c48cff;
-
-    animation:
-        magicPulse 2.5s infinite ease-in-out,
-        rotateMagic 10s linear infinite;
-}
-
-.magic-text{
-    margin-top:12px;
-
-    color:#cdb9d8;
-
-    font-size:14px;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
-}
-
-@keyframes magicPulse{
-    0%,100%{
-        text-shadow:0 0 5px #9d4edd;
-        opacity:.5;
-    }
-
-    50%{
-        text-shadow:
-            0 0 10px #c77dff,
-            0 0 30px #9d4edd,
-            0 0 60px #6a0dad;
-
+        transform:translateY(10px);
         opacity:1;
     }
 }
 
-@keyframes rotateMagic{
-    from{
-        transform:rotate(0);
-    }
+/* =========================
+   INVITACIÓN
+========================= */
 
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   FOTO 2
-========================================================= */
-
-.invitation-image-wrapper{
-    width:min(750px,95vw);
-
+.invitation-reveal{
     position:relative;
-
-    opacity:0;
-
-    transform:
-        translateY(80px)
-        scale(.88);
-
-    filter:
-        brightness(.35)
-        blur(4px);
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s cubic-bezier(.2,.8,.2,1),
-        filter 1.5s ease;
+    z-index:1;
+    min-height:100vh;
+    padding:80px 20px 100px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
 }
 
-.invitation-reveal.visible
+.magic-transition{
+    font-family:"Cinzel Decorative",serif;
+    font-size:25px;
+    color:#dcbdf5;
+    margin-bottom:30px;
+    opacity:.8;
+}
+
 .invitation-image-wrapper{
-    opacity:1;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    filter:
-        brightness(1)
-        blur(0);
-}
-
-.invitation-image-wrapper::before{
-    content:"";
-
-    position:absolute;
-
-    inset:-20px;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(174,90,255,.5),
-            transparent 65%
-        );
-
-    filter:blur(25px);
-
-    opacity:0;
-
-    transition:opacity 2s ease;
-
-    pointer-events:none;
-}
-
-.invitation-reveal.visible
-.invitation-image-wrapper::before{
-    opacity:1;
+    width:94vw;
+    max-width:760px;
+    display:flex;
+    justify-content:center;
 }
 
 .invitation-image-wrapper img{
-    width:100%;
-
-    height:auto;
-
     display:block;
-
-    position:relative;
-
-    z-index:2;
-
-    border:5px solid #17091f;
-
+    width:100%;
+    height:auto;
+    border-radius:10px;
     box-shadow:
-        0 0 20px rgba(172,84,255,.5),
-        0 0 70px rgba(120,40,180,.25);
+        0 15px 50px rgba(0,0,0,.65),
+        0 0 30px rgba(150,92,191,.2);
 }
-
-
-/* =========================================================
-   CONFIRMACIÓN
-========================================================= */
 
 .confirm-help{
-    margin-top:35px;
-
-    color:#fff;
-
+    margin-top:42px;
     font-size:16px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    text-align:center;
-
-    text-shadow:
-        0 0 8px rgba(190,120,255,.8),
-        0 2px 8px rgba(0,0,0,.8);
-}
-
-.confirm-help::after{
-    content:"↓";
-
-    display:block;
-
-    margin-top:7px;
-
-    font-size:38px;
-
-    color:#d7a6ff;
-
-    animation:
-        tutorialArrow 1.2s infinite ease-in-out;
+    color:#e9d7f4;
 }
 
 .confirm-button{
-    margin-top:10px;
-
-    padding:17px 36px;
-
-    border:1px solid #c17cff;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(80,20,110,.9),
-            rgba(30,5,45,.95)
-        );
-
+    margin-top:12px;
+    border:1px solid #c99aff;
+    background:rgba(89,45,120,.7);
     color:white;
-
+    padding:14px 26px;
+    border-radius:30px;
+    font-family:Georgia,serif;
     font-size:15px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-
     cursor:pointer;
-
-    box-shadow:
-        0 0 15px rgba(180,80,255,.25);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
+    box-shadow:0 0 20px rgba(175,115,231,.25);
+    transition:.3s;
 }
 
 .confirm-button:hover{
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 0 20px rgba(200,100,255,.6),
-        0 0 45px rgba(130,40,200,.3);
+    transform:scale(1.04);
+    background:#70469a;
 }
 
+/* FLECHA DE LA INVITACIÓN */
 
-/* =========================================================
+.confirm-help::after{
+    content:"↓";
+    display:block;
+    margin-top:8px;
+    font-size:32px;
+    color:#d7b5f4;
+    animation:arrowDown 1.2s infinite ease-in-out;
+}
+
+/* =========================
    MODAL
-========================================================= */
+========================= */
 
 .modal{
     position:fixed;
-
     inset:0;
-
-    background:
-        rgba(3,0,7,.88);
-
-    backdrop-filter:blur(8px);
-
+    z-index:5000;
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
-
+    justify-content:center;
     padding:20px;
+    background:rgba(0,0,0,.78);
+    backdrop-filter:blur(6px);
+}
 
-    z-index:1000;
+.modal.hidden{
+    display:none;
 }
 
 .modal-box{
-    width:min(500px,100%);
-
+    width:min(450px,100%);
     max-height:90vh;
-
     overflow-y:auto;
-
+    padding:30px;
+    border-radius:20px;
     background:
-        linear-gradient(
-            145deg,
-            #18091f,
-            #09040e
-        );
-
-    border:
-        1px solid
-        rgba(190,120,255,.55);
-
-    padding:35px;
-
-    box-shadow:
-        0 0 35px rgba(130,40,190,.3);
-
-    position:relative;
+        linear-gradient(145deg,#29183a,#120b19);
+    border:1px solid rgba(202,157,239,.4);
+    box-shadow:0 20px 60px rgba(0,0,0,.7);
 }
 
 .modal-title{
+    font-family:"Cinzel Decorative",serif;
+    font-size:25px;
     text-align:center;
-
-    font-size:28px;
-
-    font-weight:normal;
-
     margin-bottom:8px;
 }
 
 .modal-subtitle{
     text-align:center;
-
-    color:#ad9ab8;
-
     font-size:13px;
-
-    margin-bottom:30px;
+    opacity:.7;
+    margin-bottom:25px;
 }
 
 .close-modal{
-    position:absolute;
-
-    top:12px;
-    right:15px;
-
-    background:none;
-
+    float:right;
     border:0;
-
-    color:#c5a7d2;
-
-    font-size:25px;
-
+    background:transparent;
+    color:white;
+    font-size:23px;
     cursor:pointer;
 }
 
 .form-group{
-    margin-bottom:20px;
+    margin-bottom:17px;
 }
 
 .form-group label{
     display:block;
-
-    color:#d7c2df;
-
-    font-size:13px;
-
     margin-bottom:7px;
+    font-size:14px;
+    color:#dec9ed;
 }
 
 .form-group input,
 .form-group select{
     width:100%;
-
-    padding:13px;
-
-    background:#0b0610;
-
-    border:
-        1px solid
-        #4b2a5a;
-
+    padding:12px;
+    border-radius:10px;
+    border:1px solid rgba(205,160,241,.3);
+    background:#0e0913;
     color:white;
-
     outline:none;
+    font-family:Georgia,serif;
 }
 
 .form-group input:focus,
 .form-group select:focus{
-    border-color:#b66aff;
-
-    box-shadow:
-        0 0 10px
-        rgba(180,90,255,.2);
+    border-color:#c99aff;
 }
 
 .submit-button{
     width:100%;
-
-    padding:15px;
-
-    background:#5c247a;
-
-    border:
-        1px solid
-        #bd78ff;
-
+    border:0;
+    border-radius:12px;
+    padding:14px;
+    background:#744a99;
     color:white;
-
+    font-family:Georgia,serif;
+    font-size:15px;
     cursor:pointer;
-
-    letter-spacing:2px;
-
-    transition:.25s;
+    transition:.3s;
 }
 
 .submit-button:hover{
-    background:#75309a;
+    background:#8b5bb3;
 }
 
 .submit-button:disabled{
@@ -924,410 +487,193 @@ body::before{
 }
 
 .form-message{
-    margin-top:15px;
-
+    min-height:22px;
+    margin-top:13px;
     text-align:center;
-
-    font-size:13px;
-
-    min-height:18px;
+    font-size:14px;
 }
 
-
-/* =========================================================
+/* =========================
    CELEBRACIÓN
-========================================================= */
+========================= */
 
 .celebration{
     position:fixed;
-
     inset:0;
-
-    z-index:2000;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(80,15,110,.75),
-            rgba(4,1,8,.97) 65%
-        );
-
+    z-index:8000;
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
-
+    justify-content:center;
     text-align:center;
+    padding:20px;
+    background:
+        radial-gradient(circle,#4d2862 0%,#180d23 50%,#050308 100%);
+}
 
-    overflow:hidden;
+.celebration.hidden{
+    display:none;
 }
 
 .celebration-content{
     position:relative;
-
-    z-index:10;
-
-    animation:
-        celebrateIn 1.5s ease;
+    z-index:2;
 }
 
 .celebration-title{
-    font-size:
-        clamp(38px,8vw,75px);
-
-    font-weight:normal;
-
+    font-family:"Cinzel Decorative",serif;
+    font-size:clamp(34px,8vw,70px);
     text-shadow:
-        0 0 20px #c77dff,
-        0 0 50px #8b2fc9;
+        0 0 20px #c88aff,
+        0 0 45px #7a3da1;
 }
 
 .celebration-subtitle{
     margin-top:15px;
-
-    color:#e4d4ea;
-
-    font-size:18px;
+    font-size:20px;
 }
 
 .play-music{
-    margin-top:30px;
-
-    padding:14px 25px;
-
-    background:transparent;
-
+    margin-top:35px;
+    padding:14px 22px;
+    border-radius:30px;
+    border:1px solid #d3a8f3;
+    background:#70469a;
     color:white;
-
-    border:
-        1px solid
-        #c17cff;
-
+    font-family:Georgia,serif;
     cursor:pointer;
-
-    letter-spacing:1px;
-}
-
-@keyframes celebrateIn{
-    from{
-        opacity:0;
-        transform:scale(.7);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
 }
 
 .spark{
     position:absolute;
-
     width:5px;
     height:5px;
-
     border-radius:50%;
-
-    background:#dba3ff;
-
-    box-shadow:
-        0 0 8px #dba3ff,
-        0 0 20px #9b4dca;
-
-    animation:
-        sparkFly linear forwards;
+    background:#fff;
+    animation:sparkFly 2.5s linear forwards;
 }
 
 @keyframes sparkFly{
     from{
-        transform:
-            translate(0,0)
-            scale(1);
-
+        transform:translate(0,0) scale(1);
         opacity:1;
     }
-
     to{
-        transform:
-            translate(var(--x),var(--y))
-            scale(0);
-
+        transform:translate(var(--x),var(--y)) scale(0);
         opacity:0;
     }
 }
 
-
-/* =========================================================
-   MODO FIESTA
-========================================================= */
+/* =========================
+   PARTY MODE
+========================= */
 
 .party-mode{
     position:fixed;
-
     inset:0;
-
-    z-index:1500;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #351052,
-            #100317 65%,
-            #050108
-        );
-
+    z-index:7000;
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
-
+    justify-content:center;
     text-align:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at center,#5c2f73,#1a0d24 55%,#050308);
 }
 
-.party-content{
-    padding:30px;
-}
-
-.party-icon{
-    font-size:65px;
-
-    animation:
-        partyFloat 2s infinite ease-in-out;
+.party-mode.hidden{
+    display:none;
 }
 
 .party-title{
-    margin-top:20px;
-
-    font-size:
-        clamp(40px,8vw,80px);
-
-    font-weight:normal;
-
-    text-shadow:
-        0 0 20px #c77dff,
-        0 0 60px #8b2fc9;
+    font-family:"Cinzel Decorative",serif;
+    font-size:clamp(30px,7vw,65px);
+    text-shadow:0 0 25px #d69aff;
 }
 
 .party-text{
-    margin-top:15px;
-
-    color:#d8c4df;
-
-    font-size:18px;
+    margin-top:20px;
+    font-size:20px;
 }
 
-@keyframes partyFloat{
-    0%,100%{
-        transform:
-            translateY(0)
-            rotate(-3deg);
-    }
-
-    50%{
-        transform:
-            translateY(-15px)
-            rotate(3deg);
-    }
-}
-
-
-/* =========================================================
-   PANTALLA FINAL
-========================================================= */
+/* =========================
+   FINAL
+========================= */
 
 .final-screen{
     position:fixed;
-
     inset:0;
-
-    z-index:3000;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #351052,
-            #09020e 70%
-        );
-
+    z-index:9000;
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
-
+    justify-content:center;
     text-align:center;
-
-    padding:30px;
+    padding:25px;
+    background:
+        radial-gradient(circle,#3b204d,#120914 65%,#050308);
 }
 
-.final-content{
-    animation:
-        finalAppear 2s ease;
+.final-screen.hidden{
+    display:none;
 }
 
 .final-title{
-    font-size:
-        clamp(38px,8vw,80px);
-
-    font-weight:normal;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 20px #d38aff,
-        0 0 50px #9c45d0;
+    font-family:"Cinzel Decorative",serif;
+    font-size:clamp(30px,7vw,65px);
+    text-shadow:0 0 25px #d29aff;
 }
 
 .final-text{
-    margin-top:25px;
-
-    color:#d9c8df;
-
-    font-size:17px;
-
-    line-height:1.8;
+    margin-top:20px;
+    font-size:18px;
+    color:#e3d4ec;
 }
 
-@keyframes finalAppear{
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-@media(max-width:750px){
-
-    .hero{
-        padding-top:35px;
-    }
-
-    .hero-content{
-        flex-direction:column;
-
-        gap:45px;
-    }
-
-    .photo1-container{
-        width:min(270px,75vw);
-    }
-
-    .countdown-area{
-        width:100%;
-    }
-
-    .countdown{
-        gap:7px;
-    }
-
-    .time-box{
-        padding:14px 5px;
-    }
-
-    .time-label{
-        font-size:9px;
-        letter-spacing:1px;
-    }
-
-    .scroll-tutorial{
-        margin-top:50px;
-    }
-
-    .scroll-tutorial-text{
-        font-size:16px;
-    }
-
-    .scroll-tutorial-arrow{
-        font-size:48px;
-    }
-
-    .invitation-reveal{
-        padding-top:90px;
-    }
-
-    .invitation-image-wrapper{
-        width:94vw;
-    }
-
-    .confirm-help{
-        font-size:15px;
-
-        line-height:1.5;
-
-        padding:0 15px;
-    }
-
-    .confirm-button{
-        padding:17px 25px;
-    }
-
-    .modal-box{
-        padding:25px 20px;
-    }
-
-    #introVideo{
-        object-fit:cover;
-    }
-}
-
-
-/* =========================================================
+/* =========================
    PC
-========================================================= */
+========================= */
 
 @media(min-width:751px){
 
     .invitation-image-wrapper{
         width:min(600px,85vw);
     }
+
 }
 
+/* =========================
+   MÓVIL
+========================= */
 
-/* =========================================================
-   CELULARES PEQUEÑOS
-========================================================= */
+@media(max-width:600px){
 
-@media(max-width:420px){
+    .hero{
+        padding-top:55px;
+    }
 
     .main-title{
-        letter-spacing:2px;
+        letter-spacing:3px;
     }
 
     .subtitle{
-        font-size:15px;
-    }
-
-    .countdown-title{
         font-size:14px;
     }
 
-    .time-number{
-        font-size:27px;
+    .count-box{
+        width:68px;
     }
 
-    .magic-text{
-        font-size:11px;
-        letter-spacing:2px;
+    .count-number{
+        font-size:24px;
     }
 
-    .confirm-button{
-        width:90%;
-
-        font-size:12px;
-
-        padding:15px;
+    .invitation-reveal{
+        padding-top:60px;
     }
+
+    .modal-box{
+        padding:23px;
+    }
+
 }
 
 </style>
@@ -1335,10 +681,9 @@ body::before{
 
 <body>
 
-
-<!-- =========================================================
+<!-- =========================
      VIDEO DE INICIO
-========================================================= -->
+========================= -->
 
 <div id="introVideoScreen">
 
@@ -1346,8 +691,8 @@ body::before{
         id="introVideo"
         src="videoinicio1.mp4"
         playsinline
-        preload="auto"
-    ></video>
+        preload="auto">
+    </video>
 
     <div id="introStart">
 
@@ -1361,8 +706,7 @@ body::before{
 
         <button
             id="startInvitation"
-            type="button"
-        >
+            type="button">
             ▶ INICIAR INVITACIÓN
         </button>
 
@@ -1370,220 +714,170 @@ body::before{
 
 </div>
 
+<!-- ESTRELLAS -->
 
-<!-- =========================================================
-     ESTRELLAS
-========================================================= -->
+<div class="stars" id="stars"></div>
 
-<div
-    class="stars"
-    id="stars"
-></div>
+<!-- =========================
+     INVITACIÓN PRINCIPAL
+========================= -->
 
+<main id="publicContent">
 
-<!-- =========================================================
-     CONTENIDO PÚBLICO
-========================================================= -->
+<section class="hero">
 
-<div id="publicContent">
+    <div class="small-title">
+        Una celebración especial
+    </div>
 
-    <section class="hero">
+    <h1 class="main-title">
+        VELUNARA
+    </h1>
 
-        <div class="small-title">
-            Una celebración especial
+    <div class="subtitle">
+        ✦ Una noche mágica está por comenzar ✦
+    </div>
+
+    <div class="hero-content">
+
+        <div class="photo1-container">
+            <img
+                src="foto1.jpg"
+                alt="Velunara">
         </div>
-
-        <h1 class="main-title">
-            VELUNARA
-        </h1>
-
-        <div class="subtitle">
-            ✦ Una noche mágica está por comenzar ✦
-        </div>
-
-
-        <div class="hero-content">
-
-            <div class="photo1-container">
-
-                <img
-                    src="foto1.jpg"
-                    alt="Velunara"
-                >
-
-            </div>
-
-
-            <div
-                class="countdown-area"
-                id="countdownSection"
-            >
-
-                <div class="countdown-title">
-                    FALTAN PARA LA CELEBRACIÓN
-                </div>
-
-
-                <div class="countdown">
-
-                    <div class="time-box">
-
-                        <span
-                            class="time-number"
-                            id="days"
-                        >
-                            00
-                        </span>
-
-                        <span class="time-label">
-                            Días
-                        </span>
-
-                    </div>
-
-
-                    <div class="time-box">
-
-                        <span
-                            class="time-number"
-                            id="hours"
-                        >
-                            00
-                        </span>
-
-                        <span class="time-label">
-                            Horas
-                        </span>
-
-                    </div>
-
-
-                    <div class="time-box">
-
-                        <span
-                            class="time-number"
-                            id="minutes"
-                        >
-                            00
-                        </span>
-
-                        <span class="time-label">
-                            Minutos
-                        </span>
-
-                    </div>
-
-
-                    <div class="time-box">
-
-                        <span
-                            class="time-number"
-                            id="seconds"
-                        >
-                            00
-                        </span>
-
-                        <span class="time-label">
-                            Segundos
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             TUTORIAL ORIGINAL
-        ================================================== -->
 
         <div
-            class="scroll-tutorial"
-            id="scrollTutorial"
-        >
+            class="countdown-area"
+            id="countdownSection">
 
-            <div class="scroll-tutorial-text">
-                👇 AQUÍ EMPIEZA LA INVITACIÓN
+            <div class="countdown-title">
+                Faltan...
             </div>
 
-            <div
-                class="scroll-tutorial-text"
-                style="margin-top:7px;font-size:14px;"
-            >
-                Desliza hacia abajo para ver el contador
-                y después la invitación
-            </div>
+            <div class="countdown">
 
-            <div class="scroll-tutorial-arrow">
-                ↓
+                <div class="count-box">
+                    <div
+                        class="count-number"
+                        id="days">
+                        0
+                    </div>
+                    <div class="count-label">
+                        Días
+                    </div>
+                </div>
+
+                <div class="count-box">
+                    <div
+                        class="count-number"
+                        id="hours">
+                        0
+                    </div>
+                    <div class="count-label">
+                        Horas
+                    </div>
+                </div>
+
+                <div class="count-box">
+                    <div
+                        class="count-number"
+                        id="minutes">
+                        0
+                    </div>
+                    <div class="count-label">
+                        Minutos
+                    </div>
+                </div>
+
+                <div class="count-box">
+                    <div
+                        class="count-number"
+                        id="seconds">
+                        0
+                    </div>
+                    <div class="count-label">
+                        Segundos
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
-    </section>
+    </div>
 
+    <!-- GUÍA QUE NO SE DEBE QUITAR -->
 
-    <!-- =====================================================
-         INVITACIÓN
-    ====================================================== -->
+    <div
+        class="scroll-tutorial"
+        id="scrollTutorial">
 
-    <section
-        class="invitation-reveal"
-        id="invitationReveal"
-    >
+        <div class="scroll-tutorial-text">
+            👇 AQUÍ EMPIEZA LA INVITACIÓN
+        </div>
 
-        <div class="magic-transition">
+        <div
+            class="scroll-tutorial-text"
+            style="margin-top:7px;font-size:14px;">
 
-            <div class="magic-symbol">
-                ✦
-            </div>
-
-            <div class="magic-text">
-                La magia comienza aquí
-            </div>
+            Desliza hacia abajo para ver el contador y después la invitación
 
         </div>
 
-
-        <div class="invitation-image-wrapper">
-
-            <img
-                src="foto2.jpg"
-                alt="Invitación de Velunara"
-            >
-
+        <div class="scroll-tutorial-arrow">
+            ↓
         </div>
 
+    </div>
 
-        <div class="confirm-help">
-            👇 PICA AQUÍ PARA CONFIRMAR TU ASISTENCIA
-        </div>
+</section>
 
+<!-- =========================
+     IMAGEN DE INVITACIÓN
+========================= -->
 
-        <button
-            class="confirm-button"
-            id="openForm"
-            type="button"
-        >
-            💜 CONFIRMAR ASISTENCIA
-        </button>
+<section
+    class="invitation-reveal"
+    id="invitationReveal">
 
-    </section>
+    <div class="magic-transition">
+        ✦ ✧ ✦
+    </div>
 
-</div>
+    <div class="invitation-image-wrapper">
 
+        <img
+            src="foto2.jpg"
+            alt="Invitación de Velunara">
 
-<!-- =========================================================
-     MODAL
-========================================================= -->
+    </div>
+
+    <!-- SEGUNDA GUÍA + FLECHA -->
+
+    <div class="confirm-help">
+        👇 PICA AQUÍ PARA CONFIRMAR TU ASISTENCIA
+    </div>
+
+    <button
+        class="confirm-button"
+        id="openForm"
+        type="button">
+
+        💜 CONFIRMAR ASISTENCIA
+
+    </button>
+
+</section>
+
+</main>
+
+<!-- =========================
+     MODAL RSVP
+========================= -->
 
 <div
     class="modal hidden"
-    id="formModal"
->
+    id="formModal">
 
     <div class="modal-box">
 
@@ -1591,21 +885,19 @@ body::before{
             class="close-modal"
             id="closeForm"
             type="button"
-            aria-label="Cerrar"
-        >
+            aria-label="Cerrar">
+
             ×
+
         </button>
 
+        <div class="modal-title">
+            Confirmación
+        </div>
 
-        <h2 class="modal-title">
-            Confirmar asistencia
-        </h2>
-
-
-        <p class="modal-subtitle">
-            Completa los datos de tu asistencia
-        </p>
-
+        <div class="modal-subtitle">
+            Confirma tu asistencia a Velunara
+        </div>
 
         <form id="confirmationForm">
 
@@ -1616,16 +908,13 @@ body::before{
                 </label>
 
                 <input
-                    type="text"
                     id="nombre"
+                    type="text"
                     maxlength="80"
-                    required
                     autocomplete="name"
-                    placeholder="Tu nombre"
-                >
+                    required>
 
             </div>
-
 
             <div class="form-group">
 
@@ -1634,16 +923,14 @@ body::before{
                 </label>
 
                 <input
-                    type="number"
                     id="personas"
+                    type="number"
                     min="1"
                     max="20"
                     value="1"
-                    required
-                >
+                    required>
 
             </div>
-
 
             <div class="form-group">
 
@@ -1653,8 +940,7 @@ body::before{
 
                 <select
                     id="asistencia"
-                    required
-                >
+                    required>
 
                     <option value="">
                         Selecciona una opción
@@ -1672,43 +958,33 @@ body::before{
 
             </div>
 
-
             <div class="form-group">
 
                 <label for="telefono">
-
-                    Teléfono
-
-                    <span style="color:#8e7a96;">
-                        (opcional)
-                    </span>
-
+                    Teléfono (opcional)
                 </label>
 
                 <input
-                    type="tel"
                     id="telefono"
+                    type="tel"
                     maxlength="25"
-                    autocomplete="tel"
-                    placeholder="Número de teléfono"
-                >
+                    autocomplete="tel">
 
             </div>
-
 
             <button
                 class="submit-button"
                 id="guardarBtn"
-                type="submit"
-            >
-                💜 GUARDAR
-            </button>
+                type="submit">
 
+                💜 GUARDAR
+
+            </button>
 
             <div
                 class="form-message"
-                id="formMessage"
-            ></div>
+                id="formMessage">
+            </div>
 
         </form>
 
@@ -1716,15 +992,13 @@ body::before{
 
 </div>
 
-
-<!-- =========================================================
-     CELEBRACIÓN DE MEDIANOCHE
-========================================================= -->
+<!-- =========================
+     CELEBRACIÓN
+========================= -->
 
 <div
     class="celebration hidden"
-    id="celebration"
->
+    id="celebration">
 
     <div class="celebration-content">
 
@@ -1739,93 +1013,71 @@ body::before{
         <button
             class="play-music"
             id="playMusic"
-            type="button"
-        >
+            type="button">
+
             🎵 REPRODUCIR LAS MAÑANITAS
+
         </button>
 
     </div>
 
 </div>
 
-
-<!-- =========================================================
+<!-- =========================
      MODO FIESTA
-========================================================= -->
+========================= -->
 
 <div
     class="party-mode hidden"
-    id="partyMode"
->
+    id="partyMode">
 
-    <div class="party-content">
-
-        <div class="party-icon">
-            🖤✨
-        </div>
+    <div>
 
         <div class="party-title">
-            ¡ES HORA DE CELEBRAR!
+            ✨ ¡YA EMPEZÓ! ✨
         </div>
 
         <div class="party-text">
-            La fiesta de Velunara está comenzando.
+            🎉 ¡Bienvenidos a la celebración de Velunara! 🎉
         </div>
 
     </div>
 
 </div>
 
-
-<!-- =========================================================
+<!-- =========================
      PANTALLA FINAL
-========================================================= -->
+========================= -->
 
 <div
     class="final-screen hidden"
-    id="finalScreen"
->
+    id="finalScreen">
 
-    <div class="final-content">
+    <div>
 
         <div class="final-title">
             ✨ ¡FELICIDADES, VELUNARA! ✨
         </div>
 
         <div class="final-text">
-
-            Gracias por haber formado parte
-            <br>
-
-            de este día tan especial.
-
-            <br><br>
-
-            💜 27 de septiembre de 2026 💜
-
+            Gracias por formar parte de este día tan especial.
         </div>
 
     </div>
 
 </div>
 
-
-<!-- =========================================================
-     AUDIO DE LAS MAÑANITAS
-========================================================= -->
-
 <audio
     id="birthdayMusic"
     src="mananitas.mp3"
-    preload="auto"
-></audio>
-
+    preload="auto">
+</audio>
 
 <script>
 
-/* =========================================================
+/* =========================
    SUPABASE
-========================================================= */
+========================= */
 
 const SUPABASE_URL =
     "https://ibdjtobuadgzozbggxxu.supabase.co";
@@ -1840,174 +1092,64 @@ const supabaseClient =
     );
 
 
-/* =========================================================
-   FECHAS
-========================================================= */
-
-const countdownDate =
-    new Date(
-        2026,
-        8,
-        27,
-        0,
-        0,
-        0
-    );
-
-const partyStart =
-    new Date(
-        2026,
-        8,
-        27,
-        16,
-        0,
-        0
-    );
-
-const partyEnd =
-    new Date(
-        2026,
-        8,
-        27,
-        20,
-        0,
-        0
-    );
-
-const finalDate =
-    new Date(
-        2026,
-        8,
-        28,
-        0,
-        0,
-        0
-    );
-
-
-/* =========================================================
+/* =========================
    ELEMENTOS
-========================================================= */
+========================= */
 
 const introVideoScreen =
-    document.getElementById(
-        "introVideoScreen"
-    );
+    document.getElementById("introVideoScreen");
 
 const introVideo =
-    document.getElementById(
-        "introVideo"
-    );
+    document.getElementById("introVideo");
 
 const introStart =
-    document.getElementById(
-        "introStart"
-    );
+    document.getElementById("introStart");
 
 const startInvitation =
-    document.getElementById(
-        "startInvitation"
-    );
-
-const publicContent =
-    document.getElementById(
-        "publicContent"
-    );
-
-const celebration =
-    document.getElementById(
-        "celebration"
-    );
-
-const partyMode =
-    document.getElementById(
-        "partyMode"
-    );
-
-const finalScreen =
-    document.getElementById(
-        "finalScreen"
-    );
-
-const formModal =
-    document.getElementById(
-        "formModal"
-    );
-
-const openForm =
-    document.getElementById(
-        "openForm"
-    );
-
-const closeForm =
-    document.getElementById(
-        "closeForm"
-    );
-
-const confirmationForm =
-    document.getElementById(
-        "confirmationForm"
-    );
-
-const formMessage =
-    document.getElementById(
-        "formMessage"
-    );
-
-const music =
-    document.getElementById(
-        "birthdayMusic"
-    );
-
-const playMusic =
-    document.getElementById(
-        "playMusic"
-    );
+    document.getElementById("startInvitation");
 
 const scrollTutorial =
-    document.getElementById(
-        "scrollTutorial"
-    );
+    document.getElementById("scrollTutorial");
 
-const countdownSection =
-    document.getElementById(
-        "countdownSection"
-    );
+const formModal =
+    document.getElementById("formModal");
 
-const invitationReveal =
-    document.getElementById(
-        "invitationReveal"
-    );
+const openForm =
+    document.getElementById("openForm");
+
+const closeForm =
+    document.getElementById("closeForm");
+
+const confirmationForm =
+    document.getElementById("confirmationForm");
+
+const celebration =
+    document.getElementById("celebration");
+
+const partyMode =
+    document.getElementById("partyMode");
+
+const finalScreen =
+    document.getElementById("finalScreen");
+
+const music =
+    document.getElementById("birthdayMusic");
 
 
-/* =========================================================
-   VIDEO DE INICIO CON SONIDO
-========================================================= */
-
-let introFinished = false;
+/* =========================
+   VIDEO
+========================= */
 
 function finishIntro(){
 
-    if(introFinished){
-        return;
-    }
+    introVideoScreen.classList.add("fade-out");
 
-    introFinished = true;
+    setTimeout(() => {
 
-    introVideoScreen.classList.add(
-        "fade-out"
-    );
+        introVideo.pause();
 
-    setTimeout(
-        () => {
+    }, 1800);
 
-            introVideoScreen.classList.add(
-                "hidden"
-            );
-
-        },
-        1500
-    );
 }
 
 
@@ -2015,13 +1157,9 @@ startInvitation.addEventListener(
     "click",
     async () => {
 
-        introStart.classList.add(
-            "hidden-start"
-        );
+        introStart.classList.add("hidden-start");
 
-        introVideo.classList.add(
-            "visible"
-        );
+        introVideo.classList.add("visible");
 
         try{
 
@@ -2052,38 +1190,16 @@ introVideo.addEventListener(
 );
 
 
-introVideo.addEventListener(
-    "error",
-    () => {
-
-        console.error(
-            "No se pudo cargar videoinicio1.mp4"
-        );
-
-        finishIntro();
-
-    }
-);
-
-
-/* =========================================================
+/* =========================
    ESTRELLAS
-========================================================= */
-
-const starsContainer =
-    document.getElementById(
-        "stars"
-    );
+========================= */
 
 for(let i = 0; i < 100; i++){
 
     const star =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
-    star.className =
-        "star";
+    star.className = "star";
 
     star.style.left =
         Math.random() * 100 + "%";
@@ -2094,52 +1210,44 @@ for(let i = 0; i < 100; i++){
     star.style.animationDelay =
         Math.random() * 3 + "s";
 
-    star.style.animationDuration =
-        (
-            2 +
-            Math.random() * 4
-        ) + "s";
+    document.getElementById("stars")
+        .appendChild(star);
 
-    starsContainer.appendChild(
-        star
-    );
 }
 
 
-/* =========================================================
+/* =========================
+   FECHAS
+========================= */
+
+const countdownDate =
+    new Date(2026, 8, 27, 0, 0, 0);
+
+const partyStart =
+    new Date(2026, 8, 27, 16, 0, 0);
+
+const partyEnd =
+    new Date(2026, 8, 27, 20, 0, 0);
+
+const finalDate =
+    new Date(2026, 8, 28, 0, 0, 0);
+
+
+/* =========================
    CONTADOR
-========================================================= */
+========================= */
 
 function updateCountdown(){
 
     const now =
         new Date();
 
-    const difference =
+    let difference =
         countdownDate - now;
 
-
-    if(difference <= 0){
-
-        document.getElementById(
-            "days"
-        ).textContent = "00";
-
-        document.getElementById(
-            "hours"
-        ).textContent = "00";
-
-        document.getElementById(
-            "minutes"
-        ).textContent = "00";
-
-        document.getElementById(
-            "seconds"
-        ).textContent = "00";
-
-        return;
+    if(difference < 0){
+        difference = 0;
     }
-
 
     const days =
         Math.floor(
@@ -2149,368 +1257,245 @@ function updateCountdown(){
 
     const hours =
         Math.floor(
-            (
-                difference /
-                (1000 * 60 * 60)
-            ) % 24
+            (difference /
+            (1000 * 60 * 60)) % 24
         );
 
     const minutes =
         Math.floor(
-            (
-                difference /
-                (1000 * 60)
-            ) % 60
+            (difference /
+            (1000 * 60)) % 60
         );
 
     const seconds =
         Math.floor(
-            (
-                difference /
-                1000
-            ) % 60
+            (difference / 1000) % 60
         );
 
+    document.getElementById("days")
+        .textContent = days;
 
-    document.getElementById(
-        "days"
-    ).textContent =
-        String(days).padStart(2,"0");
+    document.getElementById("hours")
+        .textContent = hours;
 
-    document.getElementById(
-        "hours"
-    ).textContent =
-        String(hours).padStart(2,"0");
+    document.getElementById("minutes")
+        .textContent = minutes;
 
-    document.getElementById(
-        "minutes"
-    ).textContent =
-        String(minutes).padStart(2,"0");
-
-    document.getElementById(
-        "seconds"
-    ).textContent =
-        String(seconds).padStart(2,"0");
-}
-
-updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
-
-
-/* =========================================================
-   TUTORIAL
-========================================================= */
-
-let tutorialUserInteracted =
-    false;
-
-let automaticScrolling =
-    false;
-
-let firstAutoScrollTimer =
-    null;
-
-let secondAutoScrollTimer =
-    null;
-
-
-function hideScrollTutorial(){
-
-    scrollTutorial.classList.add(
-        "fade-out"
-    );
+    document.getElementById("seconds")
+        .textContent = seconds;
 
 }
 
 
-function cancelAutomaticTutorial(){
+/* =========================
+   CHISPAS
+========================= */
 
-    if(automaticScrolling){
+function createSparks(){
+
+    for(let i = 0; i < 45; i++){
+
+        const spark =
+            document.createElement("div");
+
+        spark.className = "spark";
+
+        spark.style.left =
+            "50%";
+
+        spark.style.top =
+            "50%";
+
+        spark.style.setProperty(
+            "--x",
+            ((Math.random() - .5) * 1000) + "px"
+        );
+
+        spark.style.setProperty(
+            "--y",
+            ((Math.random() - .5) * 800) + "px"
+        );
+
+        spark.style.animationDelay =
+            (Math.random() * 1.5) + "s";
+
+        celebration.appendChild(spark);
+
+    }
+
+}
+
+
+/* =========================
+   ESTADO DE LA PÁGINA
+========================= */
+
+function updatePageState(){
+
+    const now =
+        new Date();
+
+    /* FINAL */
+
+    if(now >= finalDate){
+
+        document.getElementById(
+            "publicContent"
+        ).style.display = "none";
+
+        celebration.classList.add("hidden");
+
+        partyMode.classList.add("hidden");
+
+        finalScreen.classList.remove("hidden");
+
         return;
-    }
-
-    tutorialUserInteracted =
-        true;
-
-    clearTimeout(
-        firstAutoScrollTimer
-    );
-
-    clearTimeout(
-        secondAutoScrollTimer
-    );
-
-    hideScrollTutorial();
-
-}
-
-
-window.addEventListener(
-    "scroll",
-    function(){
-
-        if(
-            window.scrollY > 10 &&
-            !automaticScrolling
-        ){
-
-            cancelAutomaticTutorial();
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-window.addEventListener(
-    "wheel",
-    cancelAutomaticTutorial,
-    {
-        passive:true
-    }
-);
-
-window.addEventListener(
-    "touchmove",
-    cancelAutomaticTutorial,
-    {
-        passive:true
-    }
-);
-
-
-window.addEventListener(
-    "keydown",
-    function(event){
-
-        const keys = [
-            "ArrowDown",
-            "ArrowUp",
-            "PageDown",
-            "PageUp",
-            " ",
-            "Home",
-            "End"
-        ];
-
-        if(keys.includes(event.key)){
-            cancelAutomaticTutorial();
-        }
 
     }
-);
 
 
-/* =========================================================
-   CLICK DEL TUTORIAL
-========================================================= */
+    /* MODO FIESTA */
 
-scrollTutorial.addEventListener(
-    "click",
-    function(){
+    if(
+        now >= partyStart &&
+        now < partyEnd
+    ){
 
-        tutorialUserInteracted =
-            true;
+        document.getElementById(
+            "publicContent"
+        ).style.display = "none";
 
-        clearTimeout(
-            firstAutoScrollTimer
-        );
+        celebration.classList.add("hidden");
 
-        clearTimeout(
-            secondAutoScrollTimer
-        );
+        partyMode.classList.remove("hidden");
 
-        hideScrollTutorial();
-
-        automaticScrolling =
-            true;
-
-        countdownSection.scrollIntoView({
-            behavior:"smooth",
-            block:"center"
-        });
-
-        setTimeout(
-            function(){
-
-                automaticScrolling =
-                    false;
-
-            },
-            1800
-        );
+        return;
 
     }
-);
 
 
-/* =========================================================
-   AUTO-SCROLL
-========================================================= */
+    /* DÍA DE LA CELEBRACIÓN */
 
-function startAutomaticTutorial(){
+    if(now >= countdownDate){
 
-    firstAutoScrollTimer =
-        setTimeout(
-            function(){
+        document.getElementById(
+            "publicContent"
+        ).style.display = "";
 
-                if(
-                    tutorialUserInteracted
-                ){
-                    return;
-                }
+        partyMode.classList.add("hidden");
 
-                const now =
-                    new Date();
-
-                if(
-                    now >= partyStart
-                ){
-                    return;
-                }
-
-                hideScrollTutorial();
-
-                automaticScrolling =
-                    true;
-
-                countdownSection.scrollIntoView({
-                    behavior:"smooth",
-                    block:"center"
-                });
-
-                setTimeout(
-                    function(){
-
-                        automaticScrolling =
-                            false;
-
-                    },
-                    1800
-                );
-
-
-                secondAutoScrollTimer =
-                    setTimeout(
-                        function(){
-
-                            if(
-                                tutorialUserInteracted
-                            ){
-                                return;
-                            }
-
-                            const currentTime =
-                                new Date();
-
-                            if(
-                                currentTime >= partyStart
-                            ){
-                                return;
-                            }
-
-                            automaticScrolling =
-                                true;
-
-                            invitationReveal.scrollIntoView({
-                                behavior:"smooth",
-                                block:"start"
-                            });
-
-                            setTimeout(
-                                function(){
-
-                                    automaticScrolling =
-                                        false;
-
-                                    hideScrollTutorial();
-
-                                },
-                                1800
-                            );
-
-                        },
-                        60000
-                    );
-
-            },
-            60000
-        );
-
-}
-
-
-window.addEventListener(
-    "load",
-    function(){
-
-        startAutomaticTutorial();
-
-    }
-);
-
-
-/* =========================================================
-   TRANSICIÓN FOTO 2
-========================================================= */
-
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(
-                entry => {
-
-                    if(
-                        entry.isIntersecting
-                    ){
-
-                        invitationReveal
-                            .classList
-                            .add(
-                                "visible"
-                            );
-
-                    }
-
-                }
+        const alreadyShown =
+            localStorage.getItem(
+                "velunara_midnight_2026"
             );
 
-        },
-        {
-            threshold:.18
-        }
-    );
+        if(!alreadyShown){
 
-revealObserver.observe(
-    invitationReveal
+            celebration.classList.remove("hidden");
+
+            createSparks();
+
+            localStorage.setItem(
+                "velunara_midnight_2026",
+                "true"
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    /* ANTES DE LA FECHA */
+
+    document.getElementById(
+        "publicContent"
+    ).style.display = "";
+
+    celebration.classList.add("hidden");
+
+    partyMode.classList.add("hidden");
+
+}
+
+
+/* =========================
+   MÚSICA
+========================= */
+
+document.getElementById(
+    "playMusic"
+).addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            music.currentTime = 0;
+
+            music.volume = 1;
+
+            await music.play();
+
+            document.getElementById(
+                "playMusic"
+            ).textContent =
+                "🎵 REPRODUCIENDO LAS MAÑANITAS...";
+
+        }
+        catch(error){
+
+            console.error(
+                "No se pudo reproducir las mañanitas:",
+                error
+            );
+
+            document.getElementById(
+                "playMusic"
+            ).textContent =
+                "⚠️ NO SE PUDO REPRODUCIR";
+
+        }
+
+    }
 );
 
 
-/* =========================================================
+music.addEventListener(
+    "ended",
+    () => {
+
+        celebration.classList.add("hidden");
+
+    }
+);
+
+
+/* =========================
    MODAL
-========================================================= */
+========================= */
 
 openForm.addEventListener(
     "click",
     () => {
 
-        formModal.classList.remove(
-            "hidden"
-        );
+        formModal.classList.remove("hidden");
 
         document.body.style.overflow =
             "hidden";
 
     }
 );
+
+
+function closeModal(){
+
+    formModal.classList.add("hidden");
+
+    document.body.style.overflow = "";
+
+}
 
 
 closeForm.addEventListener(
@@ -2521,12 +1506,9 @@ closeForm.addEventListener(
 
 formModal.addEventListener(
     "click",
-    event => {
+    (event) => {
 
-        if(
-            event.target ===
-            formModal
-        ){
+        if(event.target === formModal){
 
             closeModal();
 
@@ -2536,21 +1518,9 @@ formModal.addEventListener(
 );
 
 
-function closeModal(){
-
-    formModal.classList.add(
-        "hidden"
-    );
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-/* =========================================================
+/* =========================
    GUARDAR CONFIRMACIÓN
-========================================================= */
+========================= */
 
 async function guardarConfirmacion(){
 
@@ -2581,12 +1551,13 @@ async function guardarConfirmacion(){
             "guardarBtn"
         );
 
+    const formMessage =
+        document.getElementById(
+            "formMessage"
+        );
 
-    formMessage.textContent =
-        "";
-
-    formMessage.style.color =
-        "";
+    formMessage.textContent = "";
+    formMessage.style.color = "";
 
 
     if(!nombre){
@@ -2598,6 +1569,7 @@ async function guardarConfirmacion(){
             "#ff9b9b";
 
         return;
+
     }
 
 
@@ -2610,6 +1582,7 @@ async function guardarConfirmacion(){
             "#ff9b9b";
 
         return;
+
     }
 
 
@@ -2622,6 +1595,7 @@ async function guardarConfirmacion(){
             "#ff9b9b";
 
         return;
+
     }
 
 
@@ -2638,6 +1612,7 @@ async function guardarConfirmacion(){
             "#ff9b9b";
 
         return;
+
     }
 
 
@@ -2653,6 +1628,7 @@ async function guardarConfirmacion(){
             "#ff9b9b";
 
         return;
+
     }
 
 
@@ -2665,11 +1641,11 @@ async function guardarConfirmacion(){
             "#ff9b9b";
 
         return;
+
     }
 
 
-    botonGuardar.disabled =
-        true;
+    botonGuardar.disabled = true;
 
     botonGuardar.textContent =
         "GUARDANDO...";
@@ -2677,27 +1653,17 @@ async function guardarConfirmacion(){
 
     try{
 
-        const {
-            error
-        } =
+        const { error } =
             await supabaseClient
-                .from(
-                    "confirmaciones"
-                )
+                .from("confirmaciones")
                 .insert([
                     {
-                        nombre:
-                            nombre,
-
-                        personas:
-                            personas,
-
+                        nombre: nombre,
+                        personas: personas,
                         asistencia:
                             asistencia === "true",
-
                         telefono:
-                            telefono ||
-                            null
+                            telefono || null
                     }
                 ]);
 
@@ -2710,13 +1676,10 @@ async function guardarConfirmacion(){
             );
 
 
-            if(
-                error.code === "23505"
-            ){
+            if(error.code === "23505"){
 
                 const message =
-                    error.message ||
-                    "";
+                    error.message || "";
 
 
                 if(
@@ -2751,6 +1714,7 @@ async function guardarConfirmacion(){
                     "#ffcf70";
 
                 return;
+
             }
 
 
@@ -2761,6 +1725,7 @@ async function guardarConfirmacion(){
                 "#ff9b9b";
 
             return;
+
         }
 
 
@@ -2793,12 +1758,12 @@ async function guardarConfirmacion(){
 
                 closeModal();
 
-                formMessage.textContent =
-                    "";
+                formMessage.textContent = "";
 
             },
             1800
         );
+
 
     }
     catch(error){
@@ -2817,8 +1782,7 @@ async function guardarConfirmacion(){
     }
     finally{
 
-        botonGuardar.disabled =
-            false;
+        botonGuardar.disabled = false;
 
         botonGuardar.textContent =
             "💜 GUARDAR";
@@ -2830,7 +1794,7 @@ async function guardarConfirmacion(){
 
 confirmationForm.addEventListener(
     "submit",
-    event => {
+    (event) => {
 
         event.preventDefault();
 
@@ -2840,304 +1804,128 @@ confirmationForm.addEventListener(
 );
 
 
-/* =========================================================
-   CHISPAS
-========================================================= */
+/* =========================
+   GUÍA / AUTO-SCROLL
+========================= */
 
-function createSparks(){
+let userInteracted = false;
 
-    for(
-        let i = 0;
-        i < 80;
-        i++
-    ){
-
-        setTimeout(
-            () => {
-
-                const spark =
-                    document.createElement(
-                        "div"
-                    );
-
-                spark.className =
-                    "spark";
-
-                spark.style.left =
-                    "50%";
-
-                spark.style.top =
-                    "50%";
+let tutorialTimer1;
+let tutorialTimer2;
 
 
-                const angle =
-                    Math.random() *
-                    Math.PI *
-                    2;
+function cancelAutoScroll(){
 
-                const distance =
-                    100 +
-                    Math.random() *
-                    500;
-
-
-                spark.style.setProperty(
-                    "--x",
-                    Math.cos(angle) *
-                    distance +
-                    "px"
-                );
-
-                spark.style.setProperty(
-                    "--y",
-                    Math.sin(angle) *
-                    distance +
-                    "px"
-                );
-
-
-                spark.style.animationDuration =
-                    (
-                        1.5 +
-                        Math.random() *
-                        2
-                    ) + "s";
-
-
-                celebration.appendChild(
-                    spark
-                );
-
-
-                setTimeout(
-                    () =>
-                        spark.remove(),
-                    4000
-                );
-
-            },
-            i * 35
-        );
-
+    if(userInteracted){
+        return;
     }
 
-}
+    userInteracted = true;
 
+    clearTimeout(tutorialTimer1);
+    clearTimeout(tutorialTimer2);
 
-/* =========================================================
-   CELEBRACIÓN
-========================================================= */
-
-function showMidnightCelebration(){
-
-    celebration.classList.remove(
-        "hidden"
+    scrollTutorial.classList.remove(
+        "fade-out"
     );
 
-    createSparks();
-
 }
 
 
-/* =========================================================
-   MÚSICA
-========================================================= */
-
-playMusic.addEventListener(
-    "click",
-    async () => {
-
-        try{
-
-            await music.play();
-
-            playMusic.textContent =
-                "🎵 LAS MAÑANITAS ESTÁN SONANDO";
-
-        }
-        catch(error){
-
-            console.error(
-                "ERROR DE AUDIO:",
-                error
-            );
-
-            playMusic.textContent =
-                "No se pudo reproducir el audio";
-
-        }
-
-    }
+window.addEventListener(
+    "wheel",
+    cancelAutoScroll,
+    {passive:true}
 );
 
+window.addEventListener(
+    "touchstart",
+    cancelAutoScroll,
+    {passive:true}
+);
 
-music.addEventListener(
-    "ended",
+window.addEventListener(
+    "keydown",
+    cancelAutoScroll
+);
+
+window.addEventListener(
+    "scroll",
     () => {
 
-        celebration.classList.add(
-            "hidden"
-        );
+        if(window.scrollY > 20){
 
-    }
-);
-
-
-/* =========================================================
-   ESTADOS DE LA PÁGINA
-========================================================= */
-
-let midnightShown =
-    false;
-
-
-function updatePageState(){
-
-    const now =
-        new Date();
-
-
-    /* ---------------------------------------------
-       28 SEPTIEMBRE 00:00
-    --------------------------------------------- */
-
-    if(
-        now >= finalDate
-    ){
-
-        clearTimeout(
-            firstAutoScrollTimer
-        );
-
-        clearTimeout(
-            secondAutoScrollTimer
-        );
-
-        publicContent.classList.add(
-            "hidden"
-        );
-
-        celebration.classList.add(
-            "hidden"
-        );
-
-        partyMode.classList.add(
-            "hidden"
-        );
-
-        finalScreen.classList.remove(
-            "hidden"
-        );
-
-        return;
-    }
-
-
-    /* ---------------------------------------------
-       27 SEPTIEMBRE 16:00 - 20:00
-    --------------------------------------------- */
-
-    if(
-        now >= partyStart &&
-        now < partyEnd
-    ){
-
-        clearTimeout(
-            firstAutoScrollTimer
-        );
-
-        clearTimeout(
-            secondAutoScrollTimer
-        );
-
-        publicContent.classList.add(
-            "hidden"
-        );
-
-        celebration.classList.add(
-            "hidden"
-        );
-
-        partyMode.classList.remove(
-            "hidden"
-        );
-
-        return;
-    }
-
-
-    /* ---------------------------------------------
-       27 SEPTIEMBRE DESPUÉS DE MEDIANOCHE
-    --------------------------------------------- */
-
-    if(
-        now >= countdownDate
-    ){
-
-        publicContent.classList.remove(
-            "hidden"
-        );
-
-        partyMode.classList.add(
-            "hidden"
-        );
-
-
-        const celebrationKey =
-            "velunara_midnight_2026";
-
-
-        const alreadyShown =
-            localStorage.getItem(
-                celebrationKey
+            scrollTutorial.classList.add(
+                "fade-out"
             );
-
-
-        if(
-            !alreadyShown &&
-            !midnightShown
-        ){
-
-            midnightShown =
-                true;
-
-            localStorage.setItem(
-                celebrationKey,
-                "true"
-            );
-
-            showMidnightCelebration();
 
         }
 
-        return;
-    }
+    },
+    {passive:true}
+);
 
 
-    /* ---------------------------------------------
-       ANTES DEL 27
-    --------------------------------------------- */
+/* Después de 1 minuto */
 
-    publicContent.classList.remove(
-        "hidden"
+tutorialTimer1 =
+    setTimeout(
+        () => {
+
+            if(userInteracted){
+                return;
+            }
+
+            scrollTutorial.classList.add(
+                "fade-out"
+            );
+
+            document.getElementById(
+                "countdownSection"
+            ).scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        },
+        60000
     );
 
-    partyMode.classList.add(
-        "hidden"
+
+/* Otro minuto después */
+
+tutorialTimer2 =
+    setTimeout(
+        () => {
+
+            if(userInteracted){
+                return;
+            }
+
+            document.getElementById(
+                "invitationReveal"
+            ).scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+        },
+        120000
     );
 
-    celebration.classList.add(
-        "hidden"
-    );
 
-}
-
-
-/* =========================================================
+/* =========================
    INICIO
-========================================================= */
+========================= */
+
+updateCountdown();
 
 updatePageState();
+
+setInterval(
+    updateCountdown,
+    1000
+);
 
 setInterval(
     updatePageState,
@@ -3148,4 +1936,4 @@ setInterval(
 
 </body>
 </html>
-```
+}
