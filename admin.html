@@ -1,6 +1,7 @@
 ```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
@@ -24,6 +25,10 @@
 
 <style>
 
+/* =========================================================
+   GENERAL
+========================================================= */
+
 *{
     box-sizing:border-box;
 }
@@ -39,7 +44,7 @@ body{
             #09050d 100%
         );
     color:#fff;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 .hidden{
@@ -47,9 +52,9 @@ body{
 }
 
 
-/* =========================
+/* =========================================================
    LOGIN
-========================= */
+========================================================= */
 
 .login-screen{
     min-height:100vh;
@@ -83,6 +88,11 @@ body{
     color:#c9b9d4;
 }
 
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
 .input-group{
     margin-bottom:15px;
 }
@@ -108,14 +118,74 @@ body{
     border-color:#c99aff;
 }
 
+
+/* =========================================================
+   CONTRASEÑA + OJITO
+========================================================= */
+
+.password-wrapper{
+    position:relative;
+    width:100%;
+}
+
+.password-wrapper input{
+    padding-right:55px;
+}
+
+.password-toggle{
+    position:absolute;
+    top:50%;
+    right:7px;
+    transform:translateY(-50%);
+
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+
+    border:0;
+    border-radius:8px;
+
+    background:transparent;
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    user-select:none;
+}
+
+.password-toggle:hover{
+    background:rgba(255,255,255,.08);
+}
+
+.password-toggle:focus{
+    outline:2px solid #c99aff;
+    outline-offset:1px;
+}
+
+
+/* =========================================================
+   BOTÓN LOGIN
+========================================================= */
+
 .login-button{
     width:100%;
     padding:14px;
+
     border:0;
     border-radius:10px;
+
     background:#8e4fc4;
     color:white;
+
     font-weight:bold;
+
     cursor:pointer;
 }
 
@@ -131,14 +201,16 @@ body{
 .login-message{
     min-height:22px;
     margin-top:14px;
+
     text-align:center;
+
     color:#ff9b9b;
 }
 
 
-/* =========================
+/* =========================================================
    ADMIN
-========================= */
+========================================================= */
 
 .admin-screen{
     min-height:100vh;
@@ -151,21 +223,32 @@ body{
     margin:auto;
 }
 
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .admin-header{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:15px;
+
     margin-bottom:25px;
     padding:20px;
+
     border-radius:18px;
+
     background:rgba(20,10,30,.9);
     border:1px solid rgba(220,170,255,.18);
 }
 
 .admin-header h1{
     margin:0;
+
     font-family:Georgia,serif;
+
     color:#e8c8ff;
 }
 
@@ -178,9 +261,12 @@ body{
 .admin-actions button{
     border:1px solid #75558a;
     border-radius:9px;
+
     padding:10px 15px;
+
     background:#1b1024;
     color:#fff;
+
     cursor:pointer;
 }
 
@@ -194,53 +280,70 @@ body{
 }
 
 
-/* =========================
+/* =========================================================
    ESTADÍSTICAS
-========================= */
+========================================================= */
 
 .stats{
     display:grid;
+
     grid-template-columns:
         repeat(3,minmax(0,1fr));
+
     gap:15px;
+
     margin-bottom:25px;
 }
 
 .stat-card{
     padding:22px;
+
     border-radius:16px;
+
     background:rgba(20,10,30,.9);
-    border:1px solid rgba(220,170,255,.18);
+
+    border:1px solid
+        rgba(220,170,255,.18);
 }
 
 .stat-card h2{
     margin:0 0 8px;
+
     font-size:15px;
+
     color:#cbb8d7;
+
     font-weight:normal;
 }
 
 .stat-number{
     font-size:32px;
+
     font-weight:bold;
+
     color:#efd9ff;
 }
 
 
-/* =========================
+/* =========================================================
    TABLA
-========================= */
+========================================================= */
 
 .table-container{
     overflow-x:auto;
+
     border-radius:16px;
+
     background:rgba(20,10,30,.9);
-    border:1px solid rgba(220,170,255,.18);
+
+    border:1px solid
+        rgba(220,170,255,.18);
 }
 
 table{
     width:100%;
     min-width:850px;
+
     border-collapse:collapse;
 }
 
@@ -251,40 +354,53 @@ thead{
 th,
 td{
     padding:14px 12px;
+
     text-align:left;
-    border-bottom:1px solid rgba(255,255,255,.08);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 }
 
 th{
     color:#e7cfff;
+
     font-size:14px;
 }
 
 td{
     color:#eee;
+
     font-size:14px;
 }
 
 tbody tr:hover{
-    background:rgba(255,255,255,.035);
+    background:
+        rgba(255,255,255,.035);
 }
 
 .attending{
     color:#9dffb2;
+
     font-weight:bold;
 }
 
 .not-attending{
     color:#ff9b9b;
+
     font-weight:bold;
 }
 
 .delete-button{
     border:0;
+
     border-radius:7px;
+
     padding:8px 11px;
+
     background:#8e3030;
+
     color:#fff;
+
     cursor:pointer;
 }
 
@@ -294,24 +410,27 @@ tbody tr:hover{
 
 .delete-button:disabled{
     opacity:.5;
+
     cursor:not-allowed;
 }
 
 
-/* =========================
+/* =========================================================
    MENSAJE VACÍO
-========================= */
+========================================================= */
 
 .empty-message{
     padding:35px;
+
     text-align:center;
+
     color:#b9a9c4;
 }
 
 
-/* =========================
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
 @media(max-width:750px){
 
@@ -321,6 +440,7 @@ tbody tr:hover{
 
     .admin-header{
         flex-direction:column;
+
         align-items:stretch;
     }
 
@@ -350,6 +470,7 @@ tbody tr:hover{
 
 </head>
 
+
 <body>
 
 
@@ -364,13 +485,19 @@ tbody tr:hover{
 
     <div class="login-box">
 
-        <h1>Administración</h1>
+        <h1>
+            Administración
+        </h1>
 
         <p>
             Acceso privado de Velunara
         </p>
 
+
         <form id="loginForm">
+
+
+            <!-- CORREO -->
 
             <div class="input-group">
 
@@ -388,21 +515,39 @@ tbody tr:hover{
             </div>
 
 
+            <!-- CONTRASEÑA -->
+
             <div class="input-group">
 
                 <label for="password">
                     Contraseña
                 </label>
 
-                <input
-                    type="password"
-                    id="password"
-                    autocomplete="current-password"
-                    required
-                >
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="password-toggle"
+                        aria-label="Mostrar contraseña"
+                        title="Mostrar contraseña"
+                    >
+                        👁️
+                    </button>
+
+                </div>
 
             </div>
 
+
+            <!-- LOGIN -->
 
             <button
                 type="submit"
@@ -412,10 +557,12 @@ tbody tr:hover{
                 INICIAR SESIÓN
             </button>
 
+
             <div
                 class="login-message"
                 id="loginMessage"
             ></div>
+
 
         </form>
 
@@ -436,11 +583,14 @@ tbody tr:hover{
     <div class="admin-container">
 
 
+        <!-- HEADER -->
+
         <header class="admin-header">
 
             <h1>
                 💜 Confirmaciones
             </h1>
+
 
             <div class="admin-actions">
 
@@ -450,6 +600,7 @@ tbody tr:hover{
                 >
                     ↻ Actualizar
                 </button>
+
 
                 <button
                     type="button"
@@ -463,9 +614,7 @@ tbody tr:hover{
         </header>
 
 
-        <!-- =========================
-             ESTADÍSTICAS
-        ========================== -->
+        <!-- ESTADÍSTICAS -->
 
         <section class="stats">
 
@@ -521,9 +670,7 @@ tbody tr:hover{
         </section>
 
 
-        <!-- =========================
-             TABLA
-        ========================== -->
+        <!-- TABLA -->
 
         <section class="table-container">
 
@@ -561,11 +708,13 @@ tbody tr:hover{
 
                 </thead>
 
+
                 <tbody
                     id="guestsTableBody"
                 ></tbody>
 
             </table>
+
 
             <div
                 id="emptyMessage"
@@ -678,6 +827,16 @@ document.addEventListener(
                 "totalNoAsistiran"
             );
 
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+        const togglePassword =
+            document.getElementById(
+                "togglePassword"
+            );
+
 
         /* =================================================
            ESTADO
@@ -691,14 +850,72 @@ document.addEventListener(
 
 
         /* =================================================
+           MOSTRAR / OCULTAR CONTRASEÑA
+        ================================================= */
+
+        togglePassword.addEventListener(
+            "click",
+            () => {
+
+                const showing =
+                    passwordInput.type === "text";
+
+
+                if(showing){
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁️";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Mostrar contraseña"
+                    );
+
+                    togglePassword.setAttribute(
+                        "title",
+                        "Mostrar contraseña"
+                    );
+
+                }
+                else{
+
+                    passwordInput.type =
+                        "text";
+
+                    togglePassword.textContent =
+                        "🙈";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Ocultar contraseña"
+                    );
+
+                    togglePassword.setAttribute(
+                        "title",
+                        "Ocultar contraseña"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
            MOSTRAR LOGIN
         ================================================= */
 
         function showLogin(){
 
-            sessionActive = false;
+            sessionActive =
+                false;
 
-            currentGuests = [];
+            currentGuests =
+                [];
+
 
             loginScreen.classList.remove(
                 "hidden"
@@ -708,13 +925,18 @@ document.addEventListener(
                 "hidden"
             );
 
-            guestsTableBody.innerHTML = "";
+
+            guestsTableBody.innerHTML =
+                "";
 
             emptyMessage.classList.add(
                 "hidden"
             );
 
-            updateStats([]);
+
+            updateStats(
+                []
+            );
 
         }
 
@@ -725,7 +947,8 @@ document.addEventListener(
 
         function showAdmin(){
 
-            sessionActive = true;
+            sessionActive =
+                true;
 
             loginScreen.classList.add(
                 "hidden"
@@ -759,18 +982,21 @@ document.addEventListener(
                         .value
                         .trim();
 
+
                 const password =
-                    document
-                        .getElementById("password")
-                        .value;
+                    passwordInput.value;
 
 
-                if(!email || !password){
+                if(
+                    !email ||
+                    !password
+                ){
 
                     loginMessage.textContent =
                         "Completa todos los campos.";
 
                     return;
+
                 }
 
 
@@ -795,7 +1021,10 @@ document.addEventListener(
                             });
 
 
-                    if(error || !data.session){
+                    if(
+                        error ||
+                        !data.session
+                    ){
 
                         console.error(
                             "ERROR DE LOGIN:",
@@ -806,10 +1035,29 @@ document.addEventListener(
                             "Correo o contraseña incorrectos.";
 
                         return;
+
                     }
 
 
                     loginForm.reset();
+
+
+                    passwordInput.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁️";
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        "Mostrar contraseña"
+                    );
+
+                    togglePassword.setAttribute(
+                        "title",
+                        "Mostrar contraseña"
+                    );
+
 
                     showAdmin();
 
@@ -852,7 +1100,9 @@ document.addEventListener(
                 loadingGuests ||
                 !sessionActive
             ){
+
                 return;
+
             }
 
 
@@ -892,21 +1142,31 @@ document.addEventListener(
                         error
                     );
 
-                    currentGuests = [];
+
+                    currentGuests =
+                        [];
+
 
                     guestsTableBody.innerHTML =
                         "";
+
 
                     emptyMessage.classList.remove(
                         "hidden"
                     );
 
+
                     emptyMessage.textContent =
                         "No se pudieron cargar las confirmaciones.";
 
-                    updateStats([]);
+
+                    updateStats(
+                        []
+                    );
+
 
                     return;
+
                 }
 
 
@@ -919,6 +1179,7 @@ document.addEventListener(
                 renderGuests(
                     currentGuests
                 );
+
 
                 updateStats(
                     currentGuests
@@ -933,19 +1194,27 @@ document.addEventListener(
                     error
                 );
 
-                currentGuests = [];
+
+                currentGuests =
+                    [];
+
 
                 guestsTableBody.innerHTML =
                     "";
+
 
                 emptyMessage.classList.remove(
                     "hidden"
                 );
 
+
                 emptyMessage.textContent =
                     "No se pudieron cargar las confirmaciones.";
 
-                updateStats([]);
+
+                updateStats(
+                    []
+                );
 
             }
             finally{
@@ -972,9 +1241,11 @@ document.addEventListener(
             guests
         ){
 
-            let asistiran = 0;
+            let asistiran =
+                0;
 
-            let noAsistiran = 0;
+            let noAsistiran =
+                0;
 
 
             for(
@@ -1008,8 +1279,10 @@ document.addEventListener(
             totalConfirmaciones.textContent =
                 guests.length;
 
+
             totalAsistiran.textContent =
                 asistiran;
+
 
             totalNoAsistiran.textContent =
                 noAsistiran;
@@ -1060,7 +1333,7 @@ document.addEventListener(
 
         /* =================================================
            RENDERIZAR TABLA
-           Usa textContent para evitar XSS.
+           Se usa textContent para evitar XSS.
         ================================================= */
 
         function renderGuests(
@@ -1177,7 +1450,8 @@ document.addEventListener(
                     );
 
                 phoneCell.textContent =
-                    guest.telefono || "No indicado";
+                    guest.telefono ||
+                    "No indicado";
 
                 row.appendChild(
                     phoneCell
@@ -1240,6 +1514,7 @@ document.addEventListener(
                 actionCell.appendChild(
                     deleteButton
                 );
+
 
                 row.appendChild(
                     actionCell
@@ -1315,15 +1590,18 @@ document.addEventListener(
                         error
                     );
 
+
                     window.alert(
                         "No se pudo eliminar la confirmación."
                     );
+
 
                     button.disabled =
                         false;
 
                     button.textContent =
                         "Eliminar";
+
 
                     return;
 
@@ -1341,9 +1619,11 @@ document.addEventListener(
                     error
                 );
 
+
                 window.alert(
                     "Ocurrió un error al eliminar."
                 );
+
 
                 button.disabled =
                     false;
@@ -1380,6 +1660,7 @@ document.addEventListener(
 
                 logoutButton.disabled =
                     true;
+
 
                 try{
 
@@ -1499,6 +1780,10 @@ document.addEventListener(
 
         }
 
+
+        /* =================================================
+           INICIAR
+        ================================================= */
 
         init();
 
