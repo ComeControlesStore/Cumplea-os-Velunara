@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Velunara | Invitación</title>
+<title>Velunara | Festejo</title>
 
 <meta
     name="robots"
@@ -31,6 +31,8 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap"
     rel="stylesheet"
 >
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -55,7 +57,9 @@ body{
 }
 
 
-/* ESTRELLAS */
+/* =========================================
+   ESTRELLAS
+========================================= */
 
 .stars{
     position:fixed;
@@ -90,7 +94,49 @@ body{
 }
 
 
-/* VIDEO DE INICIO */
+/* =========================================
+   CONFETI
+========================================= */
+
+#confettiContainer{
+    position:fixed;
+    inset:0;
+    z-index:50000;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.confetti{
+    position:absolute;
+    top:-20px;
+    width:9px;
+    height:15px;
+    opacity:.9;
+    animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+
+    0%{
+        transform:
+            translate3d(0,-30px,0)
+            rotate(0deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate3d(var(--drift),110vh,0)
+            rotate(720deg);
+        opacity:.2;
+    }
+
+}
+
+
+/* =========================================
+   VIDEO INICIAL
+========================================= */
 
 #introVideoScreen{
     position:fixed;
@@ -208,7 +254,9 @@ body{
 }
 
 
-/* TUTORIAL */
+/* =========================================
+   TUTORIAL
+========================================= */
 
 .fixed-tutorial{
     position:fixed;
@@ -282,7 +330,9 @@ body{
 }
 
 
-/* CONTENIDO */
+/* =========================================
+   CONTENIDO
+========================================= */
 
 main{
     position:relative;
@@ -294,7 +344,9 @@ section{
 }
 
 
-/* HERO */
+/* =========================================
+   HERO
+========================================= */
 
 .hero{
     min-height:100vh;
@@ -378,7 +430,9 @@ section{
 }
 
 
-/* CUENTA REGRESIVA */
+/* =========================================
+   CUENTA REGRESIVA
+========================================= */
 
 .countdown-section{
     padding:70px 20px;
@@ -396,7 +450,9 @@ section{
 }
 
 
-/* ESTADO */
+/* =========================================
+   ESTADO
+========================================= */
 
 .birthday-status{
 
@@ -420,8 +476,7 @@ section{
 
     background:rgba(40,10,55,.45);
 
-    transition:
-        .4s ease;
+    transition:.4s ease;
 
 }
 
@@ -432,6 +487,24 @@ section{
     box-shadow:
         0 0 20px rgba(130,50,210,.15);
 
+}
+
+.birthday-status.confirmar{
+
+    color:#fff;
+
+    border-color:rgba(220,160,255,.75);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(105,30,145,.55),
+            rgba(50,10,70,.6)
+        );
+
+    box-shadow:
+        0 0 25px rgba(170,70,255,.45),
+        0 0 60px rgba(130,40,210,.2);
 }
 
 .birthday-status.festejando{
@@ -467,6 +540,10 @@ section{
 
 }
 
+
+/* =========================================
+   CONTADOR
+========================================= */
 
 .countdown{
     display:flex;
@@ -508,8 +585,91 @@ section{
     color:#cdb2dc;
 }
 
+.celebration-message{
 
-/* INVITACIÓN */
+    margin-top:22px;
+
+    font-family:"Cinzel Decorative",Georgia,serif;
+
+    font-size:clamp(18px,4vw,30px);
+
+    color:#f5e5ff;
+
+    text-shadow:
+        0 0 10px #9c4dff,
+        0 0 25px #7a25d6;
+
+    animation:
+        celebrationText 2s infinite ease-in-out;
+}
+
+@keyframes celebrationText{
+
+    0%,100%{
+        transform:scale(1);
+        opacity:.85;
+    }
+
+    50%{
+        transform:scale(1.04);
+        opacity:1;
+    }
+
+}
+
+
+/* =========================================
+   BOTÓN DE ASISTENCIA
+========================================= */
+
+.attendance-button{
+
+    margin-top:28px;
+
+    padding:15px 28px;
+
+    border-radius:30px;
+
+    border:1px solid rgba(220,180,255,.7);
+
+    background:
+        linear-gradient(
+            135deg,
+            #5e178f,
+            #321047
+        );
+
+    color:#fff;
+
+    font-family:Georgia,serif;
+
+    font-size:15px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 25px rgba(157,65,255,.3);
+
+    transition:.3s;
+}
+
+.attendance-button:hover:not(:disabled){
+    transform:scale(1.05);
+    box-shadow:
+        0 0 35px rgba(157,65,255,.55);
+}
+
+.attendance-button:disabled{
+    cursor:default;
+    opacity:.75;
+}
+
+
+/* =========================================
+   INVITACIÓN
+========================================= */
 
 #invitationReveal{
     min-height:100vh;
@@ -582,7 +742,9 @@ section{
 }
 
 
-/* AVISO */
+/* =========================================
+   AVISO
+========================================= */
 
 .confirm-hint{
 
@@ -603,7 +765,179 @@ section{
 }
 
 
-/* VIDEO 2 */
+/* =========================================
+   MODAL ASISTENCIA
+========================================= */
+
+#confirmationModal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:70000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.78);
+
+    backdrop-filter:blur(8px);
+}
+
+.confirmation-box{
+
+    width:min(500px,94%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    padding:28px;
+
+    border:1px solid rgba(210,160,255,.55);
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(35,8,50,.98),
+            rgba(12,3,20,.98)
+        );
+
+    box-shadow:
+        0 0 45px rgba(150,50,255,.4);
+
+    text-align:center;
+}
+
+.confirmation-box h2{
+
+    margin-top:0;
+
+    font-family:"Cinzel Decorative",Georgia,serif;
+
+    color:#f4e7ff;
+
+}
+
+.form-group{
+
+    text-align:left;
+
+    margin:15px 0;
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#d9c1e8;
+
+    font-size:14px;
+}
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    padding:12px 14px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(200,140,255,.35);
+
+    background:#13081b;
+
+    color:#fff;
+
+    outline:none;
+
+    font-family:Georgia,serif;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:#bd78ff;
+
+    box-shadow:
+        0 0 15px rgba(170,70,255,.2);
+}
+
+.confirm-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    justify-content:center;
+
+    margin-top:22px;
+
+    flex-wrap:wrap;
+}
+
+.confirm-submit,
+.confirm-close{
+
+    padding:12px 22px;
+
+    border-radius:25px;
+
+    font-family:Georgia,serif;
+
+    cursor:pointer;
+}
+
+.confirm-submit{
+
+    border:1px solid rgba(220,180,255,.8);
+
+    background:
+        linear-gradient(
+            135deg,
+            #64199a,
+            #321047
+        );
+
+    color:#fff;
+}
+
+.confirm-close{
+
+    border:1px solid rgba(255,255,255,.2);
+
+    background:rgba(255,255,255,.06);
+
+    color:#ddd;
+}
+
+.confirm-message{
+
+    margin-top:15px;
+
+    min-height:20px;
+
+    color:#e7d2f5;
+
+    font-size:14px;
+}
+
+
+/* =========================================
+   VIDEO 2
+========================================= */
 
 #finalVideoScreen{
     position:fixed;
@@ -640,7 +974,9 @@ section{
 }
 
 
-/* CELULAR */
+/* =========================================
+   CELULAR
+========================================= */
 
 @media(max-width:750px){
 
@@ -705,7 +1041,9 @@ section{
 }
 
 
-/* CELULARES PEQUEÑOS */
+/* =========================================
+   CELULARES PEQUEÑOS
+========================================= */
 
 @media(max-width:420px){
 
@@ -753,7 +1091,9 @@ section{
 <body>
 
 
-<!-- VIDEO INICIAL -->
+<!-- =========================================
+     VIDEO INICIAL
+========================================= -->
 
 <div id="introVideoScreen">
 
@@ -779,7 +1119,9 @@ section{
 </div>
 
 
-<!-- VIDEO 2 -->
+<!-- =========================================
+     VIDEO 2
+========================================= -->
 
 <div
     id="finalVideoScreen"
@@ -796,17 +1138,28 @@ section{
 </div>
 
 
-<!-- MÚSICA -->
+<!-- =========================================
+     MAÑANITAS
+========================================= -->
 
 <audio
-    id="backgroundMusic"
-    src="musica.mp3"
+    id="mananitasAudio"
+    src="mananitas.mp3"
     preload="auto"
     loop>
 </audio>
 
 
-<!-- TUTORIAL -->
+<!-- =========================================
+     CONFETI
+========================================= -->
+
+<div id="confettiContainer"></div>
+
+
+<!-- =========================================
+     TUTORIAL
+========================================= -->
 
 <div class="fixed-tutorial">
 
@@ -831,10 +1184,224 @@ section{
 </div>
 
 
+<!-- =========================================
+     MODAL
+========================================= -->
+
+<div
+    id="confirmationModal"
+    class="hidden"
+>
+
+    <div class="confirmation-box">
+
+        <h2>
+            ✨ CONFIRMAR ASISTENCIA ✨
+        </h2>
+
+        <p>
+            Confirma tus datos para formar parte
+            de esta celebración.
+        </p>
+
+
+        <div class="form-group">
+
+            <label for="nombre">
+                Nombre
+            </label>
+
+            <input
+                id="nombre"
+                type="text"
+                maxlength="100"
+                autocomplete="name"
+                placeholder="Escribe tu nombre"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="personas">
+                Personas que asistirán
+            </label>
+
+            <select id="personas">
+
+                <option value="1">
+                    1
+                </option>
+
+                <option value="2">
+                    2
+                </option>
+
+                <option value="3">
+                    3
+                </option>
+
+                <option value="4">
+                    4
+                </option>
+
+                <option value="5">
+                    5
+                </option>
+
+                <option value="6">
+                    6
+                </option>
+
+                <option value="7">
+                    7
+                </option>
+
+                <option value="8">
+                    8
+                </option>
+
+                <option value="9">
+                    9
+                </option>
+
+                <option value="10">
+                    10
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="adultos">
+                Adultos
+            </label>
+
+            <select id="adultos">
+
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="ninos">
+                Niños
+            </label>
+
+            <select id="ninos">
+
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="asistencia">
+                ¿Asistirás?
+            </label>
+
+            <select id="asistencia">
+
+                <option value="Sí">
+                    Sí
+                </option>
+
+                <option value="No">
+                    No
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="telefono">
+                Teléfono
+                <span style="opacity:.55">
+                    (opcional)
+                </span>
+            </label>
+
+            <input
+                id="telefono"
+                type="tel"
+                maxlength="30"
+                autocomplete="tel"
+                placeholder="Opcional"
+            >
+
+        </div>
+
+
+        <div class="confirm-actions">
+
+            <button
+                id="confirmSubmit"
+                class="confirm-submit"
+            >
+                CONFIRMAR
+            </button>
+
+            <button
+                id="confirmClose"
+                class="confirm-close"
+                type="button"
+            >
+                CERRAR
+            </button>
+
+        </div>
+
+
+        <div
+            id="confirmMessage"
+            class="confirm-message">
+        </div>
+
+    </div>
+
+</div>
+
+
 <main>
 
 
-    <!-- HERO -->
+    <!-- =====================================
+         HERO
+    ====================================== -->
 
     <section class="hero">
 
@@ -868,7 +1435,9 @@ section{
     </section>
 
 
-    <!-- CUENTA REGRESIVA -->
+    <!-- =====================================
+         CUENTA REGRESIVA
+    ====================================== -->
 
     <section class="countdown-section">
 
@@ -876,11 +1445,15 @@ section{
             ESTADO DE LA CELEBRACIÓN
         </div>
 
+
         <div
             id="birthdayStatus"
             class="birthday-status esperando">
+
             ⏳ ESPERANDO
+
         </div>
+
 
         <div class="countdown">
 
@@ -945,10 +1518,29 @@ section{
 
         </div>
 
+
+        <div
+            id="celebrationMessage"
+            class="celebration-message hidden">
+            🎊 ¡LA FIESTA CONTINÚA! 🎊
+        </div>
+
+
+        <button
+            id="attendanceButton"
+            class="attendance-button"
+            type="button">
+
+            ⏳ ESPERANDO
+
+        </button>
+
     </section>
 
 
-    <!-- INVITACIÓN -->
+    <!-- =====================================
+         INVITACIÓN
+    ====================================== -->
 
     <section id="invitationReveal">
 
@@ -973,10 +1565,14 @@ section{
 
         </div>
 
-        <div class="confirm-hint">
-            🔒 Las confirmaciones están cerradas
+        <div
+            id="confirmHint"
+            class="confirm-hint">
+
+            ⏳ Las confirmaciones estarán disponibles
             <br>
-            Los registros anteriores se conservaron.
+            del 20 al 26 de septiembre.
+
         </div>
 
     </section>
@@ -985,6 +1581,42 @@ section{
 
 
 <script>
+
+/* =========================================
+   SUPABASE
+========================================= */
+
+const SUPABASE_URL =
+    "https://ibdjtobuadgzozbggxxu.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
+
+let supabaseClient = null;
+
+try{
+
+    if(
+        window.supabase &&
+        typeof window.supabase.createClient === "function"
+    ){
+
+        supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+    }
+
+}catch(error){
+
+    console.error(
+        "Supabase no pudo inicializarse:",
+        error
+    );
+
+}
 
 
 /* =========================================
@@ -1043,6 +1675,62 @@ const startVideo =
     );
 
 
+/* =========================================
+   MAÑANITAS
+========================================= */
+
+const mananitasAudio =
+    document.getElementById(
+        "mananitasAudio"
+    );
+
+
+let mananitasIniciadas = false;
+
+
+async function iniciarMananitas(){
+
+    if(!mananitasAudio){
+        return;
+    }
+
+    if(mananitasIniciadas){
+        return;
+    }
+
+    mananitasIniciadas = true;
+
+    try{
+
+        mananitasAudio.volume = 0.8;
+
+        mananitasAudio.currentTime = 0;
+
+        await mananitasAudio.play();
+
+    }catch(error){
+
+        /*
+         * Si el navegador bloquea el audio,
+         * no se rompe la página.
+         */
+
+        console.warn(
+            "El navegador bloqueó las Mañanitas:",
+            error
+        );
+
+        mananitasIniciadas = false;
+
+    }
+
+}
+
+
+/* =========================================
+   ENTRAR
+========================================= */
+
 startVideo.addEventListener(
     "click",
     async () => {
@@ -1054,14 +1742,6 @@ startVideo.addEventListener(
         introVideo.classList.add(
             "visible"
         );
-
-        /*
-         * Las Mañanitas empiezan
-         * al entrar y permanecen
-         * en loop.
-         */
-
-        fadeMusicIn();
 
         try{
 
@@ -1079,6 +1759,11 @@ startVideo.addEventListener(
 
             }catch(secondError){
 
+                console.error(
+                    "No se pudo reproducir el video:",
+                    secondError
+                );
+
                 introStart.classList.remove(
                     "hidden"
                 );
@@ -1092,86 +1777,16 @@ startVideo.addEventListener(
 
 
 /* =========================================
-   MÚSICA
-========================================= */
-
-const backgroundMusic =
-    document.getElementById(
-        "backgroundMusic"
-    );
-
-let musicFadeTimer = null;
-
-
-function fadeMusicIn(){
-
-    if(!backgroundMusic){
-        return;
-    }
-
-    clearInterval(
-        musicFadeTimer
-    );
-
-    backgroundMusic.volume = 0;
-
-    const playPromise =
-        backgroundMusic.play();
-
-    if(playPromise){
-
-        playPromise.catch(
-            error => {
-
-                console.error(
-                    "No se pudo reproducir la música:",
-                    error
-                );
-
-            }
-        );
-
-    }
-
-
-    let volume = 0;
-
-
-    musicFadeTimer =
-        setInterval(
-            () => {
-
-                volume += 0.02;
-
-
-                if(volume >= 0.75){
-
-                    volume = 0.75;
-
-                    clearInterval(
-                        musicFadeTimer
-                    );
-
-                }
-
-
-                backgroundMusic.volume =
-                    volume;
-
-            },
-            100
-        );
-
-}
-
-
-/* =========================================
    TERMINA VIDEO 1
+   AQUÍ COMIENZAN LAS MAÑANITAS
 ========================================= */
 
 introVideo.addEventListener(
     "ended",
-    () => {
+    async () => {
+
+        await iniciarMananitas();
+
 
         introVideoScreen.classList.add(
             "fade-out"
@@ -1210,57 +1825,61 @@ const invitationReveal =
 let tutorialHidden = false;
 
 
-const tutorialObserver =
-    new IntersectionObserver(
-        entries => {
+if(
+    tutorial &&
+    invitationReveal &&
+    "IntersectionObserver" in window
+){
 
-            entries.forEach(entry => {
+    const tutorialObserver =
+        new IntersectionObserver(
+            entries => {
 
-                if(
-                    entry.isIntersecting &&
-                    entry.intersectionRatio >= .75 &&
-                    !tutorialHidden
-                ){
+                entries.forEach(entry => {
 
-                    tutorialHidden = true;
+                    if(
+                        entry.isIntersecting &&
+                        entry.intersectionRatio >= .75 &&
+                        !tutorialHidden
+                    ){
 
-                    tutorial.classList.add(
-                        "tutorial-hidden"
-                    );
+                        tutorialHidden = true;
 
-                    setTimeout(
-                        () => {
+                        tutorial.classList.add(
+                            "tutorial-hidden"
+                        );
 
-                            tutorial.classList.add(
-                                "hidden"
-                            );
+                        setTimeout(
+                            () => {
 
-                        },
-                        700
-                    );
+                                tutorial.classList.add(
+                                    "hidden"
+                                );
 
-                }
+                            },
+                            700
+                        );
 
-            });
+                    }
 
-        },
-        {
-            threshold:[.75]
-        }
+                });
+
+            },
+            {
+                threshold:[.75]
+            }
+        );
+
+
+    tutorialObserver.observe(
+        invitationReveal
     );
 
-
-tutorialObserver.observe(
-    invitationReveal
-);
+}
 
 
 /* =========================================
-   CUENTA REGRESIVA Y ESTADO
-
-   26 SEP -> ESPERANDO
-   27 SEP -> FESTEJANDO
-   28 SEP -> ESPERANDO
+   ELEMENTOS DEL CONTADOR
 ========================================= */
 
 const birthdayStatus =
@@ -1268,63 +1887,74 @@ const birthdayStatus =
         "birthdayStatus"
     );
 
+const attendanceButton =
+    document.getElementById(
+        "attendanceButton"
+    );
 
-function obtenerCumpleActual(){
+const celebrationMessage =
+    document.getElementById(
+        "celebrationMessage"
+    );
 
-    const ahora =
-        new Date();
+const confirmHint =
+    document.getElementById(
+        "confirmHint"
+    );
+
+
+const daysElement =
+    document.getElementById("days");
+
+const hoursElement =
+    document.getElementById("hours");
+
+const minutesElement =
+    document.getElementById("minutes");
+
+const secondsElement =
+    document.getElementById("seconds");
+
+
+/* =========================================
+   FECHAS
+========================================= */
+
+function fechaLocal(
+    anio,
+    mes,
+    dia,
+    hora = 0,
+    minuto = 0,
+    segundo = 0
+){
 
     return new Date(
-        ahora.getFullYear(),
-        8,
-        27,
-        0,
-        0,
-        0,
+        anio,
+        mes - 1,
+        dia,
+        hora,
+        minuto,
+        segundo,
         0
     );
 
 }
 
 
-function obtenerSiguienteCumple(){
-
-    const ahora =
-        new Date();
-
-    let siguiente =
-        new Date(
-            ahora.getFullYear(),
-            8,
-            27,
-            0,
-            0,
-            0,
-            0
-        );
-
-
-    if(
-        ahora >= siguiente
-    ){
-
-        siguiente =
-            new Date(
-                ahora.getFullYear() + 1,
-                8,
-                27,
-                0,
-                0,
-                0,
-                0
-            );
-
-    }
-
-    return siguiente;
-
-}
-
+/*
+ * 20 de septiembre:
+ * abre confirmación.
+ *
+ * 27 de septiembre:
+ * empieza celebración 00:00.
+ *
+ * 27 de septiembre 16:00:
+ * termina contador.
+ *
+ * 28 de septiembre:
+ * vuelve a ESPERANDO.
+ */
 
 function actualizarEstadoYContador(){
 
@@ -1335,127 +1965,301 @@ function actualizarEstadoYContador(){
         ahora.getFullYear();
 
 
-    /*
-     * 27 DE SEPTIEMBRE
-     *
-     * Desde las 00:00
-     * hasta antes del 28.
-     */
+    const apertura =
+        fechaLocal(
+            anio,
+            9,
+            20,
+            0,
+            0,
+            0
+        );
+
 
     const inicioFestejo =
-        new Date(
+        fechaLocal(
             anio,
-            8,
+            9,
             27,
             0,
             0,
+            0
+        );
+
+
+    const finContador =
+        fechaLocal(
+            anio,
+            9,
+            27,
+            16,
             0,
             0
         );
 
 
     const finFestejo =
-        new Date(
+        fechaLocal(
             anio,
-            8,
+            9,
             28,
-            0,
             0,
             0,
             0
         );
 
 
-    const esDiaDeCumple =
+    let estado;
+
+
+    /*
+     * =====================================
+     * 20 AL 26
+     * =====================================
+     */
+
+    if(
+        ahora >= apertura &&
+        ahora < inicioFestejo
+    ){
+
+        estado =
+            "CONFIRMAR";
+
+    }
+
+
+    /*
+     * =====================================
+     * 27 TODO EL DÍA
+     * =====================================
+     */
+
+    else if(
         ahora >= inicioFestejo &&
-        ahora < finFestejo;
+        ahora < finFestejo
+    ){
+
+        estado =
+            "FESTEJANDO";
+
+    }
 
 
-    if(esDiaDeCumple){
+    /*
+     * =====================================
+     * RESTO DEL AÑO
+     * =====================================
+     */
 
-        /*
-         * 27 DE SEPTIEMBRE
-         */
+    else{
+
+        estado =
+            "ESPERANDO";
+
+    }
+
+
+    /* =====================================
+       ESTADO CONFIRMAR
+    ====================================== */
+
+    if(estado === "CONFIRMAR"){
 
         birthdayStatus.textContent =
-            "🎉 FESTEJANDO";
+            "📝 CONFIRMAR ASISTENCIA";
 
-        birthdayStatus.classList.remove(
-            "esperando"
-        );
+        birthdayStatus.className =
+            "birthday-status confirmar";
 
-        birthdayStatus.classList.add(
-            "festejando"
+
+        attendanceButton.textContent =
+            "📝 CONFIRMAR ASISTENCIA";
+
+        attendanceButton.disabled =
+            false;
+
+        attendanceButton.dataset.mode =
+            "confirmar";
+
+
+        confirmHint.innerHTML =
+            "✨ Las confirmaciones están abiertas" +
+            "<br>" +
+            "Del 20 al 26 de septiembre.";
+
+
+        celebrationMessage.classList.add(
+            "hidden"
         );
 
 
         /*
-         * Durante el cumpleaños
-         * el contador queda en cero.
+         * Contador hacia el 27 a las 00:00
          */
 
-        document.getElementById(
-            "days"
-        ).textContent = "0";
-
-        document.getElementById(
-            "hours"
-        ).textContent = "0";
-
-        document.getElementById(
-            "minutes"
-        ).textContent = "0";
-
-        document.getElementById(
-            "seconds"
-        ).textContent = "0";
+        actualizarContador(
+            inicioFestejo,
+            ahora
+        );
 
         return;
 
     }
 
 
-    /*
-     * ANTES O DESPUÉS DEL 27
-     */
+    /* =====================================
+       ESTADO FESTEJANDO
+    ====================================== */
+
+    if(estado === "FESTEJANDO"){
+
+        birthdayStatus.textContent =
+            "🎉 FESTEJANDO";
+
+        birthdayStatus.className =
+            "birthday-status festejando";
+
+
+        attendanceButton.textContent =
+            "🎉 FESTEJANDO";
+
+        attendanceButton.disabled =
+            true;
+
+        attendanceButton.dataset.mode =
+            "festejando";
+
+
+        confirmHint.innerHTML =
+            "🎊 ¡Hoy es el gran día!" +
+            "<br>" +
+            "Las confirmaciones están cerradas.";
+
+
+        iniciarConfeti();
+
+
+        /*
+         * Antes de las 4 PM:
+         * contador sigue corriendo.
+         */
+
+        if(ahora < finContador){
+
+            celebrationMessage.classList.add(
+                "hidden"
+            );
+
+            actualizarContador(
+                finContador,
+                ahora
+            );
+
+        }
+
+        /*
+         * Desde las 4 PM:
+         * contador terminado.
+         */
+
+        else{
+
+            ponerContadorEnCero();
+
+            celebrationMessage.classList.remove(
+                "hidden"
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    /* =====================================
+       ESTADO ESPERANDO
+    ====================================== */
 
     birthdayStatus.textContent =
         "⏳ ESPERANDO";
 
-    birthdayStatus.classList.remove(
-        "festejando"
+    birthdayStatus.className =
+        "birthday-status esperando";
+
+
+    attendanceButton.textContent =
+        "⏳ ESPERANDO";
+
+    attendanceButton.disabled =
+        true;
+
+    attendanceButton.dataset.mode =
+        "esperando";
+
+
+    celebrationMessage.classList.add(
+        "hidden"
     );
 
-    birthdayStatus.classList.add(
-        "esperando"
-    );
+
+    detenerConfeti();
 
 
-    let destino;
+    confirmHint.innerHTML =
+        "⏳ Las confirmaciones están cerradas" +
+        "<br>" +
+        "Se abrirán nuevamente el 20 de septiembre.";
 
 
     /*
-     * Si todavía no llega el 27
-     * esperamos al 27 de este año.
+     * Si estamos antes del 20:
+     * esperamos al 20 de este año.
+     *
+     * Si ya pasó el 28:
+     * esperamos al 20 del siguiente año.
      */
 
-    if(ahora < inicioFestejo){
+    let siguienteApertura;
 
-        destino =
-            inicioFestejo;
+
+    if(ahora < apertura){
+
+        siguienteApertura =
+            apertura;
 
     }else{
 
-        /*
-         * Si ya pasó el 27,
-         * esperamos al próximo 27.
-         */
-
-        destino =
-            obtenerSiguienteCumple();
+        siguienteApertura =
+            fechaLocal(
+                anio + 1,
+                9,
+                20,
+                0,
+                0,
+                0
+            );
 
     }
 
+
+    actualizarContador(
+        siguienteApertura,
+        ahora
+    );
+
+}
+
+
+/* =========================================
+   CONTADOR
+========================================= */
+
+function actualizarContador(
+    destino,
+    ahora
+){
 
     const diferencia =
         destino.getTime() -
@@ -1463,7 +2267,11 @@ function actualizarEstadoYContador(){
 
 
     if(diferencia <= 0){
+
+        ponerContadorEnCero();
+
         return;
+
     }
 
 
@@ -1501,25 +2309,34 @@ function actualizarEstadoYContador(){
         );
 
 
-    document.getElementById(
-        "days"
-    ).textContent =
+    daysElement.textContent =
         dias;
 
-    document.getElementById(
-        "hours"
-    ).textContent =
+    hoursElement.textContent =
         horas;
 
-    document.getElementById(
-        "minutes"
-    ).textContent =
+    minutesElement.textContent =
         minutos;
 
-    document.getElementById(
-        "seconds"
-    ).textContent =
+    secondsElement.textContent =
         segundos;
+
+}
+
+
+function ponerContadorEnCero(){
+
+    daysElement.textContent =
+        "0";
+
+    hoursElement.textContent =
+        "0";
+
+    minutesElement.textContent =
+        "0";
+
+    secondsElement.textContent =
+        "0";
 
 }
 
@@ -1530,6 +2347,582 @@ actualizarEstadoYContador();
 setInterval(
     actualizarEstadoYContador,
     1000
+);
+
+
+/* =========================================
+   CONFETI
+========================================= */
+
+let confettiTimer = null;
+
+
+function crearConfeti(){
+
+    const confettiContainer =
+        document.getElementById(
+            "confettiContainer"
+        );
+
+    if(!confettiContainer){
+        return;
+    }
+
+
+    const pieza =
+        document.createElement("div");
+
+    pieza.className =
+        "confetti";
+
+
+    pieza.style.left =
+        Math.random() * 100 + "%";
+
+
+    pieza.style.setProperty(
+        "--drift",
+        (
+            Math.random() * 220 -
+            110
+        ) + "px"
+    );
+
+
+    pieza.style.animationDuration =
+        (
+            3 +
+            Math.random() * 4
+        ) + "s";
+
+
+    pieza.style.transform =
+        "rotate(" +
+        Math.random() * 360 +
+        "deg)";
+
+
+    const tamanos =
+        [
+            [7,12],
+            [9,15],
+            [6,10],
+            [11,8]
+        ];
+
+
+    const tamano =
+        tamanos[
+            Math.floor(
+                Math.random() *
+                tamanos.length
+            )
+        ];
+
+
+    pieza.style.width =
+        tamano[0] + "px";
+
+    pieza.style.height =
+        tamano[1] + "px";
+
+
+    /*
+     * Se generan colores mediante
+     * HSL para que haya variedad.
+     */
+
+    pieza.style.background =
+        "hsl(" +
+        Math.floor(
+            Math.random() * 360
+        ) +
+        ", 90%, 65%)";
+
+
+    confettiContainer.appendChild(
+        pieza
+    );
+
+
+    setTimeout(
+        () => {
+
+            pieza.remove();
+
+        },
+        8000
+    );
+
+}
+
+
+function iniciarConfeti(){
+
+    if(confettiTimer){
+        return;
+    }
+
+
+    /*
+     * Primera ráfaga
+     */
+
+    for(
+        let i = 0;
+        i < 35;
+        i++
+    ){
+
+        setTimeout(
+            crearConfeti,
+            i * 40
+        );
+
+    }
+
+
+    /*
+     * Continúa durante TODO
+     * el 27 de septiembre.
+     */
+
+    confettiTimer =
+        setInterval(
+            () => {
+
+                for(
+                    let i = 0;
+                    i < 8;
+                    i++
+                ){
+
+                    crearConfeti();
+
+                }
+
+            },
+            450
+        );
+
+}
+
+
+function detenerConfeti(){
+
+    if(confettiTimer){
+
+        clearInterval(
+            confettiTimer
+        );
+
+        confettiTimer =
+            null;
+
+    }
+
+
+    const container =
+        document.getElementById(
+            "confettiContainer"
+        );
+
+
+    if(container){
+
+        container.innerHTML =
+            "";
+
+    }
+
+}
+
+
+/* =========================================
+   MODAL DE CONFIRMACIÓN
+========================================= */
+
+const confirmationModal =
+    document.getElementById(
+        "confirmationModal"
+    );
+
+const confirmClose =
+    document.getElementById(
+        "confirmClose"
+    );
+
+const confirmSubmit =
+    document.getElementById(
+        "confirmSubmit"
+    );
+
+const confirmMessage =
+    document.getElementById(
+        "confirmMessage"
+    );
+
+
+function abrirConfirmacion(){
+
+    /*
+     * Volvemos a comprobar la fecha
+     * antes de abrir.
+     */
+
+    const ahora =
+        new Date();
+
+    const anio =
+        ahora.getFullYear();
+
+
+    const apertura =
+        fechaLocal(
+            anio,
+            9,
+            20
+        );
+
+
+    const inicioFestejo =
+        fechaLocal(
+            anio,
+            9,
+            27
+        );
+
+
+    if(
+        ahora < apertura ||
+        ahora >= inicioFestejo
+    ){
+
+        actualizarEstadoYContador();
+
+        return;
+
+    }
+
+
+    confirmMessage.textContent =
+        "";
+
+    confirmationModal.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+function cerrarConfirmacion(){
+
+    confirmationModal.classList.add(
+        "hidden"
+    );
+
+}
+
+
+attendanceButton.addEventListener(
+    "click",
+    () => {
+
+        if(
+            attendanceButton.dataset.mode ===
+            "confirmar"
+        ){
+
+            abrirConfirmacion();
+
+        }
+
+    }
+);
+
+
+confirmClose.addEventListener(
+    "click",
+    cerrarConfirmacion
+);
+
+
+confirmationModal.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            confirmationModal
+        ){
+
+            cerrarConfirmacion();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   GUARDAR CONFIRMACIÓN
+========================================= */
+
+confirmSubmit.addEventListener(
+    "click",
+    async () => {
+
+        /*
+         * Comprobación de seguridad
+         * de fecha.
+         */
+
+        const ahora =
+            new Date();
+
+        const anio =
+            ahora.getFullYear();
+
+
+        const apertura =
+            fechaLocal(
+                anio,
+                9,
+                20
+            );
+
+
+        const inicioFestejo =
+            fechaLocal(
+                anio,
+                9,
+                27
+            );
+
+
+        if(
+            ahora < apertura ||
+            ahora >= inicioFestejo
+        ){
+
+            confirmMessage.textContent =
+                "⏳ Las confirmaciones están cerradas.";
+
+            actualizarEstadoYContador();
+
+            return;
+
+        }
+
+
+        const nombre =
+            document
+                .getElementById("nombre")
+                .value
+                .trim();
+
+
+        const personas =
+            Number(
+                document
+                    .getElementById("personas")
+                    .value
+            );
+
+
+        const adultos =
+            Number(
+                document
+                    .getElementById("adultos")
+                    .value
+            );
+
+
+        const ninos =
+            Number(
+                document
+                    .getElementById("ninos")
+                    .value
+            );
+
+
+        const asistencia =
+            document
+                .getElementById("asistencia")
+                .value;
+
+
+        const telefono =
+            document
+                .getElementById("telefono")
+                .value
+                .trim();
+
+
+        if(!nombre){
+
+            confirmMessage.textContent =
+                "⚠️ Escribe tu nombre.";
+
+            return;
+
+        }
+
+
+        if(
+            !Number.isFinite(personas) ||
+            personas < 1
+        ){
+
+            confirmMessage.textContent =
+                "⚠️ Indica cuántas personas asistirán.";
+
+            return;
+
+        }
+
+
+        if(
+            adultos + ninos !== personas
+        ){
+
+            confirmMessage.textContent =
+                "⚠️ Adultos + niños debe coincidir con el total de personas.";
+
+            return;
+
+        }
+
+
+        if(!supabaseClient){
+
+            confirmMessage.textContent =
+                "⚠️ No se pudo conectar con el servidor.";
+
+            return;
+
+        }
+
+
+        confirmSubmit.disabled =
+            true;
+
+        confirmSubmit.textContent =
+            "GUARDANDO...";
+
+
+        try{
+
+            /*
+             * IMPORTANTE:
+             *
+             * No se borran confirmaciones anteriores.
+             * Cada nueva confirmación se agrega.
+             */
+
+            const datos = {
+
+                nombre:
+                    nombre,
+
+                personas:
+                    personas,
+
+                adultos:
+                    adultos,
+
+                ninos:
+                    ninos,
+
+                asistencia:
+                    asistencia
+
+            };
+
+
+            /*
+             * Solo mandamos teléfono si
+             * realmente se escribió.
+             */
+
+            if(telefono){
+
+                datos.telefono =
+                    telefono;
+
+            }
+
+
+            const resultado =
+                await supabaseClient
+                    .from("confirmaciones")
+                    .insert(datos);
+
+
+            if(resultado.error){
+
+                throw resultado.error;
+
+            }
+
+
+            confirmMessage.textContent =
+                "🎉 ¡Confirmación guardada correctamente!";
+
+
+            confirmSubmit.textContent =
+                "CONFIRMADO";
+
+
+            /*
+             * Limpiar formulario
+             */
+
+            document
+                .getElementById("nombre")
+                .value = "";
+
+            document
+                .getElementById("telefono")
+                .value = "";
+
+
+            setTimeout(
+                () => {
+
+                    cerrarConfirmacion();
+
+                    confirmSubmit.disabled =
+                        false;
+
+                    confirmSubmit.textContent =
+                        "CONFIRMAR";
+
+                },
+                1600
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "Error al guardar confirmación:",
+                error
+            );
+
+
+            confirmMessage.textContent =
+                "⚠️ No se pudo guardar la confirmación. Intenta nuevamente.";
+
+            confirmSubmit.disabled =
+                false;
+
+            confirmSubmit.textContent =
+                "CONFIRMAR";
+
+        }
+
+    }
 );
 
 
@@ -1548,53 +2941,67 @@ const finalVideo =
     );
 
 
-function reproducirVideo2(){
-
-    /*
-     * Se conserva la función por si
-     * posteriormente se utiliza desde
-     * otra parte del proyecto.
-     */
-
-    if(backgroundMusic){
-
-        backgroundMusic.pause();
-
-    }
-
+async function reproducirVideo2(){
 
     finalVideoScreen.classList.remove(
         "hidden"
     );
 
-    finalVideo.currentTime = 0;
 
-    finalVideo.muted = false;
-
-
-    const promesa =
-        finalVideo.play();
+    finalVideo.currentTime =
+        0;
 
 
-    if(promesa){
+    finalVideo.muted =
+        false;
 
-        promesa.catch(
-            () => {
 
-                finalVideo.muted = true;
+    /*
+     * Las Mañanitas siguen sonando.
+     */
 
-                finalVideo.play()
-                    .catch(error => {
+    if(
+        mananitasAudio &&
+        mananitasAudio.paused
+    ){
 
-                        console.error(
-                            "No se pudo reproducir video2:",
-                            error
-                        );
+        try{
 
-                    });
+            await mananitasAudio.play();
 
-            }
-        );
+        }catch(error){
+
+            console.warn(
+                "No se pudieron mantener las Mañanitas:",
+                error
+            );
+
+        }
+
+    }
+
+
+    try{
+
+        await finalVideo.play();
+
+    }catch(error){
+
+        try{
+
+            finalVideo.muted =
+                true;
+
+            await finalVideo.play();
+
+        }catch(secondError){
+
+            console.error(
+                "No se pudo reproducir video2:",
+                secondError
+            );
+
+        }
 
     }
 
@@ -1607,15 +3014,43 @@ function reproducirVideo2(){
 
 finalVideo.addEventListener(
     "ended",
-    () => {
+    async () => {
 
         finalVideo.pause();
 
-        finalVideo.currentTime = 0;
+        finalVideo.currentTime =
+            0;
+
 
         finalVideoScreen.classList.add(
             "hidden"
         );
+
+
+        /*
+         * Las Mañanitas continúan.
+         */
+
+        if(
+            mananitasAudio &&
+            mananitasAudio.paused
+        ){
+
+            try{
+
+                await mananitasAudio.play();
+
+            }catch(error){
+
+                console.warn(
+                    "No se pudieron continuar las Mañanitas:",
+                    error
+                );
+
+            }
+
+        }
+
 
         document
             .getElementById(
@@ -1625,6 +3060,31 @@ finalVideo.addEventListener(
                 behavior:"smooth",
                 block:"start"
             });
+
+    }
+);
+
+
+/* =========================================
+   RECUPERAR AUDIO SI EL NAVEGADOR
+   LO INTERRUMPE
+========================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if(
+            document.visibilityState === "visible" &&
+            mananitasIniciadas &&
+            mananitasAudio &&
+            mananitasAudio.paused
+        ){
+
+            mananitasAudio.play()
+                .catch(() => {});
+
+        }
 
     }
 );
