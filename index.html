@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
@@ -9,128 +10,49 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Velunara | Festejo</title>
+<title>Velunara | Invitación</title>
 
 <meta
     name="robots"
     content="noindex,nofollow,noarchive"
 >
 
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
-
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
-
-<link
-    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap"
-    rel="stylesheet"
->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
+
+/* =========================================
+   GENERAL
+========================================= */
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-    margin:0;
-    background:#08030c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #28102e 0%,
+            #130819 45%,
+            #08040d 100%
+        );
+
     color:#fff;
-    font-family:Georgia,"Times New Roman",serif;
+
     overflow-x:hidden;
-}
-
-.hidden{
-    display:none!important;
-}
-
-
-/* =========================================
-   ESTRELLAS
-========================================= */
-
-.stars{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    overflow:hidden;
-}
-
-.star{
-    position:absolute;
-    width:2px;
-    height:2px;
-    background:#fff;
-    border-radius:50%;
-    opacity:.75;
-    animation:twinkle 3s infinite ease-in-out;
-}
-
-@keyframes twinkle{
-
-    0%,100%{
-        opacity:.25;
-        transform:scale(.8);
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(1.4);
-    }
-
-}
-
-
-/* =========================================
-   CONFETI
-========================================= */
-
-#confettiContainer{
-    position:fixed;
-    inset:0;
-    z-index:50000;
-    pointer-events:none;
-    overflow:hidden;
-}
-
-.confetti{
-    position:absolute;
-    top:-20px;
-    width:9px;
-    height:15px;
-    opacity:.9;
-    animation:confettiFall linear forwards;
-}
-
-@keyframes confettiFall{
-
-    0%{
-        transform:
-            translate3d(0,-30px,0)
-            rotate(0deg);
-        opacity:1;
-    }
-
-    100%{
-        transform:
-            translate3d(var(--drift),110vh,0)
-            rotate(720deg);
-        opacity:.2;
-    }
-
 }
 
 
@@ -138,315 +60,142 @@ body{
    VIDEO INICIAL
 ========================================= */
 
-#introVideoScreen{
+#videoInicial{
+
     position:fixed;
+
     inset:0;
-    z-index:60000;
-    background:#000;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    opacity:1;
-    visibility:visible;
-
-    transition:
-        opacity 1.25s ease,
-        visibility 1.25s ease;
-}
-
-#introVideoScreen.fade-out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-#introVideo{
     width:100%;
     height:100%;
+
     object-fit:cover;
-    display:block;
 
-    opacity:0;
-    visibility:hidden;
+    background:#000;
 
-    transform:scale(1.04);
+    z-index:9999;
 
-    transition:
-        opacity .9s ease,
-        transform 1.2s ease,
-        visibility .9s ease;
 }
 
-#introVideo.visible{
-    opacity:1;
-    visibility:visible;
-    transform:scale(1);
-}
 
-#introStart{
-    position:absolute;
-    z-index:2;
+/* =========================================
+   BOTÓN ENTRAR
+========================================= */
 
-    text-align:center;
+#entrar{
 
-    padding:30px;
+    position:fixed;
 
-    border:1px solid rgba(205,160,255,.5);
-    border-radius:20px;
+    left:50%;
+    bottom:40px;
 
-    background:rgba(20,5,30,.75);
+    transform:translateX(-50%);
 
-    backdrop-filter:blur(10px);
+    z-index:10000;
 
-    box-shadow:
-        0 0 40px rgba(160,70,255,.35),
-        inset 0 0 30px rgba(255,255,255,.03);
-}
+    padding:15px 35px;
 
-#introStartTitle{
-    font-family:"Cinzel Decorative",Georgia,serif;
+    border:none;
 
-    font-size:clamp(30px,7vw,70px);
-
-    color:#fff;
-
-    text-shadow:
-        0 0 10px #9c4dff,
-        0 0 25px #7a25d6;
-
-    margin-bottom:25px;
-}
-
-#startVideo{
-    border:1px solid rgba(220,180,255,.8);
+    border-radius:50px;
 
     background:
         linear-gradient(
             135deg,
-            #5e178f,
-            #321047
+            #c99a3e,
+            #f1cf76
         );
 
-    color:white;
+    color:#24120a;
 
-    padding:14px 35px;
+    font-size:17px;
 
-    border-radius:30px;
+    font-weight:bold;
 
     cursor:pointer;
 
-    font-family:Georgia,serif;
-
-    font-size:16px;
-
-    letter-spacing:1px;
-
     box-shadow:
-        0 0 20px rgba(157,65,255,.4);
+        0 0 20px rgba(
+            241,
+            207,
+            118,
+            .5
+        );
 
-    transition:.3s;
+    transition:.25s;
 }
 
-#startVideo:hover{
-    transform:scale(1.06);
-}
+#entrar:hover{
 
-
-/* =========================================
-   TUTORIAL
-========================================= */
-
-.fixed-tutorial{
-    position:fixed;
-
-    top:12px;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:9999;
-
-    text-align:center;
-
-    width:min(92%,500px);
-
-    padding:10px 18px;
-
-    border:1px solid rgba(210,170,255,.4);
-
-    border-radius:20px;
-
-    background:rgba(20,5,30,.75);
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-        0 0 20px rgba(150,60,255,.25);
-
-    transition:
-        opacity .65s ease,
-        transform .65s ease;
-}
-
-.fixed-tutorial.tutorial-hidden{
-    opacity:0;
-    transform:translate(-50%,-20px);
-}
-
-.tutorial-title{
-    font-size:13px;
-    letter-spacing:2px;
-    color:#e8cfff;
-}
-
-.tutorial-text{
-    margin-top:4px;
-    font-size:14px;
-    color:#fff;
-}
-
-.tutorial-arrow{
-    font-size:27px;
-    line-height:25px;
-
-    animation:
-        arrowMove 1.2s infinite ease-in-out;
-
-    color:#d9b1ff;
-}
-
-@keyframes arrowMove{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(7px);
-    }
+    transform:
+        translateX(-50%)
+        scale(1.05);
 
 }
 
 
 /* =========================================
-   CONTENIDO
+   CONTENEDOR PRINCIPAL
 ========================================= */
 
-main{
-    position:relative;
-    z-index:1;
-}
+#contenido{
 
-section{
-    position:relative;
-}
+    display:none;
 
-
-/* =========================================
-   HERO
-========================================= */
-
-.hero{
     min-height:100vh;
 
-    padding:110px 20px 70px;
+    padding:
+        25px
+        15px
+        60px;
 
-    display:flex;
-    flex-direction:column;
+    position:relative;
 
-    align-items:center;
-    justify-content:center;
+    z-index:2;
 
-    text-align:center;
-}
-
-.small-title{
-    font-size:15px;
-
-    letter-spacing:3px;
-
-    color:#d7b7ed;
-
-    margin-bottom:20px;
-
-    text-transform:uppercase;
-}
-
-.main-title{
-    font-family:"Cinzel Decorative",Georgia,serif;
-
-    font-size:clamp(48px,10vw,105px);
-
-    line-height:1;
-
-    margin:0;
-
-    color:#fff;
-
-    letter-spacing:2px;
-
-    text-shadow:
-        0 0 10px rgba(194,118,255,.8),
-        0 0 30px rgba(130,50,220,.6),
-        0 0 65px rgba(90,20,150,.45);
-}
-
-.subtitle{
-    margin-top:20px;
-
-    font-size:clamp(15px,3vw,22px);
-
-    color:#dfc5ed;
-}
-
-.hero-photo-wrap{
-    width:min(850px,92%);
-
-    margin-top:45px;
-
-    padding:8px;
-
-    border:1px solid rgba(190,120,255,.6);
-
-    box-shadow:
-        0 0 25px rgba(150,50,255,.35),
-        0 0 70px rgba(100,30,170,.15);
-}
-
-.hero-photo{
-    width:100%;
-    display:block;
-    height:auto;
-}
-
-.photo-caption{
-    margin-top:20px;
-
-    color:#d7bce6;
-
-    font-size:14px;
 }
 
 
 /* =========================================
-   CUENTA REGRESIVA
+   ENCABEZADO
 ========================================= */
 
-.countdown-section{
-    padding:70px 20px;
+.titulo{
+
     text-align:center;
+
+    margin-top:20px;
+
+    font-size:
+        clamp(
+            34px,
+            7vw,
+            70px
+        );
+
+    color:#f1cf76;
+
+    text-shadow:
+        0 0 20px
+        rgba(
+            241,
+            207,
+            118,
+            .35
+        );
+
 }
 
-.section-title{
-    font-size:15px;
+.subtitulo{
 
-    letter-spacing:3px;
+    text-align:center;
 
-    color:#d6b5e9;
+    margin-top:10px;
 
-    margin-bottom:18px;
+    color:#eadfe8;
+
+    font-size:18px;
+
 }
 
 
@@ -456,87 +205,96 @@ section{
 
 .birthday-status{
 
-    display:inline-block;
+    width:max-content;
 
-    margin-bottom:28px;
+    max-width:90%;
 
-    padding:10px 22px;
+    margin:
+        25px
+        auto
+        15px;
+
+    padding:
+        10px
+        20px;
 
     border-radius:30px;
 
-    font-family:Georgia,"Times New Roman",serif;
+    text-align:center;
 
-    font-size:15px;
+    font-size:16px;
 
     font-weight:bold;
 
-    letter-spacing:2px;
-
-    border:1px solid rgba(200,140,255,.4);
-
-    background:rgba(40,10,55,.45);
-
-    transition:.4s ease;
-
-}
-
-.birthday-status.esperando{
-
-    color:#d6b5e9;
-
-    box-shadow:
-        0 0 20px rgba(130,50,210,.15);
+    letter-spacing:.5px;
 
 }
 
 .birthday-status.confirmar{
 
-    color:#fff;
-
-    border-color:rgba(220,160,255,.75);
-
     background:
-        linear-gradient(
-            135deg,
-            rgba(105,30,145,.55),
-            rgba(50,10,70,.6)
+        rgba(
+            198,
+            153,
+            58,
+            .18
         );
 
-    box-shadow:
-        0 0 25px rgba(170,70,255,.45),
-        0 0 60px rgba(130,40,210,.2);
+    border:
+        1px solid
+        #c99a3e;
+
+    color:#f1cf76;
+
 }
 
 .birthday-status.festejando{
 
-    color:#fff;
-
-    border-color:rgba(220,160,255,.75);
-
     background:
-        linear-gradient(
-            135deg,
-            rgba(105,30,145,.55),
-            rgba(50,10,70,.6)
+        rgba(
+            164,
+            55,
+            177,
+            .25
         );
 
-    box-shadow:
-        0 0 25px rgba(170,70,255,.45),
-        0 0 60px rgba(130,40,210,.2);
+    border:
+        1px solid
+        #e08be9;
 
-    animation:
-        celebrationPulse 2s infinite ease-in-out;
+    color:#ffd9ff;
+
+    box-shadow:
+        0 0 20px
+        rgba(
+            224,
+            139,
+            233,
+            .25
+        );
+
 }
 
-@keyframes celebrationPulse{
+.birthday-status.esperando{
 
-    0%,100%{
-        transform:scale(1);
-    }
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
 
-    50%{
-        transform:scale(1.04);
-    }
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .2
+        );
+
+    color:#ddd;
 
 }
 
@@ -545,239 +303,219 @@ section{
    CONTADOR
 ========================================= */
 
-.countdown{
+.contador{
+
     display:flex;
 
     justify-content:center;
 
     flex-wrap:wrap;
 
-    gap:15px;
+    gap:12px;
+
+    margin:
+        20px
+        auto
+        25px;
+
 }
 
-.count-box{
-    min-width:95px;
+.bloque-contador{
 
-    padding:18px 14px;
+    min-width:75px;
 
-    border:1px solid rgba(200,140,255,.35);
+    padding:12px 10px;
 
     border-radius:15px;
 
-    background:rgba(40,10,55,.45);
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .07
+        );
 
-    box-shadow:
-        0 0 20px rgba(130,50,210,.15);
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .13
+        );
+
+    text-align:center;
+
+    backdrop-filter:
+        blur(8px);
+
 }
 
-.count-number{
-    font-size:32px;
+.numero{
+
+    display:block;
+
+    font-size:27px;
+
+    color:#f1cf76;
+
     font-weight:bold;
+
 }
 
-.count-label{
-    margin-top:5px;
+.etiqueta{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#cfc6d0;
 
     font-size:11px;
 
-    letter-spacing:2px;
-
-    color:#cdb2dc;
-}
-
-.celebration-message{
-
-    margin-top:22px;
-
-    font-family:"Cinzel Decorative",Georgia,serif;
-
-    font-size:clamp(18px,4vw,30px);
-
-    color:#f5e5ff;
-
-    text-shadow:
-        0 0 10px #9c4dff,
-        0 0 25px #7a25d6;
-
-    animation:
-        celebrationText 2s infinite ease-in-out;
-}
-
-@keyframes celebrationText{
-
-    0%,100%{
-        transform:scale(1);
-        opacity:.85;
-    }
-
-    50%{
-        transform:scale(1.04);
-        opacity:1;
-    }
+    text-transform:uppercase;
 
 }
 
 
 /* =========================================
-   BOTÓN DE ASISTENCIA
+   MENSAJE CELEBRACIÓN
 ========================================= */
 
-.attendance-button{
+#celebrationMessage{
 
-    margin-top:28px;
+    text-align:center;
 
-    padding:15px 28px;
+    margin:
+        15px
+        auto
+        20px;
 
-    border-radius:30px;
+    color:#f5d2fa;
 
-    border:1px solid rgba(220,180,255,.7);
+    font-size:22px;
+
+    font-weight:bold;
+
+    text-shadow:
+        0 0 15px
+        rgba(
+            236,
+            145,
+            255,
+            .45
+        );
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+
+/* =========================================
+   BOTÓN CONFIRMACIÓN
+========================================= */
+
+#attendanceButton{
+
+    display:block;
+
+    margin:
+        20px
+        auto
+        10px;
+
+    padding:
+        15px
+        28px;
+
+    border:none;
+
+    border-radius:50px;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
 
     background:
         linear-gradient(
             135deg,
-            #5e178f,
-            #321047
+            #c99a3e,
+            #f1cf76
         );
 
-    color:#fff;
-
-    font-family:Georgia,serif;
-
-    font-size:15px;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
+    color:#24120a;
 
     box-shadow:
-        0 0 25px rgba(157,65,255,.3);
+        0 8px 25px
+        rgba(
+            0,
+            0,
+            0,
+            .25
+        );
 
-    transition:.3s;
+    transition:
+        transform .2s,
+        opacity .2s;
+
 }
 
-.attendance-button:hover:not(:disabled){
-    transform:scale(1.05);
-    box-shadow:
-        0 0 35px rgba(157,65,255,.55);
+#attendanceButton:hover:not(:disabled){
+
+    transform:
+        scale(1.04);
+
 }
 
-.attendance-button:disabled{
-    cursor:default;
+#attendanceButton:disabled{
+
+    cursor:not-allowed;
+
     opacity:.75;
+
 }
 
 
 /* =========================================
-   INVITACIÓN
+   TEXTO DE CONFIRMACIÓN
 ========================================= */
 
-#invitationReveal{
-    min-height:100vh;
-
-    padding:90px 20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
+#confirmHint{
 
     text-align:center;
-}
 
-.magic-symbol{
-    font-size:40px;
+    margin:
+        10px
+        auto
+        30px;
 
-    color:#d6aaff;
-
-    animation:
-        magicPulse 2.5s infinite ease-in-out;
-}
-
-@keyframes magicPulse{
-
-    0%,100%{
-        opacity:.5;
-        transform:scale(.9);
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(1.1);
-    }
-
-}
-
-.reveal-title{
-    font-size:clamp(25px,6vw,48px);
-
-    margin:15px 0;
-
-    color:#f3e5ff;
-}
-
-.reveal-text{
-    color:#cbb5d9;
-
-    margin-bottom:30px;
-}
-
-.invitation-card{
-    width:min(850px,94%);
-
-    padding:8px;
-
-    border:1px solid rgba(180,100,255,.65);
-
-    box-shadow:
-        0 0 30px rgba(140,50,230,.3),
-        0 0 70px rgba(100,20,170,.15);
-}
-
-.invitation-card img{
-    width:100%;
-    display:block;
-}
-
-
-/* =========================================
-   AVISO
-========================================= */
-
-.confirm-hint{
-
-    margin-top:30px;
-
-    color:#cdb8d9;
+    color:#d7cad8;
 
     font-size:14px;
 
-    padding:12px 20px;
-
-    border:1px solid rgba(190,130,235,.25);
-
-    border-radius:20px;
-
-    background:rgba(30,7,40,.35);
-
 }
 
 
 /* =========================================
-   MODAL ASISTENCIA
+   MODAL
 ========================================= */
 
-#confirmationModal{
+#confirmModal{
 
     position:fixed;
 
     inset:0;
 
-    z-index:70000;
-
-    display:flex;
+    display:none;
 
     align-items:center;
 
@@ -785,64 +523,96 @@ section{
 
     padding:20px;
 
-    background:rgba(0,0,0,.78);
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            .75
+        );
 
-    backdrop-filter:blur(8px);
+    backdrop-filter:
+        blur(7px);
+
+    z-index:5000;
+
 }
 
-.confirmation-box{
+#confirmModal.active{
 
-    width:min(500px,94%);
+    display:flex;
+
+}
+
+.modal-box{
+
+    width:
+        min(
+            100%,
+            480px
+        );
 
     max-height:90vh;
 
-    overflow:auto;
+    overflow-y:auto;
 
     padding:28px;
-
-    border:1px solid rgba(210,160,255,.55);
 
     border-radius:22px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(35,8,50,.98),
-            rgba(12,3,20,.98)
+            #241128,
+            #120914
+        );
+
+    border:
+        1px solid
+        rgba(
+            241,
+            207,
+            118,
+            .45
         );
 
     box-shadow:
-        0 0 45px rgba(150,50,255,.4);
+        0 20px 60px
+        rgba(
+            0,
+            0,
+            0,
+            .5
+        );
 
-    text-align:center;
 }
 
-.confirmation-box h2{
+.modal-box h2{
 
-    margin-top:0;
+    text-align:center;
 
-    font-family:"Cinzel Decorative",Georgia,serif;
+    color:#f1cf76;
 
-    color:#f4e7ff;
+    margin-bottom:22px;
 
 }
 
 .form-group{
 
-    text-align:left;
+    margin-bottom:15px;
 
-    margin:15px 0;
 }
 
 .form-group label{
 
     display:block;
 
-    margin-bottom:7px;
+    margin-bottom:6px;
 
-    color:#d9c1e8;
+    color:#eee;
 
     font-size:14px;
+
 }
 
 .form-group input,
@@ -850,88 +620,129 @@ section{
 
     width:100%;
 
-    padding:12px 14px;
+    padding:12px;
 
-    border-radius:12px;
+    border-radius:10px;
 
-    border:1px solid rgba(200,140,255,.35);
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .18
+        );
 
-    background:#13081b;
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
 
-    color:#fff;
+    color:white;
 
     outline:none;
 
-    font-family:Georgia,serif;
+    font-family:inherit;
 
 }
 
-.form-group input:focus,
-.form-group select:focus{
+.form-group select option{
 
-    border-color:#bd78ff;
+    color:#111;
 
-    box-shadow:
-        0 0 15px rgba(170,70,255,.2);
 }
 
-.confirm-actions{
+.modal-buttons{
 
     display:flex;
 
     gap:10px;
 
-    justify-content:center;
+    margin-top:20px;
 
-    margin-top:22px;
-
-    flex-wrap:wrap;
 }
 
-.confirm-submit,
-.confirm-close{
+.modal-buttons button{
 
-    padding:12px 22px;
+    flex:1;
 
-    border-radius:25px;
+    padding:12px;
 
-    font-family:Georgia,serif;
+    border:none;
+
+    border-radius:12px;
+
+    font-family:inherit;
+
+    font-weight:bold;
 
     cursor:pointer;
+
 }
 
-.confirm-submit{
+#cancelConfirm{
 
-    border:1px solid rgba(220,180,255,.8);
+    background:#3b293d;
+
+    color:white;
+
+}
+
+#confirmSubmit{
 
     background:
         linear-gradient(
             135deg,
-            #64199a,
-            #321047
+            #c99a3e,
+            #f1cf76
         );
 
-    color:#fff;
+    color:#24120a;
+
 }
 
-.confirm-close{
 
-    border:1px solid rgba(255,255,255,.2);
+/* =========================================
+   CONFETI
+========================================= */
 
-    background:rgba(255,255,255,.06);
+.confetti{
 
-    color:#ddd;
+    position:fixed;
+
+    width:9px;
+    height:14px;
+
+    top:-20px;
+
+    z-index:4000;
+
+    pointer-events:none;
+
+    animation:
+        caer linear forwards;
+
 }
 
-.confirm-message{
+@keyframes caer{
 
-    margin-top:15px;
+    to{
 
-    min-height:20px;
+        transform:
+            translateY(
+                110vh
+            )
+            rotate(
+                720deg
+            );
 
-    color:#e7d2f5;
+        opacity:0;
 
-    font-size:14px;
+    }
+
 }
 
 
@@ -939,147 +750,67 @@ section{
    VIDEO 2
 ========================================= */
 
-#finalVideoScreen{
+#video2Container{
+
+    display:none;
+
     position:fixed;
 
     inset:0;
 
-    z-index:65000;
-
     background:#000;
 
-    display:flex;
+    z-index:9000;
 
-    align-items:center;
-
-    justify-content:center;
-
-    overflow:hidden;
 }
 
-#finalVideo{
-    width:auto;
-    height:100vh;
+#video2{
 
-    max-width:100vw;
-    max-height:100vh;
+    width:100%;
+    height:100%;
 
-    object-fit:contain;
-
-    object-position:center;
-
-    display:block;
-
-    background:#000;
-}
-
-
-/* =========================================
-   CELULAR
-========================================= */
-
-@media(max-width:750px){
-
-    .hero{
-        padding:100px 15px 50px;
-    }
-
-    .fixed-tutorial{
-        width:94%;
-        padding:8px 12px;
-    }
-
-    .tutorial-title{
-        font-size:11px;
-    }
-
-    .tutorial-text{
-        font-size:13px;
-    }
-
-    .tutorial-arrow{
-        font-size:24px;
-    }
-
-    .hero-photo-wrap{
-        width:96%;
-    }
-
-    .birthday-status{
-        font-size:13px;
-        padding:9px 17px;
-    }
-
-    .count-box{
-        min-width:75px;
-        padding:14px 10px;
-    }
-
-    .count-number{
-        font-size:25px;
-    }
-
-    .count-label{
-        font-size:9px;
-    }
-
-    #invitationReveal{
-        padding:80px 12px;
-    }
-
-    #finalVideo{
-        width:auto;
-        height:100vh;
-
-        max-width:100vw;
-        max-height:100vh;
-
-        object-fit:contain;
-        object-position:center;
-    }
+    object-fit:cover;
 
 }
 
 
 /* =========================================
-   CELULARES PEQUEÑOS
+   RESPONSIVE
 ========================================= */
 
-@media(max-width:420px){
+@media(max-width:600px){
 
-    .main-title{
-        font-size:43px;
+    #contenido{
+
+        padding:
+            15px
+            12px
+            40px;
+
     }
 
-    .small-title{
-        font-size:12px;
-        letter-spacing:2px;
+    .subtitulo{
+
+        font-size:15px;
+
     }
 
-    .subtitle{
-        font-size:14px;
-    }
+    .bloque-contador{
 
-    .countdown{
-        gap:7px;
-    }
-
-    .count-box{
         min-width:68px;
-        padding:11px 7px;
+
     }
 
-    .count-number{
-        font-size:22px;
+    .numero{
+
+        font-size:23px;
+
     }
 
-    #introStart{
-        width:90%;
-        padding:25px 15px;
-    }
+    .modal-box{
 
-    #introStartTitle{
-        font-size:32px;
+        padding:22px;
+
     }
 
 }
@@ -1088,6 +819,7 @@ section{
 
 </head>
 
+
 <body>
 
 
@@ -1095,489 +827,351 @@ section{
      VIDEO INICIAL
 ========================================= -->
 
-<div id="introVideoScreen">
+<video
+    id="videoInicial"
+    playsinline
+    preload="auto"
+>
 
-    <video
-        id="introVideo"
+    <source
         src="videoinicio1.mp4"
-        playsinline
-        preload="auto">
-    </video>
+        type="video/mp4"
+    >
 
-    <div id="introStart">
+</video>
 
-        <div id="introStartTitle">
-            ✨ VELUNARA ✨
-        </div>
 
-        <button id="startVideo">
-            ENTRAR
-        </button>
+<button id="entrar">
+    ENTRAR
+</button>
 
-    </div>
 
-</div>
+<!-- =========================================
+     AUDIO
+========================================= -->
+
+<audio
+    id="mananitasAudio"
+    src="mananitas.mp3"
+    loop
+    preload="auto"
+></audio>
 
 
 <!-- =========================================
      VIDEO 2
 ========================================= -->
 
-<div
-    id="finalVideoScreen"
-    class="hidden"
->
+<div id="video2Container">
 
     <video
-        id="finalVideo"
-        src="video2.mp4"
+        id="video2"
         playsinline
-        preload="auto">
+        preload="auto"
+    >
+
+        <source
+            src="video2.mp4"
+            type="video/mp4"
+        >
+
     </video>
 
 </div>
 
 
 <!-- =========================================
-     MAÑANITAS
+     CONTENIDO
 ========================================= -->
 
-<audio
-    id="mananitasAudio"
-    src="mananitas.mp3"
-    preload="auto"
-    loop>
-</audio>
+<main id="contenido">
 
 
-<!-- =========================================
-     CONFETI
-========================================= -->
-
-<div id="confettiContainer"></div>
+    <h1 class="titulo">
+        Velunara
+    </h1>
 
 
-<!-- =========================================
-     TUTORIAL
-========================================= -->
+    <p class="subtitulo">
+        Una celebración muy especial
+    </p>
 
-<div class="fixed-tutorial">
 
-    <div class="tutorial-title">
-        ✦ CÓMO VER LA INVITACIÓN ✦
+    <div
+        id="birthdayStatus"
+        class="birthday-status"
+    >
+        ⏳ CARGANDO...
     </div>
 
-    <div class="tutorial-text">
-        ☝ DESLIZA HACIA ABAJO
+
+    <!-- =====================================
+         CONTADOR
+    ====================================== -->
+
+    <div class="contador">
+
+        <div class="bloque-contador">
+
+            <span
+                id="days"
+                class="numero"
+            >
+                0
+            </span>
+
+            <span class="etiqueta">
+                Días
+            </span>
+
+        </div>
+
+
+        <div class="bloque-contador">
+
+            <span
+                id="hours"
+                class="numero"
+            >
+                0
+            </span>
+
+            <span class="etiqueta">
+                Horas
+            </span>
+
+        </div>
+
+
+        <div class="bloque-contador">
+
+            <span
+                id="minutes"
+                class="numero"
+            >
+                0
+            </span>
+
+            <span class="etiqueta">
+                Minutos
+            </span>
+
+        </div>
+
+
+        <div class="bloque-contador">
+
+            <span
+                id="seconds"
+                class="numero"
+            >
+                0
+            </span>
+
+            <span class="etiqueta">
+                Segundos
+            </span>
+
+        </div>
+
     </div>
 
-    <div class="tutorial-arrow">
-        ↓
+
+    <div
+        id="celebrationMessage"
+        class="hidden"
+    >
+        🎊 ¡LA FIESTA CONTINÚA! 🎊
     </div>
 
-</div>
+
+    <!-- =====================================
+         CONFIRMACIÓN
+    ====================================== -->
+
+    <button
+        id="attendanceButton"
+        disabled
+    >
+        ⏳ ESPERANDO
+    </button>
 
 
-<div
-    class="stars"
-    id="stars">
-</div>
+    <p id="confirmHint">
+        ⏳ Esperando al próximo ciclo.
+    </p>
+
+
+</main>
 
 
 <!-- =========================================
      MODAL
 ========================================= -->
 
-<div
-    id="confirmationModal"
-    class="hidden"
->
+<div id="confirmModal">
 
-    <div class="confirmation-box">
+    <div class="modal-box">
 
         <h2>
-            ✨ CONFIRMAR ASISTENCIA ✨
+            📝 Confirmar asistencia
         </h2>
 
-        <p>
-            Confirma tus datos para formar parte
-            de esta celebración.
-        </p>
+
+        <form id="confirmForm">
 
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label for="nombre">
-                Nombre
-            </label>
+                <label for="nombre">
+                    Nombre
+                </label>
 
-            <input
-                id="nombre"
-                type="text"
-                maxlength="100"
-                autocomplete="name"
-                placeholder="Escribe tu nombre"
-            >
+                <input
+                    id="nombre"
+                    name="nombre"
+                    type="text"
+                    required
+                    autocomplete="name"
+                >
 
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="personas">
-                Personas que asistirán
-            </label>
-
-            <select id="personas">
-
-                <option value="1">
-                    1
-                </option>
-
-                <option value="2">
-                    2
-                </option>
-
-                <option value="3">
-                    3
-                </option>
-
-                <option value="4">
-                    4
-                </option>
-
-                <option value="5">
-                    5
-                </option>
-
-                <option value="6">
-                    6
-                </option>
-
-                <option value="7">
-                    7
-                </option>
-
-                <option value="8">
-                    8
-                </option>
-
-                <option value="9">
-                    9
-                </option>
-
-                <option value="10">
-                    10
-                </option>
-
-            </select>
-
-        </div>
+            </div>
 
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label for="adultos">
-                Adultos
-            </label>
+                <label for="personas">
+                    ¿Cuántas personas asistirán?
+                </label>
 
-            <select id="adultos">
+                <input
+                    id="personas"
+                    name="personas"
+                    type="number"
+                    min="1"
+                    max="20"
+                    required
+                >
 
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-
-            </select>
-
-        </div>
+            </div>
 
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label for="ninos">
-                Niños
-            </label>
+                <label for="adultos">
+                    Adultos
+                </label>
 
-            <select id="ninos">
+                <input
+                    id="adultos"
+                    name="adultos"
+                    type="number"
+                    min="0"
+                    max="20"
+                    required
+                >
 
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-
-            </select>
-
-        </div>
+            </div>
 
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label for="asistencia">
-                ¿Asistirás?
-            </label>
+                <label for="ninos">
+                    Niños
+                </label>
 
-            <select id="asistencia">
+                <input
+                    id="ninos"
+                    name="ninos"
+                    type="number"
+                    min="0"
+                    max="20"
+                    required
+                >
 
-                <option value="Sí">
-                    Sí
-                </option>
-
-                <option value="No">
-                    No
-                </option>
-
-            </select>
-
-        </div>
+            </div>
 
 
-        <div class="form-group">
+            <div class="form-group">
 
-            <label for="telefono">
-                Teléfono
-                <span style="opacity:.55">
-                    (opcional)
-                </span>
-            </label>
+                <label for="asistencia">
+                    ¿Asistirás?
+                </label>
 
-            <input
-                id="telefono"
-                type="tel"
-                maxlength="30"
-                autocomplete="tel"
-                placeholder="Opcional"
-            >
+                <select
+                    id="asistencia"
+                    name="asistencia"
+                    required
+                >
 
-        </div>
+                    <option value="">
+                        Selecciona una opción
+                    </option>
 
+                    <option value="si">
+                        Sí, asistiré
+                    </option>
 
-        <div class="confirm-actions">
+                    <option value="no">
+                        No podré asistir
+                    </option>
 
-            <button
-                id="confirmSubmit"
-                class="confirm-submit"
-            >
-                CONFIRMAR
-            </button>
+                </select>
 
-            <button
-                id="confirmClose"
-                class="confirm-close"
-                type="button"
-            >
-                CERRAR
-            </button>
-
-        </div>
+            </div>
 
 
-        <div
-            id="confirmMessage"
-            class="confirm-message">
-        </div>
+            <div class="form-group">
+
+                <label for="telefono">
+                    Teléfono
+                    <small>
+                        (opcional)
+                    </small>
+                </label>
+
+                <input
+                    id="telefono"
+                    name="telefono"
+                    type="tel"
+                    autocomplete="tel"
+                >
+
+            </div>
+
+
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    id="cancelConfirm"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="submit"
+                    id="confirmSubmit"
+                >
+                    Confirmar
+                </button>
+
+            </div>
+
+
+        </form>
 
     </div>
 
 </div>
 
 
-<main>
+<!-- =========================================
+     SUPABASE
+========================================= -->
 
-
-    <!-- =====================================
-         HERO
-    ====================================== -->
-
-    <section class="hero">
-
-        <div class="small-title">
-            Una celebración especial
-        </div>
-
-        <h1 class="main-title">
-            VELUNARA
-        </h1>
-
-        <div class="subtitle">
-            ✦ Una noche mágica está por comenzar ✦
-        </div>
-
-        <div class="hero-photo-wrap">
-
-            <img
-                src="foto1.jpg"
-                alt="Velunara"
-                class="hero-photo"
-            >
-
-        </div>
-
-        <div class="photo-caption">
-            Una celebración llena de magia,
-            cariño y momentos inolvidables.
-        </div>
-
-    </section>
-
-
-    <!-- =====================================
-         CUENTA REGRESIVA
-    ====================================== -->
-
-    <section class="countdown-section">
-
-        <div class="section-title">
-            ESTADO DE LA CELEBRACIÓN
-        </div>
-
-
-        <div
-            id="birthdayStatus"
-            class="birthday-status esperando">
-
-            ⏳ ESPERANDO
-
-        </div>
-
-
-        <div class="countdown">
-
-            <div class="count-box">
-
-                <div
-                    class="count-number"
-                    id="days">
-                    0
-                </div>
-
-                <div class="count-label">
-                    DÍAS
-                </div>
-
-            </div>
-
-
-            <div class="count-box">
-
-                <div
-                    class="count-number"
-                    id="hours">
-                    0
-                </div>
-
-                <div class="count-label">
-                    HORAS
-                </div>
-
-            </div>
-
-
-            <div class="count-box">
-
-                <div
-                    class="count-number"
-                    id="minutes">
-                    0
-                </div>
-
-                <div class="count-label">
-                    MINUTOS
-                </div>
-
-            </div>
-
-
-            <div class="count-box">
-
-                <div
-                    class="count-number"
-                    id="seconds">
-                    0
-                </div>
-
-                <div class="count-label">
-                    SEGUNDOS
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div
-            id="celebrationMessage"
-            class="celebration-message hidden">
-            🎊 ¡LA FIESTA CONTINÚA! 🎊
-        </div>
-
-
-        <button
-            id="attendanceButton"
-            class="attendance-button"
-            type="button">
-
-            ⏳ ESPERANDO
-
-        </button>
-
-    </section>
-
-
-    <!-- =====================================
-         INVITACIÓN
-    ====================================== -->
-
-    <section id="invitationReveal">
-
-        <div class="magic-symbol">
-            ✦
-        </div>
-
-        <h2 class="reveal-title">
-            La magia comienza aquí
-        </h2>
-
-        <div class="reveal-text">
-            Tu invitación especial está lista.
-        </div>
-
-        <div class="invitation-card">
-
-            <img
-                src="foto2.jpg"
-                alt="Invitación Velunara"
-            >
-
-        </div>
-
-        <div
-            id="confirmHint"
-            class="confirm-hint">
-
-            ⏳ Las confirmaciones estarán disponibles
-            <br>
-            del 20 al 26 de septiembre.
-
-        </div>
-
-    </section>
-
-</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
@@ -1592,295 +1186,47 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_QYI1nQKLZly1FHoSjgaqcg_xTS3WDSE";
 
-let supabaseClient = null;
-
-try{
-
-    if(
-        window.supabase &&
-        typeof window.supabase.createClient === "function"
-    ){
-
-        supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_KEY
-            );
-
-    }
-
-}catch(error){
-
-    console.error(
-        "Supabase no pudo inicializarse:",
-        error
-    );
-
-}
-
-
-/* =========================================
-   ESTRELLAS
-========================================= */
-
-const starsContainer =
-    document.getElementById("stars");
-
-for(let i = 0; i < 90; i++){
-
-    const star =
-        document.createElement("div");
-
-    star.className = "star";
-
-    star.style.left =
-        Math.random() * 100 + "%";
-
-    star.style.top =
-        Math.random() * 100 + "%";
-
-    star.style.animationDelay =
-        Math.random() * 3 + "s";
-
-    star.style.animationDuration =
-        (2 + Math.random() * 3) + "s";
-
-    starsContainer.appendChild(star);
-
-}
-
-
-/* =========================================
-   VIDEO INICIAL
-========================================= */
-
-const introVideoScreen =
-    document.getElementById(
-        "introVideoScreen"
-    );
-
-const introVideo =
-    document.getElementById(
-        "introVideo"
-    );
-
-const introStart =
-    document.getElementById(
-        "introStart"
-    );
-
-const startVideo =
-    document.getElementById(
-        "startVideo"
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
     );
 
 
 /* =========================================
-   MAÑANITAS
+   ELEMENTOS
 ========================================= */
+
+const videoInicial =
+    document.getElementById(
+        "videoInicial"
+    );
+
+const entrar =
+    document.getElementById(
+        "entrar"
+    );
+
+const contenido =
+    document.getElementById(
+        "contenido"
+    );
 
 const mananitasAudio =
     document.getElementById(
         "mananitasAudio"
     );
 
-
-let mananitasIniciadas = false;
-
-
-async function iniciarMananitas(){
-
-    if(!mananitasAudio){
-        return;
-    }
-
-    if(mananitasIniciadas){
-        return;
-    }
-
-    mananitasIniciadas = true;
-
-    try{
-
-        mananitasAudio.volume = 0.8;
-
-        mananitasAudio.currentTime = 0;
-
-        await mananitasAudio.play();
-
-    }catch(error){
-
-        /*
-         * Si el navegador bloquea el audio,
-         * no se rompe la página.
-         */
-
-        console.warn(
-            "El navegador bloqueó las Mañanitas:",
-            error
-        );
-
-        mananitasIniciadas = false;
-
-    }
-
-}
-
-
-/* =========================================
-   ENTRAR
-========================================= */
-
-startVideo.addEventListener(
-    "click",
-    async () => {
-
-        introStart.classList.add(
-            "hidden"
-        );
-
-        introVideo.classList.add(
-            "visible"
-        );
-
-        try{
-
-            introVideo.muted = false;
-
-            await introVideo.play();
-
-        }catch(error){
-
-            try{
-
-                introVideo.muted = true;
-
-                await introVideo.play();
-
-            }catch(secondError){
-
-                console.error(
-                    "No se pudo reproducir el video:",
-                    secondError
-                );
-
-                introStart.classList.remove(
-                    "hidden"
-                );
-
-            }
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   TERMINA VIDEO 1
-   AQUÍ COMIENZAN LAS MAÑANITAS
-========================================= */
-
-introVideo.addEventListener(
-    "ended",
-    async () => {
-
-        await iniciarMananitas();
-
-
-        introVideoScreen.classList.add(
-            "fade-out"
-        );
-
-
-        setTimeout(
-            () => {
-
-                introVideoScreen.classList.add(
-                    "hidden"
-                );
-
-            },
-            1300
-        );
-
-    }
-);
-
-
-/* =========================================
-   TUTORIAL
-========================================= */
-
-const tutorial =
-    document.querySelector(
-        ".fixed-tutorial"
-    );
-
-const invitationReveal =
+const video2Container =
     document.getElementById(
-        "invitationReveal"
+        "video2Container"
     );
 
-let tutorialHidden = false;
-
-
-if(
-    tutorial &&
-    invitationReveal &&
-    "IntersectionObserver" in window
-){
-
-    const tutorialObserver =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if(
-                        entry.isIntersecting &&
-                        entry.intersectionRatio >= .75 &&
-                        !tutorialHidden
-                    ){
-
-                        tutorialHidden = true;
-
-                        tutorial.classList.add(
-                            "tutorial-hidden"
-                        );
-
-                        setTimeout(
-                            () => {
-
-                                tutorial.classList.add(
-                                    "hidden"
-                                );
-
-                            },
-                            700
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold:[.75]
-            }
-        );
-
-
-    tutorialObserver.observe(
-        invitationReveal
+const video2 =
+    document.getElementById(
+        "video2"
     );
 
-}
-
-
-/* =========================================
-   ELEMENTOS DEL CONTADOR
-========================================= */
 
 const birthdayStatus =
     document.getElementById(
@@ -1904,20 +1250,131 @@ const confirmHint =
 
 
 const daysElement =
-    document.getElementById("days");
+    document.getElementById(
+        "days"
+    );
 
 const hoursElement =
-    document.getElementById("hours");
+    document.getElementById(
+        "hours"
+    );
 
 const minutesElement =
-    document.getElementById("minutes");
+    document.getElementById(
+        "minutes"
+    );
 
 const secondsElement =
-    document.getElementById("seconds");
+    document.getElementById(
+        "seconds"
+    );
+
+
+const confirmModal =
+    document.getElementById(
+        "confirmModal"
+    );
+
+const confirmForm =
+    document.getElementById(
+        "confirmForm"
+    );
+
+const cancelConfirm =
+    document.getElementById(
+        "cancelConfirm"
+    );
 
 
 /* =========================================
-   FECHAS
+   VIDEO INICIAL
+========================================= */
+
+let videoTerminado = false;
+
+
+/*
+ * Cuando termina el video inicial,
+ * desaparece y empiezan Las Mañanitas.
+ */
+
+videoInicial.addEventListener(
+    "ended",
+    iniciarInvitacion
+);
+
+
+/*
+ * Botón ENTRAR
+ */
+
+entrar.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await videoInicial.play();
+
+            entrar.style.display =
+                "none";
+
+        }catch(error){
+
+            console.log(
+                "No se pudo reproducir el video:",
+                error
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   INICIAR INVITACIÓN
+========================================= */
+
+function iniciarInvitacion(){
+
+    if(videoTerminado)
+        return;
+
+    videoTerminado = true;
+
+
+    videoInicial.style.display =
+        "none";
+
+    entrar.style.display =
+        "none";
+
+    contenido.style.display =
+        "block";
+
+
+    /*
+     * Las Mañanitas comienzan
+     * inmediatamente después del video.
+     */
+
+    mananitasAudio.currentTime = 0;
+
+    mananitasAudio.play()
+        .catch(
+            error =>
+                console.log(
+                    "El navegador bloqueó el audio:",
+                    error
+                )
+        );
+
+}
+
+
+/* =========================================
+   FECHA LOCAL
 ========================================= */
 
 function fechaLocal(
@@ -1942,318 +1399,29 @@ function fechaLocal(
 }
 
 
-/*
- * 20 de septiembre:
- * abre confirmación.
- *
- * 27 de septiembre:
- * empieza celebración 00:00.
- *
- * 27 de septiembre 16:00:
- * termina contador.
- *
- * 28 de septiembre:
- * vuelve a ESPERANDO.
- */
+/* =========================================
+   CONTADOR EN CERO
+========================================= */
 
-function actualizarEstadoYContador(){
+function ponerContadorEnCero(){
 
-    const ahora =
-        new Date();
+    daysElement.textContent =
+        "0";
 
-    const anio =
-        ahora.getFullYear();
+    hoursElement.textContent =
+        "0";
 
+    minutesElement.textContent =
+        "0";
 
-    const apertura =
-        fechaLocal(
-            anio,
-            9,
-            20,
-            0,
-            0,
-            0
-        );
-
-
-    const inicioFestejo =
-        fechaLocal(
-            anio,
-            9,
-            27,
-            0,
-            0,
-            0
-        );
-
-
-    const finContador =
-        fechaLocal(
-            anio,
-            9,
-            27,
-            16,
-            0,
-            0
-        );
-
-
-    const finFestejo =
-        fechaLocal(
-            anio,
-            9,
-            28,
-            0,
-            0,
-            0
-        );
-
-
-    let estado;
-
-
-    /*
-     * =====================================
-     * 20 AL 26
-     * =====================================
-     */
-
-    if(
-        ahora >= apertura &&
-        ahora < inicioFestejo
-    ){
-
-        estado =
-            "CONFIRMAR";
-
-    }
-
-
-    /*
-     * =====================================
-     * 27 TODO EL DÍA
-     * =====================================
-     */
-
-    else if(
-        ahora >= inicioFestejo &&
-        ahora < finFestejo
-    ){
-
-        estado =
-            "FESTEJANDO";
-
-    }
-
-
-    /*
-     * =====================================
-     * RESTO DEL AÑO
-     * =====================================
-     */
-
-    else{
-
-        estado =
-            "ESPERANDO";
-
-    }
-
-
-    /* =====================================
-       ESTADO CONFIRMAR
-    ====================================== */
-
-    if(estado === "CONFIRMAR"){
-
-        birthdayStatus.textContent =
-            "📝 CONFIRMAR ASISTENCIA";
-
-        birthdayStatus.className =
-            "birthday-status confirmar";
-
-
-        attendanceButton.textContent =
-            "📝 CONFIRMAR ASISTENCIA";
-
-        attendanceButton.disabled =
-            false;
-
-        attendanceButton.dataset.mode =
-            "confirmar";
-
-
-        confirmHint.innerHTML =
-            "✨ Las confirmaciones están abiertas" +
-            "<br>" +
-            "Del 20 al 26 de septiembre.";
-
-
-        celebrationMessage.classList.add(
-            "hidden"
-        );
-
-
-        /*
-         * Contador hacia el 27 a las 00:00
-         */
-
-        actualizarContador(
-            inicioFestejo,
-            ahora
-        );
-
-        return;
-
-    }
-
-
-    /* =====================================
-       ESTADO FESTEJANDO
-    ====================================== */
-
-    if(estado === "FESTEJANDO"){
-
-        birthdayStatus.textContent =
-            "🎉 FESTEJANDO";
-
-        birthdayStatus.className =
-            "birthday-status festejando";
-
-
-        attendanceButton.textContent =
-            "🎉 FESTEJANDO";
-
-        attendanceButton.disabled =
-            true;
-
-        attendanceButton.dataset.mode =
-            "festejando";
-
-
-        confirmHint.innerHTML =
-            "🎊 ¡Hoy es el gran día!" +
-            "<br>" +
-            "Las confirmaciones están cerradas.";
-
-
-        iniciarConfeti();
-
-
-        /*
-         * Antes de las 4 PM:
-         * contador sigue corriendo.
-         */
-
-        if(ahora < finContador){
-
-            celebrationMessage.classList.add(
-                "hidden"
-            );
-
-            actualizarContador(
-                finContador,
-                ahora
-            );
-
-        }
-
-        /*
-         * Desde las 4 PM:
-         * contador terminado.
-         */
-
-        else{
-
-            ponerContadorEnCero();
-
-            celebrationMessage.classList.remove(
-                "hidden"
-            );
-
-        }
-
-        return;
-
-    }
-
-
-    /* =====================================
-       ESTADO ESPERANDO
-    ====================================== */
-
-    birthdayStatus.textContent =
-        "⏳ ESPERANDO";
-
-    birthdayStatus.className =
-        "birthday-status esperando";
-
-
-    attendanceButton.textContent =
-        "⏳ ESPERANDO";
-
-    attendanceButton.disabled =
-        true;
-
-    attendanceButton.dataset.mode =
-        "esperando";
-
-
-    celebrationMessage.classList.add(
-        "hidden"
-    );
-
-
-    detenerConfeti();
-
-
-    confirmHint.innerHTML =
-        "⏳ Las confirmaciones están cerradas" +
-        "<br>" +
-        "Se abrirán nuevamente el 20 de septiembre.";
-
-
-    /*
-     * Si estamos antes del 20:
-     * esperamos al 20 de este año.
-     *
-     * Si ya pasó el 28:
-     * esperamos al 20 del siguiente año.
-     */
-
-    let siguienteApertura;
-
-
-    if(ahora < apertura){
-
-        siguienteApertura =
-            apertura;
-
-    }else{
-
-        siguienteApertura =
-            fechaLocal(
-                anio + 1,
-                9,
-                20,
-                0,
-                0,
-                0
-            );
-
-    }
-
-
-    actualizarContador(
-        siguienteApertura,
-        ahora
-    );
+    secondsElement.textContent =
+        "0";
 
 }
 
 
 /* =========================================
-   CONTADOR
+   ACTUALIZAR CONTADOR
 ========================================= */
 
 function actualizarContador(
@@ -2262,11 +1430,14 @@ function actualizarContador(
 ){
 
     const diferencia =
-        destino.getTime() -
+        destino.getTime()
+        -
         ahora.getTime();
 
 
-    if(diferencia <= 0){
+    if(
+        diferencia <= 0
+    ){
 
         ponerContadorEnCero();
 
@@ -2278,7 +1449,12 @@ function actualizarContador(
     const dias =
         Math.floor(
             diferencia /
-            (1000 * 60 * 60 * 24)
+            (
+                1000 *
+                60 *
+                60 *
+                24
+            )
         );
 
 
@@ -2286,7 +1462,11 @@ function actualizarContador(
         Math.floor(
             (
                 diferencia /
-                (1000 * 60 * 60)
+                (
+                    1000 *
+                    60 *
+                    60
+                )
             ) % 24
         );
 
@@ -2295,7 +1475,10 @@ function actualizarContador(
         Math.floor(
             (
                 diferencia /
-                (1000 * 60)
+                (
+                    1000 *
+                    60
+                )
             ) % 60
         );
 
@@ -2324,22 +1507,411 @@ function actualizarContador(
 }
 
 
-function ponerContadorEnCero(){
+/* =========================================
+   CONFETI
+========================================= */
 
-    daysElement.textContent =
-        "0";
+let confetiActivo = false;
 
-    hoursElement.textContent =
-        "0";
+let intervaloConfeti = null;
 
-    minutesElement.textContent =
-        "0";
 
-    secondsElement.textContent =
-        "0";
+function crearConfeti(){
+
+    if(!confetiActivo)
+        return;
+
+
+    const pieza =
+        document.createElement(
+            "div"
+        );
+
+    pieza.className =
+        "confetti";
+
+
+    pieza.style.left =
+        Math.random() * 100 +
+        "vw";
+
+
+    pieza.style.animationDuration =
+        (
+            3 +
+            Math.random() * 4
+        ) +
+        "s";
+
+
+    pieza.style.transform =
+        `rotate(${
+            Math.random() * 360
+        }deg)`;
+
+
+    /*
+     * Se usan colores aleatorios
+     * directamente en la pieza.
+     */
+
+    const colores = [
+        "#f1cf76",
+        "#e08be9",
+        "#ffffff",
+        "#ff9fcf",
+        "#b98cff",
+        "#ffd85c"
+    ];
+
+
+    pieza.style.background =
+        colores[
+            Math.floor(
+                Math.random() *
+                colores.length
+            )
+        ];
+
+
+    document.body.appendChild(
+        pieza
+    );
+
+
+    setTimeout(
+        () => pieza.remove(),
+        7500
+    );
 
 }
 
+
+function iniciarConfeti(){
+
+    if(confetiActivo)
+        return;
+
+
+    confetiActivo = true;
+
+
+    crearConfeti();
+
+
+    intervaloConfeti =
+        setInterval(
+            crearConfeti,
+            180
+        );
+
+}
+
+
+function detenerConfeti(){
+
+    confetiActivo = false;
+
+
+    if(intervaloConfeti){
+
+        clearInterval(
+            intervaloConfeti
+        );
+
+        intervaloConfeti =
+            null;
+
+    }
+
+}
+
+
+/* =========================================
+   ESTADO Y CONTADOR
+========================================= */
+
+function actualizarEstadoYContador(){
+
+    const ahora =
+        new Date();
+
+
+    const anio =
+        ahora.getFullYear();
+
+
+    /*
+     * 20 DE SEPTIEMBRE 00:00
+     */
+
+    const apertura =
+        fechaLocal(
+            anio,
+            9,
+            20,
+            0,
+            0,
+            0
+        );
+
+
+    /*
+     * 27 DE SEPTIEMBRE 00:00
+     */
+
+    const inicioFestejo =
+        fechaLocal(
+            anio,
+            9,
+            27,
+            0,
+            0,
+            0
+        );
+
+
+    /*
+     * 27 DE SEPTIEMBRE 16:00
+     */
+
+    const finContador =
+        fechaLocal(
+            anio,
+            9,
+            27,
+            16,
+            0,
+            0
+        );
+
+
+    /*
+     * 28 DE SEPTIEMBRE 00:00
+     */
+
+    const finFestejo =
+        fechaLocal(
+            anio,
+            9,
+            28,
+            0,
+            0,
+            0
+        );
+
+
+    /* =====================================
+       20 - 26 SEPTIEMBRE
+    ====================================== */
+
+    if(
+        ahora >= apertura &&
+        ahora < inicioFestejo
+    ){
+
+        birthdayStatus.textContent =
+            "📝 CONFIRMAR ASISTENCIA";
+
+        birthdayStatus.className =
+            "birthday-status confirmar";
+
+
+        attendanceButton.textContent =
+            "📝 CONFIRMAR ASISTENCIA";
+
+        attendanceButton.disabled =
+            false;
+
+        attendanceButton.dataset.mode =
+            "confirmar";
+
+
+        confirmHint.innerHTML =
+            "✨ Confirmación de asistencia disponible.";
+
+
+        celebrationMessage.classList.add(
+            "hidden"
+        );
+
+
+        actualizarContador(
+            inicioFestejo,
+            ahora
+        );
+
+
+        detenerConfeti();
+
+
+        return;
+
+    }
+
+
+    /* =====================================
+       27 SEPTIEMBRE
+    ====================================== */
+
+    if(
+        ahora >= inicioFestejo &&
+        ahora < finFestejo
+    ){
+
+        birthdayStatus.textContent =
+            "🎉 FESTEJANDO";
+
+        birthdayStatus.className =
+            "birthday-status festejando";
+
+
+        attendanceButton.textContent =
+            "🎉 FESTEJANDO";
+
+        attendanceButton.disabled =
+            true;
+
+        attendanceButton.dataset.mode =
+            "festejando";
+
+
+        confirmHint.innerHTML =
+            "🎊 ¡Hoy es el gran día!";
+
+
+        /*
+         * CONFETI TODO EL 27.
+         */
+
+        iniciarConfeti();
+
+
+        /*
+         * ANTES DE LAS 4 PM:
+         * CONTADOR HASTA LAS 16:00.
+         */
+
+        if(
+            ahora < finContador
+        ){
+
+            celebrationMessage.classList.add(
+                "hidden"
+            );
+
+
+            actualizarContador(
+                finContador,
+                ahora
+            );
+
+        }
+
+        /*
+         * A LAS 4 PM:
+         * CONTADOR EN CERO.
+         */
+
+        else{
+
+            ponerContadorEnCero();
+
+
+            celebrationMessage.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /* =====================================
+       DESPUÉS DEL 27
+       ESPERAR AL SIGUIENTE 20
+    ====================================== */
+
+    birthdayStatus.textContent =
+        "⏳ ESPERANDO";
+
+    birthdayStatus.className =
+        "birthday-status esperando";
+
+
+    attendanceButton.textContent =
+        "⏳ ESPERANDO";
+
+    attendanceButton.disabled =
+        true;
+
+    attendanceButton.dataset.mode =
+        "esperando";
+
+
+    celebrationMessage.classList.add(
+        "hidden"
+    );
+
+
+    detenerConfeti();
+
+
+    confirmHint.innerHTML =
+        "⏳ Esperando al próximo ciclo.";
+
+
+    /*
+     * Si todavía no llegamos al 20
+     * de este año, esperamos al 20.
+     */
+
+    let siguienteApertura;
+
+
+    if(
+        ahora < apertura
+    ){
+
+        siguienteApertura =
+            apertura;
+
+    }
+
+    /*
+     * Si ya pasó el 20 de este año,
+     * esperamos al 20 del próximo.
+     */
+
+    else{
+
+        siguienteApertura =
+            fechaLocal(
+                anio + 1,
+                9,
+                20,
+                0,
+                0,
+                0
+            );
+
+    }
+
+
+    actualizarContador(
+        siguienteApertura,
+        ahora
+    );
+
+}
+
+
+/* =========================================
+   ARRANCAR ESTADO
+========================================= */
 
 actualizarEstadoYContador();
 
@@ -2351,312 +1923,69 @@ setInterval(
 
 
 /* =========================================
-   CONFETI
+   MODAL
 ========================================= */
-
-let confettiTimer = null;
-
-
-function crearConfeti(){
-
-    const confettiContainer =
-        document.getElementById(
-            "confettiContainer"
-        );
-
-    if(!confettiContainer){
-        return;
-    }
-
-
-    const pieza =
-        document.createElement("div");
-
-    pieza.className =
-        "confetti";
-
-
-    pieza.style.left =
-        Math.random() * 100 + "%";
-
-
-    pieza.style.setProperty(
-        "--drift",
-        (
-            Math.random() * 220 -
-            110
-        ) + "px"
-    );
-
-
-    pieza.style.animationDuration =
-        (
-            3 +
-            Math.random() * 4
-        ) + "s";
-
-
-    pieza.style.transform =
-        "rotate(" +
-        Math.random() * 360 +
-        "deg)";
-
-
-    const tamanos =
-        [
-            [7,12],
-            [9,15],
-            [6,10],
-            [11,8]
-        ];
-
-
-    const tamano =
-        tamanos[
-            Math.floor(
-                Math.random() *
-                tamanos.length
-            )
-        ];
-
-
-    pieza.style.width =
-        tamano[0] + "px";
-
-    pieza.style.height =
-        tamano[1] + "px";
-
-
-    /*
-     * Se generan colores mediante
-     * HSL para que haya variedad.
-     */
-
-    pieza.style.background =
-        "hsl(" +
-        Math.floor(
-            Math.random() * 360
-        ) +
-        ", 90%, 65%)";
-
-
-    confettiContainer.appendChild(
-        pieza
-    );
-
-
-    setTimeout(
-        () => {
-
-            pieza.remove();
-
-        },
-        8000
-    );
-
-}
-
-
-function iniciarConfeti(){
-
-    if(confettiTimer){
-        return;
-    }
-
-
-    /*
-     * Primera ráfaga
-     */
-
-    for(
-        let i = 0;
-        i < 35;
-        i++
-    ){
-
-        setTimeout(
-            crearConfeti,
-            i * 40
-        );
-
-    }
-
-
-    /*
-     * Continúa durante TODO
-     * el 27 de septiembre.
-     */
-
-    confettiTimer =
-        setInterval(
-            () => {
-
-                for(
-                    let i = 0;
-                    i < 8;
-                    i++
-                ){
-
-                    crearConfeti();
-
-                }
-
-            },
-            450
-        );
-
-}
-
-
-function detenerConfeti(){
-
-    if(confettiTimer){
-
-        clearInterval(
-            confettiTimer
-        );
-
-        confettiTimer =
-            null;
-
-    }
-
-
-    const container =
-        document.getElementById(
-            "confettiContainer"
-        );
-
-
-    if(container){
-
-        container.innerHTML =
-            "";
-
-    }
-
-}
-
-
-/* =========================================
-   MODAL DE CONFIRMACIÓN
-========================================= */
-
-const confirmationModal =
-    document.getElementById(
-        "confirmationModal"
-    );
-
-const confirmClose =
-    document.getElementById(
-        "confirmClose"
-    );
-
-const confirmSubmit =
-    document.getElementById(
-        "confirmSubmit"
-    );
-
-const confirmMessage =
-    document.getElementById(
-        "confirmMessage"
-    );
-
-
-function abrirConfirmacion(){
-
-    /*
-     * Volvemos a comprobar la fecha
-     * antes de abrir.
-     */
-
-    const ahora =
-        new Date();
-
-    const anio =
-        ahora.getFullYear();
-
-
-    const apertura =
-        fechaLocal(
-            anio,
-            9,
-            20
-        );
-
-
-    const inicioFestejo =
-        fechaLocal(
-            anio,
-            9,
-            27
-        );
-
-
-    if(
-        ahora < apertura ||
-        ahora >= inicioFestejo
-    ){
-
-        actualizarEstadoYContador();
-
-        return;
-
-    }
-
-
-    confirmMessage.textContent =
-        "";
-
-    confirmationModal.classList.remove(
-        "hidden"
-    );
-
-}
-
-
-function cerrarConfirmacion(){
-
-    confirmationModal.classList.add(
-        "hidden"
-    );
-
-}
-
 
 attendanceButton.addEventListener(
     "click",
     () => {
 
+        /*
+         * Solo se abre durante
+         * el periodo permitido.
+         */
+
         if(
-            attendanceButton.dataset.mode ===
+            attendanceButton.dataset.mode
+            !==
             "confirmar"
         ){
 
-            abrirConfirmacion();
+            return;
 
         }
+
+
+        confirmModal.classList.add(
+            "active"
+        );
 
     }
 );
 
 
-confirmClose.addEventListener(
+/* =========================================
+   CERRAR MODAL
+========================================= */
+
+cancelConfirm.addEventListener(
     "click",
-    cerrarConfirmacion
+    () => {
+
+        confirmModal.classList.remove(
+            "active"
+        );
+
+    }
 );
 
 
-confirmationModal.addEventListener(
+/*
+ * Cerrar haciendo clic fuera.
+ */
+
+confirmModal.addEventListener(
     "click",
     event => {
 
         if(
             event.target ===
-            confirmationModal
+            confirmModal
         ){
 
-            cerrarConfirmacion();
+            confirmModal.classList.remove(
+                "active"
+            );
 
         }
 
@@ -2665,16 +1994,21 @@ confirmationModal.addEventListener(
 
 
 /* =========================================
-   GUARDAR CONFIRMACIÓN
+   CONFIRMAR ASISTENCIA
 ========================================= */
 
-confirmSubmit.addEventListener(
-    "click",
-    async () => {
+confirmForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
 
         /*
-         * Comprobación de seguridad
-         * de fecha.
+         * Volvemos a comprobar la fecha
+         * para evitar que alguien deje
+         * el modal abierto y espere hasta
+         * que cambie el día.
          */
 
         const ahora =
@@ -2688,7 +2022,10 @@ confirmSubmit.addEventListener(
             fechaLocal(
                 anio,
                 9,
-                20
+                20,
+                0,
+                0,
+                0
             );
 
 
@@ -2696,7 +2033,10 @@ confirmSubmit.addEventListener(
             fechaLocal(
                 anio,
                 9,
-                27
+                27,
+                0,
+                0,
+                0
             );
 
 
@@ -2705,8 +2045,13 @@ confirmSubmit.addEventListener(
             ahora >= inicioFestejo
         ){
 
-            confirmMessage.textContent =
-                "⏳ Las confirmaciones están cerradas.";
+            alert(
+                "La confirmación ya no está disponible."
+            );
+
+            confirmModal.classList.remove(
+                "active"
+            );
 
             actualizarEstadoYContador();
 
@@ -2716,109 +2061,99 @@ confirmSubmit.addEventListener(
 
 
         const nombre =
-            document
-                .getElementById("nombre")
-                .value
-                .trim();
+            document.getElementById(
+                "nombre"
+            ).value.trim();
 
 
         const personas =
             Number(
-                document
-                    .getElementById("personas")
-                    .value
+                document.getElementById(
+                    "personas"
+                ).value
             );
 
 
         const adultos =
             Number(
-                document
-                    .getElementById("adultos")
-                    .value
+                document.getElementById(
+                    "adultos"
+                ).value
             );
 
 
         const ninos =
             Number(
-                document
-                    .getElementById("ninos")
-                    .value
+                document.getElementById(
+                    "ninos"
+                ).value
             );
 
 
         const asistencia =
-            document
-                .getElementById("asistencia")
-                .value;
+            document.getElementById(
+                "asistencia"
+            ).value;
 
 
         const telefono =
-            document
-                .getElementById("telefono")
-                .value
-                .trim();
+            document.getElementById(
+                "telefono"
+            ).value.trim();
 
 
-        if(!nombre){
-
-            confirmMessage.textContent =
-                "⚠️ Escribe tu nombre.";
-
-            return;
-
-        }
-
+        /*
+         * Validación básica.
+         */
 
         if(
-            !Number.isFinite(personas) ||
-            personas < 1
+            !nombre ||
+            !personas ||
+            !asistencia
         ){
 
-            confirmMessage.textContent =
-                "⚠️ Indica cuántas personas asistirán.";
+            alert(
+                "Completa los datos requeridos."
+            );
 
             return;
 
         }
 
+
+        /*
+         * Comprobamos que adultos + niños
+         * coincida con el total.
+         */
 
         if(
-            adultos + ninos !== personas
+            adultos +
+            ninos !==
+            personas
         ){
 
-            confirmMessage.textContent =
-                "⚠️ Adultos + niños debe coincidir con el total de personas.";
+            alert(
+                "La cantidad de adultos y niños debe coincidir con el total de personas."
+            );
 
             return;
 
         }
 
 
-        if(!supabaseClient){
-
-            confirmMessage.textContent =
-                "⚠️ No se pudo conectar con el servidor.";
-
-            return;
-
-        }
+        const boton =
+            document.getElementById(
+                "confirmSubmit"
+            );
 
 
-        confirmSubmit.disabled =
-            true;
+        boton.disabled = true;
 
-        confirmSubmit.textContent =
-            "GUARDANDO...";
+        boton.textContent =
+            "Guardando...";
 
 
         try{
-
-            /*
-             * IMPORTANTE:
-             *
-             * No se borran confirmaciones anteriores.
-             * Cada nueva confirmación se agrega.
-             */
 
             const datos = {
 
@@ -2841,8 +2176,7 @@ confirmSubmit.addEventListener(
 
 
             /*
-             * Solo mandamos teléfono si
-             * realmente se escribió.
+             * Teléfono solo si fue escrito.
              */
 
             if(telefono){
@@ -2853,72 +2187,63 @@ confirmSubmit.addEventListener(
             }
 
 
-            const resultado =
+            const {
+                error
+            } =
                 await supabaseClient
-                    .from("confirmaciones")
-                    .insert(datos);
+                    .from(
+                        "confirmaciones"
+                    )
+                    .insert(
+                        datos
+                    );
 
 
-            if(resultado.error){
+            if(error){
 
-                throw resultado.error;
+                console.error(
+                    error
+                );
+
+                alert(
+                    "No se pudo guardar la confirmación. Inténtalo de nuevo."
+                );
+
+                return;
 
             }
 
 
-            confirmMessage.textContent =
-                "🎉 ¡Confirmación guardada correctamente!";
+            alert(
+                "🎉 ¡Tu confirmación fue guardada correctamente!"
+            );
 
 
-            confirmSubmit.textContent =
-                "CONFIRMADO";
+            confirmForm.reset();
 
 
-            /*
-             * Limpiar formulario
-             */
-
-            document
-                .getElementById("nombre")
-                .value = "";
-
-            document
-                .getElementById("telefono")
-                .value = "";
-
-
-            setTimeout(
-                () => {
-
-                    cerrarConfirmacion();
-
-                    confirmSubmit.disabled =
-                        false;
-
-                    confirmSubmit.textContent =
-                        "CONFIRMAR";
-
-                },
-                1600
+            confirmModal.classList.remove(
+                "active"
             );
 
 
         }catch(error){
 
             console.error(
-                "Error al guardar confirmación:",
                 error
             );
 
+            alert(
+                "Ocurrió un error al guardar la confirmación."
+            );
 
-            confirmMessage.textContent =
-                "⚠️ No se pudo guardar la confirmación. Intenta nuevamente.";
+        }finally{
 
-            confirmSubmit.disabled =
+            boton.disabled =
                 false;
 
-            confirmSubmit.textContent =
-                "CONFIRMAR";
+            boton.textContent =
+                "Confirmar";
 
         }
 
@@ -2930,159 +2255,111 @@ confirmSubmit.addEventListener(
    VIDEO 2
 ========================================= */
 
-const finalVideoScreen =
-    document.getElementById(
-        "finalVideoScreen"
-    );
+function reproducirVideo2(){
 
-const finalVideo =
-    document.getElementById(
-        "finalVideo"
-    );
+    video2Container.style.display =
+        "block";
 
 
-async function reproducirVideo2(){
-
-    finalVideoScreen.classList.remove(
-        "hidden"
-    );
-
-
-    finalVideo.currentTime =
-        0;
-
-
-    finalVideo.muted =
-        false;
+    contenido.style.display =
+        "none";
 
 
     /*
-     * Las Mañanitas siguen sonando.
+     * Las Mañanitas se detienen
+     * durante el video 2.
      */
 
-    if(
-        mananitasAudio &&
-        mananitasAudio.paused
-    ){
-
-        try{
-
-            await mananitasAudio.play();
-
-        }catch(error){
-
-            console.warn(
-                "No se pudieron mantener las Mañanitas:",
-                error
-            );
-
-        }
-
-    }
+    mananitasAudio.pause();
 
 
-    try{
+    mananitasAudio.currentTime =
+        0;
 
-        await finalVideo.play();
 
-    }catch(error){
+    video2.currentTime =
+        0;
 
-        try{
 
-            finalVideo.muted =
-                true;
-
-            await finalVideo.play();
-
-        }catch(secondError){
-
-            console.error(
-                "No se pudo reproducir video2:",
-                secondError
-            );
-
-        }
-
-    }
+    video2.play()
+        .catch(
+            error =>
+                console.log(
+                    "No se pudo reproducir video2:",
+                    error
+                )
+        );
 
 }
 
 
 /* =========================================
-   CUANDO TERMINE VIDEO 2
+   CUANDO TERMINA VIDEO 2
 ========================================= */
 
-finalVideo.addEventListener(
+video2.addEventListener(
     "ended",
-    async () => {
+    () => {
 
-        finalVideo.pause();
-
-        finalVideo.currentTime =
-            0;
+        video2Container.style.display =
+            "none";
 
 
-        finalVideoScreen.classList.add(
-            "hidden"
-        );
+        contenido.style.display =
+            "block";
 
 
         /*
-         * Las Mañanitas continúan.
+         * Regresan Las Mañanitas
+         * después del video 2.
          */
 
-        if(
-            mananitasAudio &&
-            mananitasAudio.paused
-        ){
-
-            try{
-
-                await mananitasAudio.play();
-
-            }catch(error){
-
-                console.warn(
-                    "No se pudieron continuar las Mañanitas:",
-                    error
-                );
-
-            }
-
-        }
+        mananitasAudio.currentTime =
+            0;
 
 
-        document
-            .getElementById(
-                "invitationReveal"
-            )
-            .scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-            });
+        mananitasAudio.play()
+            .catch(
+                error =>
+                    console.log(
+                        "No se pudo reproducir Las Mañanitas:",
+                        error
+                    )
+            );
 
     }
 );
 
 
 /* =========================================
-   RECUPERAR AUDIO SI EL NAVEGADOR
-   LO INTERRUMPE
+   CERRAR VIDEO 2 CON ESC
 ========================================= */
 
 document.addEventListener(
-    "visibilitychange",
-    () => {
+    "keydown",
+    event => {
 
         if(
-            document.visibilityState === "visible" &&
-            mananitasIniciadas &&
-            mananitasAudio &&
-            mananitasAudio.paused
+            event.key === "Escape" &&
+            video2Container.style.display ===
+            "block"
         ){
 
+            video2.pause();
+
+
+            video2Container.style.display =
+                "none";
+
+
+            contenido.style.display =
+                "block";
+
+
             mananitasAudio.play()
-                .catch(() => {});
+                .catch(
+                    () => {}
+                );
 
         }
 
@@ -3092,4 +2369,5 @@ document.addEventListener(
 </script>
 
 </body>
+
 </html>
