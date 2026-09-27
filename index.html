@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>6 Horas😈</title>
@@ -12,7 +10,6 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
@@ -1426,45 +1423,6 @@ const startVideo =
         "startVideo"
     );
 
-startVideo.addEventListener(
-    "click",
-    async () => {
-
-        introStart.classList.add(
-            "hidden"
-        );
-
-        introVideo.classList.add(
-            "visible"
-        );
-
-        try{
-
-            introVideo.muted = false;
-
-            await introVideo.play();
-
-        }catch(error){
-
-            try{
-
-                introVideo.muted = true;
-
-                await introVideo.play();
-
-            }catch(secondError){
-
-                introStart.classList.remove(
-                    "hidden"
-                );
-
-            }
-
-        }
-
-    }
-);
-
 /* MÚSICA */
 
 const backgroundMusic =
@@ -1473,6 +1431,7 @@ const backgroundMusic =
     );
 
 let musicFadeTimer = null;
+let musicStartTimer = null;
 
 /* FADE IN */
 
@@ -1578,11 +1537,93 @@ function fadeMusicOut(){
 
 }
 
+/* BOTÓN ENTRAR */
+
+startVideo.addEventListener(
+    "click",
+    async () => {
+
+        introStart.classList.add(
+            "hidden"
+        );
+
+        introVideo.classList.add(
+            "visible"
+        );
+
+        try{
+
+            introVideo.muted = false;
+
+            await introVideo.play();
+
+        }catch(error){
+
+            try{
+
+                introVideo.muted = true;
+
+                await introVideo.play();
+
+            }catch(secondError){
+
+                introStart.classList.remove(
+                    "hidden"
+                );
+
+                return;
+
+            }
+
+        }
+
+        /*
+            LA TRAMPITA:
+            la música empieza exactamente
+            3 segundos después del clic.
+        */
+
+        clearTimeout(
+            musicStartTimer
+        );
+
+        musicStartTimer =
+            setTimeout(
+                () => {
+
+                    fadeMusicIn();
+
+                },
+                3000
+            );
+
+    }
+);
+
 /* TERMINA VIDEO 1 */
 
 introVideo.addEventListener(
     "ended",
     () => {
+
+        /*
+            Si el video dura menos de 3 segundos,
+            cancelamos el temporizador y arrancamos
+            la música inmediatamente.
+        */
+
+        if(
+            musicStartTimer &&
+            backgroundMusic.paused
+        ){
+
+            clearTimeout(
+                musicStartTimer
+            );
+
+            fadeMusicIn();
+
+        }
 
         introVideoScreen.classList.add(
             "fade-out"
@@ -1594,8 +1635,6 @@ introVideo.addEventListener(
                 introVideoScreen.classList.add(
                     "hidden"
                 );
-
-                fadeMusicIn();
 
             },
             1300
@@ -1665,7 +1704,7 @@ tutorialObserver.observe(
 
 const celebrationDate =
     new Date(
-        "2026-09-27T16:16:00"
+        "2026-09-27T16:00:00"
     ).getTime();
 
 function updateCountdown(){
@@ -2167,4 +2206,3 @@ submitConfirmation.addEventListener(
 
 </body>
 </html>
-}
